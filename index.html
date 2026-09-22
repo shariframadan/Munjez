@@ -111,10 +111,8 @@ let tasks=migrateOldData();
 if(tasks.length===0){
   tasks=[
     {id:'1', title:'أذكار الصباح والمساء', category:'الأذكار', date:new Date().toISOString().split('T')[0], priority:'high', completed:false, completedAt:null, financial:null, subtasks:[{id:'s1',title:'صباح',done:false},{id:'s2',title:'مساء',done:false}], recurrence:'daily', recurrenceId:'r1', createdAt:new Date().toISOString()},
-    {id:'2', title:'تسليم أختي كتاب الأضواء دين أولى ابتدائي', category:'عائلة', date:new Date().toISOString().split('T')[0], priority:'medium', completed:false, completedAt:null, financial:{amount:110, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
-    {id:'3', title:'سيفوفلوران', category:'عمل', date:new Date().toISOString().split('T')[0], priority:'high', completed:false, completedAt:null, financial:{amount:2700, type:'expense'}, subtasks:[{id:'s3',title:'مراجعة',done:true}], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
-    {id:'4', title:'طلبية كيان', category:'عمل', date:new Date().toISOString().split('T')[0], priority:'medium', completed:true, completedAt:new Date().toISOString(), financial:{amount:3360, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
-    {id:'5', title:'د. شيما أنور (مع أختي ومعاذ)', category:'عائلة', date:new Date().toISOString().split('T')[0], priority:'high', completed:true, completedAt:new Date().toISOString(), financial:{amount:170, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()}
+    
+
   ];
 }
 localStorage.setItem('munjez_v5_final', JSON.stringify(tasks));
