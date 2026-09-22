@@ -1,0 +1,26 @@
+{
+  "name": "منجز - يعمل بدون إنترنت",
+  "short_name": "منجز",
+  "description": "برنامج إدارة المهام الاحترافي - نسخة نظيفة للزملاء",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f6f7fb",
+  "theme_color": "#0F766E",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "scope": "./",
+  "offline_enabled": true
+}
