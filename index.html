@@ -1,0 +1,625 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>منجز - نسخة نظيفة للزملاء - بواسطة شريف رمضان</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<style>
+body{font-family:'Cairo',sans-serif; background:#f6f7fb; transition: background 0.3s, color 0.3s}
+.glass{background:rgba(255,255,255,0.85); backdrop-filter: blur(12px);}
+.card-shadow{box-shadow:0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.05);}
+.teal-gradient{background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);}
+/* Dark mode */
+body.dark{background:#0f172a !important; color:#e2e8f0}
+body.dark .bg-white{background:#1e293b !important; color:#e2e8f0 !important}
+body.dark .bg-gray-50{background:#0f172a !important; color:#cbd5e1 !important}
+body.dark .bg-gray-100{background:#334155 !important}
+body.dark .text-gray-900{color:#f1f5f9 !important}
+body.dark .text-gray-700{color:#cbd5e1 !important}
+body.dark .text-gray-600{color:#94a3b8 !important}
+body.dark .text-gray-500{color:#94a3b8 !important}
+body.dark .text-gray-400{color:#64748b !important}
+body.dark .border{border-color:#334155 !important}
+body.dark .border-white{border-color:#1e293b !important}
+body.dark input, body.dark select{background:#0f172a !important; color:#e2e8f0 !important; border-color:#334155 !important}
+body.dark .glass{background:rgba(30,41,59,0.85) !important}
+</style>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0F766E">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="منجز">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+<meta name="mobile-web-app-capable" content="yes">
+
+
+<script>
+// تنظيف النسخة الفاضية - يمسح أي مهام قديمة
+(function(){
+  try{
+    localStorage.removeItem('munjez_tasks');
+    localStorage.removeItem('tasks');
+    localStorage.removeItem('munjez-tasks');
+    localStorage.removeItem('munjez');
+  }catch(e){}
+})();
+</script>
+
+</head>
+<body>
+<div id="root"></div>
+<script>
+const CATS={
+  'عمل':{color:'#0F766E', bg:'#ccfbf1', dot:'#0F766E'},
+  'شخصي':{color:'#7C3AED', bg:'#ede9fe', dot:'#7C3AED'},
+  'دراسة':{color:'#2563EB', bg:'#dbeafe', dot:'#2563EB'},
+  'صحة':{color:'#DB2777', bg:'#fce7f3', dot:'#DB2777'},
+  'مالي':{color:'#D97706', bg:'#fef3c7', dot:'#D97706'},
+  'عائلة':{color:'#059669', bg:'#d1fae5', dot:'#059669'},
+  'الأذكار':{color:'#0D9488', bg:'#ccfbf1', dot:'#0D9488'},
+  'أخرى':{color:'#6B7280', bg:'#f3f4f6', dot:'#6B7280'}
+};
+
+function migrateOldData(){
+  const possibleKeys=['munjez_v5','munjez_v4','munjez_v3','munjez_tasks','munjez_app','munjez','tasks','munjez_tasks_v4'];
+  let allTasks=[];
+  for(let key of possibleKeys){
+    try{
+      let raw=localStorage.getItem(key);
+      if(!raw) continue;
+      let data=JSON.parse(raw);
+      let arr=Array.isArray(data)?data:(data.tasks||data.data||[]);
+      if(arr.length>0){
+        console.log('Found data in',key, arr.length);
+        allTasks=allTasks.concat(arr);
+      }
+    }catch(e){}
+  }
+  // Deduplicate by id
+  let map={};
+  allTasks.forEach(t=>{ if(!map[t.id]) map[t.id]=t; });
+  let merged=Object.values(map);
+  // Normalize tasks to new schema
+  merged=merged.map(t=>{
+    return {
+      id: t.id || Date.now().toString()+Math.random(),
+      title: t.title || t.name || 'مهمة بدون عنوان',
+      category: t.category || 'أخرى',
+      date: t.date || t.dueDate || new Date().toISOString().split('T')[0],
+      priority: t.priority || 'medium',
+      completed: !!t.completed,
+      completedAt: t.completedAt || (t.completed? new Date().toISOString():null),
+      financial: t.financial || (t.amount? {amount:t.amount, type: t.type||'expense'}: null),
+      subtasks: (t.subtasks||[]).map(s=>typeof s==='string'?{id:Date.now()+Math.random(), title:s, done:false}:s),
+      recurrence: t.recurrence || 'none',
+      recurrenceId: t.recurrenceId || null,
+      createdAt: t.createdAt || new Date().toISOString()
+    };
+  });
+  return merged;
+}
+
+let tasks=migrateOldData();
+if(tasks.length===0){
+  tasks=[
+    {id:'1', title:'أذكار الصباح والمساء', category:'الأذكار', date:new Date().toISOString().split('T')[0], priority:'high', completed:false, completedAt:null, financial:null, subtasks:[{id:'s1',title:'صباح',done:false},{id:'s2',title:'مساء',done:false}], recurrence:'daily', recurrenceId:'r1', createdAt:new Date().toISOString()},
+    {id:'2', title:'تسليم أختي كتاب الأضواء دين أولى ابتدائي', category:'عائلة', date:new Date().toISOString().split('T')[0], priority:'medium', completed:false, completedAt:null, financial:{amount:110, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
+    {id:'3', title:'سيفوفلوران', category:'عمل', date:new Date().toISOString().split('T')[0], priority:'high', completed:false, completedAt:null, financial:{amount:2700, type:'expense'}, subtasks:[{id:'s3',title:'مراجعة',done:true}], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
+    {id:'4', title:'طلبية كيان', category:'عمل', date:new Date().toISOString().split('T')[0], priority:'medium', completed:true, completedAt:new Date().toISOString(), financial:{amount:3360, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()},
+    {id:'5', title:'د. شيما أنور (مع أختي ومعاذ)', category:'عائلة', date:new Date().toISOString().split('T')[0], priority:'high', completed:true, completedAt:new Date().toISOString(), financial:{amount:170, type:'expense'}, subtasks:[], recurrence:'none', recurrenceId:null, createdAt:new Date().toISOString()}
+  ];
+}
+localStorage.setItem('munjez_v5_final', JSON.stringify(tasks));
+function save(){localStorage.setItem('munjez_v5_final_clean', JSON.stringify(tasks)); localStorage.setItem('munjez_v5_final', JSON.stringify(tasks));}
+function toggleSubtask(taskId, subId){
+  try{
+    let t=tasks.find(x=>String(x.id)===String(taskId));
+    if(!t) return;
+    let s=t.subtasks.find(x=>String(x.id)===String(subId));
+    if(!s) return;
+    s.done=!s.done;
+    save(); render();
+  }catch(e){ console.error(e); }
+}
+function addSubtaskDirect(taskId){
+  let input=document.getElementById('direct-sub-'+taskId);
+  if(!input) return;
+  let title=input.value.trim();
+  if(!title) return;
+  let t=tasks.find(x=>String(x.id)===String(taskId));
+  if(!t) return;
+  t.subtasks.push({id:Date.now().toString()+Math.random().toString().slice(2), title:title, done:false});
+  input.value='';
+  save(); render();
+  // Focus back
+  setTimeout(()=>{ let el=document.getElementById('direct-sub-'+taskId); if(el) el.focus(); }, 100);
+}
+// Theme
+function applyTheme(theme){
+  let isDark=theme==='dark';
+  document.body.classList.toggle('dark', isDark);
+  let btn=document.getElementById('themeBtn');
+  if(btn) btn.textContent=isDark?'☀️':'🌙';
+  localStorage.setItem('munjez_theme', theme);
+}
+function toggleTheme(){
+  let current=localStorage.getItem('munjez_theme')||'light';
+  let next=current==='light'?'dark':'light';
+  applyTheme(next);
+}
+// Load theme on start
+(function initTheme(){
+  let saved=localStorage.getItem('munjez_theme')||'light';
+  // Also respect system preference on first time
+  if(!localStorage.getItem('munjez_theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
+    saved='dark';
+  }
+  applyTheme(saved);
+})();
+
+
+function getNextDate(d,rec){let dt=new Date(d); if(rec==='daily') dt.setDate(dt.getDate()+1); if(rec==='weekly') dt.setDate(dt.getDate()+7); if(rec==='monthly') dt.setMonth(dt.getMonth()+1); if(rec==='yearly') dt.setFullYear(dt.getFullYear()+1); return dt.toISOString().split('T')[0];}
+function formatAmount(num){if(num===0) return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;color:#6b7280;">0 EGP</span>`; let abs=Math.abs(num).toLocaleString('en-US'); if(num<0) return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fef2f2;color:#dc2626;font-weight:700;padding:2px 10px;border-radius:20px;font-size:13px;">-${abs} EGP</span>`; return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;background:#ecfdf5;color:#059669;font-weight:700;padding:2px 10px;border-radius:20px;font-size:13px;">+${abs} EGP</span>`;}
+
+let selectedDate=new Date().toISOString().split('T')[0];
+let activeTab='today';
+let searchQ='';
+let filterCat='الكل';
+let showRec=false;
+
+function render(){
+  const root=document.getElementById('root');
+  let filtered=tasks;
+  if(searchQ) filtered=filtered.filter(t=>t.title.includes(searchQ));
+  if(filterCat!=='الكل') filtered=filtered.filter(t=>t.category===filterCat);
+  if(showRec) filtered=filtered.filter(t=>t.recurrence!=='none');
+  const todayTasks=filtered.filter(t=>t.date===selectedDate && !t.completed).sort((a,b)=>new Date(b.createdAt||b.id)-new Date(a.createdAt||a.id));
+  const futureTasks=filtered.filter(t=>t.date>selectedDate && !t.completed).sort((a,b)=>a.date.localeCompare(b.date));
+  const ach=filtered.filter(t=>t.completed).sort((a,b)=>new Date(b.completedAt||b.date)-new Date(a.completedAt||a.date));
+  const fin=filtered.filter(t=>t.financial);
+  let totalExp=ach.filter(t=>t.financial && t.financial.type==='expense').reduce((s,t)=>s+Math.abs(t.financial.amount),0);
+  let totalInc=ach.filter(t=>t.financial && t.financial.type==='income').reduce((s,t)=>s+t.financial.amount,0);
+
+  root.innerHTML=`
+  <div class="max-w-6xl mx-auto p-4 md:p-6">
+    <!-- Professional Header - like previous version -->
+    <header class="teal-gradient rounded-[24px] p-[1px] mb-6">
+      <div class="bg-white rounded-[23px] p-5 md:p-6 flex justify-between items-center">
+        <div class="flex items-center gap-4">
+          <div class="w-14 h-14 rounded-2xl teal-gradient flex items-center justify-center text-white text-[28px] font-black shadow-lg">م</div>
+          <div>
+            <h1 class="text-[26px] font-black text-gray-900 tracking-tight">منجز</h1>
+            <p class="text-[12px] text-gray-500 font-semibold">برنامج منجز بواسطة شريف رمضان • ${tasks.length} مهمة محفوظة</p>
+          </div>
+        </div>
+        <div class="flex items-center gap-2">
+          <button onclick="toggleTheme()" id="themeBtn" class="bg-white border border-gray-200 w-11 h-11 rounded-2xl flex items-center justify-center text-lg hover:bg-gray-50">🌙</button>
+          <button onclick="exportData()" class="bg-white border border-gray-200 text-gray-700 px-3 py-3 rounded-2xl font-bold text-sm hover:bg-gray-50 hidden md:block">📤 تصدير</button>
+          <label class="bg-white border border-gray-200 text-gray-700 px-3 py-3 rounded-2xl font-bold text-sm hover:bg-gray-50 cursor-pointer hidden md:block">📥 استيراد<input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(event)"></label>
+          <button onclick="openAdd()" class="teal-gradient text-white px-5 md:px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-xl transition text-sm">+ مهمة جديدة</button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats Bar - professional -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
+      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">اليوم</div><div class="text-2xl font-black mt-1">${todayTasks.length}</div><div class="text-[11px] text-gray-400">مهمة</div></div>
+      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">الإنجازات</div><div class="text-2xl font-black mt-1 text-[#0F766E]">${ach.length}</div><div class="text-[11px] text-gray-400">مكتمل</div></div>
+      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">المصروفات</div><div class="text-lg font-bold mt-1 text-red-600">${totalExp.toLocaleString('en-US')} <span class="text-xs">EGP</span></div></div>
+      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">المتكررة</div><div class="text-2xl font-black mt-1 text-amber-600">${tasks.filter(t=>t.recurrence!=='none').length}</div><div class="text-[11px] text-gray-400">نشطة</div></div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="bg-white card-shadow rounded-2xl p-2 flex gap-2 mb-5 overflow-x-auto">
+      ${[['today','اليوم',todayTasks.length],['future','المستقبلية',futureTasks.length],['achievements','الإنجازات',ach.length],['financial','المالي',fin.length]].map(([k,l,c])=>`<button onclick="setTab('${k}')" class="flex-1 min-w-[110px] px-4 py-3 rounded-xl font-bold text-sm transition ${activeTab===k?'teal-gradient text-white shadow-lg':'text-gray-500 hover:bg-gray-50'}">${l} <span class="opacity-60">(${c})</span></button>`).join('')}
+    </div>
+
+    <!-- Filters -->
+    <div class="bg-white card-shadow rounded-2xl p-4 mb-5">
+      <div class="flex gap-2 mb-3">
+        <div class="flex-1 relative"><span class="absolute right-3 top-3 text-gray-400">🔍</span><input id="searchInput" value="${searchQ}" placeholder="بحث في المهام والإنجازات..." class="w-full border border-gray-100 bg-gray-50 rounded-xl pr-10 pl-4 py-2.5 text-sm focus:bg-white focus:border-[#0F766E] outline-none" oninput="onSearch(this.value)"></div>
+        <button onclick="toggleRec()" class="px-4 py-2.5 rounded-xl text-sm border font-bold ${showRec?'bg-amber-50 text-amber-700 border-amber-200':'bg-gray-50 text-gray-600 border-gray-100'}">🔁 المتكررة</button>
+      </div>
+      <div class="flex gap-2 overflow-x-auto pb-1">
+        ${['الكل',...Object.keys(CATS)].map(c=>{
+          const isActive=filterCat===c;
+          const catInfo=CATS[c];
+          return `<button onclick="setCat('${c}')" class="px-4 py-2 rounded-full text-[13px] whitespace-nowrap border font-semibold transition ${isActive?'text-white shadow':''}" style="${isActive?`background:${catInfo?catInfo.color:'#0F766E'}; border-color:${catInfo?catInfo.color:'#0F766E'}; color:white`:`background:${catInfo?catInfo.bg:'#f3f4f6'}; color:${catInfo?catInfo.color:'#6B7280'}; border-color:transparent`}">${c}</button>`;
+        }).join('')}
+      </div>
+      ${activeTab==='today'?`<div class="mt-4 flex gap-2 overflow-x-auto pb-1">${Array.from({length:14}).map((_,i)=>{let d=new Date(); d.setDate(d.getDate()-3+i); let ds=d.toISOString().split('T')[0]; let isSel=ds===selectedDate; let isToday=ds===new Date().toISOString().split('T')[0]; return `<button onclick="selectDate('${ds}')" class="min-w-[64px] p-3 rounded-2xl text-center border transition ${isSel?'bg-[#0F766E] text-white border-[#0F766E] shadow-lg scale-105':'bg-white border-gray-100 hover:border-gray-200'}"><div class="text-[10px] ${isSel?'text-white/70':'text-gray-400'}">${d.toLocaleDateString('ar-EG',{weekday:'short'})}</div><div class="font-black text-[18px] mt-1">${d.getDate()}</div>${isToday?`<div class="w-1 h-1 bg-amber-400 rounded-full mx-auto mt-1"></div>`:''}</button>`;}).join('')}</div>`:''}
+    </div>
+
+    <!-- Main -->
+    <div id="mainContent">
+      ${activeTab==='today'?`<div class="space-y-3">${todayTasks.length?todayTasks.map(t=>taskCardPro(t)).join(''):`<div class="bg-white card-shadow rounded-[20px] p-12 text-center"><div class="w-20 h-20 teal-gradient rounded-3xl flex items-center justify-center text-white text-4xl font-black mx-auto mb-4">م</div><div class="font-black text-xl text-gray-800">مرحباً بك في منجز!</div><div class="text-sm text-gray-500 mt-2 max-w-sm mx-auto">برنامج إدارة مهام احترافي بواسطة شريف رمضان - ابدأ بإضافة أول مهمة لك الآن</div><button onclick="openAdd()" class="mt-6 teal-gradient text-white px-8 py-3 rounded-2xl font-bold shadow-lg">+ أضف أول مهمة</button><div class="mt-8 grid grid-cols-3 gap-3 text-center max-w-md mx-auto"><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">🔁</div><div class="text-[11px] font-bold mt-1">مهام متكررة</div></div><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">📊</div><div class="text-[11px] font-bold mt-1">تقارير PDF</div></div><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">🌙</div><div class="text-[11px] font-bold mt-1">وضع داكن</div></div></div></div>`}</div>`:''}
+      ${activeTab==='future'? (futureTasks.length?`<div class="bg-white card-shadow rounded-2xl p-4 mb-4 flex justify-between items-center"><div class="font-bold text-sm">لديك ${futureTasks.length} مهمة مستقبلية</div><button onclick="moveAllFutureToToday()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-black shadow">📥 نقل الكل لليوم</button></div>`+Object.entries(futureTasks.reduce((a,t)=>{(a[t.date]=a[t.date]||[]).push(t); return a;},{})).sort().map(([d,arr])=>`<div class="mb-6"><div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200"></div><h3 class="font-black text-gray-700 bg-white px-3 py-1 rounded-full border text-sm">${d}</h3><div class="h-px flex-1 bg-gray-200"></div></div><div class="space-y-3">${arr.map(t=>taskCardPro(t)).join('')}</div></div>`).join(''):`<div class="bg-white card-shadow rounded-[20px] p-12 text-center text-gray-400">لا توجد مهام مستقبلية</div>`) :''}
+      ${activeTab==='achievements'?`
+        <div class="bg-white card-shadow rounded-[20px] p-5 mb-5 border border-white">
+          <div class="flex justify-between items-center mb-4"><h3 class="font-black text-[16px]">الملخص المالي</h3><button onclick="openPdf()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow">📄 تصدير تقرير PDF</button></div>
+          <div class="grid grid-cols-3 gap-3">
+            <div class="bg-gray-50 rounded-2xl p-4 text-center border"><div class="text-[11px] text-gray-500">الإنجازات</div><div class="text-2xl font-black mt-1">${ach.length}</div></div>
+            <div class="bg-red-50 rounded-2xl p-4 text-center border border-red-100"><div class="text-[11px] text-red-400">المصروفات</div><div class="font-bold text-red-600 mt-1">${totalExp.toLocaleString('en-US')} EGP</div></div>
+            <div class="bg-teal-50 rounded-2xl p-4 text-center border border-teal-100"><div class="text-[11px] text-teal-600">المتكررة المكتملة</div><div class="font-black text-teal-700 mt-1">${ach.filter(t=>t.recurrence!=='none').length}</div></div>
+          </div>
+        </div>
+        <div class="space-y-3">${ach.map(t=>achCardPro(t)).join('')}</div>`:''}
+      ${activeTab==='financial'?`
+        <div class="bg-white card-shadow rounded-[20px] p-5 mb-5"><div class="flex justify-between items-center mb-3"><h3 class="font-black">المعاملات المالية (${fin.length})</h3><button onclick="openPdf()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-bold">📄 تصدير PDF</button></div></div>
+        <div class="space-y-3">${fin.map(t=>taskCardPro(t)).join('')}</div>`:''}
+    </div>
+
+    <footer class="text-center mt-10 mb-4"><div class="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 card-shadow border"><div class="w-6 h-6 rounded-full teal-gradient flex items-center justify-center text-white text-xs font-black">م</div><span class="text-xs font-bold text-gray-600">برنامج منجز بواسطة شريف رمضان - نسخة مجانية للزملاء</span><span class="text-[10px] text-gray-400">• ${tasks.length} مهمة</span></div><div class="mt-3"><button onclick="forceRepair()" class="text-[11px] bg-white border px-4 py-2 rounded-full text-gray-500 hover:bg-gray-50">🔧 إصلاح المهام التي لا تحذف</button></div><div class="text-[11px] text-gray-400 mt-3">تم استرجاع ${tasks.length} مهمة من النسخ السابقة تلقائيا • <button onclick="exportData()" class="underline font-bold">احفظ نسخة احتياطية الآن</button></div></footer>
+  </div>
+
+  <!-- Add/Edit Modal - Pro -->
+  <div id="modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
+    <div class="bg-white rounded-[24px] p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl">
+      <div class="flex justify-between items-center mb-5"><h2 id="modalTitle" class="text-xl font-black">مهمة جديدة</h2><button onclick="closeModal()" class="w-8 h-8 bg-gray-100 rounded-full">✕</button></div>
+      <input id="m_title" placeholder="عنوان المهمة..." class="w-full border-0 bg-gray-50 rounded-2xl px-5 py-4 mb-4 text-[15px] focus:bg-white focus:ring-2 focus:ring-[#0F766E]/20 outline-none font-semibold">
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التصنيف</label><div class="flex gap-2"><select id="m_cat" class="flex-1 border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm font-semibold">${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select><button onclick="addNewCategory()" class="bg-gray-100 px-3 rounded-xl text-sm font-bold" title="إضافة تصنيف جديد">+</button></div></div>
+        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">الأولوية</label><select id="m_pri" class="w-full border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm"><option value="low">🟢 منخفضة</option><option value="medium" selected>🟡 متوسطة</option><option value="high">🔴 عالية</option></select></div>
+      </div>
+      <div class="grid grid-cols-2 gap-3 mb-4">
+        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التاريخ</label><input id="m_date" type="date" class="w-full border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm"></div>
+        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التكرار 🔁</label><select id="m_rec" class="w-full border-0 bg-amber-50 rounded-xl px-4 py-3 text-sm font-bold text-amber-700 border border-amber-100"><option value="none">بدون تكرار</option><option value="daily">يومي</option><option value="weekly">أسبوعي</option><option value="monthly">شهري</option><option value="yearly">سنوي</option></select></div>
+      </div>
+      <p id="recHelp" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 hidden">✨ سيتم إنشاء المهمة التالية تلقائيا عند إكمال هذه المهمة</p>
+      <div class="bg-gray-50 rounded-2xl p-4 mb-4">
+        <div class="flex items-center gap-2 mb-3"><input type="checkbox" id="m_hasFin" onchange="document.getElementById('finBox').classList.toggle('hidden', !this.checked)" class="w-4 h-4"><label class="text-sm font-bold">معاملة مالية (ج.م)</label></div>
+        <div id="finBox" class="hidden grid grid-cols-2 gap-3"><input id="m_amount" type="number" placeholder="المبلغ" class="border-0 bg-white rounded-xl px-4 py-3 text-sm"><select id="m_finType" class="border-0 bg-white rounded-xl px-4 py-3 text-sm"><option value="expense">مصروف</option><option value="income">دخل</option></select></div>
+      </div>
+      <div class="bg-gray-50 rounded-2xl p-4 mb-5"><label class="text-[11px] font-bold text-gray-500 mb-2 block">مهام فرعية</label><div id="subList" class="space-y-2"></div><button onclick="addSub()" class="text-sm text-[#0F766E] font-bold mt-3">+ إضافة مهمة فرعية</button></div>
+      <div class="flex gap-3"><button onclick="saveTask()" class="flex-1 teal-gradient text-white py-4 rounded-2xl font-black shadow-lg">حفظ المهمة</button><button onclick="closeModal()" class="px-6 py-4 bg-gray-100 rounded-2xl font-bold">إلغاء</button></div>
+    </div>
+  </div>
+
+  <div id="pdfModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50"><div class="bg-white rounded-[24px] p-6 w-full max-w-md shadow-2xl"><h2 class="text-xl font-black mb-5">تصدير تقرير PDF</h2><div class="grid grid-cols-2 gap-3 mb-4"><div><label class="text-[11px] font-bold text-gray-500">من</label><input id="pdf_from" type="date" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mt-1 text-sm"></div><div><label class="text-[11px] font-bold text-gray-500">إلى</label><input id="pdf_to" type="date" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mt-1 text-sm"></div></div><select id="pdf_cat" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mb-5 text-sm font-semibold"><option value="الكل">كل التصنيفات</option>${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select><div class="flex gap-3"><button id="pdfBtn" onclick="doExport()" class="flex-1 teal-gradient text-white py-4 rounded-2xl font-black shadow">تصدير PDF</button><button onclick="document.getElementById('pdfModal').classList.add('hidden')" class="px-6 py-4 bg-gray-100 rounded-2xl font-bold">إلغاء</button></div></div></div>
+  `;
+
+  const recEl=document.getElementById('m_rec');
+  if(recEl) recEl.addEventListener('change', e=>{document.getElementById('recHelp').classList.toggle('hidden', e.target.value==='none');});
+}
+
+function taskCardPro(t){
+  const cat=CATS[t.category]||CATS['أخرى'];
+  const priColor=t.priority==='high'?'bg-red-500':t.priority==='medium'?'bg-amber-400':'bg-emerald-400';
+  const progress=t.subtasks.length?Math.round(t.subtasks.filter(s=>s.done).length/t.subtasks.length*100):0;
+  return `
+  <div class="group bg-white rounded-[20px] p-[1px] card-shadow hover:shadow-xl transition-all duration-300 border border-white">
+    <div class="bg-white rounded-[19px] p-4">
+      <div class="flex items-start gap-3">
+        <button onclick="toggleComplete('${t.id}')" class="mt-1 w-7 h-7 rounded-full border-2 flex items-center justify-center transition ${t.completed?'bg-[#0F766E] border-[#0F766E] text-white':'border-gray-200 hover:border-[#0F766E] group-hover:border-[#0F766E]/50'}">${t.completed?'✓':''}</button>
+        <div class="flex-1 min-w-0">
+          <div class="flex items-center gap-2 flex-wrap">
+            <span class="font-bold text-[15px] text-gray-900 truncate">${t.title}</span>
+            <span class="text-[11px] px-2.5 py-1 rounded-full font-bold" style="background:${cat.bg}; color:${cat.color}">${t.category}</span>
+            <span class="w-2 h-2 rounded-full ${priColor}"></span>
+            ${t.recurrence!=='none'?`<span class="text-[11px] bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full border border-amber-200 font-bold">🔁 ${t.recurrence==='daily'?'يومي':t.recurrence==='weekly'?'أسبوعي':t.recurrence==='monthly'?'شهري':'سنوي'}</span>`:''}
+            ${t.financial?`<span dir="ltr" class="text-[11px] px-2.5 py-1 rounded-full font-bold ${t.financial.type==='expense'?'bg-red-50 text-red-600 border border-red-100':'bg-green-50 text-green-600 border border-green-100'}">${t.financial.type==='expense'?'-':'+'}${Math.abs(t.financial.amount).toLocaleString('en-US')} EGP</span>`:''}
+          </div>
+          <div class="mt-3 bg-gray-50 rounded-xl p-3 border border-gray-100 ${t.subtasks.length?'':'border-dashed'}">
+            ${t.subtasks.length?`<div class="flex justify-between text-[11px] font-bold text-gray-500 mb-2"><span>المهام الفرعية</span><span class="bg-white px-2 py-0.5 rounded-full border">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length} • ${progress}%</span></div><div class="w-full bg-white h-2 rounded-full overflow-hidden border mb-3"><div class="h-2 rounded-full transition-all" style="width:${progress}%; background:linear-gradient(90deg, #0F766E, #14B8A6)"></div></div>`:''}
+            ${t.subtasks.length?`<div class="space-y-1.5 mb-3">${t.subtasks.map((s, idx)=>`<label class="flex items-center gap-2 p-2 rounded-lg hover:bg-white cursor-pointer transition group ${s.done?'opacity-60':''}"><input type="checkbox" ${s.done?'checked':''} onchange="toggleSubtask('${t.id}','${s.id}')" class="w-4 h-4 rounded accent-[#0F766E]"><span class="text-[13px] flex-1 ${s.done?'line-through text-gray-400':''}">${s.title}</span><button onclick="event.preventDefault(); if(confirm('حذف المهمة الفرعية؟')){ let tt=tasks.find(x=>String(x.id)==='${t.id}'); tt.subtasks=tt.subtasks.filter(x=>String(x.id)!=='${s.id}'); save(); render(); }" class="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 text-xs">✕</button></label>`).join('')}</div>`:''}
+            <div class="flex gap-2">
+              <input id="direct-sub-${t.id}" placeholder="إضافة مهمة فرعية مباشرة..." class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-[13px] focus:border-[#0F766E] outline-none" onkeydown="if(event.key==='Enter'){ addSubtaskDirect('${t.id}'); }">
+              <button onclick="addSubtaskDirect('${t.id}')" class="bg-[#0F766E] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#0d5e57]">+ إضافة</button>
+            </div>
+          </div>
+          <div class="flex gap-2 mt-3.5 flex-wrap">
+            <button onclick="moveTo('${t.id}', new Date().toISOString().split('T')[0])" class="text-[12px] bg-[#0F766E]/10 hover:bg-[#0F766E] hover:text-white text-[#0F766E] px-3.5 py-1.5 rounded-full font-bold transition border border-[#0F766E]/20">📥 لليوم</button>
+            <button onclick="editTask('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold transition">✏️ تعديل</button>
+            <button onclick="openPostpone('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold">⏰ تأجيل</button>
+            <button onclick="dupTask('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold">📋 نسخ</button>
+            <button onclick="delTask('${t.id}')" class="text-[12px] bg-red-50 hover:bg-red-100 text-red-600 px-3.5 py-1.5 rounded-full font-semibold">🗑️ حذف</button>
+          </div>
+        </div>
+      </div>
+      <div id="postpone-${t.id}" class="hidden mt-4 p-3 bg-amber-50 rounded-2xl border border-amber-200"><div class="text-[11px] font-bold text-amber-700 mb-2">نقل المهمة إلى:</div><div class="flex gap-2 flex-wrap"><button onclick="moveTo('${t.id}', new Date().toISOString().split('T')[0])" class="text-xs bg-[#0F766E] text-white border border-[#0F766E] px-4 py-2 rounded-full font-black shadow">📥 اليوم</button><button onclick="moveTo('${t.id}','${getNextDate(t.date,'daily')}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold hover:shadow">غدا</button><button onclick="moveTo('${t.id}','${(()=>{let d=new Date(t.date); d.setDate(d.getDate()+3); return d.toISOString().split('T')[0];})()}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold">بعد 3 أيام</button><button onclick="moveTo('${t.id}','${(()=>{let d=new Date(t.date); d.setDate(d.getDate()+7); return d.toISOString().split('T')[0];})()}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold">الأسبوع القادم</button><input type="date" onchange="moveTo('${t.id}', this.value)" class="text-xs border rounded-full px-4 py-2 bg-white" title="اختر تاريخ مخصص"></div></div>
+    </div>
+  </div>`;
+}
+function achCardPro(t){
+  const cat=CATS[t.category]||CATS['أخرى'];
+  const progress=t.subtasks.length?Math.round(t.subtasks.filter(s=>s.done).length/t.subtasks.length*100):0;
+  return `<div class="bg-white rounded-[20px] p-4 card-shadow border border-white opacity-[0.95] hover:opacity-100 transition"><div class="flex items-start gap-3"><div class="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-black">✓</div><div class="flex-1"><div class="flex items-center gap-2 flex-wrap"><span class="font-bold text-[15px]">${t.title}</span><span class="text-[11px] px-2.5 py-1 rounded-full font-bold" style="background:${cat.bg}; color:${cat.color}">${t.category}</span>${t.recurrence!=='none'?`<span class="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full">🔁 متكررة</span>`:''}</div><div class="text-[11px] text-gray-400 mt-1">${t.date} • ${new Date(t.completedAt||t.date).toLocaleDateString('ar-EG')}</div>${t.subtasks.length?`<div class="mt-3 bg-emerald-50/50 rounded-xl p-3 border border-emerald-100"><div class="flex justify-between text-[11px] font-bold text-emerald-700 mb-2"><span>المهام الفرعية المكتملة</span><span>${progress}%</span></div><div class="space-y-1">${t.subtasks.map(s=>`<div class="flex items-center gap-2 text-[12px] ${s.done?'text-emerald-700':'text-gray-400'}"><span>${s.done?'✓':'○'}</span><span class="${s.done?'':'line-through'}">${s.title}</span></div>`).join('')}</div></div>`:''}<div class="flex gap-2 mt-3"><button onclick="editTask('${t.id}')" class="text-[12px] bg-gray-50 px-3 py-1 rounded-full font-semibold">✏️ تعديل</button><button onclick="reopen('${t.id}')" class="text-[12px] bg-amber-50 text-amber-700 px-3 py-1 rounded-full font-semibold">↩️ إعادة فتح</button></div></div>${t.financial?`<span dir="ltr" class="text-xs">${formatAmount(t.financial.type==='expense'?-Math.abs(t.financial.amount):t.financial.amount)}</span>`:''}</div></div>`;
+}
+
+window.setTab=(k)=>{activeTab=k; render();};
+window.selectDate=(d)=>{selectedDate=d; render();};
+window.setCat=(c)=>{filterCat=c; render();};
+window.toggleRec=()=>{showRec=!showRec; render();};
+window.onSearch=(v)=>{searchQ=v; render();};
+let editingId=null; let tempSubs=[];
+window.openAdd=()=>{editingId=null; tempSubs=[]; document.getElementById('modalTitle').innerText='مهمة جديدة'; document.getElementById('m_title').value=''; document.getElementById('m_date').value=selectedDate; document.getElementById('m_rec').value='none'; document.getElementById('recHelp').classList.add('hidden'); document.getElementById('m_hasFin').checked=false; document.getElementById('finBox').classList.add('hidden'); document.getElementById('m_amount').value=''; document.getElementById('subList').innerHTML=''; document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('flex');};
+window.editTask=(id)=>{let t=tasks.find(x=>x.id===id); editingId=id; tempSubs=[...t.subtasks]; document.getElementById('modalTitle').innerText='تعديل مهمة'; document.getElementById('m_title').value=t.title; document.getElementById('m_cat').value=t.category; document.getElementById('m_pri').value=t.priority; document.getElementById('m_date').value=t.date; document.getElementById('m_rec').value=t.recurrence||'none'; document.getElementById('recHelp').classList.toggle('hidden',(t.recurrence||'none')==='none'); document.getElementById('m_hasFin').checked=!!t.financial; document.getElementById('finBox').classList.toggle('hidden',!t.financial); document.getElementById('m_amount').value=t.financial?Math.abs(t.financial.amount):''; document.getElementById('m_finType').value=t.financial?t.financial.type:'expense'; renderSubs(); document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('flex');};
+window.closeModal=()=>{document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex');};
+window.addSub=()=>{tempSubs.push({id:Date.now().toString(), title:'', done:false}); renderSubs();};
+function renderSubs(){document.getElementById('subList').innerHTML=tempSubs.map((s,i)=>`<div class="flex gap-2"><input value="${s.title}" oninput="tempSubs[${i}].title=this.value" placeholder="مهمة فرعية" class="flex-1 bg-white border-0 rounded-xl px-4 py-2.5 text-sm"><button onclick="tempSubs.splice(${i},1); renderSubs()" class="w-8 h-8 bg-red-50 text-red-500 rounded-full">×</button></div>`).join('');}
+window.saveTask=()=>{let title=document.getElementById('m_title').value.trim(); if(!title) return alert('اكتب العنوان'); let cat=document.getElementById('m_cat').value; let pri=document.getElementById('m_pri').value; let date=document.getElementById('m_date').value||selectedDate; let rec=document.getElementById('m_rec').value; let hasFin=document.getElementById('m_hasFin').checked; let fin=null; if(hasFin){let amt=parseFloat(document.getElementById('m_amount').value)||0; let type=document.getElementById('m_finType').value; if(amt>0) fin={amount:amt, type};} if(editingId){let t=tasks.find(x=>x.id===editingId); t.title=title; t.category=cat; t.priority=pri; t.date=date; t.recurrence=rec; t.financial=fin; t.subtasks=tempSubs.filter(s=>s.title.trim()); if(rec!=='none' && !t.recurrenceId) t.recurrenceId=Date.now().toString();}else{tasks.unshift({id:Date.now().toString(), title, category:cat, priority:pri, date, completed:false, completedAt:null, financial:fin, subtasks:tempSubs.filter(s=>s.title.trim()), recurrence:rec, recurrenceId: rec!=='none'?Date.now().toString():null, createdAt:new Date().toISOString()});} save(); closeModal(); render();};
+window.toggleComplete=(id)=>{
+  try{
+    let t=tasks.find(x=>String(x.id)===String(id));
+    if(!t) return;
+    if(!t.completed){
+      t.completed=true; t.completedAt=new Date().toISOString();
+      if(t.recurrence && t.recurrence!=='none'){
+        let next=getNextDate(t.date, t.recurrence);
+        let exists=tasks.some(x=>x.recurrenceId===t.recurrenceId && x.date===next);
+        if(!exists){
+          tasks.unshift({id:Date.now().toString()+Math.random(), title:t.title, category:t.category, priority:t.priority, date:next, completed:false, completedAt:null, financial:t.financial, subtasks:t.subtasks.map(s=>({id:Date.now()+Math.random(), title:s.title, done:false})), recurrence:t.recurrence, recurrenceId:t.recurrenceId, createdAt:new Date().toISOString()});
+        }
+      }
+    }else{
+      t.completed=false; t.completedAt=null;
+    }
+    save(); render();
+  }catch(e){ console.error('toggle error',e); }
+};
+
+window.delTask=(id)=>{
+  try{
+    if(!confirm('حذف المهمة؟')) return;
+    // Robust delete: filter by id string, also handle if id has special chars
+    let before=tasks.length;
+    tasks=tasks.filter(x=>String(x.id)!==String(id));
+    // If nothing deleted (id mismatch), try delete by index fallback
+    if(tasks.length===before){
+      let idx=tasks.findIndex(x=>String(x.id).includes(String(id).substring(0,8)) || x.title===id);
+      if(idx>=0) tasks.splice(idx,1);
+    }
+    save(); render();
+  }catch(e){
+    console.error('delete error',e);
+    // Force delete by position: find element with that id in DOM and remove from array by position
+    alert('حدث خطأ في الحذف، سيتم إصلاح البيانات');
+    tasks=tasks.filter(x=>String(x.id)!==String(id).replace(/'/g,''));
+    save(); render();
+  }
+};
+window.dupTask=(id)=>{
+  try{
+    let t=tasks.find(x=>String(x.id)===String(id));
+    if(!t) return;
+    tasks.push({...t, id:Date.now().toString()+Math.random().toString().slice(2), title:t.title+' (نسخة)', completed:false, completedAt:null, subtasks:t.subtasks.map(s=>({...s, done:false, id:Date.now()+Math.random()}))});
+    save(); render();
+  }catch(e){ alert('تعذر النسخ'); }
+};
+window.reopen=(id)=>{
+  try{
+    let t=tasks.find(x=>String(x.id)===String(id));
+    if(!t) return;
+    t.completed=false; t.completedAt=null; save(); render();
+  }catch(e){}
+};
+window.openPostpone=(id)=>{
+  try{
+    let el=document.getElementById('postpone-'+id);
+    if(el) el.classList.toggle('hidden');
+    else {
+      // ID with special chars, escape
+      let escId = CSS.escape(id);
+      let el2=document.getElementById('postpone-'+escId) || document.querySelector(`[id^='postpone-']`);
+      if(el2) el2.classList.toggle('hidden');
+    }
+  }catch(e){
+    // fallback: toggle all postpone boxes
+    document.querySelectorAll('[id^="postpone-"]').forEach(el=>el.classList.add('hidden'));
+    try{ document.getElementById('postpone-'+id).classList.remove('hidden'); }catch(_){}
+  }
+};
+window.moveTo=(id,nd)=>{
+  try{
+    if(!nd) return;
+    let t=tasks.find(x=>String(x.id)===String(id));
+    if(!t){ t=tasks.find(x=>x.title===id); }
+    if(t){
+      let oldDate=t.date;
+      t.date=nd;
+      save();
+      // If moved to today, switch to today tab and select date
+      let today=new Date().toISOString().split('T')[0];
+      if(nd===today){
+        selectedDate=today;
+        activeTab='today';
+      }
+      render();
+      // Show feedback
+      if(nd===today){
+        setTimeout(()=>{ alert(`تم نقل "${t.title}" إلى مهام اليوم ✅`); }, 100);
+      }
+    }
+  }catch(e){ console.error('move error',e); }
+};
+window.moveAllFutureToToday=()=>{
+  let today=new Date().toISOString().split('T')[0];
+  let futureCount=tasks.filter(t=>!t.completed && t.date>today).length;
+  if(!futureCount) return alert('لا توجد مهام مستقبلية');
+  if(!confirm(`هل تريد نقل جميع المهام المستقبلية (${futureCount} مهمة) إلى اليوم؟`)) return;
+  tasks.forEach(t=>{ if(!t.completed && t.date>today) t.date=today; });
+  selectedDate=today; activeTab='today';
+  save(); render();
+  alert(`تم نقل ${futureCount} مهمة إلى اليوم ✅`);
+};
+
+window.forceRepair=()=>{
+  if(!confirm('سيتم إصلاح جميع المهام التي بها أخطاء وإعطاؤها IDs جديدة صالحة. هل تريد المتابعة؟')) return;
+  let fixed=0;
+  tasks=tasks.map(t=>{
+    let newId = String(t.id||'').replace(/[^a-zA-Z0-9-_]/g,'');
+    if(!newId || newId.length<5 || tasks.filter(x=>x.id===t.id).length>1){
+      t.id=Date.now().toString()+Math.random().toString().slice(2);
+      fixed++;
+    }
+    // Ensure required fields
+    if(!t.date) t.date=new Date().toISOString().split('T')[0];
+    if(!t.category) t.category='أخرى';
+    if(!t.priority) t.priority='medium';
+    if(!Array.isArray(t.subtasks)) t.subtasks=[];
+    if(typeof t.recurrence==='undefined') t.recurrence='none';
+    return t;
+  });
+  // Deduplicate again
+  let seen={}; tasks=tasks.filter(t=>{ if(seen[t.id]) return false; seen[t.id]=true; return true; });
+  save(); render();
+  alert(`تم إصلاح ${fixed} مهمة. يمكنك الآن حذف ونقل جميع المهام.`);
+};
+
+
+window.exportData=()=>{
+  let dataStr=JSON.stringify(tasks, null, 2);
+  let blob=new Blob([dataStr], {type:'application/json'});
+  let url=URL.createObjectURL(blob);
+  let a=document.createElement('a');
+  a.href=url; a.download=`munjez-backup-${new Date().toISOString().split('T')[0]}.json`;
+  a.click();
+  URL.revokeObjectURL(url);
+  alert(`تم تصدير ${tasks.length} مهمة بنجاح! احتفظ بالملف في مكان آمن.`);
+};
+window.importData=(event)=>{
+  let file=event.target.files[0];
+  if(!file) return;
+  let reader=new FileReader();
+  reader.onload=(e)=>{
+    try{
+      let imported=JSON.parse(e.target.result);
+      let arr=Array.isArray(imported)?imported:(imported.tasks||[]);
+      if(!arr.length) throw 'empty';
+      if(confirm(`تم العثور على ${arr.length} مهمة في الملف. هل تريد دمجها مع مهامك الحالية (${tasks.length} مهمة)؟ اضغط موافق للدمج، إلغاء للاستبدال`)){
+        // merge
+        let map={}; tasks.forEach(t=>map[t.id]=true);
+        let added=0;
+        arr.forEach(t=>{
+          if(!map[t.id]){ tasks.push(t); added++; }
+        });
+        save(); render();
+        alert(`تم دمج ${added} مهمة جديدة. الإجمالي الآن ${tasks.length} مهمة`);
+      }else{
+        if(confirm(`هل أنت متأكد من استبدال كل مهامك الحالية بـ ${arr.length} مهمة من الملف؟`)){
+          tasks=arr; save(); render();
+          alert(`تم الاستيراد بنجاح - ${tasks.length} مهمة`);
+        }
+      }
+    }catch(err){ alert('ملف غير صالح: '+err); }
+  };
+  reader.readAsText(file);
+  event.target.value='';
+};
+window.addNewCategory=()=>{
+  let name=prompt('اكتب اسم التصنيف الجديد:');
+  if(!name) return;
+  name=name.trim();
+  if(!name) return;
+  if(CATS[name]) return alert('التصنيف موجود بالفعل');
+  // random color
+  let colors=['#0F766E','#7C3AED','#2563EB','#DB2777','#D97706','#059669','#0D9488','#6B7280','#EF4444','#8B5CF6'];
+  let color=colors[Math.floor(Math.random()*colors.length)];
+  CATS[name]={color:color, bg:color+'20', dot:color};
+  // save custom categories
+  let custom=JSON.parse(localStorage.getItem('munjez_custom_cats')||'[]');
+  if(!custom.includes(name)) custom.push(name);
+  localStorage.setItem('munjez_custom_cats', JSON.stringify(custom));
+  // update select
+  let sel=document.getElementById('m_cat');
+  let opt=document.createElement('option'); opt.value=name; opt.textContent=name; opt.selected=true;
+  sel.appendChild(opt);
+  render();
+  alert(`تم إضافة تصنيف "${name}" بنجاح`);
+};
+// Load custom cats on start
+(function loadCustomCats(){
+  try{
+    let custom=JSON.parse(localStorage.getItem('munjez_custom_cats')||'[]');
+    custom.forEach(name=>{
+      if(!CATS[name]){
+        let colors=['#0F766E','#7C3AED','#2563EB','#DB2777','#D97706','#059669'];
+        let color=colors[Math.floor(Math.random()*colors.length)];
+        CATS[name]={color:color, bg:color+'20', dot:color};
+      }
+    });
+  }catch(e){}
+})();
+
+// Clean version - no auto-migration for colleagues (disabled)
+// Deep migrate disabled for clean version
+
+window.openPdf=()=>{let today=new Date().toISOString().split('T')[0]; let week=new Date(); week.setDate(week.getDate()-7); document.getElementById('pdf_from').value=week.toISOString().split('T')[0]; document.getElementById('pdf_to').value=today; document.getElementById('pdfModal').classList.remove('hidden'); document.getElementById('pdfModal').classList.add('flex');};
+window.doExport=async()=>{
+  let from=document.getElementById('pdf_from').value; let to=document.getElementById('pdf_to').value; let cat=document.getElementById('pdf_cat').value;
+  let btn=document.getElementById('pdfBtn'); btn.innerText='جاري الإنشاء...';
+  let list=tasks.filter(t=>t.completed); if(from) list=list.filter(t=>t.date>=from); if(to) list=list.filter(t=>t.date<=to); if(cat!=='الكل') list=list.filter(t=>t.category===cat);
+  let totalExp=list.filter(t=>t.financial && t.financial.type==='expense').reduce((s,t)=>s+Math.abs(t.financial.amount),0);
+  let totalInc=list.filter(t=>t.financial && t.financial.type==='income').reduce((s,t)=>s+t.financial.amount,0);
+  let div=document.createElement('div'); div.style.width='800px'; div.style.background='white'; div.style.fontFamily='Cairo, sans-serif'; div.style.position='absolute'; div.style.left='-9999px';
+  div.innerHTML=`
+    <div style="background:#0F766E; padding:28px; border-radius:16px 16px 0 0;">
+      <div style="display:flex; justify-content:space-between; flex-direction:row-reverse;">
+        <div><div style="font-size:42px; font-weight:900; color:white;">تقرير منجز</div><div style="font-size:16px; color:#FDE68A; font-weight:700; margin-top:6px;">برنامج منجز بواسطة شريف رمضان</div><div style="font-size:13px; color:rgba(255,255,255,0.8); margin-top:4px;">Munjez Report</div></div>
+        <div><div style="width:64px; height:64px; background:white; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:#0F766E;">م</div><div style="margin-top:8px; background:rgba(255,255,255,0.15); padding:4px 12px; border-radius:20px; color:white; font-size:11px; text-align:center;">${new Date().toLocaleDateString('en-CA')}</div></div>
+      </div>
+      <div style="margin-top:20px; display:flex; gap:8px; flex-wrap:wrap;">
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">الفترة: ${from||'البداية'} الى ${to||'اليوم'}</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">التصنيف: ${cat}</span>
+        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">العدد: ${list.length} انجاز</span>
+      </div>
+    </div>
+    <div style="height:4px; background:#F59E0B;"></div>
+    <div style="padding:24px;">
+      <div style="font-size:18px; font-weight:700; color:#0F766E; text-align:right; margin-bottom:12px;">الملخص المالي</div>
+      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:20px;">
+        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">عدد الانجازات</div><div style="font-size:20px; font-weight:900; margin-top:4px;">${list.length}</div></div>
+        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">اجمالي الدخل</div><div style="margin-top:6px;">${formatAmount(totalInc)}</div></div>
+        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">المصروفات</div><div style="margin-top:6px;">${formatAmount(-totalExp)}</div></div>
+      </div>
+      <div style="border:1px solid #fecaca; background:#fef2f2; border-radius:12px; padding:12px; display:flex; justify-content:space-between; margin-bottom:20px;"><span style="font-weight:700;">الصافي</span><span>${formatAmount(totalInc-totalExp)}</span></div>
+      <div style="font-size:16px; font-weight:700; color:#0F766E; text-align:right; margin-bottom:8px;">✓ قائمة الانجازات (${list.length})</div>
+      <div style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; margin-bottom:20px;">
+        <div style="display:grid; grid-template-columns:50px 100px 1fr 100px 140px; background:#0F766E; color:white; padding:10px; font-size:12px; font-weight:700;"><span>#</span><span>التاريخ</span><span>المهمة</span><span>التصنيف</span><span>المبلغ</span></div>
+        ${list.map((t,i)=>`<div style="display:grid; grid-template-columns:50px 100px 1fr 100px 140px; padding:10px; font-size:12px; border-top:1px solid #f3f4f6; background:${i%2?'#f9fafb':'white'};"><span dir="ltr">${i+1}</span><span dir="ltr" style="direction:ltr; display:inline-block;">${t.date}</span><span style="font-weight:600;">${t.title}</span><span><span style="background:#f3f4f6; padding:2px 8px; border-radius:12px; font-size:11px;">${t.category}</span></span><span>${t.financial?formatAmount(t.financial.type==='expense'?-Math.abs(t.financial.amount):t.financial.amount):'<span style="color:#9ca3af;">-</span>'}</span></div>`).join('')}
+      </div>
+      <div style="background:#f8fafc; padding:16px; border-radius:12px; text-align:center; margin-top:24px;"><div style="font-size:14px; font-weight:700; color:#0F766E;">برنامج منجز بواسطة شريف رمضان</div><div dir="ltr" style="font-size:11px; color:#9ca3af; margin-top:6px;">Munjez Report | ${new Date().toISOString().split('T')[0]}</div></div>
+    </div>
+  `;
+  document.body.appendChild(div);
+  await new Promise(r=>setTimeout(r,700));
+  let canvas=await html2canvas(div,{scale:2, useCORS:true, backgroundColor:'#ffffff'});
+  let {jsPDF}=window.jspdf; let pdf=new jsPDF('p','mm','a4'); let imgData=canvas.toDataURL('image/png'); let imgW=210; let imgH=canvas.height*imgW/canvas.width; let hLeft=imgH; let pos=0; pdf.addImage(imgData,'PNG',0,pos,imgW,imgH); hLeft-=297; while(hLeft>0){pos=hLeft-imgH; pdf.addPage(); pdf.addImage(imgData,'PNG',0,pos,imgW,imgH); hLeft-=297;} pdf.save(`Munjez-Report-${new Date().toISOString().split('T')[0]}.pdf`); document.body.removeChild(div); btn.innerText='تصدير PDF'; document.getElementById('pdfModal').classList.add('hidden');
+};
+
+render();
+</script>
+
+<div id="pwaPrompt" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0F766E; color:white; padding:14px 20px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.2); z-index:9999; font-weight:bold; text-align:center; max-width:90%;"><div>📱 تثبيت منجز على هاتفك؟</div><div style="margin-top:8px"><button onclick="installPWA()" style="background:white; color:#0F766E; border:none; padding:8px 18px; border-radius:10px; margin:0 4px; font-weight:bold;">تثبيت</button><button onclick="document.getElementById('pwaPrompt').style.display='none'" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:8px 14px; border-radius:10px; font-weight:bold;">لاحقاً</button></div></div>
+<script>
+let deferredPrompt;
+window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('pwaPrompt').style.display='block'; });
+function installPWA(){ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(choice=>{ deferredPrompt=null; document.getElementById('pwaPrompt').style.display='none'; }); } }
+if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
+</script>
+
+
+<script>
+// Offline-first registration
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('./sw.js').then(reg => {
+      console.log('SW registered offline-ready');
+    });
+  });
+}
+// Notify if offline but working
+window.addEventListener('offline', () => {
+  console.log('Offline but app works!');
+});
+</script>
+</body>
+</html>
