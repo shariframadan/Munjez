@@ -1,29 +1,7611 @@
-{
-  "name": "منجز - إدارة المهام",
-  "short_name": "منجز",
-  "description": "تطبيق منجز لإدارة المهام - يعمل بدون انترنت",
-  "start_url": "./index.html",
-  "display": "standalone",
-  "background_color": "#ffffff",
-  "theme_color": "#0f766e",
-  "icons": [
-    {
-      "src": "./icon-192.png",
-      "sizes": "192x192",
-      "type": "image/png",
-      "purpose": "any maskable"
+[
+  {
+    "id": "1794919911039",
+    "title": "جرد الخزينة",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794919894095",
+        "title": "عجز 5335 ج",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T12:51:51.039Z"
+  },
+  {
+    "id": "1794919784687",
+    "title": "طلبية الأبرار",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794919764839",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "1794919768447",
+        "title": "الاستلام",
+        "done": false
+      },
+      {
+        "id": "1794919777072",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "1794919781391",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T12:49:44.687Z"
+  },
+  {
+    "id": "1794917207749",
+    "title": "مطالبة تيسير الحياة",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": true,
+    "completedAt": "2026-11-17T12:06:51.190Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794917170038",
+        "title": "مطلوب التوقيع والختم (أ. مصطفى 👍)",
+        "done": true
+      },
+      {
+        "id": "1794917191037",
+        "title": "تم التسليم (أم ساندي)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T12:06:47.749Z"
+  },
+  {
+    "id": "1794917055694",
+    "title": "طلبية عابدين",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794917039667",
+        "title": "العروض",
+        "done": true
+      },
+      {
+        "id": "1794917047598",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "17949197943925677877874240647",
+        "title": "الاستلام",
+        "done": false
+      },
+      {
+        "id": "1794919797312705808926082659",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "179491979951231418468527312016",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T12:04:15.694Z"
+  },
+  {
+    "id": "1794916748624",
+    "title": "تسليم أ. ياسمين عهدة مؤقتة 10000",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-16",
+    "completed": true,
+    "completedAt": "2026-11-17T12:02:30.951Z",
+    "financial": {
+      "amount": 10000,
+      "type": "expense"
     },
-    {
-      "src": "./icon-512.png",
-      "sizes": "512x512",
-      "type": "image/png",
-      "purpose": "any maskable"
+    "subtasks": [
+      {
+        "id": "1794916712800",
+        "title": "سيوتي 5870 ج شامل الاكرامية",
+        "done": true
+      },
+      {
+        "id": "1794916726360",
+        "title": "تم رد 4130 ج 17-11-2026",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:59:08.624Z"
+  },
+  {
+    "id": "1794916658890",
+    "title": "طلبية دريفاكسيم 1جم I.V (بديل سيفترياكسون)",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179491666806449566160145937777",
+        "title": "الطلب",
+        "done": false
+      },
+      {
+        "id": "17949169582002713094480790307",
+        "title": "التسليم",
+        "done": false
+      },
+      {
+        "id": "179491695999240387919985066023",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "17949169620317431136227346994",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:57:38.890Z"
+  },
+  {
+    "id": "1794916363010",
+    "title": "عمل صرف داخلي الساعة 11:30 ليلا (د. الحلواني)",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-16",
+    "completed": true,
+    "completedAt": "2026-11-17T11:52:45.962Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794916336394",
+        "title": "من العمليات للطوارئ",
+        "done": true
+      },
+      {
+        "id": "1794916344562",
+        "title": "اخطار أسماء ود. الحلواني بعد التحويل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:52:43.010Z"
+  },
+  {
+    "id": "1794916293082",
+    "title": "طلبية الأبرار",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": true,
+    "completedAt": "2026-11-17T11:51:44.130Z",
+    "financial": {
+      "amount": 450,
+      "type": "expense"
     },
-    {
-      "src": "./icon-1024.png",
-      "sizes": "1024x1024",
-      "type": "image/png",
-      "purpose": "any maskable"
-    }
-  ]
-}
+    "subtasks": [
+      {
+        "id": "1794916281082",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "1794916285018",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1794916289346",
+        "title": "السداد",
+        "done": true
+      },
+      {
+        "id": "179491630059534938835758199704",
+        "title": "استلام الشخصي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:51:33.082Z"
+  },
+  {
+    "id": "1794916255434",
+    "title": "تبرع جلفي",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": true,
+    "completedAt": "2026-11-17T11:50:58.667Z",
+    "financial": {
+      "amount": 5000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794916215395",
+        "title": "اخطار الحسابات",
+        "done": true
+      },
+      {
+        "id": "1794916224419",
+        "title": "التسجيل على السيستم",
+        "done": true
+      },
+      {
+        "id": "1794916230779",
+        "title": "طباعة الإيصال وختمه وإرساله لأبو المعارف والحسابات",
+        "done": true
+      },
+      {
+        "id": "1794916246059",
+        "title": "ارفاق الإيصال مع العهدة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:50:55.434Z"
+  },
+  {
+    "id": "1794916204211",
+    "title": "قبول تحويل أ. مصطفى على السيستم ، والتوقيع على الايصال",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": true,
+    "completedAt": "2026-11-17T11:50:06.219Z",
+    "financial": {
+      "amount": 10000,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:50:04.211Z"
+  },
+  {
+    "id": "1794916174427",
+    "title": "تسجيل دفعة الشربيني",
+    "category": "عمل",
+    "priority": "medium",
+    "date": "2026-11-17",
+    "completed": true,
+    "completedAt": "2026-11-17T11:50:07.443Z",
+    "financial": {
+      "amount": 10000,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-17T11:49:34.427Z"
+  },
+  {
+    "id": "1",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-19",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-19T07:43:13.513Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "s1",
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": "s2",
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-19T07:30:13.173Z"
+  },
+  {
+    "id": "2",
+    "title": "تسليم أختي كتاب الأضواء دين أولى ابتدائي",
+    "category": "عائلة",
+    "date": "2026-09-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-16T21:16:48.893Z",
+    "financial": {
+      "amount": -110,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:16:36.808Z"
+  },
+  {
+    "id": "3",
+    "title": "سيفوفلوران",
+    "category": "عمل",
+    "date": "2026-09-16",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-16T21:16:50.297Z",
+    "financial": {
+      "amount": -2700,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:16:36.808Z"
+  },
+  {
+    "id": "4",
+    "title": "طلبية كيان",
+    "category": "عمل",
+    "date": "2026-10-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-19T07:30:13.173Z",
+    "financial": {
+      "amount": 3360,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:30:13.173Z"
+  },
+  {
+    "id": "5",
+    "title": "د. شيما أنور (مع أختي ومعاذ)",
+    "category": "عائلة",
+    "date": "2026-10-19",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-19T07:30:13.173Z",
+    "financial": {
+      "amount": 170,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:30:13.173Z"
+  },
+  {
+    "id": "1794839877181",
+    "title": "تحويل دفعة د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-17T11:51:50.770Z",
+    "financial": {
+      "amount": 10000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "179483990812546861732475349105",
+        "title": "كاش أ. مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T14:37:57.181Z"
+  },
+  {
+    "id": "1794839279121",
+    "title": "د. محمود",
+    "category": "عمل",
+    "date": "2026-11-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-17T11:51:07.058Z",
+    "financial": {
+      "amount": 20000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794839243944",
+        "title": "انستاباي (10 و 10 نقدا)",
+        "done": true
+      },
+      {
+        "id": "1794839252738",
+        "title": "نيتروديرم (غير متوفر)",
+        "done": false
+      },
+      {
+        "id": "1794839268689",
+        "title": "اسبرين بروتكت",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T14:27:59.122Z"
+  },
+  {
+    "id": "1794839081226",
+    "title": "متابعة محمد خليفة في صيانة هاندبيسات",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T14:34:34.958Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179483967115138146052350052984",
+        "title": "خلصوا ، وعند د. مصطفى رجب",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T14:24:41.226Z"
+  },
+  {
+    "id": "1794838889131",
+    "title": "متابعة تركيب الكمبيوتر الجديد للحضانات والعمليات",
+    "category": "عمل",
+    "date": "2026-11-18",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17948389789874423517039006378",
+        "title": "الإخطار على جروب الصيانة",
+        "done": true
+      },
+      {
+        "id": "1794838987995654385642688833",
+        "title": "إخطار أسماء خالد",
+        "done": true
+      },
+      {
+        "id": "17948389915301068418450687455",
+        "title": "تم التسليم لمحمد سعد",
+        "done": true
+      },
+      {
+        "id": "179483910601009221153589766173",
+        "title": "التأكد من التوصيل (يوم الأربعاء)",
+        "done": false
+      },
+      {
+        "id": "17948391279619358613750578866",
+        "title": "إثبات الحركة في الأصول الثابتة ،",
+        "done": false
+      },
+      {
+        "id": "17948391320271619830430857282",
+        "title": "التوقيع بلاستلام",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T14:21:29.131Z"
+  },
+  {
+    "id": "1794838795291",
+    "title": "جرد الخزينة",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T14:20:01.219Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794838772299",
+        "title": "20 ألف طرف د. محمود ",
+        "done": true
+      },
+      {
+        "id": "1794838783995",
+        "title": "5 ألاف أمانة طرفي (سارة)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T14:19:55.291Z"
+  },
+  {
+    "id": "1794830948293",
+    "title": "طباعة رسم هندسي للشيخ فتحي",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T12:09:24.429Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179483095555817819668222784146",
+        "title": "البحث على جهازي",
+        "done": true
+      },
+      {
+        "id": "17948309617105183034807390469",
+        "title": "البحث على جها زينب",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T12:09:08.293Z"
+  },
+  {
+    "id": "1794826748292",
+    "title": "مراجعة وسداد فواتير السام السابقة",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T12:07:58.294Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794826719884",
+        "title": "الحاج محمد رمضان",
+        "done": true
+      },
+      {
+        "id": "1794826727549",
+        "title": "تارجت",
+        "done": true
+      },
+      {
+        "id": "1794826731741",
+        "title": "باراجون",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T10:59:08.292Z"
+  },
+  {
+    "id": "1794826015553",
+    "title": "فواتير إلكترونية",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T12:08:03.222Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794825994442",
+        "title": "فاتورة العالمية",
+        "done": true
+      },
+      {
+        "id": "1794826010281",
+        "title": "فاتورة باراجون",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T10:46:55.553Z"
+  },
+  {
+    "id": "1794820826357",
+    "title": "متابعة 2 استاند بعد القافلة",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T10:47:11.792Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179482602852102298375992137447",
+        "title": "تم الاخلاء والرفع للمخزن",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:20:26.357Z"
+  },
+  {
+    "id": "1794820793750",
+    "title": "سداد أ. علي سواق المدرسة (انستاباي)",
+    "category": "شخصي",
+    "date": "2026-11-15",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-11-16T09:20:00.493Z",
+    "financial": {
+      "amount": 600,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:19:53.750Z"
+  },
+  {
+    "id": "1794820667333",
+    "title": "ط سيوتي",
+    "category": "عمل",
+    "date": "2026-11-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-17T11:49:14.999Z",
+    "financial": {
+      "amount": 6600,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794820655102",
+        "title": "تحضير النواقص (ياسمين)",
+        "done": true
+      },
+      {
+        "id": "179482067564549038011289551087",
+        "title": "إرسالها لسيوتي",
+        "done": true
+      },
+      {
+        "id": "17948206812459752668254807321",
+        "title": "تحضير المرتجعات",
+        "done": true
+      },
+      {
+        "id": "17948263638469535944731036042",
+        "title": "تأكيد الفاتورة",
+        "done": true
+      },
+      {
+        "id": "17949157072146146102591481089",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "179491571132519853979457277182",
+        "title": "الدفع نقدا",
+        "done": true
+      },
+      {
+        "id": "17949157221421793596326504432",
+        "title": "خطأ في خصم  المرتجع (تم الاخطار)",
+        "done": true
+      },
+      {
+        "id": "17949157309334870842150830864",
+        "title": "التسحيل سيستم (ياسمين)",
+        "done": true
+      },
+      {
+        "id": "17949157407667072263004044423",
+        "title": "كشف حساب لسيوتي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:17:47.333Z"
+  },
+  {
+    "id": "1794820559358",
+    "title": "شراء كمبيوتر من باراجون لزوم العمليات والحضانات",
+    "category": "عمل",
+    "date": "2026-11-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T10:46:18.273Z",
+    "financial": {
+      "amount": 6000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17948205857365424380683002401",
+        "title": "الشراء",
+        "done": true
+      },
+      {
+        "id": "17948205895185152543122923914",
+        "title": "ارسال الفاتورة للتسجيل",
+        "done": true
+      },
+      {
+        "id": "17948205929986535595703473716",
+        "title": "النقل",
+        "done": true
+      },
+      {
+        "id": "17948205987425676627914813708",
+        "title": "السداد",
+        "done": true
+      },
+      {
+        "id": "179482062060512251692055559682",
+        "title": "التسليم 16-11-2026",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:15:59.358Z"
+  },
+  {
+    "id": "1794820515870",
+    "title": "د. تامر الشربيني (أم مسلم)",
+    "category": "شخصي",
+    "date": "2026-11-14",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-11-16T09:15:17.054Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:15:15.870Z"
+  },
+  {
+    "id": "1794820432150",
+    "title": "مراجعة عهدة الأقسام (طلب من أ. فتحي العدوي) 12-11-2026",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T09:13:55.990Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794820366679",
+        "title": "تفقد العهدة الموجودة خلف الأبواب",
+        "done": true
+      },
+      {
+        "id": "1794820379222",
+        "title": "تسجيل الملاحظات ",
+        "done": true
+      },
+      {
+        "id": "1794820403438",
+        "title": "عمل تقرير",
+        "done": true
+      },
+      {
+        "id": "1794820409150",
+        "title": "إرساله للشيخ فتحي و د. الحلواني و مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:13:52.150Z"
+  },
+  {
+    "id": "1794820333335",
+    "title": "متابعة فاتورة الإيمان الإلكترونية 12-11",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T09:12:16.175Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794820291567",
+        "title": "المتابعة 14-11",
+        "done": true
+      },
+      {
+        "id": "1794820307335",
+        "title": "الاستلام والارسال لياسمين والحسابات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:12:13.335Z"
+  },
+  {
+    "id": "1794820121784",
+    "title": "اضافة لولب لحالة النسا 12-11-2026",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T09:08:46.312Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794819954465",
+        "title": "تلقي الاخطار من منال 11-11",
+        "done": true
+      },
+      {
+        "id": "1794819965577",
+        "title": "اخطار الحسابات والتنفيذ 12-11",
+        "done": true
+      },
+      {
+        "id": "1794819979697",
+        "title": "إعادة تكويد الخدمة 12-11",
+        "done": true
+      },
+      {
+        "id": "1794820008481",
+        "title": "تعديل الحالة ",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T09:08:41.784Z"
+  },
+  {
+    "id": "1794819255541",
+    "title": "متابعة زي العاملات 12-11-2026",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:55:16.172Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794819188797",
+        "title": "متابعة الانتهاء من التصنيع (سيتأخر)",
+        "done": true
+      },
+      {
+        "id": "1794819203117",
+        "title": "ارسال اللوجو للطباعة",
+        "done": true
+      },
+      {
+        "id": "1794819212909",
+        "title": "الانتهاء قبل الساعة 10 مساء بقليل",
+        "done": true
+      },
+      {
+        "id": "1794819231397",
+        "title": "الاستلام السبت بواسطة محمود كمال",
+        "done": true
+      },
+      {
+        "id": "17948192632297210618965108869",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "179481929562909781366804088609",
+        "title": "السداد 14-11-2026",
+        "done": true
+      },
+      {
+        "id": "17948193139179703220344428966",
+        "title": "أ. جمال (المقاسات ستحتاج لتعديل)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:54:15.541Z"
+  },
+  {
+    "id": "1794819141782",
+    "title": "شراء منفاخ بالونات وبصامة 12-11-2026",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:52:52.502Z",
+    "financial": {
+      "amount": 65,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794819128374",
+        "title": "الشراء",
+        "done": true
+      },
+      {
+        "id": "1794819131461",
+        "title": "التسليم",
+        "done": true
+      },
+      {
+        "id": "1794819134693",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1794819137877",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:52:21.782Z"
+  },
+  {
+    "id": "1794818960318",
+    "title": "الاتفاق على 2 ستاند معدني لزوم القافلة 12-11",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:50:36.878Z",
+    "financial": {
+      "amount": 5700,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794818916288",
+        "title": "استلام 2 استاند (محمود كمال)  12-11",
+        "done": true
+      },
+      {
+        "id": "1794818941527",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1794818945318",
+        "title": "السداد ع السيستم 16-11",
+        "done": true
+      },
+      {
+        "id": "1794819025046",
+        "title": "الانتقال 350ج ",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:49:20.318Z"
+  },
+  {
+    "id": "1794818882703",
+    "title": "سداد فاتورة O & S 11-11",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:51:29.094Z",
+    "financial": {
+      "amount": 18720,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:48:02.703Z"
+  },
+  {
+    "id": "1794818867958",
+    "title": "سداد فاتورة مستلزمات امي 11-11",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:51:30.278Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:47:47.958Z"
+  },
+  {
+    "id": "1794818814511",
+    "title": "عمل طليبة تارجت 11-11-2026",
+    "category": "عمل",
+    "date": "2026-11-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-16T08:47:28.783Z",
+    "financial": {
+      "amount": 3240,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794818802663",
+        "title": "عمل الطلبية",
+        "done": true
+      },
+      {
+        "id": "1794818810455",
+        "title": "الاستلام 14-11-2026",
+        "done": true
+      },
+      {
+        "id": "17948188180328028773584881821",
+        "title": "التسجيل 14-11-2026",
+        "done": true
+      },
+      {
+        "id": "179481884648817082677683216452",
+        "title": "السداد 16-11-2026",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:46:54.511Z"
+  },
+  {
+    "id": "1794818758689",
+    "title": "عمل طلبية تارجت",
+    "category": "عمل",
+    "date": "2026-11-11",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-16T08:45:58.689Z"
+  },
+  {
+    "id": "1794217697901",
+    "title": "طلبية مناديل (الإيمان للتوكيلات)",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 1615,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794217691437",
+        "title": "الطلبية",
+        "done": false
+      },
+      {
+        "id": "179421770164547669978345750197",
+        "title": "الاستلام",
+        "done": false
+      },
+      {
+        "id": "17942177054057512234335494764",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "17942177089331418117385248875",
+        "title": "السداد سيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-09T09:48:17.901Z"
+  },
+  {
+    "id": "1794217405966",
+    "title": "فاتورة صيدلية شريف",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:44:06.910Z",
+    "financial": {
+      "amount": 90,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794217396718",
+        "title": "عمل التحويل من الطوارئ",
+        "done": true
+      },
+      {
+        "id": "179421741461512997853596447806",
+        "title": "عمل الفاتورة",
+        "done": true
+      },
+      {
+        "id": "17942174276954713486749630835",
+        "title": "اخطار أ. أسماء",
+        "done": true
+      },
+      {
+        "id": "17942174376633509077940886619",
+        "title": "السداد",
+        "done": true
+      },
+      {
+        "id": "17942174415515201607905079393",
+        "title": "اخطار أم عبير",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-09T09:43:25.966Z"
+  },
+  {
+    "id": "1794217315535",
+    "title": "جرد خزينة المشتريات",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:43:03.271Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794217303031",
+        "title": "الجرد ، اكتشاف عجز 5000 ج",
+        "done": true
+      },
+      {
+        "id": "17942173273595375986319140926",
+        "title": "مراجعة جميع الفواتير والسداد بالأمس",
+        "done": true
+      },
+      {
+        "id": "17942173480395439531169225091",
+        "title": "ترجيح استلام العهدة ناقصة ، تم استلام 45000 وعلى السيستم 50000",
+        "done": true
+      },
+      {
+        "id": "17942173619836949366237468376",
+        "title": "تم استلام باقي العهدة 5000 ج من أ. مصطفى",
+        "done": true
+      },
+      {
+        "id": "17942173783277461850241130568",
+        "title": "تم إعادة الجرد ومعرفة المسحوبات الفعلية الشخصية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-09T09:41:55.535Z"
+  },
+  {
+    "id": "1794217219000",
+    "title": "عمل اخطار بمواعيد أ. ياسمين الشتوي",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:41:19.975Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794217204016",
+        "title": "عمل الاخطار",
+        "done": true
+      },
+      {
+        "id": "17942172270806142511959123645",
+        "title": "توقيعه ، سحبه اسكانر",
+        "done": true
+      },
+      {
+        "id": "179421723798422516008730230552",
+        "title": "تسليم أ. جمال ، والتوقيع بالاستلام",
+        "done": true
+      },
+      {
+        "id": "179421724776012353620926060449",
+        "title": "سحبه سكانر بعد الاستلام",
+        "done": true
+      },
+      {
+        "id": "179421726480017215317549314169",
+        "title": "ارساله لياسمين",
+        "done": true
+      },
+      {
+        "id": "17942172734322148298919791416",
+        "title": "أرشفته في ملف المشتريات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-09T09:40:19.000Z"
+  },
+  {
+    "id": "1794146403980",
+    "title": "تصوير جهاز رسم قلب محتاج لشاشة وإرساله لشركة الأمين",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T14:00:05.812Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T14:00:03.980Z"
+  },
+  {
+    "id": "1794146374052",
+    "title": "تصوير جهاز رسم قلب zonecare  بالمخزن",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T14:00:07.124Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:59:34.052Z"
+  },
+  {
+    "id": "1794145312265",
+    "title": "طلبية O & S",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 18720,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "179421763015012157127278244229",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "179421763638238190806202013905",
+        "title": "الفاتورة الإلكترونية",
+        "done": true
+      },
+      {
+        "id": "179421764498148155522384615257",
+        "title": "الاستلام",
+        "done": false
+      },
+      {
+        "id": "179421765034107733931839024244",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "17942176540465984979721315324",
+        "title": "السداد سيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:41:52.265Z"
+  },
+  {
+    "id": "1794145293554",
+    "title": "جرد كرتونة منظمات ومكونات أجهزة",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:37:38.968Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:41:33.554Z"
+  },
+  {
+    "id": "1794145280306",
+    "title": "جرد كرتونة آلات الأسنان (د. أحمد عبد الله)",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:37:41.352Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:41:20.306Z"
+  },
+  {
+    "id": "1794145250762",
+    "title": "متابعة فواتير الكترونية",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:37:46.472Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794145225314",
+        "title": "الإيمان مناديل",
+        "done": true
+      },
+      {
+        "id": "1794145235946",
+        "title": "العالمية",
+        "done": true
+      },
+      {
+        "id": "1794145242522",
+        "title": "فتح الله ماركت",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:40:50.762Z"
+  },
+  {
+    "id": "1794145208370",
+    "title": "طلبية دلتا فارما",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-09T09:39:45.224Z",
+    "financial": {
+      "amount": 10435,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794217176288710274051111421",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "17942171781925267972078622362",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "179421717976829058006130360736",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17942171819120540372609500851",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:40:08.370Z"
+  },
+  {
+    "id": "1794145191250",
+    "title": "طلبية طيبة",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 6740,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1794217072873655229108995157",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "179421707509722871460303994773",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17942170791134163411721634511",
+        "title": "التسجيل سيستم",
+        "done": false
+      },
+      {
+        "id": "179421708222515110477198918226",
+        "title": "السداد سيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:39:51.250Z"
+  },
+  {
+    "id": "1794145176994",
+    "title": "طلبية مكة للمحاليل",
+    "category": "عمل",
+    "date": "2026-11-09",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 7020,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17942170925205835496135515602",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "17942171088409595283033050085",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17942171143763381554005115509",
+        "title": "الفواتير الالكترونية",
+        "done": true
+      },
+      {
+        "id": "17942171627761393104739574208",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "17942171650487722144840947104",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:39:36.994Z"
+  },
+  {
+    "id": "1794144820037",
+    "title": "مراجعة تسجيل فواتير الأمس",
+    "category": "عمل",
+    "date": "2026-11-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T13:39:19.051Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1794145122515793447829718611",
+        "title": "الحاج محمد رمضان",
+        "done": true
+      },
+      {
+        "id": "1794145130171225254678862699",
+        "title": "كمال سعد",
+        "done": true
+      },
+      {
+        "id": "179414513533811978829168664684",
+        "title": "فتح الله ماركت",
+        "done": true
+      },
+      {
+        "id": "179414514206747463418520044176",
+        "title": "الانتقال محمود كمال",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T13:33:40.037Z"
+  },
+  {
+    "id": "1794129948392",
+    "title": "تسليم تجهيزات القافلة ل أ. جمال عاطف",
+    "category": "عمل",
+    "date": "2026-11-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:25:50.864Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T09:25:48.392Z"
+  },
+  {
+    "id": "1794129928440",
+    "title": "تسليم العلب للعيادات (5)",
+    "category": "عمل",
+    "date": "2026-11-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:25:49.761Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T09:25:28.440Z"
+  },
+  {
+    "id": "1794129380707",
+    "title": "فتح الله ماركت",
+    "category": "عمل",
+    "date": "2026-11-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:17:31.331Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17941293865323593473091428504",
+        "title": "شراء مستلزمات بوفيه",
+        "done": true
+      },
+      {
+        "id": "17941294050129395668360709662",
+        "title": "طلب الفاتورة الإلكترونية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T09:16:20.707Z"
+  },
+  {
+    "id": "1794128704159",
+    "title": "كمال سعد الصحراوي",
+    "category": "عمل",
+    "date": "2026-11-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:14:46.196Z",
+    "financial": {
+      "amount": 1886,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17941289425502946901558794258",
+        "title": "شراء أدوات كتابية لزوم القافلة",
+        "done": true
+      },
+      {
+        "id": "17941289549503750413032900973",
+        "title": "شراء علب العيادات الشفافة (5)",
+        "done": true
+      },
+      {
+        "id": "17941292593888811624021546239",
+        "title": "استلام الفاتورة الإلكترونية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T09:05:04.159Z"
+  },
+  {
+    "id": "1794128470152",
+    "title": "النزول للعطارين لشراء زي العاملات",
+    "category": "عمل",
+    "date": "2026-11-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:14:47.564Z",
+    "financial": {
+      "amount": 2000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "179412849197753145781224425",
+        "title": "البحث عن زي العاملات (العطارين = لا يوجد جيبة ،، كله بناطيل)",
+        "done": true
+      },
+      {
+        "id": "179412868000803328531449672245",
+        "title": "عمارة بساس - الحاج محمد رمضان - تصنيع الطقم ب 450ج - الاستلام الخميس - عربون 2000 ج",
+        "done": true
+      },
+      {
+        "id": "17941286883282455619695545932",
+        "title": "إرسال اللوجو لطباعته على الجيب",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T09:01:10.152Z"
+  },
+  {
+    "id": "1794128368745",
+    "title": "فاتورة طلبية الأبرار",
+    "category": "عمل",
+    "date": "2026-11-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:00:43.585Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179412838391331854662163995784",
+        "title": "التسجيل (ياسمين)",
+        "done": false
+      },
+      {
+        "id": "1794128386874288858132947891",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T08:59:28.745Z"
+  },
+  {
+    "id": "1794128351761",
+    "title": "دفعة د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-11-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:00:46.496Z",
+    "financial": {
+      "amount": 18000,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T08:59:11.761Z"
+  },
+  {
+    "id": "1794127120064",
+    "title": "اجتماع إداري بخصوص القافلة الطبية",
+    "category": "عمل",
+    "date": "2026-11-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-08T09:00:44.465Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17941271341046347670971192686",
+        "title": "طلبات شراء للتجهيزات",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-08T08:38:40.064Z"
+  },
+  {
+    "id": "1793520506204",
+    "title": "تأهيل مخزن الأجهزة الطبية",
+    "category": "عمل",
+    "date": "2026-11-01",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793520415948",
+        "title": "الإخلاء",
+        "done": false
+      },
+      {
+        "id": "1793520420372",
+        "title": "النظافة",
+        "done": false
+      },
+      {
+        "id": "1793520428948",
+        "title": "تفريغ وشحن الأجهزة ذات البطاريات (محمد خليفة)",
+        "done": false
+      },
+      {
+        "id": "1793520447371",
+        "title": "ادخال الاستاندات المعدنية",
+        "done": false
+      },
+      {
+        "id": "1793520473156",
+        "title": "رص الأجهز عليها",
+        "done": false
+      },
+      {
+        "id": "1793520480307",
+        "title": "وضع لوحات توضيحية",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T08:08:26.204Z"
+  },
+  {
+    "id": "1793520357308",
+    "title": "مراجعة كرت الصنف الخاصة بمخزن الأجهزة الطبية",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T08:06:25.596Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17935203716455210764804693278",
+        "title": "طلب دوسيه كرت الصنف الخاص بالمستشفى (من أ. أسماء خالد)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T08:05:57.308Z"
+  },
+  {
+    "id": "1793520004118",
+    "title": "التواصل مع العز كوزماتكس (دعاء علام)",
+    "category": "عمل",
+    "date": "2026-11-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T08:00:15.782Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793520012766625071135479537",
+        "title": "طلب القائمة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T08:00:04.118Z"
+  },
+  {
+    "id": "1793519972070",
+    "title": "العالمية (الفاتورة الإلكترونية)",
+    "category": "عمل",
+    "date": "2026-11-01",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:59:32.070Z"
+  },
+  {
+    "id": "1793519720079",
+    "title": "طلبية طيبة",
+    "category": "عمل",
+    "date": "2026-11-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:59:06.926Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17935197230488870716884313645",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17935197302238990983536141296",
+        "title": "التسجيل (أ. ياسمين)",
+        "done": true
+      },
+      {
+        "id": "179351975088717808081816131882",
+        "title": "السداد سيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:55:20.079Z"
+  },
+  {
+    "id": "1793519693311",
+    "title": "استلام 3 هاند بيس من الصيانة",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:54:56.743Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519683791",
+        "title": "اخطار د. مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:54:53.311Z"
+  },
+  {
+    "id": "1793519660223",
+    "title": "تسجيل ومراجعة تسعير د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:54:22.063Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519642407",
+        "title": "إرسال الملاحظات والتعديلات المطلوبة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:54:20.224Z"
+  },
+  {
+    "id": "1793519558408",
+    "title": "تقفيل 2 ستاند معدني لزوم مخزن الأجهزة الطبية",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:53:33.663Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:52:38.408Z"
+  },
+  {
+    "id": "1793519411576",
+    "title": "عمل طلبية من شركة طيبة",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:50:35.481Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519402568",
+        "title": "فيوسيدين",
+        "done": true
+      },
+      {
+        "id": "17935194175378845716843741641",
+        "title": "بينوكس قطرة",
+        "done": true
+      },
+      {
+        "id": "1793519420465737363519735317",
+        "title": "الكوتات",
+        "done": true
+      },
+      {
+        "id": "179351943332121530779735900085",
+        "title": "ترك الفلوس مع الاستقبال",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:50:11.576Z"
+  },
+  {
+    "id": "1793519382801",
+    "title": "التواصل مع شركة مكة للمحاليل",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:49:44.472Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519377865",
+        "title": "قائمة الأدوية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:49:42.801Z"
+  },
+  {
+    "id": "1793519362456",
+    "title": "د. محمود",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:49:24.425Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519345809",
+        "title": "طلب تحضير الموجود عنده من الأدوية الخاصة بالمعدة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:49:22.457Z"
+  },
+  {
+    "id": "1793519292033",
+    "title": "سداد فاتورة الفريدة على السيستم",
+    "category": "عمل",
+    "date": "2026-10-31",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:48:43.289Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17935193172017063508559414813",
+        "title": "سداد القيمة لشيفت رحمة ل أ. رحاب مع التسليم مساءا",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:48:12.033Z"
+  },
+  {
+    "id": "1793519218249",
+    "title": "طلب ماسكات من سيوتي",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:46:59.121Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:46:58.249Z"
+  },
+  {
+    "id": "1793519038778",
+    "title": "عمل طلبية الفريدة",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:44:01.034Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793519023522",
+        "title": "سداد أ. رحمة الفاتورة من شيفتها",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:43:58.778Z"
+  },
+  {
+    "id": "1793518962883",
+    "title": "حفظ طلبات الشراء التي تم تنفيذها",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:42:43.890Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:42:42.883Z"
+  },
+  {
+    "id": "1793518933515",
+    "title": "عمل اذن تسليم أثاث مكتب الجودة",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:42:14.386Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793518918339",
+        "title": "عمل اذن تسليم دوسيهات بماكينة ثابتة",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:42:13.515Z"
+  },
+  {
+    "id": "1793518895027",
+    "title": "عمل اذن تسليم الأدوات الكتابية وتوقيع أ. جمال عليه",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:41:35.923Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:41:35.027Z"
+  },
+  {
+    "id": "1793518864307",
+    "title": "سداد فلوس محمود كمال انستاباي",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:41:05.371Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:41:04.307Z"
+  },
+  {
+    "id": "1793518854731",
+    "title": "تسجيل فواتير الأمس",
+    "category": "عمل",
+    "date": "2026-10-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-11-01T07:40:58.947Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1793518794011",
+        "title": "الصفوة",
+        "done": true
+      },
+      {
+        "id": "1793518798795",
+        "title": "العالمية",
+        "done": true
+      },
+      {
+        "id": "1793518804851",
+        "title": "كمال سعد",
+        "done": true
+      },
+      {
+        "id": "1793518809643",
+        "title": "المصروفات",
+        "done": true
+      },
+      {
+        "id": "1793518817035",
+        "title": "الانتقالات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-11-01T07:40:54.731Z"
+  },
+  {
+    "id": "1793462178482",
+    "title": "كمال سعد (شراء أدوات كتابية)",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:56:19.762Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-31T15:56:18.482Z"
+  },
+  {
+    "id": "1793462157554",
+    "title": "العالمية (استلام وسداد وحدة أدراج وترابيزة و2 ستاند معدني)",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:55:59.034Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-31T15:55:57.554Z"
+  },
+  {
+    "id": "1793462129434",
+    "title": "مروان الجعراني (تسليم الجواب واستلام الدفاتر = الجمعية)",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:55:30.626Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-31T15:55:29.434Z"
+  },
+  {
+    "id": "1793462108538",
+    "title": "الصفوة ميديكال (سنون دياثيرمي)",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:55:09.834Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-31T15:55:08.538Z"
+  },
+  {
+    "id": "1793462093498",
+    "title": "الأزاريطة طلبية د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:54:54.922Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-31T15:54:53.498Z"
+  },
+  {
+    "id": "1793008656708",
+    "title": "العمل بعد الفجر على مرتبات الأطباء",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-26T09:57:45.556Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-26T09:57:36.708Z"
+  },
+  {
+    "id": "1793008584988",
+    "title": "تحويل فاتورة O & S انستاباي أ. مصطفى",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 12240,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-26T09:56:24.988Z"
+  },
+  {
+    "id": "1792925083223",
+    "title": "علي بن علي",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-26T09:52:51.196Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792925072895",
+        "title": "سنون جافة",
+        "done": false
+      },
+      {
+        "id": "1792925076952",
+        "title": "كحكة عمليات",
+        "done": false
+      },
+      {
+        "id": "17930083691013415142038157625",
+        "title": "غير متاح",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T10:44:43.224Z"
+  },
+  {
+    "id": "1792922526170",
+    "title": "ط الأطباء",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 1350,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T10:02:06.170Z"
+  },
+  {
+    "id": "1792922518930",
+    "title": "ط طيبة",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-26T09:53:06.556Z",
+    "financial": {
+      "amount": 2575,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "179300837859739445824576772737",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17930083809338332897021070971",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "179300838318106546444445319755",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T10:01:58.930Z"
+  },
+  {
+    "id": "1792922513643",
+    "title": "ط عابدين",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-26T09:53:19.756Z",
+    "financial": {
+      "amount": 3735,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "179300839216539700840267617443",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17930083952296440604908995001",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "179300839689334416450493865625",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T10:01:53.643Z"
+  },
+  {
+    "id": "1792920097460",
+    "title": "فلاشة انبادي",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-25T10:29:23.481Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792920053341",
+        "title": "تسليم لمحمد خليفة",
+        "done": true
+      },
+      {
+        "id": "1792920063309",
+        "title": "تكويد ، وفاتورة شراء أصول ",
+        "done": true
+      },
+      {
+        "id": "1792920076341",
+        "title": "تسليم على السيستم (تحريك)",
+        "done": true
+      },
+      {
+        "id": "179292011185343985117346927216",
+        "title": "التوقيع بالاستلام",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T09:21:37.460Z"
+  },
+  {
+    "id": "1792920032133",
+    "title": "طلبية الصفوة",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-25T10:44:19.968Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792920018693",
+        "title": "سنون جافة (متوفر مقاسات كبيرة)",
+        "done": true
+      },
+      {
+        "id": "1792920023877",
+        "title": "كحكة العمليات (غير متوفر)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T09:20:32.133Z"
+  },
+  {
+    "id": "1792918346551",
+    "title": "د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-10-28",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-31T15:54:20.275Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179291836844715059720500633844",
+        "title": "تاول",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T08:52:26.551Z"
+  },
+  {
+    "id": "1792918336383",
+    "title": "طلبية الأبرار",
+    "category": "عمل",
+    "date": "2026-10-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-25T13:05:43.006Z",
+    "financial": {
+      "amount": 2120,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17929335341277438785448837855",
+        "title": "استلام",
+        "done": true
+      },
+      {
+        "id": "179293353587921630945507478072",
+        "title": "تسجيل",
+        "done": true
+      },
+      {
+        "id": "17929335384799539262266884612",
+        "title": "سداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T08:52:16.383Z"
+  },
+  {
+    "id": "1792918329039",
+    "title": "طلبية كيان",
+    "category": "عمل",
+    "date": "2026-10-27",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T08:52:09.039Z"
+  },
+  {
+    "id": "1792918319327",
+    "title": "طلبية الوليد",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T08:51:59.327Z"
+  },
+  {
+    "id": "1792913626873",
+    "title": "أ. منال مخزن  العيادات",
+    "category": "عمل",
+    "date": "2026-10-24",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-25T07:33:52.520Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792913591856",
+        "title": "مراجعة سرنجات ورباط ضاغط",
+        "done": true
+      },
+      {
+        "id": "1792913597456",
+        "title": "مراجعة فواتير المرضى",
+        "done": true
+      },
+      {
+        "id": "1792913617008",
+        "title": "عمل التحويلات الضرورية ",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-25T07:33:46.873Z"
+  },
+  {
+    "id": "1792845787675",
+    "title": "د. محمود",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 20000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1792845771619",
+        "title": "بديل بريمبران (50) *5 أمبول",
+        "done": true
+      },
+      {
+        "id": "17928457953409699878114695846",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17928458059164977331597721031",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1792845808524025386688961740456",
+        "title": "تسليم الصيدلية 20 ألف فكة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-24T12:43:07.675Z"
+  },
+  {
+    "id": "1792838060479",
+    "title": "متابعة طلبية  O & S",
+    "category": "عمل",
+    "date": "2026-10-26",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 12240,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17929134390977276020478573235",
+        "title": "الفاتورة العادية",
+        "done": true
+      },
+      {
+        "id": "179291344708109338106246528788",
+        "title": "الفاتورة الإلكترونية",
+        "done": true
+      },
+      {
+        "id": "1792913449513006504755137879514",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17929134526497868843497927059",
+        "title": "التسجيل",
+        "done": false
+      },
+      {
+        "id": "17929134552091269816887860329",
+        "title": "السداد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-24T10:34:20.479Z"
+  },
+  {
+    "id": "1792671209961",
+    "title": "عمل طلبية O & S",
+    "category": "عمل",
+    "date": "2026-10-22",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-22T12:13:29.961Z"
+  },
+  {
+    "id": "1792662526091",
+    "title": "مرور الطوارئ (الأدوية)",
+    "category": "عمل",
+    "date": "2026-10-22",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792662423643",
+        "title": "تحضير رصيد الأدوية",
+        "done": true
+      },
+      {
+        "id": "1792662431946",
+        "title": "مطابقة الأدوية على الواقع مع تفقد الصلاحية",
+        "done": true
+      },
+      {
+        "id": "1792662452435",
+        "title": "معرفة الطلبات ، وملاحظة المشاكل",
+        "done": true
+      },
+      {
+        "id": "1792662471779",
+        "title": "سحب التقرير الكتابي",
+        "done": true
+      },
+      {
+        "id": "1792662474498",
+        "title": "عمل تقرير ببرنامج التقارير",
+        "done": true
+      },
+      {
+        "id": "1792662518962",
+        "title": "إرساله للجهات المعنية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-22T09:48:46.091Z"
+  },
+  {
+    "id": "1792662394739",
+    "title": "تسليم أ. ياسمين برنامج الاستلام والتدريب عليه",
+    "category": "عمل",
+    "date": "2026-10-22",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-22T09:46:50.466Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792662408907721729473506783",
+        "title": "متابعة الاستلام وعمل التقرير والمطابقة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-22T09:46:34.739Z"
+  },
+  {
+    "id": "1792584198466",
+    "title": "تصفية عهدة مشتريات 10-2026",
+    "category": "عمل",
+    "date": "2026-10-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-21T12:03:29.858Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792583966546",
+        "title": "جرد الخزينة (مطابق)",
+        "done": true
+      },
+      {
+        "id": "1792583978490",
+        "title": "مراجعة الفواتير على كشف الحساب",
+        "done": true
+      },
+      {
+        "id": "1792583991778",
+        "title": "طباعة الفواتير غير المطبوعة",
+        "done": true
+      },
+      {
+        "id": "1792584180002",
+        "title": "طباعة ايصالات إيرادات ومبيعات صيدلية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-21T12:03:18.466Z"
+  },
+  {
+    "id": "1792583948594",
+    "title": "سداد فاتورة سيوتي على السيستم",
+    "category": "عمل",
+    "date": "2026-10-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-21T11:59:10.482Z",
+    "financial": {
+      "amount": 7290,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1792583938682",
+        "title": "شامل الاكرامية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-21T11:59:08.594Z"
+  },
+  {
+    "id": "17925839185220.8009912052575335",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-22",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1792583918522.035,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1792583918522.4482,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-21T11:58:38.522Z"
+  },
+  {
+    "id": "17925839129300.1153686372736038",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-21",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-21T11:58:38.522Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1792583912931.947,
+        "title": "صباح",
+        "done": false
+      },
+      {
+        "id": 1792583912931.1558,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-21T11:58:32.931Z"
+  },
+  {
+    "id": "1792413258170",
+    "title": "تحويل هاني تك",
+    "category": "عمل",
+    "date": "2026-10-18",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 1050,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T12:34:18.170Z"
+  },
+  {
+    "id": "1792396430304",
+    "title": "طلبية سيوتي (مستلزمات)",
+    "category": "عمل",
+    "date": "2026-10-18",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 7853,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17923964393369556261553190423",
+        "title": "إرسال الطلبية من الأمس",
+        "done": false
+      },
+      {
+        "id": "17923964436324933191360737459",
+        "title": "مناقشةالتفاصيل",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:53:50.304Z"
+  },
+  {
+    "id": "1792396411680",
+    "title": "تطوير تطبيق إعداد تقارير الجرد والمرور",
+    "category": "عمل",
+    "date": "2026-10-18",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:53:31.680Z"
+  },
+  {
+    "id": "1792395978328",
+    "title": "استلام طلب شراء من الصيانة (كابل باور ومشترك)",
+    "category": "عمل",
+    "date": "2026-10-18",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179239639119249945951137722255",
+        "title": "تكليف محمد خليفة بالشراء وهو في العامرية",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:46:18.328Z"
+  },
+  {
+    "id": "1792395916144",
+    "title": "استلام طلبية أدويا (دريفاكسيم 1جم)",
+    "category": "عمل",
+    "date": "2026-10-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-19T07:45:20.048Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1792395881768",
+        "title": "استلام من الاستقبال",
+        "done": true
+      },
+      {
+        "id": "1792395889752",
+        "title": "تسجيل (أ. ياسمين)",
+        "done": true
+      },
+      {
+        "id": "1792395898376",
+        "title": "سداد على السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-19T07:45:16.144Z"
+  },
+  {
+    "id": "17923957935130.7505949104206693",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-20",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-21T11:58:32.930Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1792395793513.1702,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1792395793513.8901,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-19T07:43:13.513Z"
+  },
+  {
+    "id": "1791965332883",
+    "title": "طلبية صيدلية د. محمود",
+    "category": "عمل",
+    "date": "2026-10-14",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-14T10:45:49.561Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791965285683",
+        "title": "الاستلام من الصيدلية (كرتونة)",
+        "done": true
+      },
+      {
+        "id": "1791965296396",
+        "title": "التسليم للمخزن",
+        "done": true
+      },
+      {
+        "id": "1791965302419",
+        "title": "إرسال عم ناصر لاستلام كيس الثلاجة",
+        "done": true
+      },
+      {
+        "id": "1791965316747",
+        "title": "التسليم للمخزن (ثلاجة)",
+        "done": true
+      },
+      {
+        "id": "1791965317451",
+        "title": "التسجيل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-14T08:08:52.883Z"
+  },
+  {
+    "id": "1791965253739",
+    "title": "تبادل جهاز الخزينة مع جهاز ياسمين",
+    "category": "عمل",
+    "date": "2026-10-13",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-14T08:07:42.307Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791965224595",
+        "title": "النقل",
+        "done": true
+      },
+      {
+        "id": "1791965227915",
+        "title": "نقل البيانات وتشفيرها على جهاز ياسمين",
+        "done": true
+      },
+      {
+        "id": "1791965242171",
+        "title": "ضبط اني ديسك على جهاز الخزينة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-14T08:07:33.739Z"
+  },
+  {
+    "id": "1791965174491",
+    "title": "عمل طلبية أدوية (صيدلية د. محمود)",
+    "category": "عمل",
+    "date": "2026-10-13",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-14T08:06:16.971Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-14T08:06:14.491Z"
+  },
+  {
+    "id": "1791890713362",
+    "title": "تسليم مكافأة أم مريم (حمدية حمد حسن)",
+    "category": "عمل",
+    "date": "2026-10-13",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-14T08:05:24.971Z",
+    "financial": {
+      "amount": 200,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-13T11:25:13.362Z"
+  },
+  {
+    "id": "1791812511094",
+    "title": "وصول الفيزا",
+    "category": "عمل",
+    "date": "2026-10-13",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-13T10:53:46.579Z",
+    "financial": {
+      "amount": 20,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791812462474",
+        "title": "اخطار أ. مصطفى بالاستلام والاكرامية  ",
+        "done": true
+      },
+      {
+        "id": "1791812502326",
+        "title": "تم الاستلام",
+        "done": true
+      },
+      {
+        "id": "17918125297669060400551566604",
+        "title": "استلام من مكتب أ. مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-12T13:41:51.094Z"
+  },
+  {
+    "id": "1791812374971",
+    "title": "عمل طلبية الأبرار",
+    "category": "عمل",
+    "date": "2026-10-13",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-14T08:05:42.835Z",
+    "financial": {
+      "amount": 501,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17918123825746151586152148036",
+        "title": "حصر المطلوب",
+        "done": true
+      },
+      {
+        "id": "17918123962491005009405793662",
+        "title": "افيل وبي كوم",
+        "done": true
+      },
+      {
+        "id": "17918124081119986716280570814",
+        "title": "استكمال بكيتورولين ولا سيكس",
+        "done": true
+      },
+      {
+        "id": "17918124403513302173392922939",
+        "title": "ابلاغ الاستقبال بالسداد لحين تعويضهم",
+        "done": true
+      },
+      {
+        "id": "17918889587082271762600268994",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "17918889717797655195311402647",
+        "title": "التسجيل على السيستم",
+        "done": true
+      },
+      {
+        "id": "179189062996300854646738688758",
+        "title": "السداد على السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-12T13:39:34.971Z"
+  },
+  {
+    "id": "1791797000883",
+    "title": "التواصل مع زينب بخصوص باسوورد الجهاز",
+    "category": "عمل",
+    "date": "2026-10-12",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-12T10:17:14.843Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791795959721",
+        "title": "قالت مع أ. مصطفى",
+        "done": true
+      },
+      {
+        "id": "1791796986471",
+        "title": "أ. مصطفى قال 123",
+        "done": true
+      },
+      {
+        "id": "179179703024035302843475693335",
+        "title": "بلغت ياسمين تكتبه وتحمل اني ديسك وتسيبه وتديني رقمه وتسيبه مفتوح",
+        "done": true
+      },
+      {
+        "id": "1791797039642954886624285628",
+        "title": "رقم اني ديسك",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-12T09:23:20.883Z"
+  },
+  {
+    "id": "1791795689501",
+    "title": "الاثنين 12-10-2026 أجازة بدل الثلاثاء",
+    "category": "عمل",
+    "date": "2026-10-12",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-12T09:01:31.137Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-12T09:01:29.501Z"
+  },
+  {
+    "id": "1791717077038",
+    "title": "طلبية طيبة",
+    "category": "عمل",
+    "date": "2026-10-12",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-12T09:02:37.003Z",
+    "financial": {
+      "amount": 2520,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791717053622",
+        "title": "طلبية عمل",
+        "done": true
+      },
+      {
+        "id": "1791717068998",
+        "title": "طلبية شخصية",
+        "done": true
+      },
+      {
+        "id": "17917957124045102572207736644",
+        "title": "تسليم الاستقبال عهدة للسداد",
+        "done": true
+      },
+      {
+        "id": "17917957142612881059811208758",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "1791795722645457943359500653",
+        "title": "التسليم للمخزن",
+        "done": true
+      },
+      {
+        "id": "17917957238983362042094607762",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17917957388742368491175041456",
+        "title": "السدا على السيستم 12-10 من البيت",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-11T11:11:17.038Z"
+  },
+  {
+    "id": "1791717012926",
+    "title": "حصر المطلوب من الأدوية والمستلزمات",
+    "category": "عمل",
+    "date": "2026-10-11",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-11T11:10:14.486Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791717021918",
+        "title": "الحصر",
+        "done": false
+      },
+      {
+        "id": "1791717027862",
+        "title": "بدء الطلبيات",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-11T11:10:12.926Z"
+  },
+  {
+    "id": "1791716802142",
+    "title": "تكويد مكحتة جلدية ومقص غضاريف",
+    "category": "عمل",
+    "date": "2026-10-11",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-11T11:06:46.606Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791716785878",
+        "title": "التكويد",
+        "done": true
+      },
+      {
+        "id": "1791716794262",
+        "title": "النقل للعلاج الطبيعي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-11T11:06:42.142Z"
+  },
+  {
+    "id": "1791716730182",
+    "title": "تسليم أ. منى جودة اللابتوب وأدوات كتابية",
+    "category": "عمل",
+    "date": "2026-10-12",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-12T13:43:43.324Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791716654142",
+        "title": "تحريك الأصول الثابتة لإدارة الجودة",
+        "done": true
+      },
+      {
+        "id": "1791716677446",
+        "title": "توقيع الأذون السابقة (الأصول الثابتة)",
+        "done": true
+      },
+      {
+        "id": "1791716697206",
+        "title": "تسليم اللاب توب واكلاسير",
+        "done": true
+      },
+      {
+        "id": "1791716721302",
+        "title": "تسليم أدوات كتابية ",
+        "done": true
+      },
+      {
+        "id": "179171674687934376645851837107",
+        "title": "عمل اذن بالأدوات الكتابية",
+        "done": true
+      },
+      {
+        "id": "17917957772877056308158366588",
+        "title": "توقيع الاذن أدولت كتابية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-11T11:05:30.182Z"
+  },
+  {
+    "id": "1791716600062",
+    "title": "تطوير تطبيق الخزينة الفرعية",
+    "category": "عمل",
+    "date": "2026-10-11",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-11T11:03:23.870Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791716560870",
+        "title": "إضافة قسم مطابقة الخزينة",
+        "done": true
+      },
+      {
+        "id": "1791716569598",
+        "title": "تحسين تقرير أكسل",
+        "done": true
+      },
+      {
+        "id": "1791716581182",
+        "title": "تسليم نسخة لبسملة",
+        "done": true
+      },
+      {
+        "id": "1791716588110",
+        "title": "تدريب بسملة على التطبيق",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-11T11:03:20.062Z"
+  },
+  {
+    "id": "1791640012237",
+    "title": "تحويل درسنج 20 وشاش 10 للطوارئ (فاطمة)",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-11T10:59:00.326Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T13:46:52.237Z"
+  },
+  {
+    "id": "1791639941094",
+    "title": "تحويل اسكوتش 5 بوصة من الرئيسي للعيادات",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T13:45:42.430Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T13:45:41.094Z"
+  },
+  {
+    "id": "1791633822882",
+    "title": "تصميم تطبيق الخزينة الفرعية",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T13:45:21.039Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791633805258",
+        "title": "التصميم ",
+        "done": false
+      },
+      {
+        "id": "1791633809921",
+        "title": "التجربة",
+        "done": false
+      },
+      {
+        "id": "1791633814058",
+        "title": "تعديل التقارير",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T12:03:42.882Z"
+  },
+  {
+    "id": "1791628417574",
+    "title": "تعليم أ. رحاب أسأسيات العمل والكمبيوتر والأكسل",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T10:34:39.206Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179162844107111921539123967984",
+        "title": "قواعد عامة (النظام والتوثيق والأخطاء)",
+        "done": true
+      },
+      {
+        "id": "17916284491912506642023054304",
+        "title": "هارد وير الكمبيوتر",
+        "done": true
+      },
+      {
+        "id": "179162845506344896677511713434",
+        "title": "ترتيب الكمبيوتر",
+        "done": true
+      },
+      {
+        "id": "17916284614074337912271061839",
+        "title": "تسجيل المهام باستمرار",
+        "done": true
+      },
+      {
+        "id": "17916284746638268459320344557",
+        "title": "الأكسل ، وتحليل البيانات ببساطة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T10:33:37.574Z"
+  },
+  {
+    "id": "1791628301878",
+    "title": "تسليم أ. جمال عاطف قيمة ملو اسطوانات اكسجين",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T10:32:31.462Z",
+    "financial": {
+      "amount": 2050,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17916283272799007653062923678",
+        "title": "إرسال الفولس والايصال مع أم ساندي",
+        "done": true
+      },
+      {
+        "id": "17916283340397721912566899212",
+        "title": "توقيع الايصال وإعادته",
+        "done": true
+      },
+      {
+        "id": "17916283416638007912178003195",
+        "title": "إرسال الايصال على الجروب",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T10:31:41.878Z"
+  },
+  {
+    "id": "1791617389983",
+    "title": "عمل مستهلكات وتوالف الطوارئ",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T07:29:51.872Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T07:29:49.984Z"
+  },
+  {
+    "id": "1791461982519",
+    "title": "تسعير فواتير د. مصطفى رجب ، الملاحظات",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T13:06:40.080Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791461967695",
+        "title": "التسعير",
+        "done": true
+      },
+      {
+        "id": "1791461974423",
+        "title": "إرسال الملاحظات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-08T12:19:42.519Z"
+  },
+  {
+    "id": "1791450762616",
+    "title": "مطابقة الخزينة (مشتريات)",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T09:12:49.224Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791450743152",
+        "title": "سداد 1500 ج لزينب (كان تم استلامهم لاستكمال ط O&S",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-08T09:12:42.616Z"
+  },
+  {
+    "id": "1791450720264",
+    "title": "مراجعة الفواتير السابقة (تسجيل وسداد)",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T09:12:04.088Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791450681944",
+        "title": "النقابة",
+        "done": true
+      },
+      {
+        "id": "1791450691592",
+        "title": "سيوتي",
+        "done": true
+      },
+      {
+        "id": "1791450694448",
+        "title": "O&S",
+        "done": true
+      },
+      {
+        "id": "1791450706584",
+        "title": "طيبة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-08T09:12:00.264Z"
+  },
+  {
+    "id": "1791447881038",
+    "title": "استلام باقي د. مصطفى رجب",
+    "category": "عمل",
+    "date": "2026-10-07",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T08:24:44.326Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791447856118",
+        "title": "استلام الطلبية والفاتورة",
+        "done": true
+      },
+      {
+        "id": "1791447863846",
+        "title": "تسعير الفاتورة الحالية",
+        "done": true
+      },
+      {
+        "id": "1791447865560",
+        "title": "تسعير الفاتورة السابقة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-08T08:24:41.038Z"
+  },
+  {
+    "id": "17914470173820.8844473952053825",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-06",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791447017382.7498,
+        "title": "صباح",
+        "done": false
+      },
+      {
+        "id": 1791447017382.376,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-08T08:10:17.382Z"
+  },
+  {
+    "id": "17914470155340.6668089510732769",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-06",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791447015534.0505,
+        "title": "الصلاة",
+        "done": false
+      },
+      {
+        "id": 1791447015534.5835,
+        "title": "الاستكمال",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-08T08:10:15.534Z"
+  },
+  {
+    "id": "1791192940943",
+    "title": "طلب د. أحمد عبد الله (   2 بيبيتا متحركة )",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T12:18:50.519Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791192911896",
+        "title": "علي بن علي (هيسألوا)",
+        "done": true
+      },
+      {
+        "id": "1791192924471",
+        "title": "اراب ميديكال (غير متوفر)",
+        "done": true
+      },
+      {
+        "id": "17911960051789561909655782438",
+        "title": "الصفوة",
+        "done": true
+      },
+      {
+        "id": "17911960079948648722568267404",
+        "title": "د. هاني (اقترح 2 ، واحد منهم رد وهو من كفر الدوار، والتاني لم يرد)",
+        "done": true
+      },
+      {
+        "id": "17914469769184250245051299876",
+        "title": "التنفيذ (الصفوة 7-10-2026)",
+        "done": true
+      },
+      {
+        "id": "179144698109414365905100023824",
+        "title": "التسليم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-05T09:35:40.943Z"
+  },
+  {
+    "id": "1791192856559",
+    "title": "متابعة الفواتير الإلكترونية",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T13:06:29.145Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791192803127",
+        "title": "باراجون (لابتوب)",
+        "done": true
+      },
+      {
+        "id": "1791192813759",
+        "title": "فالكون -الحاج فؤاد- (كشافات)",
+        "done": true
+      },
+      {
+        "id": "1791192827103",
+        "title": "الإيمان (مناديل)",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-05T09:34:16.559Z"
+  },
+  {
+    "id": "1791191399446",
+    "title": "استلام T4-Thyro 50 , 100  من صيدلية د محمود جامع السلام",
+    "category": "عمل",
+    "date": "2026-10-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-05T09:32:36.327Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791191376086",
+        "title": "عدد 3 علب 100 & عدد 2 علبة 50 ",
+        "done": true
+      },
+      {
+        "id": "1791191390870",
+        "title": "تسليم رحمة علبة وعلبة ",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-05T09:09:59.446Z"
+  },
+  {
+    "id": "1791189537677",
+    "title": "عمل كارتة الصنف للمخزن الرئيسي",
+    "category": "عمل",
+    "date": "2026-10-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T08:10:14.038Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911927670240724131452748259",
+        "title": "التحضير (أ. ياسمين)",
+        "done": true
+      },
+      {
+        "id": "1791192770328047148985408637656",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179119277494445281155871487644",
+        "title": "الطباعة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-05T08:38:57.677Z"
+  },
+  {
+    "id": "1791189483245",
+    "title": "طلب تجهيز مكتب الجودة",
+    "category": "عمل",
+    "date": "2026-10-11",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-11T10:58:54.374Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791189391069",
+        "title": "اعتمادات الطلبات المتفرقة شفويا (أ. فتحي)",
+        "done": true
+      },
+      {
+        "id": "1791189405237",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "1791189446893",
+        "title": "كتابة طلب مجمع",
+        "done": true
+      },
+      {
+        "id": "1791189453909",
+        "title": "تسليمه ل أ. منى ",
+        "done": true
+      },
+      {
+        "id": "1791189464548",
+        "title": "اعتماده من دكتورة سلوى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-05T08:38:03.245Z"
+  },
+  {
+    "id": "17911892936690.7541348505717688",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-05",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-08T08:10:15.534Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911895104145869998094636479",
+        "title": "الصلاة",
+        "done": true
+      },
+      {
+        "id": "17911895141893561321898664559",
+        "title": "الاستكمال",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-05T08:34:53.669Z"
+  },
+  {
+    "id": "17911267776430.40788755735992",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-05",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-08T08:10:17.382Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791126777643.3843,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1791126777643.8027,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-04T15:12:57.643Z"
+  },
+  {
+    "id": "17911267726270.2529666099117056",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-05",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-05T08:34:53.669Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-04T15:12:52.627Z"
+  },
+  {
+    "id": "1791117921336",
+    "title": "متابعة عمل برنامج المراسلة العائلية",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T15:12:44.788Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911179385367952723841862329",
+        "title": "متابعة الخطوات مع ميتا",
+        "done": true
+      },
+      {
+        "id": "17911179487683179896842448705",
+        "title": "عمل سيرفر لقاعدة البيانات",
+        "done": true
+      },
+      {
+        "id": "17911179603367287537450723862",
+        "title": "تحميل برنامج رفع الملفات",
+        "done": true
+      },
+      {
+        "id": "179111796448009768864475531258",
+        "title": "رفع الملفات",
+        "done": true
+      },
+      {
+        "id": "1791117970624896369025486916",
+        "title": "التشغيل التجريبي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T12:45:21.336Z"
+  },
+  {
+    "id": "1791107614088",
+    "title": "طلب مكافأة نقل المخزن",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T15:12:48.363Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911144447154163736125160933",
+        "title": "الدفتري",
+        "done": true
+      },
+      {
+        "id": "17911144477552717810997204224",
+        "title": "السيستم",
+        "done": true
+      },
+      {
+        "id": "17911144515148391393429236458",
+        "title": "الاعتماد",
+        "done": true
+      },
+      {
+        "id": "17911144533716395635863063901",
+        "title": "الصرف",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T09:53:34.088Z"
+  },
+  {
+    "id": "1791105926876",
+    "title": "جرد العمليات والحضانات بعد حذف المستهلكات",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T09:25:32.420Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791105914348",
+        "title": "المراجعة",
+        "done": true
+      },
+      {
+        "id": "1791105918236",
+        "title": "إرسال ل أ. مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T09:25:26.876Z"
+  },
+  {
+    "id": "1791101409426",
+    "title": "طباعة جرد الرئيسي بالكامل",
+    "category": "عمل",
+    "date": "2026-10-14",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911058842936031382789315655",
+        "title": "الطباعة",
+        "done": true
+      },
+      {
+        "id": "1791105893173458283862216469",
+        "title": "تسليم ل الشيخ فتحي",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T08:10:09.426Z"
+  },
+  {
+    "id": "1791099661575",
+    "title": "تسليم أ. زينب تبرع أ. أيمن عبد الباسط",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T09:25:37.412Z",
+    "financial": {
+      "amount": 1000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791099629823",
+        "title": "تسليم المبلغ",
+        "done": true
+      },
+      {
+        "id": "1791099641902",
+        "title": "استلام الايصال",
+        "done": true
+      },
+      {
+        "id": "1791099647718",
+        "title": "إرساله ل ش محمد أبو المعارف",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T07:41:01.575Z"
+  },
+  {
+    "id": "1791099540295",
+    "title": "تسجيل حركات البنك",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T07:39:07.415Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791099484839",
+        "title": "8000 ج منصرف (محفظة وي باي) لسداد بنج النقابة",
+        "done": true
+      },
+      {
+        "id": "1791099505575",
+        "title": "1000 ج وارد متبرع (أيمن عبد الباسط)",
+        "done": true
+      },
+      {
+        "id": "1791099523383",
+        "title": "10ج المصاريف البنكية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T07:39:00.295Z"
+  },
+  {
+    "id": "1791099470815",
+    "title": "مراجعة حساب البنك",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T07:37:52.447Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T07:37:50.815Z"
+  },
+  {
+    "id": "1791099452671",
+    "title": "جرد ومطابقة الخزينة",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T07:37:34.391Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T07:37:32.671Z"
+  },
+  {
+    "id": "17910994381110.46710714255399177",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-04",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T15:12:52.627Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-04T07:37:18.111Z"
+  },
+  {
+    "id": "17910994363670.9720815615196708",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-04",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T15:12:57.643Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791099436367.9111,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1791099436367.8381,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-04T07:37:16.367Z"
+  },
+  {
+    "id": "17910987370250.4476379779127213",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-03",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T07:37:18.111Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-04T07:25:37.025Z"
+  },
+  {
+    "id": "17910987358250.7369130945181276",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-03",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T07:37:16.367Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791098735825.8496,
+        "title": "صباح",
+        "done": false
+      },
+      {
+        "id": 1791098735825.2788,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-04T07:25:35.825Z"
+  },
+  {
+    "id": "1791098705658",
+    "title": "عمل 2 طلبية بنج من النقابة",
+    "category": "عمل",
+    "date": "2026-10-05",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T08:10:24.197Z",
+    "financial": {
+      "amount": 8170,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791099285456017127252854068353",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "179109930407207709437624516136",
+        "title": "السداد بمحفظة وي باي (بعد التحويل لها من انستاباي",
+        "done": true
+      },
+      {
+        "id": "17910993102167452756994777116",
+        "title": "الاستلام",
+        "done": true
+      },
+      {
+        "id": "1791099317447",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1791099323576",
+        "title": "السداد ع السيستم",
+        "done": true
+      },
+      {
+        "id": "17911061298924294516263568501",
+        "title": "التأكيد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-04T07:25:05.658Z"
+  },
+  {
+    "id": "1791038460937",
+    "title": "توقيع أ. جمال عاطف على استلام الكشافات والمرواح",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T15:13:01.331Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17911059515884468975330315683",
+        "title": "الطباعة",
+        "done": true
+      },
+      {
+        "id": "1791105954477659498299717052",
+        "title": "التوقيع",
+        "done": true
+      },
+      {
+        "id": "1791105961756",
+        "title": "الأرشفة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T14:41:00.937Z"
+  },
+  {
+    "id": "1791037576532",
+    "title": "مراجعة منتهي الصلاحية للمخازن ، ومناقشة د. الحلواني فيها",
+    "category": "عمل",
+    "date": "2026-10-14",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791037570604",
+        "title": "الإرسال لدكتور الحلواني",
+        "done": true
+      },
+      {
+        "id": "1791037574876",
+        "title": "مراجعة منتهي الصلاحية للمخازن",
+        "done": true
+      },
+      {
+        "id": "1791105984524",
+        "title": "مناقشة د. الحلواني فيها",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T14:26:16.532Z"
+  },
+  {
+    "id": "1791037545580",
+    "title": "مراجعة جرد الحضانات",
+    "category": "عمل",
+    "date": "2026-10-04",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-04T09:27:19.412Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T14:25:45.580Z"
+  },
+  {
+    "id": "1791035687841",
+    "title": "صرف صوديوم بيكربونات لدكتور الحلواني",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T14:01:36.945Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791035655522",
+        "title": "تجميع الموجود بالمخازن ",
+        "done": true
+      },
+      {
+        "id": "1791035666362",
+        "title": "صرفه من الصيدلية",
+        "done": true
+      },
+      {
+        "id": "1791035672689",
+        "title": "تسليمه لدكتور أشرف الفيومي",
+        "done": true
+      },
+      {
+        "id": "17910360948892405984725041913",
+        "title": "اخطار أسماء وياسمين وأم عبير بالصرف",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T13:54:47.841Z"
+  },
+  {
+    "id": "1791035591162",
+    "title": "استلام جرد الحضانات",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T13:53:52.354Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791035584058",
+        "title": "تم التسجيل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T13:53:11.162Z"
+  },
+  {
+    "id": "1791035541978",
+    "title": "استلام بيان أصناف منتهية الصلاحية",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T13:52:26.290Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1791035523898",
+        "title": "طوارئ",
+        "done": true
+      },
+      {
+        "id": "1791035532074",
+        "title": "عمليات",
+        "done": true
+      },
+      {
+        "id": "1791035537074",
+        "title": "حضانات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T13:52:21.978Z"
+  },
+  {
+    "id": "1791026940225",
+    "title": "شراء 2 بطارية تيفونات نوكيا ازار الجديدة",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:53:20.736Z",
+    "financial": {
+      "amount": 355,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791026900086",
+        "title": "2 بطارية * 175 + 5ج تحويل محفظة = 355 ج",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T11:29:00.225Z"
+  },
+  {
+    "id": "1791026869466",
+    "title": "استلام تليفوني سامسونج من الصيانة",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:53:24.376Z",
+    "financial": {
+      "amount": 950,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1791026825394",
+        "title": "استكمال صيانة 800 ج",
+        "done": true
+      },
+      {
+        "id": "1791026842242",
+        "title": "سكرينة برايفت جيلاتين 150 ج",
+        "done": true
+      },
+      {
+        "id": "1791026856122",
+        "title": "مواصلات 25 ج",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T11:27:49.466Z"
+  },
+  {
+    "id": "1791026278958",
+    "title": "طلبية الأطباء",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:18:10.125Z",
+    "financial": {
+      "amount": 2070,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17910262881337056559159358289",
+        "title": "تم الاستلام والتسجيل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-03T11:17:58.958Z"
+  },
+  {
+    "id": "17910258227760.8788215729303875",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-02",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T07:25:35.825Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1791025822776.3499,
+        "title": "صباح",
+        "done": false
+      },
+      {
+        "id": 1791025822776.0203,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-03T11:10:22.776Z"
+  },
+  {
+    "id": "1790863197935",
+    "title": "دفعة د. مصطفى رجب 40000 ج",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:16:31.430Z",
+    "financial": {
+      "amount": 40000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17910261788547650321348589236",
+        "title": "تم سداد 20000 ج",
+        "done": true
+      },
+      {
+        "id": "179102618306220759215185687008",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "179102618835013082474653934706",
+        "title": "إكرامية 50 ج",
+        "done": true
+      },
+      {
+        "id": "1791037432629",
+        "title": "تسليم المرتجع لعبد الرحمن",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T13:59:57.935Z"
+  },
+  {
+    "id": "1790863029360",
+    "title": "عهدة 15000ج لـ أ. ياسمين",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:17:01.958Z",
+    "financial": {
+      "amount": 15000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17908630526566545007878833887",
+        "title": "لطلبية الإيمان 2130 ج",
+        "done": true
+      },
+      {
+        "id": "17908631103445498270173764329",
+        "title": "طلبية O & S اجمالي  9330ج",
+        "done": true
+      },
+      {
+        "id": "179102621879824142554966890883",
+        "title": "تم استلامها لسداد دفعة د. مصطفى",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T13:57:09.360Z"
+  },
+  {
+    "id": "17908601446740.053781402255376975",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-02",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-04T07:25:37.025Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-01T13:09:04.674Z"
+  },
+  {
+    "id": "1790860099106",
+    "title": "إضافة صلاحية (إستلام طلب مريض)",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T13:08:24.434Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790860089666",
+        "title": "ضمن صلاحيات كول سنتر",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T13:08:19.106Z"
+  },
+  {
+    "id": "1790846868684",
+    "title": "متابعة كشافات الحاج فؤاد",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T11:10:20.080Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17908602682905601969329236607",
+        "title": "وصل اليوم الساعة 4.30",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T09:27:48.684Z"
+  },
+  {
+    "id": "1790844542091",
+    "title": "التواصل مع د. احمد من طرف د بكري",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T12:52:40.296Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17908460723944789088713886892",
+        "title": "نالوفين و فنتانيل",
+        "done": true
+      },
+      {
+        "id": "17908576772109599529918247581",
+        "title": "سعر غالي جدا جدا",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T08:49:02.091Z"
+  },
+  {
+    "id": "1790844233956",
+    "title": "طلبية الأبرار",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T12:52:50.408Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790844216813",
+        "title": "عم جمال",
+        "done": true
+      },
+      {
+        "id": "1790844221397",
+        "title": "البيت",
+        "done": true
+      },
+      {
+        "id": "1790844225693",
+        "title": "فاروفين وكيتورولين",
+        "done": true
+      },
+      {
+        "id": "179085759340226420128605714777",
+        "title": "وصول",
+        "done": true
+      },
+      {
+        "id": "17908575984996966864689823868",
+        "title": "دفع",
+        "done": true
+      },
+      {
+        "id": "179085760001047090284895588175",
+        "title": "تسجيل",
+        "done": true
+      },
+      {
+        "id": "17908576037069623811717191729",
+        "title": "سداد سيتم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T08:43:53.956Z"
+  },
+  {
+    "id": "1790844150837",
+    "title": "تسليم فلوس أم معاذ 10000",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T12:52:52.880Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T08:42:30.837Z"
+  },
+  {
+    "id": "1790844139629",
+    "title": "مراجعة حساب البنك",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T13:08:55.730Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179086011874747253546622702625",
+        "title": "المراجعة",
+        "done": true
+      },
+      {
+        "id": "179086012249811104737950908794",
+        "title": "تسجيب ما فات",
+        "done": true
+      },
+      {
+        "id": "179086013244335364078156345624",
+        "title": "تسجيل المصرفوات البنكية على السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T08:42:19.629Z"
+  },
+  {
+    "id": "1790844130870",
+    "title": "جرد الخزينة",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T13:09:00.522Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17908466216386113228560483112",
+        "title": "نقدية بالخزينة",
+        "done": true
+      },
+      {
+        "id": "17908466266546455054785597267",
+        "title": "باقي عهدة ياسمين",
+        "done": true
+      },
+      {
+        "id": "17908466607106786619170032927",
+        "title": "انستاباي",
+        "done": true
+      },
+      {
+        "id": "179084666755023673102804958013",
+        "title": "محفظة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-01T08:42:10.870Z"
+  },
+  {
+    "id": "17908438564550.7837764388376351",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-10-01",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-03T11:10:22.776Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790843856455.1228,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790843856455.534,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-10-01T08:37:36.455Z"
+  },
+  {
+    "id": "17908438554710.7764442403262987",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-10-01",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-01T13:09:04.674Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-10-01T08:37:35.471Z"
+  },
+  {
+    "id": "17906954675200.2368294609910938",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-30",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-01T08:37:36.455Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790695467520.4644,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790695467520.774,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-29T15:24:27.520Z"
+  },
+  {
+    "id": "17906953778570.7194255750212947",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-30",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-01T08:37:35.471Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-29T15:22:57.857Z"
+  },
+  {
+    "id": "1790674528642",
+    "title": "أ. ياسمين (عهدة مؤقتة)",
+    "category": "عمل",
+    "date": "2026-10-01",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T13:09:09.682Z",
+    "financial": {
+      "amount": 30000,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790674520003",
+        "title": "طلبية سيوتي 23260 ج",
+        "done": true
+      },
+      {
+        "id": "1790844054606",
+        "title": "طلبية دلتا فارم 10335 ج",
+        "done": true
+      },
+      {
+        "id": "1790844090661",
+        "title": "متبقي 1400 ج",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-29T09:35:28.642Z"
+  },
+  {
+    "id": "17906702916020.48564616775754",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-29",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-29T15:24:27.520Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790670291602.4553,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790670291602.6414,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-29T08:24:51.602Z"
+  },
+  {
+    "id": "1790600310172",
+    "title": "طلبية الإيمان للتوكيلات",
+    "category": "عمل",
+    "date": "2026-10-03",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-03T14:25:25.468Z",
+    "financial": {
+      "amount": 2130,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790600288924",
+        "title": "مناديل بكر",
+        "done": true
+      },
+      {
+        "id": "1790600294764",
+        "title": "حفاضات أطفال",
+        "done": true
+      },
+      {
+        "id": "1790600300948",
+        "title": "فرش صحي",
+        "done": true
+      },
+      {
+        "id": "1790600305276",
+        "title": "مناديل سحب",
+        "done": true
+      },
+      {
+        "id": "179103325016343792721396388845",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179103326177822795827139831493",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17910332698105126987217365527",
+        "title": "سداد ع السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-28T12:58:30.172Z"
+  },
+  {
+    "id": "17905976311570.7427087143922272",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-29",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-29T15:22:57.857Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-28T12:13:51.157Z"
+  },
+  {
+    "id": "1790585408892",
+    "title": "بناء تطبيق لحصر الاستهلاك واستخراج المطلوب من تقرير حركة الصنف",
+    "category": "عمل",
+    "date": "2026-09-28",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-28T12:12:50.917Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179059753864528848042468805535",
+        "title": "بناء التطبيق",
+        "done": true
+      },
+      {
+        "id": "17905975426694162461360573747",
+        "title": "تجربته",
+        "done": true
+      },
+      {
+        "id": "179059754784531271812149127853",
+        "title": "تطويره",
+        "done": true
+      },
+      {
+        "id": "17905975649333545792300812435",
+        "title": "عمل حصر استهلاك فعلي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-28T08:50:08.892Z"
+  },
+  {
+    "id": "1790523919567",
+    "title": "عمل طلب بطاقة بدل تالف",
+    "category": "شخصي",
+    "date": "2026-09-30",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-10-01T08:37:40.007Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "179069539294717182170149007048",
+        "title": "تم رفض طلب مكرر",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T15:45:19.567Z"
+  },
+  {
+    "id": "17905223058060.34972227577717163",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-28",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-29T08:24:51.602Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790522305806.3167,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790522305806.5432,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-27T15:18:25.806Z"
+  },
+  {
+    "id": "1790522187775",
+    "title": "طلبية O & S",
+    "category": "عمل",
+    "date": "2026-10-08",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-08T09:11:02.113Z",
+    "financial": {
+      "amount": 9330,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17905222012713963809023204765",
+        "title": "فيسيرالجين امبول",
+        "done": true
+      },
+      {
+        "id": "17905222084637543012166239943",
+        "title": "تراكيم 50",
+        "done": true
+      },
+      {
+        "id": "179060508492520140308200397294",
+        "title": "انتودين",
+        "done": true
+      },
+      {
+        "id": "17906050953167307617801963181",
+        "title": "ميدالجيسيك",
+        "done": true
+      },
+      {
+        "id": "1790605103325032327180441136916",
+        "title": "ليدوكايين",
+        "done": true
+      },
+      {
+        "id": "17906051113171196486317872053",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "1790605114205041940189699652186",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "179060511630933349542820366596",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T15:16:27.775Z"
+  },
+  {
+    "id": "1790522108199",
+    "title": "إعادة تكويد قساطر وجوانتي معقيم بمقاستهم (بمستند جرد)",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T15:15:37.719Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790522073312",
+        "title": "أنبوبة حنجرية",
+        "done": true
+      },
+      {
+        "id": "1790522078527",
+        "title": "أنبوبة معدة",
+        "done": true
+      },
+      {
+        "id": "1790522080465",
+        "title": "أنبوبة تغذية",
+        "done": true
+      },
+      {
+        "id": "1790522096255",
+        "title": "قسطرة شفط",
+        "done": true
+      },
+      {
+        "id": "1790522100511",
+        "title": "جوانتي معقم",
+        "done": true
+      },
+      {
+        "id": "179052211647121244029529632036",
+        "title": "تسعيرهم جميعا",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T15:15:08.199Z"
+  },
+  {
+    "id": "1790518328457",
+    "title": "طلب سالسيتك أسيد 30% (صيدلية خليل)",
+    "category": "عمل",
+    "date": "2026-09-30",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T08:37:50.671Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17905221454313486698040910452",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "17905221503198142315477305109",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179052215652715731072122601486",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17905221597595713462766077207",
+        "title": "السداد",
+        "done": true
+      },
+      {
+        "id": "17906954108285683533874976603",
+        "title": "التسليم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T14:12:08.457Z"
+  },
+  {
+    "id": "1790502265818",
+    "title": "مراجعة عهدة مخزن المشتريات (المؤقت)",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T09:44:29.330Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790502227402",
+        "title": "صرف الأدوات الكتابية على جهات استلامها",
+        "done": true
+      },
+      {
+        "id": "1790502242506",
+        "title": "صرف المناديل على جهات استلامها",
+        "done": true
+      },
+      {
+        "id": "1790502256338",
+        "title": "صرف قفل على مخزن الأجهزة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:44:25.818Z"
+  },
+  {
+    "id": "1790500710299",
+    "title": "طلب أدوات كتابية (قسم الحسابات)",
+    "category": "عمل",
+    "date": "2026-09-30",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T08:38:17.775Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790843880967619988855997034",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "17908438837118321557590380606",
+        "title": "التسليم",
+        "done": true
+      },
+      {
+        "id": "17908438881447035921552806292",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17908438902233523858226408959",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:18:30.299Z"
+  },
+  {
+    "id": "1790500067731",
+    "title": "طلب نالوفين",
+    "category": "عمل",
+    "date": "2026-10-14",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790500037683",
+        "title": "مينا (غير متوفر)",
+        "done": true
+      },
+      {
+        "id": "1790500043603",
+        "title": "د. محمود (جارٍ)",
+        "done": false
+      },
+      {
+        "id": "1790500059019",
+        "title": "د. محمد بكري (تم استلام رقم الراجل اللي بيوفره)",
+        "done": true
+      },
+      {
+        "id": "1790695445853547617171332051",
+        "title": "من طرف د بكري",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:07:47.731Z"
+  },
+  {
+    "id": "1790500026836",
+    "title": "إرسال جرد العمليات لدكتور الحلواني",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T09:07:08.003Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:07:06.836Z"
+  },
+  {
+    "id": "1790500003107",
+    "title": "طلبية الأبرار",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T15:17:57.414Z",
+    "financial": {
+      "amount": 1185,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790499966499",
+        "title": "الطلب (لبن & أمري ك)",
+        "done": true
+      },
+      {
+        "id": "1790499986627",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "1790499990827",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "1790499995971",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:06:43.107Z"
+  },
+  {
+    "id": "1790499875307",
+    "title": "طلبية الوليد",
+    "category": "عمل",
+    "date": "2026-09-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-29T15:24:17.219Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790499855347",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "1790499859147",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "1790499864115",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17905977415414653210027018523",
+        "title": "طلب الفواتير الإلكترونية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:04:35.307Z"
+  },
+  {
+    "id": "1790499794715",
+    "title": "د. محمود .. طلب سيتوتك و بليداسيز  حقن للعمليات",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T15:18:12.334Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17904997993879522827544922937",
+        "title": "الطلب",
+        "done": true
+      },
+      {
+        "id": "1790499805212881418512846392",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179049980949122727258379707516",
+        "title": "التسجيل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:03:14.715Z"
+  },
+  {
+    "id": "1790499742123",
+    "title": "طباعة الاستعواض للعمليات (من جهاز أ. ياسمين)",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T09:02:23.348Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:02:22.123Z"
+  },
+  {
+    "id": "1790499692731",
+    "title": "طلب 2 كمبيوتر من باراجون",
+    "category": "عمل",
+    "date": "2026-09-30",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-01T08:38:27.415Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790499688011",
+        "title": "مكتب الجودة (لابتوب)",
+        "done": true
+      },
+      {
+        "id": "17904996984598484675539320561",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179049970144415684623053103308",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17904997054275342264816265425",
+        "title": "السداد",
+        "done": true
+      },
+      {
+        "id": "17905976273177707954299412437",
+        "title": "إلغاء كمبيوتر الإداري",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:01:32.731Z"
+  },
+  {
+    "id": "1790499631876",
+    "title": "طلب تجهيزات مكتبية من العالمية",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T12:38:16.508Z",
+    "financial": {
+      "amount": 11560,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790499547315",
+        "title": "مكتب 120 للجودة",
+        "done": true
+      },
+      {
+        "id": "1790499555484",
+        "title": "2 دولاب (دعاية وجودة)",
+        "done": true
+      },
+      {
+        "id": "1790499567267",
+        "title": "وحدة أدراج",
+        "done": true
+      },
+      {
+        "id": "1790499602404",
+        "title": "كرسي متحرك للجودة",
+        "done": true
+      },
+      {
+        "id": "1790499648619873079901005083",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "17904996527713243269997039915",
+        "title": "التسجيل",
+        "done": true
+      },
+      {
+        "id": "17904996567877449411067040497",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T09:00:31.876Z"
+  },
+  {
+    "id": "1790499502692",
+    "title": "استكمال مراجعة أصناف جرد العمليات",
+    "category": "عمل",
+    "date": "2026-09-27",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T08:58:28.971Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-27T08:58:22.692Z"
+  },
+  {
+    "id": "17904994839240.9685024243771313",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-28",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-28T12:13:51.157Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-27T08:58:03.924Z"
+  },
+  {
+    "id": "17904994720040.23181312173464286",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-27",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-27T15:18:25.806Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790499472004.8792,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790499472004.4907,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-27T08:57:52.004Z"
+  },
+  {
+    "id": "17904994697640.5956247757119913",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-27",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-27T08:58:03.924Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-27T08:57:49.764Z"
+  },
+  {
+    "id": "1790421731278",
+    "title": "طلب تحويل سكوتش ن العمليات للطوارئ ، تعذر ، فأخبرت بالحل ، عمل المستلزم من العمليات مباشرة ولو في فاتورة منفصلة",
+    "category": "عمل",
+    "date": "2026-09-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-26T12:16:16.835Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790421750838944395643275836",
+        "title": "اخبار الحسابات على الجروب",
+        "done": true
+      },
+      {
+        "id": "17904217603344647156494228435",
+        "title": "الاطلاع على الحالة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-26T11:22:11.278Z"
+  },
+  {
+    "id": "1790421646406",
+    "title": "سداد قيمة علبة اللبن (ِشراء بمعرفة د. الحلواني)",
+    "category": "عمل",
+    "date": "2026-09-26",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-26T11:20:54.182Z",
+    "financial": {
+      "amount": 245,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790421608294",
+        "title": "تسجيل الأذن (أ. ياسمين)",
+        "done": true
+      },
+      {
+        "id": "1790421618254",
+        "title": "سداد القيمة لاستقبال",
+        "done": true
+      },
+      {
+        "id": "1790421628982",
+        "title": "تسجيل الفاتورة",
+        "done": true
+      },
+      {
+        "id": "1790421631464",
+        "title": "سداد الفاتورة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-26T11:20:46.406Z"
+  },
+  {
+    "id": "1790421568671",
+    "title": "متابعة تسجيل حالة حضانة مع أ. رحاب (anydesk)",
+    "category": "عمل",
+    "date": "2026-09-26",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-27T08:57:47.612Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-26T11:19:28.671Z"
+  },
+  {
+    "id": "1790364320984",
+    "title": "صور جهاز غازات الدم ،، وجميع الأجهزة بالمخزن ل د. الحلواني",
+    "category": "عمل",
+    "date": "2026-09-25",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-25T19:25:22.223Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-25T19:25:20.984Z"
+  },
+  {
+    "id": "17903638165320.1711811996768421",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-26",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-27T08:57:49.764Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-25T19:16:56.532Z"
+  },
+  {
+    "id": "17903638145130.748186086937972",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-26",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-27T08:57:52.004Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790363814513.3335,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790363814513.7896,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-25T19:16:54.513Z"
+  },
+  {
+    "id": "1790261444819",
+    "title": "طلب سيتوتك أقراص من د. محمود",
+    "category": "عمل",
+    "date": "2026-09-24",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-24T14:50:44.819Z"
+  },
+  {
+    "id": "1790261324900",
+    "title": "تحميل اوفيس 2019 بعد فشل تفعيل اوفيس 2024",
+    "category": "عمل",
+    "date": "2026-09-24",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-24T14:49:44.564Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-24T14:48:44.900Z"
+  },
+  {
+    "id": "1790261260516",
+    "title": "مراجعة جرد العمليات ومعرفة الفروق بين الجردين",
+    "category": "عمل",
+    "date": "2026-09-24",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17902614023326624239762412618",
+        "title": "تنقيح التقرير لإرساله لدكتور الحلواني",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-24T14:47:40.516Z"
+  },
+  {
+    "id": "1790261231596",
+    "title": "وصول فاتورة لعي الإلكترونية وطباعتها وتوقيعها",
+    "category": "عمل",
+    "date": "2026-09-24",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-24T14:47:12.580Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-24T14:47:11.596Z"
+  },
+  {
+    "id": "1790261210564",
+    "title": "تنزيل ويندوز وبرامج للجهاز",
+    "category": "عمل",
+    "date": "2026-09-24",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-24T14:46:52.084Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-24T14:46:50.564Z"
+  },
+  {
+    "id": "17902611971960.7391425698039188",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-25",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-25T19:16:56.532Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-24T14:46:37.196Z"
+  },
+  {
+    "id": "17902611936440.1138182955426762",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-25",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-25T19:16:54.513Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790261193644.549,
+        "title": "صباح",
+        "done": false
+      },
+      {
+        "id": 1790261193644.4995,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-24T14:46:33.644Z"
+  },
+  {
+    "id": "17902611291720.5459730022609373",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-24",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-24T14:46:37.196Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-24T14:45:29.172Z"
+  },
+  {
+    "id": "17901023920980.6696659477871656",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-23",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-24T14:45:27.637Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790102392098.1975,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790102392098.6548,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-22T18:39:52.098Z"
+  },
+  {
+    "id": "17901023872500.6515451184267202",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-22",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-22T18:39:52.098Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790102387250.4702,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790102387250.9116,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-22T18:39:47.250Z"
+  },
+  {
+    "id": "17901023837230.7371784408018361",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-21",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-22T18:39:47.250Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790102383723.158,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790102383723.2048,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-22T18:39:43.723Z"
+  },
+  {
+    "id": "17901023349540.8102019191295564",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-20",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-22T18:39:43.723Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1790102334954.865,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1790102334954.2302,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-22T18:38:54.954Z"
+  },
+  {
+    "id": "17901021530100.6026259541433377",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-23",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-24T14:45:29.172Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-22T18:35:53.010Z"
+  },
+  {
+    "id": "1790101586410",
+    "title": "معرفة السياسات المطلوبة من الجودة، مع التنبيه على عدم كفاية الوقت",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790101344754",
+        "title": "الاطلاع على كتاب جاهار (المبدئي)",
+        "done": true
+      },
+      {
+        "id": "1790101398033",
+        "title": "التواصل مع أ. منى جودة",
+        "done": true
+      },
+      {
+        "id": "1790101538073",
+        "title": "البحث عن المعيار GOM.10",
+        "done": true
+      },
+      {
+        "id": "179010219896212814608557880347",
+        "title": "هل نكتب السياسة وفقا لمعيار غير موجود بالكتاب المبدئي؟",
+        "done": true
+      },
+      {
+        "id": "17901022104986426212922288604",
+        "title": "التحضير لكتابة المعيار",
+        "done": true
+      },
+      {
+        "id": "179026114352432157032008887687",
+        "title": "معيار EQR17",
+        "done": true
+      },
+      {
+        "id": "17902611593012623041724603852",
+        "title": "البد في كتابة السياسة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-22T18:26:26.410Z"
+  },
+  {
+    "id": "1790101077295",
+    "title": "عمليات اليوم (نقل وتعديل جرد)",
+    "category": "عمل",
+    "date": "2026-09-22",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-22T18:35:01.194Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790100951821",
+        "title": "نقل كيتولا وديكسا وباكت شاش للعمليات",
+        "done": true
+      },
+      {
+        "id": "1790100979306",
+        "title": "تعديل الجرد (فوط بطن & لاتكس & بيتادين & فرش عمليات)",
+        "done": true
+      },
+      {
+        "id": "1790101010151",
+        "title": "متابعة أ. أماني في التسجيل والنواقص",
+        "done": true
+      },
+      {
+        "id": "1790101026498",
+        "title": "إرسال الصرف الااخلي (3) ل أ. أسماء خالد",
+        "done": true
+      },
+      {
+        "id": "1790101062584",
+        "title": "التأكد من عدم وجود مشاكل بالعملية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-22T18:17:57.295Z"
+  },
+  {
+    "id": "1790091597138",
+    "title": "فاتورة صيدلية دكتور محمود",
+    "category": "عمل",
+    "date": "2026-10-14",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790091558124",
+        "title": "تجميع أذون الإضافة",
+        "done": true
+      },
+      {
+        "id": "1790091574913",
+        "title": "التواصل مع دكتور محمود",
+        "done": true
+      },
+      {
+        "id": "1790091582931",
+        "title": "حصر مرتجعات الإكسباير",
+        "done": true
+      },
+      {
+        "id": "17919747653373463670080422605",
+        "title": "عمل فاتورة المشتريات المجمعة",
+        "done": true
+      },
+      {
+        "id": "179197477260932178758480736214",
+        "title": "إرسالها لدكتور محمود",
+        "done": true
+      },
+      {
+        "id": "1791974777617030201253555415586",
+        "title": "إثبات الخصومات",
+        "done": false
+      },
+      {
+        "id": "17919747920018627319244955287",
+        "title": "مراجعة المرتجعات المعتمدة",
+        "done": false
+      },
+      {
+        "id": "179197480827335510673817550853",
+        "title": "سداد إجمالي الفاتورة",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-22T15:39:57.138Z"
+  },
+  {
+    "id": "1790086092463",
+    "title": "متابعة الفواتير الإلكترونية",
+    "category": "عمل",
+    "date": "2026-09-26",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-25T19:17:09.841Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790086044167",
+        "title": "فاتورة شركة ادكو منظفات",
+        "done": true
+      },
+      {
+        "id": "1790086045327",
+        "title": "فاتورة شركة O&S محاليل",
+        "done": true
+      },
+      {
+        "id": "17900871440719703758611857191",
+        "title": "فاتورة لمعي",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-22T14:08:12.463Z"
+  },
+  {
+    "id": "1790083316467",
+    "title": "طلبية طيبة",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": {
+      "amount": 1830,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790083243579",
+        "title": "عمل الطلبية",
+        "done": true
+      },
+      {
+        "id": "1790083254837",
+        "title": "الإخطار بضرورة خصم المرتجع",
+        "done": true
+      },
+      {
+        "id": "1790083272805",
+        "title": "التأكيد من الشركة على خصم المرتجع",
+        "done": true
+      },
+      {
+        "id": "1790083287281",
+        "title": "الترتيب مع أ. ياسمين ",
+        "done": true
+      },
+      {
+        "id": "17900852831278907893781714975",
+        "title": "استلام الطلبية (التنسيق مع الاستقبال)",
+        "done": false
+      },
+      {
+        "id": "17900853020385952033332633468",
+        "title": "تسجبل الفاتورة",
+        "done": false
+      },
+      {
+        "id": "17900853141516128720923844831",
+        "title": "السداد ع السيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-22T13:21:56.467Z"
+  },
+  {
+    "id": "1790018356591",
+    "title": "صرف حامل من الذراع من الصيدلية (بطلب من أ. هند بناءا على الشيخ فتحي",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T19:19:23.014Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T19:19:16.591Z"
+  },
+  {
+    "id": "1790018293664",
+    "title": "صرف داخلي من الحضانات للعمليات ( من البيت)",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T19:18:31.983Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790018265797",
+        "title": "حفاضات أطفال 2",
+        "done": false
+      },
+      {
+        "id": "1790018276220",
+        "title": "سرنجة 10 سم",
+        "done": false
+      },
+      {
+        "id": "17900183098269041486963224861",
+        "title": "اخطار أسماء خالد",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T19:18:13.664Z"
+  },
+  {
+    "id": "1790012246880",
+    "title": "استلام طلب شراء من أ. هند حمدي",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790012222488",
+        "title": "وحدة أدراج",
+        "done": false
+      },
+      {
+        "id": "1790012224097",
+        "title": "مكتب ووحدة أدراج للجودة",
+        "done": false
+      },
+      {
+        "id": "1790018203001",
+        "title": "الطلب من العالمية بعد استلام العهدة",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T17:37:26.880Z"
+  },
+  {
+    "id": "1790012198448",
+    "title": "طلبية مستلزمات (الوليد)",
+    "category": "عمل",
+    "date": "2026-09-22",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-22T14:06:08.695Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790018145781",
+        "title": "حصر الاستهلاك (أ. ياسمين)",
+        "done": true
+      },
+      {
+        "id": "1790018160265",
+        "title": "عمل الطلبية",
+        "done": true
+      },
+      {
+        "id": "1790018166130",
+        "title": "التوريد",
+        "done": true
+      },
+      {
+        "id": "1790018173743",
+        "title": "التسجيل",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T17:36:38.448Z"
+  },
+  {
+    "id": "1790012176472",
+    "title": "تحويل انستباي و محفظة ل أ. مصطفى عبد الباسط",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T17:36:20.905Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790012122416",
+        "title": "انستاباي 21000 ج",
+        "done": false
+      },
+      {
+        "id": "1790012133056",
+        "title": "محفظة 5000 ج",
+        "done": false
+      },
+      {
+        "id": "1790012143512",
+        "title": "خصم فاتورة O&S 12050 ج",
+        "done": false
+      },
+      {
+        "id": "1790012158672",
+        "title": "إضافة 110ج فواتير صيدلية أطباء",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T17:36:16.472Z"
+  },
+  {
+    "id": "17900119749690.4720621505363115",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-22",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-22T18:35:53.010Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-21T17:32:54.969Z"
+  },
+  {
+    "id": "1790011949160",
+    "title": "عهدة ل أ. ياسمين",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1790011925544",
+        "title": "أودلتاترون 14690 ج",
+        "done": true
+      },
+      {
+        "id": "1790011938560",
+        "title": "عهدة مؤقتة 3000 ج",
+        "done": true
+      },
+      {
+        "id": "17901011599859644346275949636",
+        "title": "مصروف 4355 ج & 1835 ج",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T17:32:29.160Z"
+  },
+  {
+    "id": "1789988354786",
+    "title": "تسليم مناديل أ. زينب",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T10:59:16.324Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T10:59:14.786Z"
+  },
+  {
+    "id": "1789975227942",
+    "title": "محاضرة الشيخ أحمد عبد العزيز",
+    "category": "القرآن",
+    "date": "2026-09-21",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-21T10:59:23.082Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789975137950",
+        "title": "التواصل مع الشيخ لعمل العرض التقديمي من pdf",
+        "done": true
+      },
+      {
+        "id": "1789975161678",
+        "title": "نقل الشاشة وتوصيلها",
+        "done": true
+      },
+      {
+        "id": "1789975162789",
+        "title": "توصيل اللاب توب",
+        "done": true
+      },
+      {
+        "id": "1789975205293",
+        "title": "إعداد العرض التقديمي",
+        "done": true
+      },
+      {
+        "id": "1789975213741",
+        "title": "أناشيد الخلفية",
+        "done": true
+      },
+      {
+        "id": "17899769413618028657799261073",
+        "title": "تقديم العرض",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-21T07:20:27.942Z"
+  },
+  {
+    "id": "1789927728374",
+    "title": "تسليم أو تحويل الفلوس 12050 لـ أ. مصطفى",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T14:43:34.831Z",
+    "financial": {
+      "amount": 12050,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T18:08:48.374Z"
+  },
+  {
+    "id": "1789927608747",
+    "title": "تعديل حالة (أنس عبد العزيز)",
+    "category": "عمل",
+    "date": "2026-09-20",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-20T18:06:57.644Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789927575974",
+        "title": "فتح الحالة ",
+        "done": false
+      },
+      {
+        "id": "1789927577388",
+        "title": "إضافة كابل ولاصق دياثيرمي ، وضبط الحساب",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T18:06:48.747Z"
+  },
+  {
+    "id": "1789927526306",
+    "title": "تحويل كابل دياثيرمي ولاصق دياثيرمي (من العمليات للعيادات)",
+    "category": "عمل",
+    "date": "2026-09-20",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-20T18:05:29.155Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789927502786",
+        "title": "الصرف الداخلي",
+        "done": false
+      },
+      {
+        "id": "1789927511569",
+        "title": "اخطار العمليات والعيادات بصورة التحويل",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T18:05:26.306Z"
+  },
+  {
+    "id": "1789927422571",
+    "title": "توريد ميزان أطفال للحضانات (تبرع د. الحلواني)",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789927364136",
+        "title": "استلام الميزان وتصويره",
+        "done": true
+      },
+      {
+        "id": "1789927369399",
+        "title": "إخطار أ. فتحي العدوي و أ. مصطفى ",
+        "done": true
+      },
+      {
+        "id": "1789927389592",
+        "title": "تكويد الميزان على السيستم",
+        "done": true
+      },
+      {
+        "id": "1789927397705",
+        "title": "تسليمه ل أ. أسماء خالد ",
+        "done": false
+      },
+      {
+        "id": "1789927412963",
+        "title": "تحريكه ع السيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T18:03:42.571Z"
+  },
+  {
+    "id": "1789927200279",
+    "title": "جهاز غازات الدم (د. الحلواني = البحث عن الوكيل أو الموزع)",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789927158872",
+        "title": "مراسلة شركات الأجهزة مثل توب ميديكال",
+        "done": true
+      },
+      {
+        "id": "1789927183437",
+        "title": "سؤال علي بن علي ",
+        "done": true
+      },
+      {
+        "id": "178992731873115635355980402266",
+        "title": "سؤال م. يوسف مورد ميزان الحضانة",
+        "done": true
+      },
+      {
+        "id": "17899276407417439970570452702",
+        "title": "متابعة البحث",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T18:00:00.279Z"
+  },
+  {
+    "id": "1789927131851",
+    "title": "حضور محاضرة الجودة (5 ساعات تقريبا)",
+    "category": "عمل",
+    "date": "2026-09-20",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-20T17:58:53.778Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-20T17:58:51.851Z"
+  },
+  {
+    "id": "17899269337020.02876689789701048",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-21",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-21T17:32:54.969Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-20T17:55:33.702Z"
+  },
+  {
+    "id": "1789829846151",
+    "title": "إلغاء خصم على حالة تخاطب لعدم موافقة الدكتور عليه",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T15:06:50.366Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789829805592",
+        "title": "فتح الفترات العلاجية",
+        "done": true
+      },
+      {
+        "id": "1789829812735",
+        "title": "فواتير المرضى",
+        "done": true
+      },
+      {
+        "id": "17898303975422801346871551599",
+        "title": "إلغاء الخصم",
+        "done": true
+      },
+      {
+        "id": "17898304034062608004533504594",
+        "title": "إغلاق الحالة",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:57:26.151Z"
+  },
+  {
+    "id": "1789829716632",
+    "title": "عمل حركة نقل جهاز المونيتور ورسم القلب (مخزن => طوارئ=> عمليات)",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789829595400",
+        "title": "تسليم مونيتور للعمليات",
+        "done": false
+      },
+      {
+        "id": "1789829596032",
+        "title": "تحريك مونيتور من العمليات للطوارئ",
+        "done": false
+      },
+      {
+        "id": "1789829666968",
+        "title": "تسليم جهاز رسم قلب للطوارئ",
+        "done": false
+      },
+      {
+        "id": "1789829684408",
+        "title": "استلام مونيتور ورسم قلب من الطوارئ",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:55:16.632Z"
+  },
+  {
+    "id": "1789829550272",
+    "title": "عمل حركات نقل المراوح الأخير والتوقيع بالاستلام عليها",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789829464345",
+        "title": "مروحة مكتب شئون العاملين",
+        "done": true
+      },
+      {
+        "id": "1789829472024",
+        "title": "مروحة البوفيه",
+        "done": false
+      },
+      {
+        "id": "1789829502520",
+        "title": "عيادة أنف وأذن",
+        "done": false
+      },
+      {
+        "id": "1789829510784",
+        "title": "المدير الإداري",
+        "done": false
+      },
+      {
+        "id": "1789829517648",
+        "title": "مكتب رئيس مجلس الإدارة",
+        "done": false
+      },
+      {
+        "id": "1789829519418",
+        "title": "المدير المالي",
+        "done": false
+      },
+      {
+        "id": "1789829542264",
+        "title": "مكتب استقبال الأسنان",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:52:30.273Z"
+  },
+  {
+    "id": "1789827859062",
+    "title": "تسليم أم ساندي (مروحة ATA تمت صيانتها)",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "medium",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:24:19.062Z"
+  },
+  {
+    "id": "1789827305079",
+    "title": "طلبية الوليد",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-22T18:38:51.914Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789827293375",
+        "title": "6 جركن كحول",
+        "done": true
+      },
+      {
+        "id": "1789827299039",
+        "title": "بيتادين لتر",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:15:05.079Z"
+  },
+  {
+    "id": "1789827190040",
+    "title": "التأكد مع طيبة على المرتجع (=مع الطلبية القادمة)",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T14:13:22.296Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T14:13:10.040Z"
+  },
+  {
+    "id": "1789824829199",
+    "title": "سداد فاتورة معمل U-Care لعدم وجود الخزينة",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-20T14:03:41.661Z",
+    "financial": {
+      "amount": 200,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17898248450639987184772970191",
+        "title": "سداد قيمة الفاتورة والتوصيل",
+        "done": true
+      },
+      {
+        "id": "17898248619918139452341590653",
+        "title": "توقيع الايصال وتسليمه لنا مرة أخرى",
+        "done": true
+      },
+      {
+        "id": "17898248891106318076887644122",
+        "title": "استلام القيمة من الحسابات 200ج",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T13:33:49.199Z"
+  },
+  {
+    "id": "1789823417955",
+    "title": "طلبية سيوتي",
+    "category": "عمل",
+    "date": "2026-09-29",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-29T11:09:28.848Z",
+    "financial": {
+      "amount": 23250,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1789823411235",
+        "title": "جل سونار",
+        "done": true
+      },
+      {
+        "id": "1790012080624729078267494102",
+        "title": "جيبسونا 15سم",
+        "done": true
+      },
+      {
+        "id": "1790597661084693844681854731",
+        "title": "عمل طلبية كبيرة",
+        "done": true
+      },
+      {
+        "id": "17906801539976680609244916973",
+        "title": "التنفيذ",
+        "done": true
+      },
+      {
+        "id": "179068016080527289917848993706",
+        "title": "الاستلام والتسجيل",
+        "done": true
+      },
+      {
+        "id": "17906801632288913326890412996",
+        "title": "السداد",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T13:10:17.955Z"
+  },
+  {
+    "id": "1789823349531",
+    "title": "زجاجة ماء مقطر من التعقيم لزوجة خالي",
+    "category": "عائلة",
+    "date": "2026-09-20",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-20T14:03:07.173Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T13:09:09.531Z"
+  },
+  {
+    "id": "1789820829835",
+    "title": "طلبية دلتا فارما (أوندلتاترون)",
+    "category": "عمل",
+    "date": "2026-09-22",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-22T16:02:43.891Z",
+    "financial": {
+      "amount": 14690,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1790012003008861243490625515",
+        "title": "عمل الطلبية",
+        "done": true
+      },
+      {
+        "id": "17900120198566172514477199254",
+        "title": "استلام الطلبية والدفع  (التنسيق مع الاستقبال)",
+        "done": true
+      },
+      {
+        "id": "17900120406367831002617474572",
+        "title": "تسجيل فاتورة الطلبية",
+        "done": true
+      },
+      {
+        "id": "1790012059072",
+        "title": "سدادها ع السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-19T12:27:09.835Z"
+  },
+  {
+    "id": "17898194318080.31142886415640847",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-20",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-20T17:55:33.702Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-19T12:03:51.808Z"
+  },
+  {
+    "id": "17897643248450.5969660180505422",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-19",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-19T12:03:51.807Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-18T20:45:24.845Z"
+  },
+  {
+    "id": "1789761133234",
+    "title": "تصميم تطبيق للخواطر والاقتباسات",
+    "category": "شخصي",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T12:03:46.008Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789761163615965408299234281",
+        "title": "التعديلات اللازمة للمشاركة",
+        "done": true
+      },
+      {
+        "id": "178976117421228211412739984143",
+        "title": "الرفع أون لاين",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T19:52:13.234Z"
+  },
+  {
+    "id": "1789754325317",
+    "title": "استلام سبازموفري امبول من دكتور محمود",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T11:29:51.510Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T17:58:45.317Z"
+  },
+  {
+    "id": "1789754173319",
+    "title": "استلام فواتير شراء مستلزمات الكمبيوتر من سموحة ( أ. محمد سعد)",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T11:29:53.238Z",
+    "financial": {
+      "amount": 1900,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1789823078612",
+        "title": "تكويد الموردين",
+        "done": false
+      },
+      {
+        "id": "1789824088201",
+        "title": "تكويد الأصناف",
+        "done": false
+      },
+      {
+        "id": "1789824089529",
+        "title": "تسجيل الفواتير وسدادها",
+        "done": false
+      },
+      {
+        "id": "1789824114593",
+        "title": "تسجيل بدل الانتقال",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T17:56:13.319Z"
+  },
+  {
+    "id": "17897516242010.04660195868948758",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-19",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-22T18:38:54.954Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1789751624201.142,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1789751624201.2761,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-18T17:13:44.201Z"
+  },
+  {
+    "id": "1789751617166",
+    "title": "تحويل اسكوتش 4 بوصة ثم تعديله ل 3 بوصة من العمليات للطوارئ",
+    "category": "عمل",
+    "date": "2026-09-18",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-18T17:13:38.906Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T17:13:37.166Z"
+  },
+  {
+    "id": "1789751580258",
+    "title": "تحويل مستلزمات من الطوارئ للعمليات (لزوم حالة الداخلي)",
+    "category": "عمل",
+    "date": "2026-09-18",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-18T17:13:04.251Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T17:13:00.258Z"
+  },
+  {
+    "id": "1789719346470",
+    "title": "إخطار كيان بوصول اوبتيما 3 بوصة بدل 2 بوصة",
+    "category": "عمل",
+    "date": "2026-09-18",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-18T13:02:16.113Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "17897193635824876296486008348",
+        "title": "لا داعي لاثبات الفارق على السيستم",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T08:15:46.470Z"
+  },
+  {
+    "id": "1789719315757",
+    "title": "تصميم سبحة للصلاة على النبي (صلى الله عليه وسلم)",
+    "category": "شخصي",
+    "date": "2026-09-18",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-18T08:15:18.902Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T08:15:15.757Z"
+  },
+  {
+    "id": "1789719276288",
+    "title": "تنزيل محاكي اندرويد وتشغيل واتساب ع اللابتوب",
+    "category": "شخصي",
+    "date": "2026-09-18",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-18T08:14:38.791Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-18T08:14:36.288Z"
+  },
+  {
+    "id": "17896677653920.3315700484378957",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-18",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-18T17:13:44.201Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1789667765392.299,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1789667765392.2534,
+        "title": "مساء",
+        "done": true
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-17T17:56:05.392Z"
+  },
+  {
+    "id": "1789650205531",
+    "title": "طلبية O & S",
+    "category": "عمل",
+    "date": "2026-09-21",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-21T14:00:47.764Z",
+    "financial": {
+      "amount": 12050,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17899269590787535593309932747",
+        "title": "عمل الطلبية ، الخميس 17-9-2026",
+        "done": true
+      },
+      {
+        "id": "178992698798415683250957881278",
+        "title": "تأكيد الطلبية السبت 19-9-2026",
+        "done": true
+      },
+      {
+        "id": "178992699959537928399446575123",
+        "title": "استلام الطلبية الأحد 20-9-2026",
+        "done": true
+      },
+      {
+        "id": "17899270275387787789233698705",
+        "title": "تحويل قيمة الفاتورة أنستباي أ. مصطفى",
+        "done": true
+      },
+      {
+        "id": "17899270431682396437569510632",
+        "title": "تسجيل الفاتورة",
+        "done": true
+      },
+      {
+        "id": "1789927053456059281944249851115",
+        "title": "سداد الفاتورة ع السيستم",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T13:03:25.531Z"
+  },
+  {
+    "id": "1789642954953",
+    "title": "طلبية الأطباء",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T12:03:56.191Z",
+    "financial": {
+      "amount": 975,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T11:02:34.953Z"
+  },
+  {
+    "id": "17895934128420.36305964321158457",
+    "title": "أذكار الصباح والمساء",
+    "category": "الأذكار",
+    "date": "2026-09-17",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-17T17:56:05.391Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": 1789593412842.6643,
+        "title": "صباح",
+        "done": true
+      },
+      {
+        "id": 1789593412842.3362,
+        "title": "مساء",
+        "done": false
+      }
+    ],
+    "recurrence": "daily",
+    "recurrenceId": "r1",
+    "createdAt": "2026-09-16T21:16:52.842Z"
+  },
+  {
+    "id": "1789590403667",
+    "title": "جرد العمليات والحضانات",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:26:00.037Z"
+  },
+  {
+    "id": "1789588938596",
+    "title": "د. شيماء أنور (مع أختي ومعاذ)",
+    "category": "عائلة",
+    "date": "2026-09-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-16T20:04:48.350Z",
+    "financial": {
+      "amount": 170,
+      "type": "expense",
+      "note": "حساب الدواء"
+    },
+    "subtasks": [
+      {
+        "id": "1789588969736",
+        "title": "الكشف والتقييمات",
+        "done": true
+      },
+      {
+        "id": "1789588989028",
+        "title": "شراء الدواء وتسليمه لأختي، واستلام حسابه",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:26:00.037Z"
+  },
+  {
+    "id": "1789588900297",
+    "title": "حصر استهلاك الأدوية لمعرفة النواقص وزيادة المخزن",
+    "category": "عمل",
+    "date": "2026-09-17",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-17T17:55:59.652Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789589800677",
+        "title": "تحديد المخزون ل 6 أشهر",
+        "done": true
+      },
+      {
+        "id": "1789589809817",
+        "title": "بيان النواقص",
+        "done": true
+      },
+      {
+        "id": "1789589820360",
+        "title": "عمل الطلبيات",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:26:00.037Z"
+  },
+  {
+    "id": "1789588391320",
+    "title": "جرد العيادات",
+    "category": "عمل",
+    "date": "2026-09-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-17T09:30:10.177Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789588440283",
+        "title": "استعراض الجرد على السيستم لمعرفة العجز ، وما يلفت الانتباه",
+        "done": true
+      },
+      {
+        "id": "1789588471948",
+        "title": "التأكيد على ضرورة الإبلاغ عن المستهلكات وما يصرف ضمن خدمة أول بأول",
+        "done": true
+      },
+      {
+        "id": "1789588504929",
+        "title": "التأكيد على أهمية مطابقة العهدة قبل كل طلبية على الأقل",
+        "done": true
+      },
+      {
+        "id": "1789588520916",
+        "title": "لا تهاون في العجز بعد ذلك",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:26:00.037Z"
+  },
+  {
+    "id": "1789588030657",
+    "title": "تسليم أ. أسماء خالد جهاز مونيتور ورسم قلب",
+    "category": "عمل",
+    "date": "2026-09-19",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-19T12:25:37.643Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789627621548",
+        "title": "تسليم الأجهزة الجديد",
+        "done": true
+      },
+      {
+        "id": "1789627631929",
+        "title": "استلام الأجهزة التي لديها",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:26:00.037Z"
+  },
+  {
+    "id": "task_1789581912063",
+    "title": "التأكد من طباعة فاتورة الكترونية (الإيمان) والتوقيع عليها",
+    "category": "عمل",
+    "date": "2026-09-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-16T21:26:57.669Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T18:05:12.063Z"
+  },
+  {
+    "id": "task_1789581863053",
+    "title": "عمل فاتورة صيدلية د. طارق خليفة",
+    "category": "عمل",
+    "date": "2026-09-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-16T21:26:59.451Z",
+    "financial": {
+      "amount": 30,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T18:04:23.053Z"
+  },
+  {
+    "id": "task_1789570846153",
+    "title": "عمل فاتورة صيدلية د. أحمد عبد الله",
+    "category": "عمل",
+    "date": "2026-09-16",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-16T21:27:00.204Z",
+    "financial": {
+      "amount": 80,
+      "type": "expense"
+    },
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T15:00:46.153Z"
+  },
+  {
+    "id": 1789490951767,
+    "title": "متابعة صيانة التليفون المحمول",
+    "category": "شخصي",
+    "date": "2026-09-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-17T17:56:08.882Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-15T16:49:11.767Z"
+  },
+  {
+    "id": "1789595420330",
+    "title": "جرد المخزن الرئيسي",
+    "category": "عمل",
+    "date": "2026-09-23",
+    "priority": "high",
+    "completed": false,
+    "completedAt": null,
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789595409341",
+        "title": "التأكيد على جرد المستلزمات",
+        "done": false
+      },
+      {
+        "id": "1789627590404",
+        "title": "التأكيد على انتهاء الجرد والمراجعات",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-16T21:50:20.330Z"
+  },
+  {
+    "id": "1789627540027",
+    "title": "ورد القرآن",
+    "category": "القرآن",
+    "date": "2026-09-18",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-18T20:45:24.845Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "daily",
+    "recurrenceId": "1789627540027",
+    "createdAt": "2026-09-17T06:45:40.027Z"
+  },
+  {
+    "id": "1789634404403",
+    "title": "تشغيل واتساب على الكمبيوتر",
+    "category": "عمل",
+    "date": "2026-09-17",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-17T08:54:53.888Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T08:40:04.403Z"
+  },
+  {
+    "id": "1789637367842",
+    "title": "طلب برناسورس (المخزن)",
+    "category": "عمل",
+    "date": "2026-09-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-17T17:55:40.101Z",
+    "financial": null,
+    "subtasks": [
+      {
+        "id": "1789637337353",
+        "title": "طلب من طيبة",
+        "done": true
+      },
+      {
+        "id": "1789637349665",
+        "title": "طلب من الأبرار",
+        "done": true
+      },
+      {
+        "id": "1789637356657",
+        "title": "طلب من الأطباء",
+        "done": true
+      },
+      {
+        "id": "1789637360889",
+        "title": "طلب من عابدين",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T09:29:27.842Z"
+  },
+  {
+    "id": "1789639272156",
+    "title": "تصميم تهنئة زينب وإراسالها",
+    "category": "شخصي",
+    "date": "2026-09-17",
+    "priority": "high",
+    "completed": true,
+    "completedAt": "2026-09-17T10:01:15.827Z",
+    "financial": null,
+    "subtasks": [],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T10:01:12.156Z"
+  },
+  {
+    "id": "1789640110281",
+    "title": "طلبية منظفات (أدكو)",
+    "category": "عمل",
+    "date": "2026-09-20",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-20T14:03:03.742Z",
+    "financial": {
+      "amount": 17330,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "1789890807262621610568291067",
+        "title": "وصلت & 20ج إكرامية",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T10:15:10.281Z"
+  },
+  {
+    "id": "1789641529293",
+    "title": "طلبية طيبة",
+    "category": "عمل",
+    "date": "2026-09-17",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-09-17T15:10:02.219Z",
+    "financial": {
+      "amount": 1865,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": "17896575474529937739564652323",
+        "title": "لم يتم  خصم مرتجع علبة لبن 222.5 ج",
+        "done": false
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-09-17T10:38:49.293Z"
+  },
+  {
+    "id": "17916283490797751691777838359",
+    "title": "تسليم أ. علي عبد السلام (صيانة الأسانسير)",
+    "category": "عمل",
+    "date": "2026-10-10",
+    "priority": "medium",
+    "completed": true,
+    "completedAt": "2026-10-10T10:33:02.342Z",
+    "financial": {
+      "amount": 890,
+      "type": "expense"
+    },
+    "subtasks": [
+      {
+        "id": 1791628349079.855,
+        "title": "تسليم الفلوس",
+        "done": true
+      },
+      {
+        "id": 1791628349079.4255,
+        "title": "توقيع الايصال ",
+        "done": true
+      },
+      {
+        "id": 1791628349079.541,
+        "title": "إرسال الايصال على الجروب",
+        "done": true
+      }
+    ],
+    "recurrence": "none",
+    "recurrenceId": null,
+    "createdAt": "2026-10-10T10:31:41.878Z"
+  }
+]
