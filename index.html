@@ -117,7 +117,14 @@ small.mut{color:var(--mut)}
 /* ============ إعدادات عامة ============ */
 const VERSION = '2.0.0';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
-const FIREBASE_CONFIG = null;
+const FIREBASE_CONFIG = {
+  apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
+  authDomain: "munjez-71a5e.firebaseapp.com",
+  projectId: "munjez-71a5e",
+  storageBucket: "munjez-71a5e.firebasestorage.app",
+  messagingSenderId: "765958538435",
+  appId: "1:765958538435:web:07222f5871fd46d81c4e76"
+};
 /* مثال:
 const FIREBASE_CONFIG = { apiKey:"...", authDomain:"PROJECT.firebaseapp.com", projectId:"PROJECT", appId:"..." };
 */
@@ -300,6 +307,22 @@ function migrateGuest(doIt) {
 async function cloudPush() {
   if (!fb.ready || !session || session.mode !== 'google' || !navigator.onLine) return;
   try { await fb.db.collection('munjez').doc(session.uid).set({json:JSON.stringify(S), updated:S.updated}); } catch (e) {}
+}
+async function cloudSync() {
+  if (!fb.ready || !session || session.mode !== 'google' || !navigator.onLine) return;
+  try {
+    const u = await new Promise(res => { const un = fb.auth.onAuthStateChanged(x => { un(); res(x); }); });
+    if (!u || u.uid !== session.uid) return;
+    const snap = await fb.db.collection('munjez').doc(session.uid).get();
+    if (snap.exists) {
+      const cd = normalizeData(JSON.parse(snap.data().json));
+      if ((cd.updated || 0) > (S.updated || 0)) {
+        S = cd; try { localStorage.setItem(dataKey(), JSON.stringify(S)); } catch (e) {}
+        LANG = S.settings.lang || 'ar'; ensureRecurring(); applyLang(); applyTheme(); shell(); return;
+      }
+    }
+    await cloudPush();
+  } catch (e) { /* أوفلاين أو صلاحيات */ }
 }
 function signOut() {
   if (!confirm(LANG === 'en' ? 'Sign out? Local data on this device will be removed (your cloud account keeps it).' : 'تسجيل الخروج؟ هتتمسح البيانات من الجهاز ده بس، والحساب هيفضل موجود على السحابة.')) return;
@@ -793,7 +816,7 @@ function refreshAll() { showPage(ui.page); }
 function startApp() {
   LANG = S.settings.lang || 'ar'; savePrefs(); ensureRecurring(); shell();
   if (S.settings.pin) showLock();
-  if (FIREBASE_CONFIG && session.mode === 'google') loadFirebase().then(() => { cloudPush(); }).catch(() => {});
+  if (FIREBASE_CONFIG && session.mode === 'google') loadFirebase().then(() => cloudSync()).catch(() => {});
 }
 
 /* ============ الأحداث ============ */
@@ -866,7 +889,7 @@ document.addEventListener('change', e => {
   else if (el.dataset.change === 'budget') { S.settings.budget = Math.abs(parseFloat(latin(el.value))) || 0; save(); }
   else if (el.dataset.change === 'catBudget') { const v = Math.abs(parseFloat(latin(el.value))) || 0; if (v) S.settings.catBudgets[el.dataset.id] = v; else delete S.settings.catBudgets[el.dataset.id]; save(); }
 });
-document.addEventListener('visibilitychange', () => { if (!document.hidden && S) { ensureRecurring(); focusUI(); if (ui.page === 'home') refreshHome(); } });
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S) { ensureRecurring(); focusUI(); if (ui.page === 'home') refreshHome(); if (fb.ready) cloudSync(); } });
 
 /* ============ التشغيل ============ */
 (function init() {
