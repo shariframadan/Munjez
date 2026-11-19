@@ -1,623 +1,883 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>منجز - نسخة نظيفة للزملاء - بواسطة شريف رمضان</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-<script src="https://cdn.tailwindcss.com"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-<style>
-body{font-family:'Cairo',sans-serif; background:#f6f7fb; transition: background 0.3s, color 0.3s}
-.glass{background:rgba(255,255,255,0.85); backdrop-filter: blur(12px);}
-.card-shadow{box-shadow:0 4px 20px rgba(0,0,0,0.06), 0 1px 3px rgba(0,0,0,0.05);}
-.teal-gradient{background: linear-gradient(135deg, #0F766E 0%, #14B8A6 100%);}
-/* Dark mode */
-body.dark{background:#0f172a !important; color:#e2e8f0}
-body.dark .bg-white{background:#1e293b !important; color:#e2e8f0 !important}
-body.dark .bg-gray-50{background:#0f172a !important; color:#cbd5e1 !important}
-body.dark .bg-gray-100{background:#334155 !important}
-body.dark .text-gray-900{color:#f1f5f9 !important}
-body.dark .text-gray-700{color:#cbd5e1 !important}
-body.dark .text-gray-600{color:#94a3b8 !important}
-body.dark .text-gray-500{color:#94a3b8 !important}
-body.dark .text-gray-400{color:#64748b !important}
-body.dark .border{border-color:#334155 !important}
-body.dark .border-white{border-color:#1e293b !important}
-body.dark input, body.dark select{background:#0f172a !important; color:#e2e8f0 !important; border-color:#334155 !important}
-body.dark .glass{background:rgba(30,41,59,0.85) !important}
-</style>
-
-<link rel="manifest" href="manifest.json">
-<meta name="theme-color" content="#0F766E">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#0f766e">
 <meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="منجز">
-<link rel="apple-touch-icon" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
-<link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
 <meta name="mobile-web-app-capable" content="yes">
-
-
-<script>
-// تنظيف النسخة الفاضية - يمسح أي مهام قديمة
-(function(){
-  try{
-    localStorage.removeItem('munjez_tasks');
-    localStorage.removeItem('tasks');
-    localStorage.removeItem('munjez-tasks');
-    localStorage.removeItem('munjez');
-  }catch(e){}
-})();
-</script>
-
+<meta name="apple-mobile-web-app-title" content="منجز">
+<title>منجز</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icon-192.png">
+<link rel="apple-touch-icon" href="icon-192.png">
+<style>
+:root{--bg:#f1f5f4;--card:#fff;--tx:#10201e;--mut:#64748b;--pri:#0f766e;--pri2:#115e59;--bd:#e2e8e6;--in:#16a34a;--out:#dc2626;--warn:#d97706;--soft:#e6f4f1;--shadow:0 1px 3px rgba(15,32,30,.08)}
+:root[data-theme=dark]{--bg:#0b1514;--card:#13211f;--tx:#e6f1ef;--mut:#94a8a4;--bd:#243936;--soft:#173430;--shadow:none}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--tx);font-family:"Segoe UI",Tahoma,"Noto Naskh Arabic","Noto Sans Arabic",Arial,sans-serif;font-size:17px;line-height:1.5}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer;border:0;background:none}
+input,select,textarea{background:var(--card);border:1.5px solid var(--bd);border-radius:12px;padding:10px 12px;min-height:46px;width:100%}
+input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-color:var(--pri)}
+#root{max-width:760px;margin:0 auto;padding-bottom:84px;min-height:100vh}
+.hdr{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.logo{font-size:24px;font-weight:800;line-height:1.1}.sub{font-size:12.5px;opacity:.9}
+.hact{display:flex;align-items:center;gap:8px}
+.hdr .ib{background:rgba(255,255,255,.16);color:#fff;width:42px;height:42px;border-radius:50%;font-size:19px}
+.av{width:42px;height:42px;border-radius:50%;background:#fff;color:var(--pri);font-weight:800;font-size:18px;overflow:hidden;padding:0}
+.av img{width:100%;height:100%;object-fit:cover;display:block}
+.saved{font-size:12px;background:rgba(255,255,255,.2);padding:3px 9px;border-radius:99px;opacity:0;transition:opacity .3s}.saved.on{opacity:1}
+main{padding:12px}
+.card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:12px;margin-bottom:12px;border:1px solid var(--bd)}
+.datebar{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+.datebar .ib{width:44px;height:44px;border-radius:12px;background:var(--soft);color:var(--pri);font-size:20px;font-weight:700}
+.dtxt{flex:1;text-align:center;font-weight:700;min-width:140px}
+.chip{background:var(--soft);color:var(--pri);border-radius:99px;padding:8px 14px;font-weight:700;white-space:nowrap}
+.chip.run{background:var(--pri);color:#fff}
+.cats{display:flex;gap:8px;overflow-x:auto;padding:2px 0 10px;scrollbar-width:none}.cats::-webkit-scrollbar{display:none}
+.cat{flex:none;display:flex;align-items:center;gap:6px;padding:9px 14px;border-radius:99px;background:var(--card);border:1.5px solid var(--bd);font-weight:600}
+.cat.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.dot{width:10px;height:10px;border-radius:50%;display:inline-block;flex:none}
+.prow{display:flex;justify-content:space-between;gap:8px;font-weight:600;font-size:15px;flex-wrap:wrap}
+.bar{height:8px;background:var(--bd);border-radius:99px;overflow:hidden;margin-top:8px}.bar i{display:block;height:100%;background:var(--pri);border-radius:99px;transition:width .3s}
+.bar.warn i{background:var(--warn)}.bar.over i{background:var(--out)}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}.row>*{flex:1 1 130px}
+.seg{display:flex;border:1.5px solid var(--bd);border-radius:12px;overflow:hidden;min-height:46px}
+.seg button{flex:1;padding:8px 6px;font-size:14.5px;font-weight:600}
+.seg button.on{background:var(--pri);color:#fff}
+.seg button.on.in{background:var(--in)}.seg button.on.out{background:var(--out)}
+.pri{display:flex;align-items:center;gap:6px;justify-content:center;border:1.5px solid var(--bd);border-radius:12px;min-height:46px;padding:0 8px;background:var(--card)}
+.pri button{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.pri button.on{background:var(--soft);outline:2px solid var(--pri)}
+.pd{width:12px;height:12px;border-radius:50%;display:inline-block;flex:none}
+.p-h{background:#ef4444}.p-m{background:#eab308}.p-l{background:#22c55e}
+.btn{background:var(--pri);color:#fff;border-radius:12px;padding:12px 16px;font-weight:700;min-height:46px;width:100%}
+.btn.sec{background:var(--soft);color:var(--pri)}.btn.red{background:var(--out)}.btn.inl{width:auto}
+.lbl{font-size:13.5px;color:var(--mut);margin:10px 0 2px;font-weight:600}
+.filters{display:flex;gap:6px;overflow-x:auto;margin-top:8px;scrollbar-width:none}.filters::-webkit-scrollbar{display:none}
+.filters button{flex:none;padding:7px 13px;border-radius:99px;font-size:14.5px;font-weight:600;background:var(--soft);color:var(--pri)}
+.filters button.on{background:var(--pri);color:#fff}
+.task{background:var(--card);border:1px solid var(--bd);border-radius:14px;padding:10px;margin-bottom:8px;box-shadow:var(--shadow)}
+.trow{display:flex;gap:10px;align-items:flex-start}
+.cb{flex:none;width:30px;height:30px;border-radius:9px;border:2px solid var(--pri);color:transparent;font-weight:800;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.cb.on{background:var(--pri);color:#fff}.cb.sm{width:24px;height:24px;border-radius:7px;font-size:14px;margin-top:0}
+.tmain{flex:1;min-width:0}.ttl{font-weight:700;display:flex;gap:7px;align-items:center;word-break:break-word}
+.ttl.dn span.tt{text-decoration:line-through;color:var(--mut)}
+.meta{font-size:13px;color:var(--mut);display:flex;gap:10px;flex-wrap:wrap;margin-top:2px}
+.in{color:var(--in);font-weight:700}.out{color:var(--out);font-weight:700}
+.tact{display:flex;gap:2px;flex-wrap:wrap;justify-content:flex-end;max-width:150px}
+.tact button{width:36px;height:36px;border-radius:10px;font-size:16px;background:var(--bg)}
+.subs{margin:8px 38px 0 0;padding-right:0;border-right:2px solid var(--bd);padding-inline-start:10px}
+[dir=ltr] .subs{margin:8px 0 0 38px;border-right:0;border-left:2px solid var(--bd)}
+.srow{display:flex;gap:8px;align-items:center;padding:3px 0;font-size:15px}
+.srow .dn{text-decoration:line-through;color:var(--mut)}.srow .x{margin-inline-start:auto;color:var(--mut);font-size:18px;width:30px;height:30px}
+.addsub{margin:6px 38px 0 0}[dir=ltr] .addsub{margin:6px 0 0 38px}
+.addsub .mini{font-size:14px;color:var(--pri);font-weight:700;padding:4px 8px;background:var(--soft);border-radius:8px}
+.addsub .inl{display:flex;gap:6px}.addsub input{min-height:40px;padding:6px 10px}
+.empty{text-align:center;color:var(--mut);padding:26px 10px}
+.mon{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;text-align:center}
+.mon div{background:var(--bg);border-radius:12px;padding:8px 4px;font-size:13px;color:var(--mut)}.mon b{display:block;font-size:17px}
+.alert{border-radius:10px;padding:8px 12px;margin-top:8px;font-size:14.5px;font-weight:600}
+.alert.w{background:#fef3c7;color:#92400e}.alert.o{background:#fee2e2;color:#991b1b}
+.link{color:var(--pri);font-weight:700;font-size:15px;padding:8px 0;text-decoration:underline}
+.nav{position:fixed;bottom:0;left:0;right:0;z-index:20;background:var(--card);border-top:1px solid var(--bd);display:flex;padding-bottom:env(safe-area-inset-bottom)}
+.nav button{flex:1;padding:8px 0;font-size:12.5px;font-weight:700;color:var(--mut);display:flex;flex-direction:column;align-items:center;gap:0}
+.nav button span{font-size:22px}.nav button.on{color:var(--pri)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
+.cal .h{font-size:12px;color:var(--mut);font-weight:700}
+.cal .d{aspect-ratio:1;border-radius:10px;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:600}
+.cal .d.g{background:var(--pri);color:#fff}.cal .d.t{outline:2px solid var(--warn)}.cal .d.e{background:none}
+.sect{font-size:18px;font-weight:800;margin:4px 2px 8px}
+.set{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid var(--bd)}.set:last-child{border:0}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:50;display:flex;align-items:flex-end;justify-content:center}
+.mbox{background:var(--card);width:100%;max-width:560px;max-height:92vh;overflow:auto;border-radius:20px 20px 0 0;padding:16px}
+.mh{display:flex;justify-content:space-between;align-items:center;font-size:19px;font-weight:800;margin-bottom:8px}
+.mh button{font-size:22px;color:var(--mut);width:40px;height:40px}
+.toast{position:fixed;bottom:96px;left:50%;transform:translateX(-50%);background:#10201e;color:#fff;padding:10px 18px;border-radius:99px;z-index:60;font-size:15px;max-width:90%;text-align:center}
+.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px}
+.lbox{background:var(--card);border-radius:24px;padding:28px 22px;max-width:400px;width:100%;text-align:center;box-shadow:var(--shadow);border:1px solid var(--bd)}
+.lbox .big{width:84px;height:84px;margin:0 auto 12px;border-radius:24px;background:linear-gradient(135deg,#14b8a6,#0f766e);color:#fff;font-size:50px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.gbtn{display:flex;align-items:center;justify-content:center;gap:10px;background:#fff;color:#1f2937;border:1.5px solid #d1d5db;border-radius:14px;padding:13px;width:100%;font-weight:700;margin:16px 0 10px}
+.lock{position:fixed;inset:0;z-index:100;background:var(--pri);color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px}
+.pins{display:flex;gap:12px;margin:6px 0 10px}.pins i{width:16px;height:16px;border-radius:50%;border:2px solid #fff}.pins i.f{background:#fff}
+.pad{display:grid;grid-template-columns:repeat(3,76px);gap:12px}.pad button{height:64px;border-radius:50%;background:rgba(255,255,255,.18);color:#fff;font-size:24px;font-weight:700}
+.chartbox{overflow:auto}.legend{display:flex;flex-wrap:wrap;gap:6px 14px;font-size:14px;margin-top:6px}
+.hl{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px solid var(--bd);font-size:15px;gap:8px}
+small.mut{color:var(--mut)}
+[hidden]{display:none!important}
+</style>
 </head>
 <body>
 <div id="root"></div>
+<div id="modal" class="modal" hidden></div>
+<div id="lock" class="lock" hidden></div>
 <script>
-const CATS={
-  'عمل':{color:'#0F766E', bg:'#ccfbf1', dot:'#0F766E'},
-  'شخصي':{color:'#7C3AED', bg:'#ede9fe', dot:'#7C3AED'},
-  'دراسة':{color:'#2563EB', bg:'#dbeafe', dot:'#2563EB'},
-  'صحة':{color:'#DB2777', bg:'#fce7f3', dot:'#DB2777'},
-  'مالي':{color:'#D97706', bg:'#fef3c7', dot:'#D97706'},
-  'عائلة':{color:'#059669', bg:'#d1fae5', dot:'#059669'},
-  'الأذكار':{color:'#0D9488', bg:'#ccfbf1', dot:'#0D9488'},
-  'أخرى':{color:'#6B7280', bg:'#f3f4f6', dot:'#6B7280'}
-};
+'use strict';
+/* ============ إعدادات عامة ============ */
+const VERSION = '2.0.0';
+// للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
+const FIREBASE_CONFIG = null;
+/* مثال:
+const FIREBASE_CONFIG = { apiKey:"...", authDomain:"PROJECT.firebaseapp.com", projectId:"PROJECT", appId:"..." };
+*/
 
-function migrateOldData(){
-  const possibleKeys=['munjez_v5','munjez_v4','munjez_v3','munjez_tasks','munjez_app','munjez','tasks','munjez_tasks_v4'];
-  let allTasks=[];
-  for(let key of possibleKeys){
-    try{
-      let raw=localStorage.getItem(key);
-      if(!raw) continue;
-      let data=JSON.parse(raw);
-      let arr=Array.isArray(data)?data:(data.tasks||data.data||[]);
-      if(arr.length>0){
-        console.log('Found data in',key, arr.length);
-        allTasks=allTasks.concat(arr);
-      }
-    }catch(e){}
+const $ = (s, r = document) => r.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2, 7);
+
+/* ============ الترجمة ============ */
+const EN = {
+'منجز':'Munjez','برنامج منجز بواسطة شريف رمضان':'Munjez by Sherif Ramadan','تم الحفظ':'Saved',
+'أهلاً بيك في منجز':'Welcome to Munjez','إدارة مهامك وفلوسك وإنجازاتك':'Manage your tasks, money and achievements',
+'الدخول بحساب Google':'Sign in with Google','المتابعة كضيف بدون تسجيل':'Continue as guest','بياناتك خاصة، ومفيش حد بيشوفها غيرك':'Your data is private',
+'اليوم':'Today','الكل':'All','المعلقة':'Pending','المكتملة':'Completed','المستقبلية':'Upcoming','الإنجازات':'Achievements','الإعدادات':'Settings',
+'شخصي':'Personal','شغل':'Work','عائلة':'Family','صحة':'Health','مالي':'Finance','دراسة':'Study','بدون فئة':'No category',
+'أنجزت':'Done','من':'of','مهام':'tasks','سلسلة الإنجاز':'Streak','أيام':'days',
+'اكتب المهمة... مثال: اجتماع الشغل':'Write a task... e.g. work meeting','المبلغ بالجنيه (اختياري)':'Amount in EGP (optional)',
+'بدون فلوس':'No money','دخل +':'Income +','مصروف -':'Expense -','مهام فرعية - اكتبها مفصولة بفاصلة':'Subtasks - separated by commas',
+'إضافة المهمة':'Add task','لا يتكرر':'No repeat','يومي':'Daily','أسبوعي':'Weekly','شهري':'Monthly','سنوي':'Yearly','أول كل شهر':'1st of month','أيام الشغل فقط':'Workdays only',
+'🔍 ابحث في مهامك...':'🔍 Search your tasks...','مفيش مهام هنا':'No tasks here','بكرة':'Tomorrow','حذف':'Delete','تعديل':'Edit','انقل لليوم':'Move to today','ركّز':'Focus',
+'إضافة مهمة فرعية':'Add subtask','إضافة':'Add','الدخل':'Income','المصروف':'Expense','الرصيد':'Balance','ج.م':'EGP',
+'ميزانية':'Budget','استهلكت':'Used','فاضل':'Left','عرض الرسم البياني':'Show charts','إخفاء الرسم البياني':'Hide charts',
+'المصاريف حسب الفئة':'Expenses by category','الدخل والمصروف خلال الشهر':'Income & expense this month','مفيش مصاريف':'No expenses',
+'تنبيه: قربت تخلص الميزانية':'Warning: budget almost used','تنبيه: عديت الميزانية':'Alert: budget exceeded',
+'الفئة':'Category','التاريخ':'Date','الأولوية':'Priority','التكرار':'Repeat','ملاحظات':'Notes','الوقت المقدر (دقائق)':'Estimated time (min)',
+'حفظ':'Save','إلغاء':'Cancel','إغلاق':'Close','تعديل المهمة':'Edit task','عنوان المهمة':'Task title','المبلغ':'Amount','النوع':'Type',
+'عالية':'High','متوسطة':'Medium','منخفضة':'Low','فئة جديدة':'New category','اسم الفئة':'Category name','اللون':'Color',
+'المظهر':'Appearance','ليلي':'Dark','نهاري':'Light','تلقائي':'Auto','الحساب':'Account','تسجيل خروج':'Sign out','الدخول بجوجل':'Sign in with Google','ضيف':'Guest',
+'القفل':'Lock','تفعيل القفل برقم سري':'Enable PIN lock','إلغاء القفل':'Disable lock','اللغة':'Language','English':'عربي',
+'الميزانية':'Budget','الميزانية الشهرية':'Monthly budget','ميزانية الفئات':'Category budgets','حساب الفلوس':'Count money from','كل المهام':'All tasks','المكتملة فقط':'Completed only',
+'النسخ الاحتياطي':'Backup','تصدير JSON':'Export JSON','تصدير Excel':'Export Excel','تصدير PDF':'Export PDF','استيراد من ملف':'Import from file',
+'الفئات':'Categories','عن التطبيق':'About','سياسة الخصوصية':'Privacy policy','قيّم التطبيق':'Rate the app','تثبيت التطبيق':'Install app','رقم النسخة':'Version',
+'تقرير منجز':'Munjez Report','الفترة':'Period','من تاريخ':'From','إلى تاريخ':'To','إجمالي الدخل':'Total income','إجمالي المصروف':'Total expense',
+'ساعات التركيز اليوم':'Focus time today','ساعات التركيز في الفترة':'Focus time in period','تصدير تقرير':'Export report','المهام المنجزة':'Completed tasks','الحالة':'Status','مكتملة':'Done','معلقة':'Pending',
+'وقت التركيز':'Focus mode','تركيز':'Focus','استراحة':'Break','بدء':'Start','إيقاف':'Pause','إعادة':'Reset','المهمة':'Task','بدون مهمة محددة':'No specific task',
+'انتهت جلسة التركيز، خد استراحة':'Focus session finished, take a break','انتهت الاستراحة، يلا نركز':'Break over, back to focus',
+'كلمة السر':'PIN','أدخل الرقم السري':'Enter PIN','رقم سري خطأ':'Wrong PIN','رقم سري من 4 أرقام':'4-digit PIN','تأكيد الرقم':'Confirm PIN','الرقمين مش متطابقين':'PINs do not match','اكتب 4 أرقام':'Enter 4 digits','تم تفعيل القفل':'Lock enabled','تم إلغاء القفل':'Lock disabled',
+'استيراد':'Import','استيراد الكل':'Import all','وجدنا':'Found','معاملة مالية':'money entries','مكرر هيتخطى':'duplicates will be skipped','أول 5 مهام':'First 5 tasks','تم استيراد':'Imported','ملف غير مدعوم أو فاضي':'Unsupported or empty file',
+'اكتب المهمة الأول':'Write the task first','تمت الإضافة':'Added','تم الحذف':'Deleted','تأكيد حذف المهمة؟':'Delete this task?','تم النقل':'Moved','إيقاف التكرار':'Stop repeating',
+'عندك مهام قديمة كضيف، تحب تنقلها لحساب جوجل بتاعك؟':'You have guest tasks. Move them to your Google account?','نقل':'Move','ابدأ جديد':'Start fresh',
+'شكراً لتقييمك!':'Thanks for rating!','شهر':'Month','مهام مستقبلية':'Upcoming tasks','أنجزت مهمة':'Achievements in period','المهام':'Tasks','الإنجاز':'Done',
+'سياسة الخصوصية: بياناتك تتحفظ على جهازك فقط (وعلى حسابك السحابي لو سجلت بجوجل). لا تُباع ولا يشاهدها أحد غيرك، وتُحذف بحذف الحساب. لا نخزّن كلمة سر جوجل نهائياً. لا توجد إعلانات.':'Privacy: your data is stored on your device (and in your cloud account if you sign in with Google). It is never sold or seen by anyone else, and is deleted when you delete your account. Your Google password is never stored. No ads.'
+};
+let LANG = 'ar';
+const t = s => (LANG === 'en' && EN[s]) ? EN[s] : s;
+
+/* ============ التاريخ والأرقام ============ */
+const pad = n => String(n).padStart(2, '0');
+const ds = d => d.getFullYear() + '-' + pad(d.getMonth() + 1) + '-' + pad(d.getDate());
+const pd = s => { const [y, m, d] = s.split('-').map(Number); return new Date(y, m - 1, d); };
+const today = () => ds(new Date());
+const addDays = (s, n) => { const d = pd(s); d.setDate(d.getDate() + n); return ds(d); };
+const addMonths = (s, n) => { const d = pd(s), day = d.getDate(); d.setDate(1); d.setMonth(d.getMonth() + n); const last = new Date(d.getFullYear(), d.getMonth() + 1, 0).getDate(); d.setDate(Math.min(day, last)); return ds(d); };
+const loc = () => LANG === 'en' ? 'en-US' : 'ar-EG-u-nu-latn';
+const fmtDate = s => new Intl.DateTimeFormat(loc(), {weekday:'long', day:'numeric', month:'long', year:'numeric'}).format(pd(s));
+const fmtMonth = s => new Intl.DateTimeFormat(loc(), {month:'long', year:'numeric'}).format(pd(s));
+const fmtShort = s => new Intl.DateTimeFormat(loc(), {day:'numeric', month:'short'}).format(pd(s));
+const money = n => { const v = Math.round(n * 100) / 100; return (v < 0 ? '-' : '') + Math.abs(v).toLocaleString('en-US'); };
+const mh = n => `<bdi dir="ltr">${money(n)}</bdi>`;
+const hm = sec => { const m = Math.round(sec / 60); return Math.floor(m / 60) + ':' + pad(m % 60); };
+
+/* ============ الحالة ============ */
+const DEFAULT_CATS = [
+  {id:'personal', name:'شخصي', color:'#0ea5e9'}, {id:'work', name:'شغل', color:'#0f766e'},
+  {id:'family', name:'عائلة', color:'#ec4899'}, {id:'health', name:'صحة', color:'#22c55e'},
+  {id:'money', name:'مالي', color:'#f59e0b'}, {id:'study', name:'دراسة', color:'#8b5cf6'}];
+const blank = () => ({v:1, tasks:[], cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all'}, focusLog:{}, updated:0});
+let S = null;
+let session = null;
+const ui = {page:'home', date:today(), cat:'all', filter:'day', q:'', prio:'m', ntype:'none', chart:false, openSub:null, calMonth:today(), aCat:'all', aFrom:'', aTo:''};
+const fb = {ready:false};
+
+const dataKey = () => session && session.mode === 'google' ? 'munjez_u_' + session.uid : 'munjez_guest';
+function normalizeData(d) {
+  const b = blank();
+  d = d && typeof d === 'object' ? d : {};
+  const r = {...b, ...d, settings:{...b.settings, ...(d.settings || {})}};
+  r.tasks = Array.isArray(d.tasks) ? d.tasks : [];
+  r.cats = Array.isArray(d.cats) && d.cats.length ? d.cats : b.cats;
+  r.focusLog = d.focusLog || {};
+  return r;
+}
+function loadData() { try { S = normalizeData(JSON.parse(localStorage.getItem(dataKey()))); } catch (e) { S = blank(); } }
+let savedTimer, pushTimer;
+function save() {
+  S.updated = Date.now();
+  try { localStorage.setItem(dataKey(), JSON.stringify(S)); } catch (e) { toast('⚠️ المساحة ممتلئة'); }
+  const s = $('#saved'); if (s) { s.classList.add('on'); clearTimeout(savedTimer); savedTimer = setTimeout(() => s.classList.remove('on'), 1400); }
+  if (session && session.mode === 'google' && fb.ready) { clearTimeout(pushTimer); pushTimer = setTimeout(cloudPush, 1500); }
+}
+function toast(msg) {
+  const e = document.createElement('div'); e.className = 'toast'; e.textContent = t(msg); document.body.appendChild(e); setTimeout(() => e.remove(), 2200);
+}
+const cat = id => S.cats.find(c => c.id === id);
+const catName = id => { const c = cat(id); if (!c) return t('بدون فئة'); return c.id.startsWith('c_') ? c.name : t(c.name); };
+const catColor = id => (cat(id) || {color:'#94a3b8'}).color;
+const PR = {h:'عالية', m:'متوسطة', l:'منخفضة'};
+const RP = {none:'لا يتكرر', daily:'يومي', weekly:'أسبوعي', monthly:'شهري', yearly:'سنوي', first:'أول كل شهر', workdays:'أيام الشغل فقط'};
+
+/* ============ المظهر ============ */
+function applyTheme() {
+  const th = S ? S.settings.theme : (JSON.parse(localStorage.getItem('munjez_prefs') || '{}').theme || 'auto');
+  const dark = th === 'dark' || (th === 'auto' && matchMedia('(prefers-color-scheme: dark)').matches);
+  document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+  const m = document.querySelector('meta[name=theme-color]'); if (m) m.content = dark ? '#0b1514' : '#0f766e';
+  const b = $('#themeBtn'); if (b) b.textContent = dark ? '☀️' : '🌙';
+}
+function applyLang() {
+  document.documentElement.lang = LANG; document.documentElement.dir = LANG === 'en' ? 'ltr' : 'rtl';
+  document.title = t('منجز');
+}
+function savePrefs() { localStorage.setItem('munjez_prefs', JSON.stringify({theme:S.settings.theme, lang:S.settings.lang})); }
+matchMedia('(prefers-color-scheme: dark)').addEventListener?.('change', () => S && applyTheme());
+
+/* ============ نوافذ ============ */
+function openModal(title, body) {
+  const m = $('#modal');
+  m.innerHTML = `<div class="mbox"><div class="mh"><span>${title}</span><button data-a="closeModal" aria-label="${t('إغلاق')}">✕</button></div>${body}</div>`;
+  m.hidden = false;
+}
+function closeModal() { $('#modal').hidden = true; $('#modal').innerHTML = ''; }
+$('#modal').addEventListener('mousedown', e => { if (e.target.id === 'modal') closeModal(); });
+
+/* ============ الدخول ============ */
+function showLogin() {
+  const prefs = JSON.parse(localStorage.getItem('munjez_prefs') || '{}'); LANG = prefs.lang || 'ar'; applyLang(); applyTheme();
+  $('#root').innerHTML = `<div class="login"><div class="lbox">
+    <div class="big">م</div><h1 style="margin:0 0 4px">${t('أهلاً بيك في منجز')}</h1>
+    <p style="color:var(--mut);margin:0 0 6px">${t('إدارة مهامك وفلوسك وإنجازاتك')}</p>
+    <button class="gbtn" data-a="google"><svg width="22" height="22" viewBox="0 0 48 48"><path fill="#EA4335" d="M24 9.5c3.5 0 6.6 1.2 9.1 3.6l6.8-6.8C35.8 2.4 30.3 0 24 0 14.6 0 6.5 5.4 2.6 13.2l7.9 6.1C12.4 13.6 17.7 9.5 24 9.5z"/><path fill="#4285F4" d="M46.5 24.5c0-1.6-.1-3.1-.4-4.5H24v9h12.7c-.6 3-2.3 5.5-4.8 7.2l7.5 5.8c4.4-4.1 7.1-10.1 7.1-17.5z"/><path fill="#FBBC05" d="M10.5 28.7a14.5 14.5 0 0 1 0-9.4l-7.9-6.1a24 24 0 0 0 0 21.6l7.9-6.1z"/><path fill="#34A853" d="M24 48c6.5 0 11.9-2.1 15.9-5.8l-7.5-5.8c-2.1 1.4-4.8 2.3-8.4 2.3-6.3 0-11.6-4.1-13.5-9.8l-7.9 6.1C6.5 42.6 14.6 48 24 48z"/></svg>${t('الدخول بحساب Google')}</button>
+    <button class="btn sec" data-a="guest">${t('المتابعة كضيف بدون تسجيل')}</button>
+    <p style="font-size:13px;color:var(--mut);margin:14px 0 0">🔒 ${t('بياناتك خاصة، ومفيش حد بيشوفها غيرك')}</p>
+    <p style="font-size:12.5px;color:var(--mut);margin:6px 0 0">${t('برنامج منجز بواسطة شريف رمضان')}</p></div></div>`;
+}
+function setSession(s) { session = s; localStorage.setItem('munjez_session', JSON.stringify(s)); }
+function enterGuest() {
+  setSession({mode:'guest'}); loadData(); startApp();
+}
+function loadScript(src) { return new Promise((res, rej) => { const s = document.createElement('script'); s.src = src; s.onload = res; s.onerror = () => rej(new Error('load ' + src)); document.head.appendChild(s); }); }
+async function loadFirebase() {
+  if (fb.ready) return true; if (!FIREBASE_CONFIG) return false;
+  const base = 'https://www.gstatic.com/firebasejs/10.12.2/';
+  for (const f of ['firebase-app-compat.js', 'firebase-auth-compat.js', 'firebase-firestore-compat.js']) await loadScript(base + f);
+  firebase.initializeApp(FIREBASE_CONFIG); fb.auth = firebase.auth(); fb.db = firebase.firestore(); fb.ready = true; return true;
+}
+async function googleSignIn() {
+  if (!FIREBASE_CONFIG) {
+    openModal('تسجيل الدخول بجوجل', `<p>الدخول بجوجل محتاج ربط التطبيق بمشروع Firebase مجاني (مرة واحدة):</p><ol style="padding-inline-start:20px;line-height:1.9"><li>ادخل <b>console.firebase.google.com</b> وأنشئ مشروع.</li><li>Authentication ← Sign-in method ← فعّل <b>Google</b>.</li><li>Firestore Database ← Create database.</li><li>Project settings ← Add web app ← انسخ كائن <b>firebaseConfig</b>.</li><li>الصقه في أول ملف <b>index.html</b> مكان <code>FIREBASE_CONFIG</code>.</li><li>Authentication ← Settings ← Authorized domains ← أضف <b>shariframadan.github.io</b>.</li></ol><p>لحد ما تعمل ده، كمّل كضيف — كل المميزات شغالة أوفلاين على جهازك.</p><button class="btn" data-a="closeModal">${t('إغلاق')}</button>`);
+    return;
   }
-  // Deduplicate by id
-  let map={};
-  allTasks.forEach(t=>{ if(!map[t.id]) map[t.id]=t; });
-  let merged=Object.values(map);
-  // Normalize tasks to new schema
-  merged=merged.map(t=>{
-    return {
-      id: t.id || Date.now().toString()+Math.random(),
-      title: t.title || t.name || 'مهمة بدون عنوان',
-      category: t.category || 'أخرى',
-      date: t.date || t.dueDate || new Date().toISOString().split('T')[0],
-      priority: t.priority || 'medium',
-      completed: !!t.completed,
-      completedAt: t.completedAt || (t.completed? new Date().toISOString():null),
-      financial: t.financial || (t.amount? {amount:t.amount, type: t.type||'expense'}: null),
-      subtasks: (t.subtasks||[]).map(s=>typeof s==='string'?{id:Date.now()+Math.random(), title:s, done:false}:s),
-      recurrence: t.recurrence || 'none',
-      recurrenceId: t.recurrenceId || null,
-      createdAt: t.createdAt || new Date().toISOString()
-    };
-  });
-  return merged;
+  try {
+    await loadFirebase();
+    const p = new firebase.auth.GoogleAuthProvider();
+    try { const r = await fb.auth.signInWithPopup(p); await onGoogleUser(r.user); }
+    catch (e) {
+      if (['auth/popup-blocked', 'auth/operation-not-supported-in-this-environment', 'auth/cancelled-popup-request'].includes(e.code)) { localStorage.setItem('munjez_redir', '1'); await fb.auth.signInWithRedirect(p); }
+      else throw e;
+    }
+  } catch (e) { toast('تعذّر تسجيل الدخول: ' + (e.code || e.message)); }
 }
-
-let tasks=migrateOldData();
-if(tasks.length===0){
-  tasks=[
-    {id:'1', title:'أذكار الصباح والمساء', category:'الأذكار', date:new Date().toISOString().split('T')[0], priority:'high', completed:false, completedAt:null, financial:null, subtasks:[{id:'s1',title:'صباح',done:false},{id:'s2',title:'مساء',done:false}], recurrence:'daily', recurrenceId:'r1', createdAt:new Date().toISOString()},
-    
-
-  ];
-}
-localStorage.setItem('munjez_v5_final', JSON.stringify(tasks));
-function save(){localStorage.setItem('munjez_v5_final_clean', JSON.stringify(tasks)); localStorage.setItem('munjez_v5_final', JSON.stringify(tasks));}
-function toggleSubtask(taskId, subId){
-  try{
-    let t=tasks.find(x=>String(x.id)===String(taskId));
-    if(!t) return;
-    let s=t.subtasks.find(x=>String(x.id)===String(subId));
-    if(!s) return;
-    s.done=!s.done;
-    save(); render();
-  }catch(e){ console.error(e); }
-}
-function addSubtaskDirect(taskId){
-  let input=document.getElementById('direct-sub-'+taskId);
-  if(!input) return;
-  let title=input.value.trim();
-  if(!title) return;
-  let t=tasks.find(x=>String(x.id)===String(taskId));
-  if(!t) return;
-  t.subtasks.push({id:Date.now().toString()+Math.random().toString().slice(2), title:title, done:false});
-  input.value='';
-  save(); render();
-  // Focus back
-  setTimeout(()=>{ let el=document.getElementById('direct-sub-'+taskId); if(el) el.focus(); }, 100);
-}
-// Theme
-function applyTheme(theme){
-  let isDark=theme==='dark';
-  document.body.classList.toggle('dark', isDark);
-  let btn=document.getElementById('themeBtn');
-  if(btn) btn.textContent=isDark?'☀️':'🌙';
-  localStorage.setItem('munjez_theme', theme);
-}
-function toggleTheme(){
-  let current=localStorage.getItem('munjez_theme')||'light';
-  let next=current==='light'?'dark':'light';
-  applyTheme(next);
-}
-// Load theme on start
-(function initTheme(){
-  let saved=localStorage.getItem('munjez_theme')||'light';
-  // Also respect system preference on first time
-  if(!localStorage.getItem('munjez_theme') && window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches){
-    saved='dark';
+async function onGoogleUser(u) {
+  setSession({mode:'google', uid:u.uid, name:u.displayName || '', email:u.email || '', photo:u.photoURL || ''});
+  loadData();
+  try {
+    const snap = await fb.db.collection('munjez').doc(u.uid).get();
+    if (snap.exists) { const cd = normalizeData(JSON.parse(snap.data().json)); if ((cd.updated || 0) > (S.updated || 0)) S = cd; }
+  } catch (e) { /* أوفلاين */ }
+  let guest = null; try { guest = JSON.parse(localStorage.getItem('munjez_guest')); } catch (e) {}
+  const mk = 'munjez_migrated_' + u.uid;
+  save(); startApp();
+  if (guest && guest.tasks && guest.tasks.length && !localStorage.getItem(mk)) {
+    openModal('نقل المهام', `<p>${t('عندك مهام قديمة كضيف، تحب تنقلها لحساب جوجل بتاعك؟')}</p><div class="row"><button class="btn" data-a="migrate">${t('نقل')}</button><button class="btn sec" data-a="noMigrate">${t('ابدأ جديد')}</button></div>`);
   }
-  applyTheme(saved);
-})();
-
-
-function getNextDate(d,rec){let dt=new Date(d); if(rec==='daily') dt.setDate(dt.getDate()+1); if(rec==='weekly') dt.setDate(dt.getDate()+7); if(rec==='monthly') dt.setMonth(dt.getMonth()+1); if(rec==='yearly') dt.setFullYear(dt.getFullYear()+1); return dt.toISOString().split('T')[0];}
-function formatAmount(num){if(num===0) return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;color:#6b7280;">0 EGP</span>`; let abs=Math.abs(num).toLocaleString('en-US'); if(num<0) return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;background:#fef2f2;color:#dc2626;font-weight:700;padding:2px 10px;border-radius:20px;font-size:13px;">-${abs} EGP</span>`; return `<span dir="ltr" style="display:inline-block;direction:ltr;unicode-bidi:isolate;background:#ecfdf5;color:#059669;font-weight:700;padding:2px 10px;border-radius:20px;font-size:13px;">+${abs} EGP</span>`;}
-
-let selectedDate=new Date().toISOString().split('T')[0];
-let activeTab='today';
-let searchQ='';
-let filterCat='الكل';
-let showRec=false;
-
-function render(){
-  const root=document.getElementById('root');
-  let filtered=tasks;
-  if(searchQ) filtered=filtered.filter(t=>t.title.includes(searchQ));
-  if(filterCat!=='الكل') filtered=filtered.filter(t=>t.category===filterCat);
-  if(showRec) filtered=filtered.filter(t=>t.recurrence!=='none');
-  const todayTasks=filtered.filter(t=>t.date===selectedDate && !t.completed).sort((a,b)=>new Date(b.createdAt||b.id)-new Date(a.createdAt||a.id));
-  const futureTasks=filtered.filter(t=>t.date>selectedDate && !t.completed).sort((a,b)=>a.date.localeCompare(b.date));
-  const ach=filtered.filter(t=>t.completed).sort((a,b)=>new Date(b.completedAt||b.date)-new Date(a.completedAt||a.date));
-  const fin=filtered.filter(t=>t.financial);
-  let totalExp=ach.filter(t=>t.financial && t.financial.type==='expense').reduce((s,t)=>s+Math.abs(t.financial.amount),0);
-  let totalInc=ach.filter(t=>t.financial && t.financial.type==='income').reduce((s,t)=>s+t.financial.amount,0);
-
-  root.innerHTML=`
-  <div class="max-w-6xl mx-auto p-4 md:p-6">
-    <!-- Professional Header - like previous version -->
-    <header class="teal-gradient rounded-[24px] p-[1px] mb-6">
-      <div class="bg-white rounded-[23px] p-5 md:p-6 flex justify-between items-center">
-        <div class="flex items-center gap-4">
-          <div class="w-14 h-14 rounded-2xl teal-gradient flex items-center justify-center text-white text-[28px] font-black shadow-lg">م</div>
-          <div>
-            <h1 class="text-[26px] font-black text-gray-900 tracking-tight">منجز</h1>
-            <p class="text-[12px] text-gray-500 font-semibold">برنامج منجز بواسطة شريف رمضان • ${tasks.length} مهمة محفوظة</p>
-          </div>
-        </div>
-        <div class="flex items-center gap-2">
-          <button onclick="toggleTheme()" id="themeBtn" class="bg-white border border-gray-200 w-11 h-11 rounded-2xl flex items-center justify-center text-lg hover:bg-gray-50">🌙</button>
-          <button onclick="exportData()" class="bg-white border border-gray-200 text-gray-700 px-3 py-3 rounded-2xl font-bold text-sm hover:bg-gray-50 hidden md:block">📤 تصدير</button>
-          <label class="bg-white border border-gray-200 text-gray-700 px-3 py-3 rounded-2xl font-bold text-sm hover:bg-gray-50 cursor-pointer hidden md:block">📥 استيراد<input type="file" id="importFile" accept=".json" class="hidden" onchange="importData(event)"></label>
-          <button onclick="openAdd()" class="teal-gradient text-white px-5 md:px-6 py-3 rounded-2xl font-bold shadow-lg hover:shadow-xl transition text-sm">+ مهمة جديدة</button>
-        </div>
-      </div>
-    </header>
-
-    <!-- Stats Bar - professional -->
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-3 mb-6">
-      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">اليوم</div><div class="text-2xl font-black mt-1">${todayTasks.length}</div><div class="text-[11px] text-gray-400">مهمة</div></div>
-      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">الإنجازات</div><div class="text-2xl font-black mt-1 text-[#0F766E]">${ach.length}</div><div class="text-[11px] text-gray-400">مكتمل</div></div>
-      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">المصروفات</div><div class="text-lg font-bold mt-1 text-red-600">${totalExp.toLocaleString('en-US')} <span class="text-xs">EGP</span></div></div>
-      <div class="glass card-shadow rounded-2xl p-4 border border-white"><div class="text-xs text-gray-500">المتكررة</div><div class="text-2xl font-black mt-1 text-amber-600">${tasks.filter(t=>t.recurrence!=='none').length}</div><div class="text-[11px] text-gray-400">نشطة</div></div>
-    </div>
-
-    <!-- Tabs -->
-    <div class="bg-white card-shadow rounded-2xl p-2 flex gap-2 mb-5 overflow-x-auto">
-      ${[['today','اليوم',todayTasks.length],['future','المستقبلية',futureTasks.length],['achievements','الإنجازات',ach.length],['financial','المالي',fin.length]].map(([k,l,c])=>`<button onclick="setTab('${k}')" class="flex-1 min-w-[110px] px-4 py-3 rounded-xl font-bold text-sm transition ${activeTab===k?'teal-gradient text-white shadow-lg':'text-gray-500 hover:bg-gray-50'}">${l} <span class="opacity-60">(${c})</span></button>`).join('')}
-    </div>
-
-    <!-- Filters -->
-    <div class="bg-white card-shadow rounded-2xl p-4 mb-5">
-      <div class="flex gap-2 mb-3">
-        <div class="flex-1 relative"><span class="absolute right-3 top-3 text-gray-400">🔍</span><input id="searchInput" value="${searchQ}" placeholder="بحث في المهام والإنجازات..." class="w-full border border-gray-100 bg-gray-50 rounded-xl pr-10 pl-4 py-2.5 text-sm focus:bg-white focus:border-[#0F766E] outline-none" oninput="onSearch(this.value)"></div>
-        <button onclick="toggleRec()" class="px-4 py-2.5 rounded-xl text-sm border font-bold ${showRec?'bg-amber-50 text-amber-700 border-amber-200':'bg-gray-50 text-gray-600 border-gray-100'}">🔁 المتكررة</button>
-      </div>
-      <div class="flex gap-2 overflow-x-auto pb-1">
-        ${['الكل',...Object.keys(CATS)].map(c=>{
-          const isActive=filterCat===c;
-          const catInfo=CATS[c];
-          return `<button onclick="setCat('${c}')" class="px-4 py-2 rounded-full text-[13px] whitespace-nowrap border font-semibold transition ${isActive?'text-white shadow':''}" style="${isActive?`background:${catInfo?catInfo.color:'#0F766E'}; border-color:${catInfo?catInfo.color:'#0F766E'}; color:white`:`background:${catInfo?catInfo.bg:'#f3f4f6'}; color:${catInfo?catInfo.color:'#6B7280'}; border-color:transparent`}">${c}</button>`;
-        }).join('')}
-      </div>
-      ${activeTab==='today'?`<div class="mt-4 flex gap-2 overflow-x-auto pb-1">${Array.from({length:14}).map((_,i)=>{let d=new Date(); d.setDate(d.getDate()-3+i); let ds=d.toISOString().split('T')[0]; let isSel=ds===selectedDate; let isToday=ds===new Date().toISOString().split('T')[0]; return `<button onclick="selectDate('${ds}')" class="min-w-[64px] p-3 rounded-2xl text-center border transition ${isSel?'bg-[#0F766E] text-white border-[#0F766E] shadow-lg scale-105':'bg-white border-gray-100 hover:border-gray-200'}"><div class="text-[10px] ${isSel?'text-white/70':'text-gray-400'}">${d.toLocaleDateString('ar-EG',{weekday:'short'})}</div><div class="font-black text-[18px] mt-1">${d.getDate()}</div>${isToday?`<div class="w-1 h-1 bg-amber-400 rounded-full mx-auto mt-1"></div>`:''}</button>`;}).join('')}</div>`:''}
-    </div>
-
-    <!-- Main -->
-    <div id="mainContent">
-      ${activeTab==='today'?`<div class="space-y-3">${todayTasks.length?todayTasks.map(t=>taskCardPro(t)).join(''):`<div class="bg-white card-shadow rounded-[20px] p-12 text-center"><div class="w-20 h-20 teal-gradient rounded-3xl flex items-center justify-center text-white text-4xl font-black mx-auto mb-4">م</div><div class="font-black text-xl text-gray-800">مرحباً بك في منجز!</div><div class="text-sm text-gray-500 mt-2 max-w-sm mx-auto">برنامج إدارة مهام احترافي بواسطة شريف رمضان - ابدأ بإضافة أول مهمة لك الآن</div><button onclick="openAdd()" class="mt-6 teal-gradient text-white px-8 py-3 rounded-2xl font-bold shadow-lg">+ أضف أول مهمة</button><div class="mt-8 grid grid-cols-3 gap-3 text-center max-w-md mx-auto"><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">🔁</div><div class="text-[11px] font-bold mt-1">مهام متكررة</div></div><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">📊</div><div class="text-[11px] font-bold mt-1">تقارير PDF</div></div><div class="bg-gray-50 rounded-xl p-3"><div class="text-lg">🌙</div><div class="text-[11px] font-bold mt-1">وضع داكن</div></div></div></div>`}</div>`:''}
-      ${activeTab==='future'? (futureTasks.length?`<div class="bg-white card-shadow rounded-2xl p-4 mb-4 flex justify-between items-center"><div class="font-bold text-sm">لديك ${futureTasks.length} مهمة مستقبلية</div><button onclick="moveAllFutureToToday()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-black shadow">📥 نقل الكل لليوم</button></div>`+Object.entries(futureTasks.reduce((a,t)=>{(a[t.date]=a[t.date]||[]).push(t); return a;},{})).sort().map(([d,arr])=>`<div class="mb-6"><div class="flex items-center gap-2 mb-3"><div class="h-px flex-1 bg-gray-200"></div><h3 class="font-black text-gray-700 bg-white px-3 py-1 rounded-full border text-sm">${d}</h3><div class="h-px flex-1 bg-gray-200"></div></div><div class="space-y-3">${arr.map(t=>taskCardPro(t)).join('')}</div></div>`).join(''):`<div class="bg-white card-shadow rounded-[20px] p-12 text-center text-gray-400">لا توجد مهام مستقبلية</div>`) :''}
-      ${activeTab==='achievements'?`
-        <div class="bg-white card-shadow rounded-[20px] p-5 mb-5 border border-white">
-          <div class="flex justify-between items-center mb-4"><h3 class="font-black text-[16px]">الملخص المالي</h3><button onclick="openPdf()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-bold shadow">📄 تصدير تقرير PDF</button></div>
-          <div class="grid grid-cols-3 gap-3">
-            <div class="bg-gray-50 rounded-2xl p-4 text-center border"><div class="text-[11px] text-gray-500">الإنجازات</div><div class="text-2xl font-black mt-1">${ach.length}</div></div>
-            <div class="bg-red-50 rounded-2xl p-4 text-center border border-red-100"><div class="text-[11px] text-red-400">المصروفات</div><div class="font-bold text-red-600 mt-1">${totalExp.toLocaleString('en-US')} EGP</div></div>
-            <div class="bg-teal-50 rounded-2xl p-4 text-center border border-teal-100"><div class="text-[11px] text-teal-600">المتكررة المكتملة</div><div class="font-black text-teal-700 mt-1">${ach.filter(t=>t.recurrence!=='none').length}</div></div>
-          </div>
-        </div>
-        <div class="space-y-3">${ach.map(t=>achCardPro(t)).join('')}</div>`:''}
-      ${activeTab==='financial'?`
-        <div class="bg-white card-shadow rounded-[20px] p-5 mb-5"><div class="flex justify-between items-center mb-3"><h3 class="font-black">المعاملات المالية (${fin.length})</h3><button onclick="openPdf()" class="bg-[#0F766E] text-white px-5 py-2.5 rounded-xl text-sm font-bold">📄 تصدير PDF</button></div></div>
-        <div class="space-y-3">${fin.map(t=>taskCardPro(t)).join('')}</div>`:''}
-    </div>
-
-    <footer class="text-center mt-10 mb-4"><div class="inline-flex items-center gap-2 bg-white rounded-full px-5 py-2.5 card-shadow border"><div class="w-6 h-6 rounded-full teal-gradient flex items-center justify-center text-white text-xs font-black">م</div><span class="text-xs font-bold text-gray-600">برنامج منجز بواسطة شريف رمضان - نسخة مجانية للزملاء</span><span class="text-[10px] text-gray-400">• ${tasks.length} مهمة</span></div><div class="mt-3"><button onclick="forceRepair()" class="text-[11px] bg-white border px-4 py-2 rounded-full text-gray-500 hover:bg-gray-50">🔧 إصلاح المهام التي لا تحذف</button></div><div class="text-[11px] text-gray-400 mt-3">تم استرجاع ${tasks.length} مهمة من النسخ السابقة تلقائيا • <button onclick="exportData()" class="underline font-bold">احفظ نسخة احتياطية الآن</button></div></footer>
-  </div>
-
-  <!-- Add/Edit Modal - Pro -->
-  <div id="modal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50">
-    <div class="bg-white rounded-[24px] p-6 w-full max-w-lg max-h-[90vh] overflow-y-auto shadow-2xl">
-      <div class="flex justify-between items-center mb-5"><h2 id="modalTitle" class="text-xl font-black">مهمة جديدة</h2><button onclick="closeModal()" class="w-8 h-8 bg-gray-100 rounded-full">✕</button></div>
-      <input id="m_title" placeholder="عنوان المهمة..." class="w-full border-0 bg-gray-50 rounded-2xl px-5 py-4 mb-4 text-[15px] focus:bg-white focus:ring-2 focus:ring-[#0F766E]/20 outline-none font-semibold">
-      <div class="grid grid-cols-2 gap-3 mb-4">
-        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التصنيف</label><div class="flex gap-2"><select id="m_cat" class="flex-1 border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm font-semibold">${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select><button onclick="addNewCategory()" class="bg-gray-100 px-3 rounded-xl text-sm font-bold" title="إضافة تصنيف جديد">+</button></div></div>
-        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">الأولوية</label><select id="m_pri" class="w-full border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm"><option value="low">🟢 منخفضة</option><option value="medium" selected>🟡 متوسطة</option><option value="high">🔴 عالية</option></select></div>
-      </div>
-      <div class="grid grid-cols-2 gap-3 mb-4">
-        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التاريخ</label><input id="m_date" type="date" class="w-full border-0 bg-gray-50 rounded-xl px-4 py-3 text-sm"></div>
-        <div><label class="text-[11px] font-bold text-gray-500 mb-1 block">التكرار 🔁</label><select id="m_rec" class="w-full border-0 bg-amber-50 rounded-xl px-4 py-3 text-sm font-bold text-amber-700 border border-amber-100"><option value="none">بدون تكرار</option><option value="daily">يومي</option><option value="weekly">أسبوعي</option><option value="monthly">شهري</option><option value="yearly">سنوي</option></select></div>
-      </div>
-      <p id="recHelp" class="text-xs text-amber-700 bg-amber-50 border border-amber-200 rounded-xl p-3 mb-4 hidden">✨ سيتم إنشاء المهمة التالية تلقائيا عند إكمال هذه المهمة</p>
-      <div class="bg-gray-50 rounded-2xl p-4 mb-4">
-        <div class="flex items-center gap-2 mb-3"><input type="checkbox" id="m_hasFin" onchange="document.getElementById('finBox').classList.toggle('hidden', !this.checked)" class="w-4 h-4"><label class="text-sm font-bold">معاملة مالية (ج.م)</label></div>
-        <div id="finBox" class="hidden grid grid-cols-2 gap-3"><input id="m_amount" type="number" placeholder="المبلغ" class="border-0 bg-white rounded-xl px-4 py-3 text-sm"><select id="m_finType" class="border-0 bg-white rounded-xl px-4 py-3 text-sm"><option value="expense">مصروف</option><option value="income">دخل</option></select></div>
-      </div>
-      <div class="bg-gray-50 rounded-2xl p-4 mb-5"><label class="text-[11px] font-bold text-gray-500 mb-2 block">مهام فرعية</label><div id="subList" class="space-y-2"></div><button onclick="addSub()" class="text-sm text-[#0F766E] font-bold mt-3">+ إضافة مهمة فرعية</button></div>
-      <div class="flex gap-3"><button onclick="saveTask()" class="flex-1 teal-gradient text-white py-4 rounded-2xl font-black shadow-lg">حفظ المهمة</button><button onclick="closeModal()" class="px-6 py-4 bg-gray-100 rounded-2xl font-bold">إلغاء</button></div>
-    </div>
-  </div>
-
-  <div id="pdfModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center p-4 z-50"><div class="bg-white rounded-[24px] p-6 w-full max-w-md shadow-2xl"><h2 class="text-xl font-black mb-5">تصدير تقرير PDF</h2><div class="grid grid-cols-2 gap-3 mb-4"><div><label class="text-[11px] font-bold text-gray-500">من</label><input id="pdf_from" type="date" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mt-1 text-sm"></div><div><label class="text-[11px] font-bold text-gray-500">إلى</label><input id="pdf_to" type="date" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mt-1 text-sm"></div></div><select id="pdf_cat" class="w-full bg-gray-50 border-0 rounded-xl px-4 py-3 mb-5 text-sm font-semibold"><option value="الكل">كل التصنيفات</option>${Object.keys(CATS).map(c=>`<option>${c}</option>`).join('')}</select><div class="flex gap-3"><button id="pdfBtn" onclick="doExport()" class="flex-1 teal-gradient text-white py-4 rounded-2xl font-black shadow">تصدير PDF</button><button onclick="document.getElementById('pdfModal').classList.add('hidden')" class="px-6 py-4 bg-gray-100 rounded-2xl font-bold">إلغاء</button></div></div></div>
-  `;
-
-  const recEl=document.getElementById('m_rec');
-  if(recEl) recEl.addEventListener('change', e=>{document.getElementById('recHelp').classList.toggle('hidden', e.target.value==='none');});
+}
+function migrateGuest(doIt) {
+  localStorage.setItem('munjez_migrated_' + session.uid, '1');
+  if (doIt) { try { mergeImport(normalizeData(JSON.parse(localStorage.getItem('munjez_guest')))); } catch (e) {} localStorage.removeItem('munjez_guest'); }
+  closeModal(); refreshAll();
+}
+async function cloudPush() {
+  if (!fb.ready || !session || session.mode !== 'google' || !navigator.onLine) return;
+  try { await fb.db.collection('munjez').doc(session.uid).set({json:JSON.stringify(S), updated:S.updated}); } catch (e) {}
+}
+function signOut() {
+  if (!confirm(LANG === 'en' ? 'Sign out? Local data on this device will be removed (your cloud account keeps it).' : 'تسجيل الخروج؟ هتتمسح البيانات من الجهاز ده بس، والحساب هيفضل موجود على السحابة.')) return;
+  if (session.mode === 'google') { cloudPush(); localStorage.removeItem(dataKey()); try { fb.auth && fb.auth.signOut(); } catch (e) {} }
+  localStorage.removeItem('munjez_session'); session = null; S = null; showLogin();
 }
 
-function taskCardPro(t){
-  const cat=CATS[t.category]||CATS['أخرى'];
-  const priColor=t.priority==='high'?'bg-red-500':t.priority==='medium'?'bg-amber-400':'bg-emerald-400';
-  const progress=t.subtasks.length?Math.round(t.subtasks.filter(s=>s.done).length/t.subtasks.length*100):0;
-  return `
-  <div class="group bg-white rounded-[20px] p-[1px] card-shadow hover:shadow-xl transition-all duration-300 border border-white">
-    <div class="bg-white rounded-[19px] p-4">
-      <div class="flex items-start gap-3">
-        <button onclick="toggleComplete('${t.id}')" class="mt-1 w-7 h-7 rounded-full border-2 flex items-center justify-center transition ${t.completed?'bg-[#0F766E] border-[#0F766E] text-white':'border-gray-200 hover:border-[#0F766E] group-hover:border-[#0F766E]/50'}">${t.completed?'✓':''}</button>
-        <div class="flex-1 min-w-0">
-          <div class="flex items-center gap-2 flex-wrap">
-            <span class="font-bold text-[15px] text-gray-900 truncate">${t.title}</span>
-            <span class="text-[11px] px-2.5 py-1 rounded-full font-bold" style="background:${cat.bg}; color:${cat.color}">${t.category}</span>
-            <span class="w-2 h-2 rounded-full ${priColor}"></span>
-            ${t.recurrence!=='none'?`<span class="text-[11px] bg-amber-50 text-amber-700 px-2.5 py-1 rounded-full border border-amber-200 font-bold">🔁 ${t.recurrence==='daily'?'يومي':t.recurrence==='weekly'?'أسبوعي':t.recurrence==='monthly'?'شهري':'سنوي'}</span>`:''}
-            ${t.financial?`<span dir="ltr" class="text-[11px] px-2.5 py-1 rounded-full font-bold ${t.financial.type==='expense'?'bg-red-50 text-red-600 border border-red-100':'bg-green-50 text-green-600 border border-green-100'}">${t.financial.type==='expense'?'-':'+'}${Math.abs(t.financial.amount).toLocaleString('en-US')} EGP</span>`:''}
-          </div>
-          <div class="mt-3 bg-gray-50 rounded-xl p-3 border border-gray-100 ${t.subtasks.length?'':'border-dashed'}">
-            ${t.subtasks.length?`<div class="flex justify-between text-[11px] font-bold text-gray-500 mb-2"><span>المهام الفرعية</span><span class="bg-white px-2 py-0.5 rounded-full border">${t.subtasks.filter(s=>s.done).length}/${t.subtasks.length} • ${progress}%</span></div><div class="w-full bg-white h-2 rounded-full overflow-hidden border mb-3"><div class="h-2 rounded-full transition-all" style="width:${progress}%; background:linear-gradient(90deg, #0F766E, #14B8A6)"></div></div>`:''}
-            ${t.subtasks.length?`<div class="space-y-1.5 mb-3">${t.subtasks.map((s, idx)=>`<label class="flex items-center gap-2 p-2 rounded-lg hover:bg-white cursor-pointer transition group ${s.done?'opacity-60':''}"><input type="checkbox" ${s.done?'checked':''} onchange="toggleSubtask('${t.id}','${s.id}')" class="w-4 h-4 rounded accent-[#0F766E]"><span class="text-[13px] flex-1 ${s.done?'line-through text-gray-400':''}">${s.title}</span><button onclick="event.preventDefault(); if(confirm('حذف المهمة الفرعية؟')){ let tt=tasks.find(x=>String(x.id)==='${t.id}'); tt.subtasks=tt.subtasks.filter(x=>String(x.id)!=='${s.id}'); save(); render(); }" class="opacity-0 group-hover:opacity-100 text-red-400 hover:text-red-600 text-xs">✕</button></label>`).join('')}</div>`:''}
-            <div class="flex gap-2">
-              <input id="direct-sub-${t.id}" placeholder="إضافة مهمة فرعية مباشرة..." class="flex-1 bg-white border border-gray-200 rounded-xl px-3 py-2 text-[13px] focus:border-[#0F766E] outline-none" onkeydown="if(event.key==='Enter'){ addSubtaskDirect('${t.id}'); }">
-              <button onclick="addSubtaskDirect('${t.id}')" class="bg-[#0F766E] text-white px-4 py-2 rounded-xl text-xs font-bold hover:bg-[#0d5e57]">+ إضافة</button>
-            </div>
-          </div>
-          <div class="flex gap-2 mt-3.5 flex-wrap">
-            <button onclick="moveTo('${t.id}', new Date().toISOString().split('T')[0])" class="text-[12px] bg-[#0F766E]/10 hover:bg-[#0F766E] hover:text-white text-[#0F766E] px-3.5 py-1.5 rounded-full font-bold transition border border-[#0F766E]/20">📥 لليوم</button>
-            <button onclick="editTask('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold transition">✏️ تعديل</button>
-            <button onclick="openPostpone('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold">⏰ تأجيل</button>
-            <button onclick="dupTask('${t.id}')" class="text-[12px] bg-gray-50 hover:bg-gray-100 px-3.5 py-1.5 rounded-full font-semibold">📋 نسخ</button>
-            <button onclick="delTask('${t.id}')" class="text-[12px] bg-red-50 hover:bg-red-100 text-red-600 px-3.5 py-1.5 rounded-full font-semibold">🗑️ حذف</button>
-          </div>
-        </div>
-      </div>
-      <div id="postpone-${t.id}" class="hidden mt-4 p-3 bg-amber-50 rounded-2xl border border-amber-200"><div class="text-[11px] font-bold text-amber-700 mb-2">نقل المهمة إلى:</div><div class="flex gap-2 flex-wrap"><button onclick="moveTo('${t.id}', new Date().toISOString().split('T')[0])" class="text-xs bg-[#0F766E] text-white border border-[#0F766E] px-4 py-2 rounded-full font-black shadow">📥 اليوم</button><button onclick="moveTo('${t.id}','${getNextDate(t.date,'daily')}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold hover:shadow">غدا</button><button onclick="moveTo('${t.id}','${(()=>{let d=new Date(t.date); d.setDate(d.getDate()+3); return d.toISOString().split('T')[0];})()}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold">بعد 3 أيام</button><button onclick="moveTo('${t.id}','${(()=>{let d=new Date(t.date); d.setDate(d.getDate()+7); return d.toISOString().split('T')[0];})()}')" class="text-xs bg-white border px-4 py-2 rounded-full font-bold">الأسبوع القادم</button><input type="date" onchange="moveTo('${t.id}', this.value)" class="text-xs border rounded-full px-4 py-2 bg-white" title="اختر تاريخ مخصص"></div></div>
-    </div>
-  </div>`;
+/* ============ القفل ============ */
+async function hashPin(p) {
+  try { const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode('munjez|' + p)); return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2, '0')).join(''); }
+  catch (e) { return btoa('munjez|' + p); }
 }
-function achCardPro(t){
-  const cat=CATS[t.category]||CATS['أخرى'];
-  const progress=t.subtasks.length?Math.round(t.subtasks.filter(s=>s.done).length/t.subtasks.length*100):0;
-  return `<div class="bg-white rounded-[20px] p-4 card-shadow border border-white opacity-[0.95] hover:opacity-100 transition"><div class="flex items-start gap-3"><div class="w-7 h-7 rounded-full bg-emerald-500 text-white flex items-center justify-center text-xs font-black">✓</div><div class="flex-1"><div class="flex items-center gap-2 flex-wrap"><span class="font-bold text-[15px]">${t.title}</span><span class="text-[11px] px-2.5 py-1 rounded-full font-bold" style="background:${cat.bg}; color:${cat.color}">${t.category}</span>${t.recurrence!=='none'?`<span class="text-[10px] bg-amber-50 text-amber-600 px-2 py-0.5 rounded-full">🔁 متكررة</span>`:''}</div><div class="text-[11px] text-gray-400 mt-1">${t.date} • ${new Date(t.completedAt||t.date).toLocaleDateString('ar-EG')}</div>${t.subtasks.length?`<div class="mt-3 bg-emerald-50/50 rounded-xl p-3 border border-emerald-100"><div class="flex justify-between text-[11px] font-bold text-emerald-700 mb-2"><span>المهام الفرعية المكتملة</span><span>${progress}%</span></div><div class="space-y-1">${t.subtasks.map(s=>`<div class="flex items-center gap-2 text-[12px] ${s.done?'text-emerald-700':'text-gray-400'}"><span>${s.done?'✓':'○'}</span><span class="${s.done?'':'line-through'}">${s.title}</span></div>`).join('')}</div></div>`:''}<div class="flex gap-2 mt-3"><button onclick="editTask('${t.id}')" class="text-[12px] bg-gray-50 px-3 py-1 rounded-full font-semibold">✏️ تعديل</button><button onclick="reopen('${t.id}')" class="text-[12px] bg-amber-50 text-amber-700 px-3 py-1 rounded-full font-semibold">↩️ إعادة فتح</button></div></div>${t.financial?`<span dir="ltr" class="text-xs">${formatAmount(t.financial.type==='expense'?-Math.abs(t.financial.amount):t.financial.amount)}</span>`:''}</div></div>`;
-}
-
-window.setTab=(k)=>{activeTab=k; render();};
-window.selectDate=(d)=>{selectedDate=d; render();};
-window.setCat=(c)=>{filterCat=c; render();};
-window.toggleRec=()=>{showRec=!showRec; render();};
-window.onSearch=(v)=>{searchQ=v; render();};
-let editingId=null; let tempSubs=[];
-window.openAdd=()=>{editingId=null; tempSubs=[]; document.getElementById('modalTitle').innerText='مهمة جديدة'; document.getElementById('m_title').value=''; document.getElementById('m_date').value=selectedDate; document.getElementById('m_rec').value='none'; document.getElementById('recHelp').classList.add('hidden'); document.getElementById('m_hasFin').checked=false; document.getElementById('finBox').classList.add('hidden'); document.getElementById('m_amount').value=''; document.getElementById('subList').innerHTML=''; document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('flex');};
-window.editTask=(id)=>{let t=tasks.find(x=>x.id===id); editingId=id; tempSubs=[...t.subtasks]; document.getElementById('modalTitle').innerText='تعديل مهمة'; document.getElementById('m_title').value=t.title; document.getElementById('m_cat').value=t.category; document.getElementById('m_pri').value=t.priority; document.getElementById('m_date').value=t.date; document.getElementById('m_rec').value=t.recurrence||'none'; document.getElementById('recHelp').classList.toggle('hidden',(t.recurrence||'none')==='none'); document.getElementById('m_hasFin').checked=!!t.financial; document.getElementById('finBox').classList.toggle('hidden',!t.financial); document.getElementById('m_amount').value=t.financial?Math.abs(t.financial.amount):''; document.getElementById('m_finType').value=t.financial?t.financial.type:'expense'; renderSubs(); document.getElementById('modal').classList.remove('hidden'); document.getElementById('modal').classList.add('flex');};
-window.closeModal=()=>{document.getElementById('modal').classList.add('hidden'); document.getElementById('modal').classList.remove('flex');};
-window.addSub=()=>{tempSubs.push({id:Date.now().toString(), title:'', done:false}); renderSubs();};
-function renderSubs(){document.getElementById('subList').innerHTML=tempSubs.map((s,i)=>`<div class="flex gap-2"><input value="${s.title}" oninput="tempSubs[${i}].title=this.value" placeholder="مهمة فرعية" class="flex-1 bg-white border-0 rounded-xl px-4 py-2.5 text-sm"><button onclick="tempSubs.splice(${i},1); renderSubs()" class="w-8 h-8 bg-red-50 text-red-500 rounded-full">×</button></div>`).join('');}
-window.saveTask=()=>{let title=document.getElementById('m_title').value.trim(); if(!title) return alert('اكتب العنوان'); let cat=document.getElementById('m_cat').value; let pri=document.getElementById('m_pri').value; let date=document.getElementById('m_date').value||selectedDate; let rec=document.getElementById('m_rec').value; let hasFin=document.getElementById('m_hasFin').checked; let fin=null; if(hasFin){let amt=parseFloat(document.getElementById('m_amount').value)||0; let type=document.getElementById('m_finType').value; if(amt>0) fin={amount:amt, type};} if(editingId){let t=tasks.find(x=>x.id===editingId); t.title=title; t.category=cat; t.priority=pri; t.date=date; t.recurrence=rec; t.financial=fin; t.subtasks=tempSubs.filter(s=>s.title.trim()); if(rec!=='none' && !t.recurrenceId) t.recurrenceId=Date.now().toString();}else{tasks.unshift({id:Date.now().toString(), title, category:cat, priority:pri, date, completed:false, completedAt:null, financial:fin, subtasks:tempSubs.filter(s=>s.title.trim()), recurrence:rec, recurrenceId: rec!=='none'?Date.now().toString():null, createdAt:new Date().toISOString()});} save(); closeModal(); render();};
-window.toggleComplete=(id)=>{
-  try{
-    let t=tasks.find(x=>String(x.id)===String(id));
-    if(!t) return;
-    if(!t.completed){
-      t.completed=true; t.completedAt=new Date().toISOString();
-      if(t.recurrence && t.recurrence!=='none'){
-        let next=getNextDate(t.date, t.recurrence);
-        let exists=tasks.some(x=>x.recurrenceId===t.recurrenceId && x.date===next);
-        if(!exists){
-          tasks.unshift({id:Date.now().toString()+Math.random(), title:t.title, category:t.category, priority:t.priority, date:next, completed:false, completedAt:null, financial:t.financial, subtasks:t.subtasks.map(s=>({id:Date.now()+Math.random(), title:s.title, done:false})), recurrence:t.recurrence, recurrenceId:t.recurrenceId, createdAt:new Date().toISOString()});
-        }
-      }
-    }else{
-      t.completed=false; t.completedAt=null;
-    }
-    save(); render();
-  }catch(e){ console.error('toggle error',e); }
-};
-
-window.delTask=(id)=>{
-  try{
-    if(!confirm('حذف المهمة؟')) return;
-    // Robust delete: filter by id string, also handle if id has special chars
-    let before=tasks.length;
-    tasks=tasks.filter(x=>String(x.id)!==String(id));
-    // If nothing deleted (id mismatch), try delete by index fallback
-    if(tasks.length===before){
-      let idx=tasks.findIndex(x=>String(x.id).includes(String(id).substring(0,8)) || x.title===id);
-      if(idx>=0) tasks.splice(idx,1);
-    }
-    save(); render();
-  }catch(e){
-    console.error('delete error',e);
-    // Force delete by position: find element with that id in DOM and remove from array by position
-    alert('حدث خطأ في الحذف، سيتم إصلاح البيانات');
-    tasks=tasks.filter(x=>String(x.id)!==String(id).replace(/'/g,''));
-    save(); render();
-  }
-};
-window.dupTask=(id)=>{
-  try{
-    let t=tasks.find(x=>String(x.id)===String(id));
-    if(!t) return;
-    tasks.push({...t, id:Date.now().toString()+Math.random().toString().slice(2), title:t.title+' (نسخة)', completed:false, completedAt:null, subtasks:t.subtasks.map(s=>({...s, done:false, id:Date.now()+Math.random()}))});
-    save(); render();
-  }catch(e){ alert('تعذر النسخ'); }
-};
-window.reopen=(id)=>{
-  try{
-    let t=tasks.find(x=>String(x.id)===String(id));
-    if(!t) return;
-    t.completed=false; t.completedAt=null; save(); render();
-  }catch(e){}
-};
-window.openPostpone=(id)=>{
-  try{
-    let el=document.getElementById('postpone-'+id);
-    if(el) el.classList.toggle('hidden');
-    else {
-      // ID with special chars, escape
-      let escId = CSS.escape(id);
-      let el2=document.getElementById('postpone-'+escId) || document.querySelector(`[id^='postpone-']`);
-      if(el2) el2.classList.toggle('hidden');
-    }
-  }catch(e){
-    // fallback: toggle all postpone boxes
-    document.querySelectorAll('[id^="postpone-"]').forEach(el=>el.classList.add('hidden'));
-    try{ document.getElementById('postpone-'+id).classList.remove('hidden'); }catch(_){}
-  }
-};
-window.moveTo=(id,nd)=>{
-  try{
-    if(!nd) return;
-    let t=tasks.find(x=>String(x.id)===String(id));
-    if(!t){ t=tasks.find(x=>x.title===id); }
-    if(t){
-      let oldDate=t.date;
-      t.date=nd;
-      save();
-      // If moved to today, switch to today tab and select date
-      let today=new Date().toISOString().split('T')[0];
-      if(nd===today){
-        selectedDate=today;
-        activeTab='today';
-      }
-      render();
-      // Show feedback
-      if(nd===today){
-        setTimeout(()=>{ alert(`تم نقل "${t.title}" إلى مهام اليوم ✅`); }, 100);
-      }
-    }
-  }catch(e){ console.error('move error',e); }
-};
-window.moveAllFutureToToday=()=>{
-  let today=new Date().toISOString().split('T')[0];
-  let futureCount=tasks.filter(t=>!t.completed && t.date>today).length;
-  if(!futureCount) return alert('لا توجد مهام مستقبلية');
-  if(!confirm(`هل تريد نقل جميع المهام المستقبلية (${futureCount} مهمة) إلى اليوم؟`)) return;
-  tasks.forEach(t=>{ if(!t.completed && t.date>today) t.date=today; });
-  selectedDate=today; activeTab='today';
-  save(); render();
-  alert(`تم نقل ${futureCount} مهمة إلى اليوم ✅`);
-};
-
-window.forceRepair=()=>{
-  if(!confirm('سيتم إصلاح جميع المهام التي بها أخطاء وإعطاؤها IDs جديدة صالحة. هل تريد المتابعة؟')) return;
-  let fixed=0;
-  tasks=tasks.map(t=>{
-    let newId = String(t.id||'').replace(/[^a-zA-Z0-9-_]/g,'');
-    if(!newId || newId.length<5 || tasks.filter(x=>x.id===t.id).length>1){
-      t.id=Date.now().toString()+Math.random().toString().slice(2);
-      fixed++;
-    }
-    // Ensure required fields
-    if(!t.date) t.date=new Date().toISOString().split('T')[0];
-    if(!t.category) t.category='أخرى';
-    if(!t.priority) t.priority='medium';
-    if(!Array.isArray(t.subtasks)) t.subtasks=[];
-    if(typeof t.recurrence==='undefined') t.recurrence='none';
-    return t;
-  });
-  // Deduplicate again
-  let seen={}; tasks=tasks.filter(t=>{ if(seen[t.id]) return false; seen[t.id]=true; return true; });
-  save(); render();
-  alert(`تم إصلاح ${fixed} مهمة. يمكنك الآن حذف ونقل جميع المهام.`);
-};
-
-
-window.exportData=()=>{
-  let dataStr=JSON.stringify(tasks, null, 2);
-  let blob=new Blob([dataStr], {type:'application/json'});
-  let url=URL.createObjectURL(blob);
-  let a=document.createElement('a');
-  a.href=url; a.download=`munjez-backup-${new Date().toISOString().split('T')[0]}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  alert(`تم تصدير ${tasks.length} مهمة بنجاح! احتفظ بالملف في مكان آمن.`);
-};
-window.importData=(event)=>{
-  let file=event.target.files[0];
-  if(!file) return;
-  let reader=new FileReader();
-  reader.onload=(e)=>{
-    try{
-      let imported=JSON.parse(e.target.result);
-      let arr=Array.isArray(imported)?imported:(imported.tasks||[]);
-      if(!arr.length) throw 'empty';
-      if(confirm(`تم العثور على ${arr.length} مهمة في الملف. هل تريد دمجها مع مهامك الحالية (${tasks.length} مهمة)؟ اضغط موافق للدمج، إلغاء للاستبدال`)){
-        // merge
-        let map={}; tasks.forEach(t=>map[t.id]=true);
-        let added=0;
-        arr.forEach(t=>{
-          if(!map[t.id]){ tasks.push(t); added++; }
-        });
-        save(); render();
-        alert(`تم دمج ${added} مهمة جديدة. الإجمالي الآن ${tasks.length} مهمة`);
-      }else{
-        if(confirm(`هل أنت متأكد من استبدال كل مهامك الحالية بـ ${arr.length} مهمة من الملف؟`)){
-          tasks=arr; save(); render();
-          alert(`تم الاستيراد بنجاح - ${tasks.length} مهمة`);
-        }
-      }
-    }catch(err){ alert('ملف غير صالح: '+err); }
+function showLock() {
+  const L = $('#lock'); let v = '';
+  const draw = () => {
+    L.innerHTML = `<div style="font-size:48px">🔒</div><div style="font-weight:800;font-size:20px">${t('أدخل الرقم السري')}</div><div class="pins">${[0,1,2,3].map(i => `<i class="${i < v.length ? 'f' : ''}"></i>`).join('')}</div><div class="pad">${[1,2,3,4,5,6,7,8,9,'',0,'⌫'].map(k => k === '' ? '<span></span>' : `<button data-k="${k}">${k}</button>`).join('')}</div>`;
   };
-  reader.readAsText(file);
-  event.target.value='';
-};
-window.addNewCategory=()=>{
-  let name=prompt('اكتب اسم التصنيف الجديد:');
-  if(!name) return;
-  name=name.trim();
-  if(!name) return;
-  if(CATS[name]) return alert('التصنيف موجود بالفعل');
-  // random color
-  let colors=['#0F766E','#7C3AED','#2563EB','#DB2777','#D97706','#059669','#0D9488','#6B7280','#EF4444','#8B5CF6'];
-  let color=colors[Math.floor(Math.random()*colors.length)];
-  CATS[name]={color:color, bg:color+'20', dot:color};
-  // save custom categories
-  let custom=JSON.parse(localStorage.getItem('munjez_custom_cats')||'[]');
-  if(!custom.includes(name)) custom.push(name);
-  localStorage.setItem('munjez_custom_cats', JSON.stringify(custom));
-  // update select
-  let sel=document.getElementById('m_cat');
-  let opt=document.createElement('option'); opt.value=name; opt.textContent=name; opt.selected=true;
-  sel.appendChild(opt);
-  render();
-  alert(`تم إضافة تصنيف "${name}" بنجاح`);
-};
-// Load custom cats on start
-(function loadCustomCats(){
-  try{
-    let custom=JSON.parse(localStorage.getItem('munjez_custom_cats')||'[]');
-    custom.forEach(name=>{
-      if(!CATS[name]){
-        let colors=['#0F766E','#7C3AED','#2563EB','#DB2777','#D97706','#059669'];
-        let color=colors[Math.floor(Math.random()*colors.length)];
-        CATS[name]={color:color, bg:color+'20', dot:color};
-      }
-    });
-  }catch(e){}
-})();
-
-// Clean version - no auto-migration for colleagues (disabled)
-// Deep migrate disabled for clean version
-
-window.openPdf=()=>{let today=new Date().toISOString().split('T')[0]; let week=new Date(); week.setDate(week.getDate()-7); document.getElementById('pdf_from').value=week.toISOString().split('T')[0]; document.getElementById('pdf_to').value=today; document.getElementById('pdfModal').classList.remove('hidden'); document.getElementById('pdfModal').classList.add('flex');};
-window.doExport=async()=>{
-  let from=document.getElementById('pdf_from').value; let to=document.getElementById('pdf_to').value; let cat=document.getElementById('pdf_cat').value;
-  let btn=document.getElementById('pdfBtn'); btn.innerText='جاري الإنشاء...';
-  let list=tasks.filter(t=>t.completed); if(from) list=list.filter(t=>t.date>=from); if(to) list=list.filter(t=>t.date<=to); if(cat!=='الكل') list=list.filter(t=>t.category===cat);
-  let totalExp=list.filter(t=>t.financial && t.financial.type==='expense').reduce((s,t)=>s+Math.abs(t.financial.amount),0);
-  let totalInc=list.filter(t=>t.financial && t.financial.type==='income').reduce((s,t)=>s+t.financial.amount,0);
-  let div=document.createElement('div'); div.style.width='800px'; div.style.background='white'; div.style.fontFamily='Cairo, sans-serif'; div.style.position='absolute'; div.style.left='-9999px';
-  div.innerHTML=`
-    <div style="background:#0F766E; padding:28px; border-radius:16px 16px 0 0;">
-      <div style="display:flex; justify-content:space-between; flex-direction:row-reverse;">
-        <div><div style="font-size:42px; font-weight:900; color:white;">تقرير منجز</div><div style="font-size:16px; color:#FDE68A; font-weight:700; margin-top:6px;">برنامج منجز بواسطة شريف رمضان</div><div style="font-size:13px; color:rgba(255,255,255,0.8); margin-top:4px;">Munjez Report</div></div>
-        <div><div style="width:64px; height:64px; background:white; border-radius:16px; display:flex; align-items:center; justify-content:center; font-size:32px; font-weight:900; color:#0F766E;">م</div><div style="margin-top:8px; background:rgba(255,255,255,0.15); padding:4px 12px; border-radius:20px; color:white; font-size:11px; text-align:center;">${new Date().toLocaleDateString('en-CA')}</div></div>
-      </div>
-      <div style="margin-top:20px; display:flex; gap:8px; flex-wrap:wrap;">
-        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">الفترة: ${from||'البداية'} الى ${to||'اليوم'}</span>
-        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">التصنيف: ${cat}</span>
-        <span style="background:rgba(255,255,255,0.12); border:1px solid rgba(255,255,255,0.2); padding:6px 14px; border-radius:20px; color:white; font-size:12px;">العدد: ${list.length} انجاز</span>
-      </div>
-    </div>
-    <div style="height:4px; background:#F59E0B;"></div>
-    <div style="padding:24px;">
-      <div style="font-size:18px; font-weight:700; color:#0F766E; text-align:right; margin-bottom:12px;">الملخص المالي</div>
-      <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:12px; margin-bottom:20px;">
-        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">عدد الانجازات</div><div style="font-size:20px; font-weight:900; margin-top:4px;">${list.length}</div></div>
-        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">اجمالي الدخل</div><div style="margin-top:6px;">${formatAmount(totalInc)}</div></div>
-        <div style="border:1px solid #e5e7eb; border-radius:12px; padding:14px; text-align:center;"><div style="font-size:11px; color:#6b7280;">المصروفات</div><div style="margin-top:6px;">${formatAmount(-totalExp)}</div></div>
-      </div>
-      <div style="border:1px solid #fecaca; background:#fef2f2; border-radius:12px; padding:12px; display:flex; justify-content:space-between; margin-bottom:20px;"><span style="font-weight:700;">الصافي</span><span>${formatAmount(totalInc-totalExp)}</span></div>
-      <div style="font-size:16px; font-weight:700; color:#0F766E; text-align:right; margin-bottom:8px;">✓ قائمة الانجازات (${list.length})</div>
-      <div style="border:1px solid #e5e7eb; border-radius:12px; overflow:hidden; margin-bottom:20px;">
-        <div style="display:grid; grid-template-columns:50px 100px 1fr 100px 140px; background:#0F766E; color:white; padding:10px; font-size:12px; font-weight:700;"><span>#</span><span>التاريخ</span><span>المهمة</span><span>التصنيف</span><span>المبلغ</span></div>
-        ${list.map((t,i)=>`<div style="display:grid; grid-template-columns:50px 100px 1fr 100px 140px; padding:10px; font-size:12px; border-top:1px solid #f3f4f6; background:${i%2?'#f9fafb':'white'};"><span dir="ltr">${i+1}</span><span dir="ltr" style="direction:ltr; display:inline-block;">${t.date}</span><span style="font-weight:600;">${t.title}</span><span><span style="background:#f3f4f6; padding:2px 8px; border-radius:12px; font-size:11px;">${t.category}</span></span><span>${t.financial?formatAmount(t.financial.type==='expense'?-Math.abs(t.financial.amount):t.financial.amount):'<span style="color:#9ca3af;">-</span>'}</span></div>`).join('')}
-      </div>
-      <div style="background:#f8fafc; padding:16px; border-radius:12px; text-align:center; margin-top:24px;"><div style="font-size:14px; font-weight:700; color:#0F766E;">برنامج منجز بواسطة شريف رمضان</div><div dir="ltr" style="font-size:11px; color:#9ca3af; margin-top:6px;">Munjez Report | ${new Date().toISOString().split('T')[0]}</div></div>
-    </div>
-  `;
-  document.body.appendChild(div);
-  await new Promise(r=>setTimeout(r,700));
-  let canvas=await html2canvas(div,{scale:2, useCORS:true, backgroundColor:'#ffffff'});
-  let {jsPDF}=window.jspdf; let pdf=new jsPDF('p','mm','a4'); let imgData=canvas.toDataURL('image/png'); let imgW=210; let imgH=canvas.height*imgW/canvas.width; let hLeft=imgH; let pos=0; pdf.addImage(imgData,'PNG',0,pos,imgW,imgH); hLeft-=297; while(hLeft>0){pos=hLeft-imgH; pdf.addPage(); pdf.addImage(imgData,'PNG',0,pos,imgW,imgH); hLeft-=297;} pdf.save(`Munjez-Report-${new Date().toISOString().split('T')[0]}.pdf`); document.body.removeChild(div); btn.innerText='تصدير PDF'; document.getElementById('pdfModal').classList.add('hidden');
-};
-
-render();
-</script>
-
-<div id="pwaPrompt" style="display:none; position:fixed; bottom:20px; left:50%; transform:translateX(-50%); background:#0F766E; color:white; padding:14px 20px; border-radius:16px; box-shadow:0 8px 24px rgba(0,0,0,0.2); z-index:9999; font-weight:bold; text-align:center; max-width:90%;"><div>📱 تثبيت منجز على هاتفك؟</div><div style="margin-top:8px"><button onclick="installPWA()" style="background:white; color:#0F766E; border:none; padding:8px 18px; border-radius:10px; margin:0 4px; font-weight:bold;">تثبيت</button><button onclick="document.getElementById('pwaPrompt').style.display='none'" style="background:rgba(255,255,255,0.2); color:white; border:none; padding:8px 14px; border-radius:10px; font-weight:bold;">لاحقاً</button></div></div>
-<script>
-let deferredPrompt;
-window.addEventListener('beforeinstallprompt', (e)=>{ e.preventDefault(); deferredPrompt=e; document.getElementById('pwaPrompt').style.display='block'; });
-function installPWA(){ if(deferredPrompt){ deferredPrompt.prompt(); deferredPrompt.userChoice.then(choice=>{ deferredPrompt=null; document.getElementById('pwaPrompt').style.display='none'; }); } }
-if('serviceWorker' in navigator){ window.addEventListener('load', ()=>{ navigator.serviceWorker.register('sw.js').catch(()=>{}); }); }
-</script>
-
-
-<script>
-// Offline-first registration
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker.register('./sw.js').then(reg => {
-      console.log('SW registered offline-ready');
-    });
-  });
+  L.hidden = false; draw();
+  L.onclick = async e => {
+    const k = e.target.dataset && e.target.dataset.k; if (k == null) return;
+    if (k === '⌫') v = v.slice(0, -1); else if (v.length < 4) v += k;
+    draw();
+    if (v.length === 4) {
+      if (await hashPin(v) === S.settings.pin) { L.hidden = true; L.innerHTML = ''; }
+      else { toast('رقم سري خطأ'); v = ''; setTimeout(draw, 250); }
+    }
+  };
 }
-// Notify if offline but working
-window.addEventListener('offline', () => {
-  console.log('Offline but app works!');
+function pinModal() {
+  if (S.settings.pin) {
+    openModal(t('إلغاء القفل'), `<div class="lbl">${t('أدخل الرقم السري')}</div><input id="pin1" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="row"><button class="btn red" data-a="pinOff">${t('إلغاء القفل')}</button></div>`);
+  } else {
+    openModal(t('تفعيل القفل برقم سري'), `<div class="lbl">${t('رقم سري من 4 أرقام')}</div><input id="pin1" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="lbl">${t('تأكيد الرقم')}</div><input id="pin2" type="password" inputmode="numeric" maxlength="4" autocomplete="off"><div class="row"><button class="btn" data-a="pinOn">${t('حفظ')}</button></div>`);
+  }
+}
+
+/* ============ التكرار ============ */
+function nextOcc(r, from) {
+  switch (r) {
+    case 'daily': return addDays(from, 1);
+    case 'weekly': return addDays(from, 7);
+    case 'monthly': return addMonths(from, 1);
+    case 'yearly': return addMonths(from, 12);
+    case 'first': { const d = pd(from); return ds(new Date(d.getFullYear(), d.getMonth() + 1, 1)); }
+    case 'workdays': { let n = addDays(from, 1); while ([5, 6].includes(pd(n).getDay())) n = addDays(n, 1); return n; }
+  }
+  return null;
+}
+function ensureRecurring() {
+  const td = today(); let changed = false;
+  S.tasks.slice().forEach(x => {
+    if (!x.repeat || x.repeat === 'none') return;
+    if (!x.nextDue) x.nextDue = nextOcc(x.repeat, x.date);
+    let n = 0;
+    while (x.nextDue && x.nextDue <= td && n++ < 800) {
+      if (x.nextDue >= addDays(td, -45)) {
+        S.tasks.push({...x, id:uid(), date:x.nextDue, done:false, doneDay:null, subs:x.subs.map(s => ({t:s.t, d:false})), repeat:'none', nextDue:null, srcId:x.id, created:Date.now() + n});
+      }
+      x.nextDue = nextOcc(x.repeat, x.nextDue); changed = true;
+    }
+  });
+  if (changed) save();
+}
+
+/* ============ المهام ============ */
+const prioRank = {h:0, m:1, l:2};
+function sortTasks(a) {
+  return a.slice().sort((x, y) => (x.done - y.done) || (ui.filter === 'future' ? x.date.localeCompare(y.date) : 0) || (prioRank[x.prio] - prioRank[y.prio]) || (y.created - x.created));
+}
+function visibleTasks() {
+  const td = today(); let a = S.tasks;
+  if (ui.cat !== 'all') a = a.filter(x => x.cat === ui.cat);
+  if (ui.filter === 'day') a = a.filter(x => x.date === ui.date);
+  else if (ui.filter === 'done') a = a.filter(x => x.done);
+  else if (ui.filter === 'pending') a = a.filter(x => !x.done);
+  else if (ui.filter === 'future') a = a.filter(x => x.date > td);
+  if (ui.q) {
+    const q = ui.q.toLowerCase();
+    a = a.filter(x => [x.title, x.notes, catName(x.cat), x.amount, ...x.subs.map(s => s.t)].join(' ').toLowerCase().includes(q));
+  }
+  return sortTasks(a);
+}
+const T = id => S.tasks.find(x => x.id === id);
+function syncDone(x) {
+  if (x.subs.length) { const all = x.subs.every(s => s.d); if (all !== x.done) setDone(x, all); }
+}
+function setDone(x, v) { x.done = v; x.doneDay = v ? today() : null; }
+function toggleTask(id) {
+  const x = T(id); if (!x) return;
+  setDone(x, !x.done); if (x.done) x.subs.forEach(s => s.d = true);
+  save(); refreshHome();
+}
+function toggleSub(id, i) { const x = T(id); if (!x || !x.subs[i]) return; x.subs[i].d = !x.subs[i].d; syncDone(x); save(); refreshHome(); }
+function parseSubs(str) { return String(str || '').split(/[,،\n]/).map(s => s.trim()).filter(Boolean).map(s => ({t:s, d:false})); }
+function addTask() {
+  const title = $('#nt').value.trim(); if (!title) { $('#nt').focus(); return toast('اكتب المهمة الأول'); }
+  const amount = Math.abs(parseFloat(latin($('#na').value))) || 0;
+  const type = amount > 0 ? (ui.ntype === 'none' ? 'out' : ui.ntype) : 'none';
+  const date = $('#nd').value || today(), rep = $('#nr').value;
+  const x = {id:uid(), title, cat:$('#nc').value, date, done:false, doneDay:null, prio:ui.prio, est:0, amount, type, subs:parseSubs($('#ns').value), repeat:rep, nextDue:rep !== 'none' ? nextOcc(rep, date) : null, notes:'', created:Date.now()};
+  S.tasks.push(x); save();
+  $('#nt').value = ''; $('#na').value = ''; $('#ns').value = '';
+  if (ui.filter !== 'day' && ui.filter !== 'all') ui.filter = 'day';
+  if (ui.filter === 'day' && date !== ui.date) { ui.date = date; syncDateInputs(); }
+  ensureRecurring(); refreshHome(); toast('تمت الإضافة');
+}
+function addSub(id) {
+  const inp = $('#subin'); const v = inp.value.trim(); if (!v) return;
+  const x = T(id); x.subs.push({t:v, d:false}); if (x.done) setDone(x, false);
+  save(); refreshHome(); setTimeout(() => { const i = $('#subin'); i && i.focus(); }, 30);
+}
+function delTask(id) { if (!confirm(t('تأكيد حذف المهمة؟'))) return; S.tasks = S.tasks.filter(x => x.id !== id); save(); refreshHome(); toast('تم الحذف'); }
+function moveTask(id, date) { const x = T(id); x.date = date; save(); refreshHome(); toast('تم النقل'); }
+
+function taskHTML(x) {
+  const sd = x.subs.filter(s => s.d).length;
+  const amt = x.amount > 0 && x.type !== 'none' ? `<span class="${x.type === 'in' ? 'in' : 'out'}">${x.type === 'in' ? '+' : '-'}${mh(x.amount)} ${t('ج.م')}</span>` : '';
+  const future = x.date > today();
+  const subsHTML = x.subs.map((s, i) => `<div class="srow"><button class="cb sm ${s.d ? 'on' : ''}" data-a="subToggle" data-id="${x.id}" data-i="${i}">✓</button><span class="${s.d ? 'dn' : ''}">${esc(s.t)}</span><button class="x" data-a="subDel" data-id="${x.id}" data-i="${i}">×</button></div>`).join('');
+  const add = ui.openSub === x.id
+    ? `<div class="inl"><input id="subin" placeholder="${t('إضافة مهمة فرعية')}" data-enter="addSub" data-id="${x.id}"><button class="btn inl" data-a="addSub" data-id="${x.id}">${t('إضافة')}</button></div>`
+    : `<button class="mini" data-a="openSub" data-id="${x.id}" title="${t('إضافة مهمة فرعية')}">+</button>`;
+  return `<div class="task"><div class="trow">
+    <button class="cb ${x.done ? 'on' : ''}" data-a="toggle" data-id="${x.id}" aria-label="done">✓</button>
+    <div class="tmain"><div class="ttl ${x.done ? 'dn' : ''}"><span class="pd p-${x.prio}"></span><span class="tt">${esc(x.title)}</span>${x.repeat && x.repeat !== 'none' ? '<span title="' + t(RP[x.repeat]) + '">🔁</span>' : ''}</div>
+    <div class="meta"><span><i class="dot" style="background:${catColor(x.cat)}"></i> ${esc(catName(x.cat))}</span><span>${fmtShort(x.date)}</span>${amt}${x.subs.length ? `<span>☑ ${sd}/${x.subs.length}</span>` : ''}${x.est ? `<span>⏳ ${x.est}${LANG === 'en' ? 'm' : 'د'}</span>` : ''}</div>
+    ${x.subs.length ? `<div class="bar" style="height:5px"><i style="width:${Math.round(sd / x.subs.length * 100)}%"></i></div>` : ''}
+    ${x.notes ? `<div class="meta">📝 ${esc(x.notes)}</div>` : ''}</div>
+    <div class="tact">${future ? `<button data-a="toToday" data-id="${x.id}" title="${t('انقل لليوم')}">📌</button>` : ''}<button data-a="tmr" data-id="${x.id}" title="${t('بكرة')}">⏭️</button><button data-a="focusFor" data-id="${x.id}" title="${t('ركّز')}">🎯</button><button data-a="edit" data-id="${x.id}" title="${t('تعديل')}">✏️</button><button data-a="del" data-id="${x.id}" title="${t('حذف')}">🗑️</button></div></div>
+    ${x.subs.length ? `<div class="subs">${subsHTML}</div>` : ''}<div class="addsub">${add}</div></div>`;
+}
+
+/* ============ الفلوس ============ */
+function monthTx(m) {
+  return S.tasks.filter(x => x.type !== 'none' && x.amount > 0 && x.date.startsWith(m) && (S.settings.moneyMode === 'all' || x.done));
+}
+function monthStats(m) {
+  const tx = monthTx(m); let inc = 0, exp = 0; const byCat = {};
+  tx.forEach(x => { if (x.type === 'in') inc += x.amount; else { exp += x.amount; byCat[x.cat] = (byCat[x.cat] || 0) + x.amount; } });
+  return {tx, inc, exp, bal:inc - exp, byCat};
+}
+function moneyHTML() {
+  const m = ui.date.slice(0, 7), st = monthStats(m), B = S.settings.budget || 0;
+  let h = `<div class="mon"><div>${t('الدخل')}<b class="in">${mh(st.inc)} ${t('ج.م')}</b></div><div>${t('المصروف')}<b class="out">${mh(st.exp)} ${t('ج.م')}</b></div><div>${t('الرصيد')}<b>${mh(st.bal)} ${t('ج.م')}</b></div></div>`;
+  if (B > 0) {
+    const p = st.exp / B, cls = p >= 1 ? 'over' : p >= .8 ? 'warn' : '';
+    h += `<div class="prow" style="margin-top:12px"><span>${t('ميزانية')} ${fmtMonth(ui.date).split(' ')[0]}: ${t('استهلكت')} ${Math.round(p * 100)}%</span><span>${t('فاضل')} ${mh(Math.max(0, B - st.exp))} ${t('ج.م')}</span></div><div class="bar ${cls}"><i style="width:${Math.min(100, p * 100)}%"></i></div>`;
+    if (p >= 1) h += `<div class="alert o">⛔ ${t('تنبيه: عديت الميزانية')}</div>`; else if (p >= .8) h += `<div class="alert w">⚠️ ${t('تنبيه: قربت تخلص الميزانية')}</div>`;
+  }
+  S.cats.forEach(c => {
+    const cb = +S.settings.catBudgets[c.id] || 0; if (!cb) return;
+    const sp = st.byCat[c.id] || 0, p = sp / cb; if (p < .8) return;
+    h += `<div class="alert ${p >= 1 ? 'o' : 'w'}">${p >= 1 ? '⛔' : '⚠️'} ${esc(catName(c.id))}: ${Math.round(p * 100)}% (${mh(sp)}/${mh(cb)})</div>`;
+  });
+  h += `<button class="link" data-a="chart">${ui.chart ? t('إخفاء الرسم البياني') : t('عرض الرسم البياني')}</button>`;
+  if (ui.chart) h += chartsHTML(m, st);
+  return h;
+}
+function chartsHTML(m, st) {
+  let h = `<div class="chartbox"><div class="lbl">${t('المصاريف حسب الفئة')}</div>`;
+  const ent = Object.entries(st.byCat).filter(e => e[1] > 0), tot = ent.reduce((a, e) => a + e[1], 0);
+  if (!tot) h += `<div class="empty">${t('مفيش مصاريف')}</div>`;
+  else {
+    let a0 = -Math.PI / 2, paths = '';
+    if (ent.length === 1) paths = `<circle cx="80" cy="80" r="70" fill="${catColor(ent[0][0])}"/>`;
+    else ent.forEach(([id, v]) => {
+      const a1 = a0 + v / tot * Math.PI * 2, x0 = 80 + 70 * Math.cos(a0), y0 = 80 + 70 * Math.sin(a0), x1 = 80 + 70 * Math.cos(a1), y1 = 80 + 70 * Math.sin(a1);
+      paths += `<path d="M80 80L${x0.toFixed(2)} ${y0.toFixed(2)}A70 70 0 ${a1 - a0 > Math.PI ? 1 : 0} 1 ${x1.toFixed(2)} ${y1.toFixed(2)}Z" fill="${catColor(id)}"/>`; a0 = a1;
+    });
+    h += `<div style="display:flex;gap:14px;align-items:center;flex-wrap:wrap;justify-content:center"><svg width="160" height="160" viewBox="0 0 160 160">${paths}<circle cx="80" cy="80" r="34" fill="var(--card)"/></svg><div class="legend" style="flex-direction:column">${ent.map(([id, v]) => `<span><i class="dot" style="background:${catColor(id)}"></i> ${esc(catName(id))} — ${mh(v)} (${Math.round(v / tot * 100)}%)</span>`).join('')}</div></div>`;
+  }
+  const [y, mo] = m.split('-').map(Number), days = new Date(y, mo, 0).getDate(), inc = Array(days).fill(0), exp = Array(days).fill(0);
+  st.tx.forEach(x => { const d = +x.date.slice(8, 10) - 1; (x.type === 'in' ? inc : exp)[d] += x.amount; });
+  for (let i = 1; i < days; i++) { inc[i] += inc[i - 1]; exp[i] += exp[i - 1]; }
+  const mx = Math.max(1, ...inc, ...exp), W = 320, H = 140, px = i => 10 + i / Math.max(1, days - 1) * (W - 20), py = v => H - 10 - v / mx * (H - 24);
+  const pl = (arr, c) => `<polyline fill="none" stroke="${c}" stroke-width="2.5" points="${arr.map((v, i) => px(i).toFixed(1) + ',' + py(v).toFixed(1)).join(' ')}"/>`;
+  h += `<div class="lbl">${t('الدخل والمصروف خلال الشهر')}</div><svg viewBox="0 0 ${W} ${H}" width="100%" style="max-width:420px;direction:ltr"><line x1="10" y1="${H - 10}" x2="${W - 10}" y2="${H - 10}" stroke="var(--bd)"/>${pl(inc, '#16a34a')}${pl(exp, '#dc2626')}</svg><div class="legend"><span><i class="dot" style="background:#16a34a"></i> ${t('الدخل')} ${mh(inc[days - 1])}</span><span><i class="dot" style="background:#dc2626"></i> ${t('المصروف')} ${mh(exp[days - 1])}</span></div></div>`;
+  return h;
+}
+
+/* ============ الصفحة الرئيسية ============ */
+function streak() {
+  const days = new Set(S.tasks.filter(x => x.done).map(x => x.doneDay || x.date));
+  let d = today(), n = 0; if (!days.has(d)) d = addDays(d, -1);
+  while (days.has(d)) { n++; d = addDays(d, -1); }
+  return n;
+}
+function renderProg() {
+  let a = S.tasks.filter(x => x.date === ui.date); if (ui.cat !== 'all') a = a.filter(x => x.cat === ui.cat);
+  const d = a.filter(x => x.done).length, p = a.length ? Math.round(d / a.length * 100) : 0;
+  $('#prog').innerHTML = `<div class="prow"><span>${t('أنجزت')} ${d} ${t('من')} ${a.length} ${t('مهام')} - ${p}%</span><span>🔥 ${t('سلسلة الإنجاز')}: ${streak()} ${t('أيام')}</span></div><div class="bar"><i style="width:${p}%"></i></div>`;
+}
+function renderCats() {
+  $('#cats').innerHTML = [{id:'all', name:'الكل', color:'#94a3b8'}, ...S.cats].map(c => `<button class="cat ${ui.cat === c.id ? 'on' : ''}" data-a="catSel" data-id="${c.id}">${c.id !== 'all' ? `<i class="dot" style="background:${c.color}"></i>` : ''}${c.id === 'all' ? t('الكل') : esc(catName(c.id))}</button>`).join('') + `<button class="cat" data-a="addCat" title="${t('فئة جديدة')}">+</button>`;
+}
+function renderList() {
+  const a = visibleTasks();
+  $('#list').innerHTML = a.length ? a.map(taskHTML).join('') : `<div class="empty">📭<br>${t('مفيش مهام هنا')}</div>`;
+  document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('on', b.dataset.filter === ui.filter));
+  const i = $('#subin'); if (i) i.focus();
+}
+function renderMoney() { $('#money').innerHTML = moneyHTML(); }
+function renderDateBar() {
+  const isT = ui.date === today(), en = LANG === 'en';
+  $('#datebar').innerHTML = `<button class="ib" data-a="prevDay">${en ? '←' : '→'}</button><div class="dtxt">${fmtDate(ui.date)}</div><button class="ib" data-a="nextDay">${en ? '→' : '←'}</button>
+    ${isT ? '' : `<button class="chip" data-a="goToday">${t('اليوم')}</button>`}<button class="ib" data-a="pickDate">📅</button><input type="date" id="dp" value="${ui.date}" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px"><button class="chip ${fo.running ? 'run' : ''}" id="fchip" data-a="focusOpen">⏱️ ${fmtClock(focusRemaining())}</button>`;
+}
+function syncDateInputs() { const n = $('#nd'); if (n) n.value = ui.date; }
+function refreshHome() { if (ui.page !== 'home') return; renderDateBar(); renderCats(); renderProg(); renderList(); renderMoney(); fillCatSelect(); }
+function fillCatSelect() {
+  const s = $('#nc'); if (!s) return; const cur = s.value;
+  s.innerHTML = S.cats.map(c => `<option value="${c.id}">${esc(catName(c.id))}</option>`).join('');
+  s.value = S.cats.some(c => c.id === cur) ? cur : (ui.cat !== 'all' && cat(ui.cat) ? ui.cat : S.cats[0].id);
+}
+function setDate(d) { ui.date = d; syncDateInputs(); refreshHome(); }
+function homePage() {
+  $('#page').innerHTML = `
+  <div class="card datebar" id="datebar" style="position:relative"></div>
+  <div class="cats" id="cats"></div>
+  <div class="card" id="prog"></div>
+  <div class="card">
+    <input id="nt" placeholder="${t('اكتب المهمة... مثال: اجتماع الشغل')}" style="font-size:18px;min-height:52px" data-enter="addTask">
+    <div class="row"><select id="nc"></select><input type="date" id="nd" value="${ui.date}"><div class="pri" id="prio">${['h', 'm', 'l'].map(p => `<button data-a="prio" data-id="${p}" class="${ui.prio === p ? 'on' : ''}" title="${t(PR[p])}"><span class="pd p-${p}"></span></button>`).join('')}</div></div>
+    <div class="row"><input id="na" inputmode="decimal" placeholder="${t('المبلغ بالجنيه (اختياري)')}"><div class="seg" id="ntype"><button data-a="ntype" data-id="none" class="${ui.ntype === 'none' ? 'on' : ''}">${t('بدون فلوس')}</button><button data-a="ntype" data-id="in" class="in ${ui.ntype === 'in' ? 'on in' : ''}">${t('دخل +')}</button><button data-a="ntype" data-id="out" class="out ${ui.ntype === 'out' ? 'on out' : ''}">${t('مصروف -')}</button></div></div>
+    <div class="row"><input id="ns" placeholder="${t('مهام فرعية - اكتبها مفصولة بفاصلة')}"><select id="nr">${Object.keys(RP).map(k => `<option value="${k}">${t('التكرار')}: ${t(RP[k])}</option>`).join('')}</select></div>
+    <div class="row"><button class="btn" data-a="addTask">${t('إضافة المهمة')}</button></div>
+  </div>
+  <input id="sq" placeholder="${t('🔍 ابحث في مهامك...')}" value="${esc(ui.q)}">
+  <div class="filters">${[['day', 'اليوم'], ['all', 'الكل'], ['pending', 'المعلقة'], ['done', 'المكتملة'], ['future', 'المستقبلية']].map(f => `<button data-a="filter" data-filter="${f[0]}" data-id="${f[0]}">${t(f[1])}</button>`).join('')}</div>
+  <div id="list" style="margin-top:10px"></div>
+  <div class="card" id="money"></div>`;
+  refreshHome();
+}
+
+/* ============ التعديل ============ */
+function editModal(id) {
+  const x = T(id);
+  openModal(t('تعديل المهمة'), `<div class="lbl">${t('عنوان المهمة')}</div><input id="et" value="${esc(x.title)}">
+  <div class="row"><div><div class="lbl">${t('الفئة')}</div><select id="ec">${S.cats.map(c => `<option value="${c.id}" ${c.id === x.cat ? 'selected' : ''}>${esc(catName(c.id))}</option>`).join('')}</select></div><div><div class="lbl">${t('التاريخ')}</div><input type="date" id="ed" value="${x.date}"></div></div>
+  <div class="row"><div><div class="lbl">${t('الأولوية')}</div><select id="ep">${['h', 'm', 'l'].map(p => `<option value="${p}" ${x.prio === p ? 'selected' : ''}>${t(PR[p])}</option>`).join('')}</select></div><div><div class="lbl">${t('الوقت المقدر (دقائق)')}</div><input id="ee" inputmode="numeric" value="${x.est || ''}"></div></div>
+  <div class="row"><div><div class="lbl">${t('المبلغ')}</div><input id="ea" inputmode="decimal" value="${x.amount || ''}"></div><div><div class="lbl">${t('النوع')}</div><select id="ey"><option value="none" ${x.type === 'none' ? 'selected' : ''}>${t('بدون فلوس')}</option><option value="in" ${x.type === 'in' ? 'selected' : ''}>${t('دخل +')}</option><option value="out" ${x.type === 'out' ? 'selected' : ''}>${t('مصروف -')}</option></select></div></div>
+  <div class="lbl">${t('مهام فرعية - اكتبها مفصولة بفاصلة')}</div><input id="es" value="${esc(x.subs.map(s => s.t).join('، '))}">
+  <div class="lbl">${t('التكرار')}</div><select id="er">${Object.keys(RP).map(k => `<option value="${k}" ${x.repeat === k || (!x.repeat && k === 'none') ? 'selected' : ''}>${t(RP[k])}</option>`).join('')}</select>
+  <div class="lbl">${t('ملاحظات')}</div><textarea id="eo" rows="2">${esc(x.notes || '')}</textarea>
+  <div class="row"><button class="btn" data-a="saveEdit" data-id="${id}">${t('حفظ')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+}
+function saveEdit(id) {
+  const x = T(id); const title = $('#et').value.trim(); if (!title) return;
+  x.title = title; x.cat = $('#ec').value; x.date = $('#ed').value || x.date; x.prio = $('#ep').value; x.est = parseInt(latin($('#ee').value)) || 0;
+  x.amount = Math.abs(parseFloat(latin($('#ea').value))) || 0; x.type = x.amount > 0 ? ($('#ey').value === 'none' ? 'out' : $('#ey').value) : 'none';
+  const old = x.subs, ns = parseSubs($('#es').value); x.subs = ns.map(s => ({t:s.t, d:!!(old.find(o => o.t === s.t) || {}).d}));
+  const r = $('#er').value; if (r !== x.repeat) { x.repeat = r; x.nextDue = r !== 'none' ? nextOcc(r, x.date) : null; }
+  x.notes = $('#eo').value.trim(); if (x.subs.length) syncDone(x);
+  save(); closeModal(); ensureRecurring(); refreshHome();
+}
+
+/* ============ التركيز ============ */
+const fo = {mode:'work', running:false, endAt:0, left:25 * 60, startedAt:0, taskId:'', timer:null};
+const fmtClock = s => pad(Math.floor(s / 60)) + ':' + pad(s % 60);
+function focusRemaining() { return fo.running ? Math.max(0, Math.round((fo.endAt - Date.now()) / 1000)) : fo.left; }
+function creditFocus() {
+  if (fo.mode === 'work' && fo.startedAt) {
+    const sec = Math.round((Date.now() - fo.startedAt) / 1000);
+    if (sec > 0) { S.focusLog[today()] = (S.focusLog[today()] || 0) + sec; save(); }
+  }
+  fo.startedAt = 0;
+}
+function focusStart() {
+  if (fo.running) return; fo.running = true; fo.endAt = Date.now() + fo.left * 1000; fo.startedAt = Date.now();
+  try { if ('Notification' in window && Notification.permission === 'default') Notification.requestPermission(); } catch (e) {}
+  clearInterval(fo.timer); fo.timer = setInterval(focusTick, 500); focusUI();
+}
+function focusPause() { if (!fo.running) return; fo.left = focusRemaining(); fo.running = false; clearInterval(fo.timer); creditFocus(); focusUI(); }
+function focusReset() { if (fo.running) { fo.running = false; clearInterval(fo.timer); creditFocus(); } fo.left = (fo.mode === 'work' ? 25 : 5) * 60; focusUI(); }
+function focusTick() {
+  const r = focusRemaining(); if (r > 0) { focusUI(); return; }
+  fo.running = false; clearInterval(fo.timer); creditFocus();
+  const wasWork = fo.mode === 'work', msg = wasWork ? 'انتهت جلسة التركيز، خد استراحة' : 'انتهت الاستراحة، يلا نركز';
+  fo.mode = wasWork ? 'break' : 'work'; fo.left = (fo.mode === 'work' ? 25 : 5) * 60;
+  beep(); try { navigator.vibrate && navigator.vibrate([300, 150, 300]); } catch (e) {}
+  try { if ('Notification' in window && Notification.permission === 'granted') new Notification(t('منجز'), {body:t(msg), icon:'icon-192.png'}); } catch (e) {}
+  focusUI(); toast(msg);
+}
+function beep() {
+  try { const c = new (window.AudioContext || window.webkitAudioContext)(); [0, .35, .7].forEach(d => { const o = c.createOscillator(), g = c.createGain(); o.frequency.value = 880; o.connect(g); g.connect(c.destination); g.gain.setValueAtTime(.2, c.currentTime + d); g.gain.exponentialRampToValueAtTime(.001, c.currentTime + d + .3); o.start(c.currentTime + d); o.stop(c.currentTime + d + .3); }); } catch (e) {}
+}
+function focusUI() {
+  const chip = $('#fchip'); if (chip) { chip.textContent = '⏱️ ' + fmtClock(focusRemaining()); chip.classList.toggle('run', fo.running); }
+  const tm = $('#ftime'); if (!tm) return;
+  tm.textContent = fmtClock(focusRemaining());
+  $('#fmode').textContent = fo.mode === 'work' ? '🎯 ' + t('تركيز') : '☕ ' + t('استراحة');
+  $('#fgo').textContent = fo.running ? t('إيقاف') : t('بدء');
+  const total = (fo.mode === 'work' ? 25 : 5) * 60; $('#fbar').style.width = (100 - focusRemaining() / total * 100) + '%';
+}
+function focusModal() {
+  const opts = `<option value="">${t('بدون مهمة محددة')}</option>` + S.tasks.filter(x => !x.done && x.date <= today()).sort((a, b) => prioRank[a.prio] - prioRank[b.prio]).map(x => `<option value="${x.id}" ${x.id === fo.taskId ? 'selected' : ''}>${esc(x.title)}</option>`).join('');
+  openModal('⏱️ ' + t('وقت التركيز'), `<div style="text-align:center"><div id="fmode" style="font-weight:700;color:var(--pri)"></div><div id="ftime" style="font-size:64px;font-weight:800;font-variant-numeric:tabular-nums;direction:ltr"></div><div class="bar"><i id="fbar" style="width:0"></i></div></div>
+  <div class="lbl">${t('المهمة')}</div><select id="ftask">${opts}</select>
+  <div class="row"><button class="btn" id="fgo" data-a="focusGo"></button><button class="btn sec" data-a="focusReset">${t('إعادة')}</button></div>
+  <p style="text-align:center;color:var(--mut)">${t('ساعات التركيز اليوم')}: <b>${hm(S.focusLog[today()] || 0)}</b></p>`);
+  focusUI();
+}
+
+/* ============ الإنجازات والتقارير ============ */
+function achPage() {
+  if (!ui.aFrom) { const n = today(); ui.aFrom = n.slice(0, 8) + '01'; ui.aTo = ds(new Date(pd(n).getFullYear(), pd(n).getMonth() + 1, 0)); }
+  $('#page').innerHTML = `<div class="card"><div class="datebar"><button class="ib" data-a="calPrev">${LANG === 'en' ? '←' : '→'}</button><div class="dtxt">${fmtMonth(ui.calMonth)}</div><button class="ib" data-a="calNext">${LANG === 'en' ? '→' : '←'}</button></div><div class="cal" id="cal" style="margin-top:10px"></div></div>
+  <div class="card"><div class="sect">${t('المهام المنجزة')}</div>
+    <div class="row"><select id="ac"><option value="all">${t('الكل')}</option>${S.cats.map(c => `<option value="${c.id}" ${ui.aCat === c.id ? 'selected' : ''}>${esc(catName(c.id))}</option>`).join('')}</select></div>
+    <div class="row"><div><div class="lbl">${t('من تاريخ')}</div><input type="date" id="af" value="${ui.aFrom}"></div><div><div class="lbl">${t('إلى تاريخ')}</div><input type="date" id="at" value="${ui.aTo}"></div></div>
+    <div id="astats" style="margin-top:10px"></div><div id="alist"></div>
+    <div class="row"><button class="btn" data-a="expPdf">📄 ${t('تصدير PDF')}</button><button class="btn sec" data-a="expCsv">📊 ${t('تصدير Excel')}</button></div></div>`;
+  renderCal(); renderAch();
+}
+function renderCal() {
+  const m = ui.calMonth.slice(0, 7), [y, mo] = m.split('-').map(Number), days = new Date(y, mo, 0).getDate(), first = (new Date(y, mo - 1, 1).getDay() + 1) % 7;
+  const done = {}; S.tasks.forEach(x => { if (x.done) { const d = x.doneDay || x.date; done[d] = (done[d] || 0) + 1; } });
+  const wk = Array.from({length:7}, (_, i) => new Intl.DateTimeFormat(loc(), {weekday:'narrow'}).format(new Date(2024, 0, 6 + i)));
+  let h = wk.map(w => `<div class="h">${w}</div>`).join('') + '<div class="d e"></div>'.repeat(first);
+  for (let d = 1; d <= days; d++) { const k = m + '-' + pad(d); h += `<button class="d ${done[k] ? 'g' : ''} ${k === today() ? 't' : ''}" data-a="calDay" data-id="${k}">${d}</button>`; }
+  $('#cal').innerHTML = h;
+}
+function periodTasks() { return S.tasks.filter(x => x.date >= ui.aFrom && x.date <= ui.aTo && (ui.aCat === 'all' || x.cat === ui.aCat)); }
+function renderAch() {
+  const all = periodTasks(), a = all.filter(x => x.done).sort((x, y) => y.date.localeCompare(x.date));
+  let inc = 0, exp = 0; all.filter(x => x.type !== 'none' && (S.settings.moneyMode === 'all' || x.done)).forEach(x => x.type === 'in' ? inc += x.amount : exp += x.amount);
+  let fs = 0; Object.entries(S.focusLog).forEach(([d, s]) => { if (d >= ui.aFrom && d <= ui.aTo) fs += s; });
+  $('#astats').innerHTML = `<div class="hl"><span>✅ ${t('المهام المنجزة')}</span><b>${a.length} / ${all.length}</b></div><div class="hl"><span>${t('إجمالي الدخل')}</span><b class="in">${mh(inc)} ${t('ج.م')}</b></div><div class="hl"><span>${t('إجمالي المصروف')}</span><b class="out">${mh(exp)} ${t('ج.م')}</b></div><div class="hl"><span>${t('الرصيد')}</span><b>${mh(inc - exp)} ${t('ج.م')}</b></div><div class="hl"><span>⏱️ ${t('ساعات التركيز اليوم')}</span><b>${hm(S.focusLog[today()] || 0)}</b></div><div class="hl"><span>⏱️ ${t('ساعات التركيز في الفترة')}</span><b>${hm(fs)}</b></div>`;
+  $('#alist').innerHTML = a.length ? `<div style="margin-top:8px">${a.slice(0, 200).map(x => `<div class="hl"><span><i class="dot" style="background:${catColor(x.cat)}"></i> ${esc(x.title)}</span><small class="mut">${fmtShort(x.date)}</small></div>`).join('')}</div>` : `<div class="empty">${t('مفيش مهام هنا')}</div>`;
+}
+function tasksCSV(list) {
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const head = ['العنوان', 'الفئة', 'التاريخ', 'الحالة', 'الأولوية', 'النوع', 'المبلغ', 'المهام الفرعية', 'ملاحظات'];
+  const rows = list.map(x => [x.title, catName(x.cat), x.date, x.done ? 'مكتملة' : 'معلقة', PR[x.prio], x.type === 'in' ? 'دخل' : x.type === 'out' ? 'مصروف' : '', x.type === 'out' ? -x.amount : (x.type === 'in' ? x.amount : ''), x.subs.map(s => (s.d ? '✓' : '○') + s.t).join(' | '), x.notes || ''].map(q).join(','));
+  return '\uFEFF' + [head.map(q).join(','), ...rows].join('\r\n');
+}
+function download(name, text, type) {
+  const b = new Blob([text], {type}), a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = name; document.body.appendChild(a); a.click(); setTimeout(() => { URL.revokeObjectURL(a.href); a.remove(); }, 800);
+}
+function expCsv(all) { download('munjez-' + today() + '.csv', tasksCSV(all ? S.tasks : periodTasks()), 'text/csv;charset=utf-8'); }
+function expPdf() {
+  const list = periodTasks().sort((a, b) => a.date.localeCompare(b.date));
+  let inc = 0, exp = 0; list.filter(x => x.type !== 'none' && (S.settings.moneyMode === 'all' || x.done)).forEach(x => x.type === 'in' ? inc += x.amount : exp += x.amount);
+  const rtl = LANG !== 'en', num = n => `<bdi dir="ltr">${money(n)}</bdi>`;
+  const html = `<!DOCTYPE html><html lang="${LANG}" dir="${rtl ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><title>${t('تقرير منجز')}</title><style>body{font-family:Tahoma,"Segoe UI",Arial,sans-serif;padding:24px;color:#111}h1{color:#0f766e;margin:0 0 4px}table{width:100%;border-collapse:collapse;margin-top:14px;font-size:14px}th,td{border:1px solid #cbd5d1;padding:6px 8px;text-align:${rtl ? 'right' : 'left'}}th{background:#e6f4f1}.s{display:flex;gap:24px;margin-top:14px;font-weight:700}small{color:#555}@page{margin:14mm}</style></head><body>
+  <h1>${t('تقرير منجز')}</h1><small>${t('برنامج منجز بواسطة شريف رمضان')}</small>
+  <p>${t('الفترة')}: <bdi dir="ltr">${ui.aFrom} → ${ui.aTo}</bdi> &nbsp;|&nbsp; ${t('الفئة')}: ${ui.aCat === 'all' ? t('الكل') : esc(catName(ui.aCat))}</p>
+  <table><tr><th>#</th><th>${t('المهمة')}</th><th>${t('الفئة')}</th><th>${t('التاريخ')}</th><th>${t('الحالة')}</th><th>${t('المبلغ')}</th></tr>
+  ${list.map((x, i) => `<tr><td>${i + 1}</td><td>${esc(x.title)}</td><td>${esc(catName(x.cat))}</td><td><bdi dir="ltr">${x.date}</bdi></td><td>${x.done ? t('مكتملة') : t('معلقة')}</td><td>${x.type === 'none' || !x.amount ? '' : num(x.type === 'out' ? -x.amount : x.amount)}</td></tr>`).join('')}</table>
+  <div class="s"><span>${t('إجمالي الدخل')}: ${num(inc)} ${t('ج.م')}</span><span>${t('إجمالي المصروف')}: ${num(-exp)} ${t('ج.م')}</span><span>${t('الرصيد')}: ${num(inc - exp)} ${t('ج.م')}</span></div></body></html>`;
+  const f = document.createElement('iframe'); f.style.cssText = 'position:fixed;width:0;height:0;border:0;right:0;bottom:0'; document.body.appendChild(f);
+  f.contentDocument.open(); f.contentDocument.write(html); f.contentDocument.close();
+  setTimeout(() => { try { f.contentWindow.focus(); f.contentWindow.print(); } catch (e) { toast('تعذّر الطباعة'); } setTimeout(() => f.remove(), 60000); }, 350);
+}
+
+/* ============ الاستيراد ============ */
+const latin = s => String(s ?? '').replace(/[٠-٩]/g, d => '٠١٢٣٤٥٦٧٨٩'.indexOf(d)).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+function normDate(v) {
+  if (v == null || v === '') return today();
+  if (v instanceof Date) return isNaN(v) ? today() : ds(v);
+  if (typeof v === 'number') { if (v > 1e11) return ds(new Date(v)); if (v > 20000 && v < 80000) return ds(new Date(Math.round((v - 25569) * 86400000) + new Date().getTimezoneOffset() * 60000)); }
+  const s = latin(v).trim(); let m = s.match(/^(\d{4})[-\/.](\d{1,2})[-\/.](\d{1,2})/); if (m) return `${m[1]}-${pad(+m[2])}-${pad(+m[3])}`;
+  m = s.match(/^(\d{1,2})[-\/.](\d{1,2})[-\/.](\d{4})/); if (m) return `${m[3]}-${pad(+m[2])}-${pad(+m[1])}`;
+  const d = new Date(s); return isNaN(d) ? today() : ds(d);
+}
+const truthy = v => v === true || /^(true|1|yes|y|done|نعم|مكتمل|مكتملة|تم|✓|x)$/i.test(String(v ?? '').trim());
+function pick(o, ...keys) { for (const k of keys) if (o[k] !== undefined && o[k] !== null && o[k] !== '') return o[k]; return undefined; }
+function normTask(o) {
+  if (typeof o === 'string') o = {title:o};
+  const title = pick(o, 'title', 'text', 'name', 'task', 'العنوان', 'المهمة', 'عنوان'); if (!title) return null;
+  const rawAmt = pick(o, 'amount', 'money', 'المبلغ'); let amount = parseFloat(latin(rawAmt)) || 0;
+  let ty = String(pick(o, 'type', 'amountType', 'النوع') ?? '').toLowerCase(), type = 'none';
+  if (/income|^in$|دخل|\+/.test(ty)) type = 'in'; else if (/expense|^out$|مصروف|-/.test(ty)) type = 'out';
+  if (amount < 0) { amount = -amount; type = 'out'; }
+  if (amount > 0 && type === 'none') type = 'out'; if (!amount) type = 'none';
+  const pr = String(pick(o, 'priority', 'prio', 'الأولوية') ?? '').toLowerCase();
+  const prio = /high|عال|^h$|urgent|^3$/.test(pr) ? 'h' : /low|منخفض|^l$|^1$/.test(pr) ? 'l' : 'm';
+  let subsRaw = pick(o, 'subs', 'subtasks', 'المهام الفرعية') || [];
+  if (typeof subsRaw === 'string') subsRaw = subsRaw.split(/\s*\|\s*|[,،]/).map(s => s.trim()).filter(Boolean);
+  const subs = subsRaw.map(s => {
+    if (typeof s === 'string') { const d = /^✓/.test(s); return {t:s.replace(/^[✓○]\s*/, ''), d}; }
+    return {t:String(pick(s, 't', 'title', 'text', 'name') ?? ''), d:truthy(pick(s, 'd', 'done', 'completed'))};
+  }).filter(s => s.t);
+  const st = pick(o, 'done', 'completed', 'isDone', 'مكتملة', 'الحالة');
+  const rep = String(pick(o, 'repeat', 'التكرار') ?? 'none'); 
+  return {id:uid(), title:String(title).trim(), catName:String(pick(o, 'category', 'cat', 'الفئة') ?? ''), date:normDate(pick(o, 'date', 'dueDate', 'due', 'التاريخ')), done:truthy(st), doneDay:pick(o,'doneDay')?normDate(pick(o,'doneDay')):null, prio, est:parseInt(pick(o, 'est', 'estimatedTime', 'estimated') || 0) || 0, amount, type, subs, repeat:'none', notes:String(pick(o, 'notes', 'note', 'ملاحظات') ?? ''), created:Number(pick(o, 'created', 'createdAt')) || Date.now()};
+}
+function parseCSV(text) {
+  text = text.replace(/^\uFEFF/, ''); const first = text.split(/\r?\n/)[0] || '', delim = [',', ';', '\t'].sort((a, b) => first.split(b).length - first.split(a).length)[0];
+  const rows = []; let row = [], cur = '', q = false;
+  for (let i = 0; i < text.length; i++) {
+    const c = text[i];
+    if (q) { if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; } else cur += c; }
+    else if (c === '"') q = true; else if (c === delim) { row.push(cur); cur = ''; }
+    else if (c === '\n' || c === '\r') { if (c === '\r' && text[i + 1] === '\n') i++; row.push(cur); cur = ''; if (row.some(x => x.trim() !== '')) rows.push(row); row = []; }
+    else cur += c;
+  }
+  row.push(cur); if (row.some(x => x.trim() !== '')) rows.push(row);
+  if (rows.length < 2) return [];
+  const head = rows[0].map(h => h.trim());
+  return rows.slice(1).map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])));
+}
+async function readImport(file) {
+  const name = file.name.toLowerCase(); let tasks = [], cats = null;
+  if (/\.(xlsx|xls)$/.test(name)) {
+    try {
+      if (!window.XLSX) await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
+      const wb = XLSX.read(await file.arrayBuffer(), {type:'array', cellDates:true}); const ws = wb.Sheets[wb.SheetNames[0]];
+      tasks = XLSX.utils.sheet_to_json(ws, {raw:true, defval:''}).map(normTask);
+    } catch (e) { toast('الاستيراد من Excel محتاج إنترنت أول مرة — احفظ الملف CSV وجرّب'); return null; }
+  } else {
+    const text = await file.text();
+    if (/\.json$/.test(name) || /^\s*[\[{]/.test(text)) {
+      let j; try { j = JSON.parse(text); } catch (e) { return null; }
+      const arr = Array.isArray(j) ? j : (j.tasks || j.data || j.items || []);
+      tasks = arr.map(normTask); if (j.cats && Array.isArray(j.cats)) cats = j.cats;
+      if (j.focusLog) importFocus = j.focusLog;
+    } else if (/\.csv$/.test(name) || /[,;\t].*\n/.test(text.slice(0, 400))) tasks = parseCSV(text).map(normTask);
+    else tasks = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => normTask({title:l}));
+  }
+  tasks = tasks.filter(Boolean); return tasks.length ? {tasks, cats} : null;
+}
+let importFocus = null, pendingImport = null;
+const dupKey = x => (x.title + '|' + x.date).toLowerCase().trim();
+function mergeImport(src) {
+  const keys = new Set(S.tasks.map(dupKey)); let added = 0, skipped = 0;
+  if (src.cats) src.cats.forEach(c => { if (c && c.id && c.name && !cat(c.id)) S.cats.push({id:c.id, name:c.name, color:c.color || '#64748b'}); });
+  (src.tasks || []).forEach(x => {
+    const k = dupKey(x); if (keys.has(k)) { skipped++; return; } keys.add(k);
+    if (x.catName !== undefined) {
+      const nm = x.catName.trim(); let c = cat(nm) || S.cats.find(c => c.name === nm || t(c.name) === nm);
+      if (!c && nm) { c = {id:'c_' + uid(), name:nm, color:'#' + ((Math.random() * 0xbbbbbb + 0x333333) | 0).toString(16).padStart(6, '0')}; S.cats.push(c); }
+      x.cat = c ? c.id : S.cats[0].id; delete x.catName;
+    }
+    if (x.done) x.doneDay = x.doneDay || x.date; if (!x.subs) x.subs = []; if (!x.cat || !cat(x.cat)) x.cat = S.cats[0].id;
+    S.tasks.push(x); added++;
+  });
+  if (importFocus) { Object.entries(importFocus).forEach(([d, s]) => { S.focusLog[d] = Math.max(S.focusLog[d] || 0, s); }); importFocus = null; }
+  save(); return {added, skipped};
+}
+function importPreview(p) {
+  pendingImport = p; const keys = new Set(S.tasks.map(dupKey)), dups = p.tasks.filter(x => keys.has(dupKey(x))).length;
+  const money = p.tasks.filter(x => x.amount > 0).length;
+  openModal(t('استيراد'), `<p>${t('وجدنا')} <b>${p.tasks.length}</b> ${t('مهام')} ${t('و')} <b>${money}</b> ${t('معاملة مالية')}${dups ? ` — ${dups} ${t('مكرر هيتخطى')}` : ''}</p><div class="lbl">${t('أول 5 مهام')}</div>${p.tasks.slice(0, 5).map(x => `<div class="hl"><span>${esc(x.title)}</span><small class="mut">${x.date}</small></div>`).join('')}<div class="row"><button class="btn" data-a="doImport">${t('استيراد الكل')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+}
+
+/* ============ الإعدادات ============ */
+function settingsPage() {
+  const s = S.settings, u = session;
+  $('#page').innerHTML = `
+  <div class="card"><div class="sect">${t('المظهر')}</div><div class="seg">${[['light', 'نهاري'], ['dark', 'ليلي'], ['auto', 'تلقائي']].map(([k, n]) => `<button data-a="theme" data-id="${k}" class="${s.theme === k ? 'on' : ''}">${t(n)}</button>`).join('')}</div></div>
+  <div class="card"><div class="sect">${t('الحساب')}</div>
+    <div class="set"><span>${u.mode === 'google' ? esc(u.name) : t('ضيف')}<br><small class="mut">${esc(u.email || '')}</small></span>${u.photo ? `<img src="${esc(u.photo)}" width="44" height="44" style="border-radius:50%" referrerpolicy="no-referrer">` : ''}</div>
+    ${u.mode === 'google' ? `<button class="btn sec" data-a="signOut">${t('تسجيل خروج')}</button>` : `<button class="btn sec" data-a="google">${t('الدخول بجوجل')}</button>`}</div>
+  <div class="card"><div class="sect">${t('القفل')}</div><div class="set"><span>${s.pin ? '🔒 ' : ''}${s.pin ? t('إلغاء القفل') : t('تفعيل القفل برقم سري')}</span><button class="btn inl" data-a="pin">${s.pin ? t('إلغاء القفل') : '🔒'}</button></div></div>
+  <div class="card"><div class="sect">${t('اللغة')}</div><button class="btn sec" data-a="lang">${LANG === 'en' ? 'عربي' : 'English'}</button></div>
+  <div class="card"><div class="sect">${t('الميزانية')}</div>
+    <div class="lbl">${t('الميزانية الشهرية')} (${t('ج.م')})</div><input id="bg" inputmode="decimal" value="${s.budget || ''}" data-change="budget">
+    <div class="lbl">${t('ميزانية الفئات')}</div>${S.cats.map(c => `<div class="set"><span><i class="dot" style="background:${c.color}"></i> ${esc(catName(c.id))}</span><input style="width:130px" inputmode="decimal" value="${s.catBudgets[c.id] || ''}" data-change="catBudget" data-id="${c.id}"></div>`).join('')}
+    <div class="lbl">${t('حساب الفلوس')}</div><div class="seg"><button data-a="moneyMode" data-id="all" class="${s.moneyMode === 'all' ? 'on' : ''}">${t('كل المهام')}</button><button data-a="moneyMode" data-id="done" class="${s.moneyMode === 'done' ? 'on' : ''}">${t('المكتملة فقط')}</button></div></div>
+  <div class="card"><div class="sect">${t('الفئات')}</div>${S.cats.map(c => `<div class="set"><span><i class="dot" style="background:${c.color}"></i> ${esc(catName(c.id))}</span>${c.id.startsWith('c_') ? `<button data-a="delCat" data-id="${c.id}">🗑️</button>` : ''}</div>`).join('')}<button class="btn sec" data-a="addCat">+ ${t('فئة جديدة')}</button></div>
+  <div class="card"><div class="sect">${t('النسخ الاحتياطي')}</div><div class="row"><button class="btn sec" data-a="expJson">💾 ${t('تصدير JSON')}</button><button class="btn sec" data-a="expAllCsv">📊 ${t('تصدير Excel')}</button></div>
+    <div class="row"><button class="btn" data-a="importPick">📥 ${t('استيراد من ملف')}</button><input type="file" id="imf" accept=".json,.csv,.txt,.xlsx,.xls" hidden></div></div>
+  <div class="card"><div class="sect">${t('عن التطبيق')}</div><p style="margin:0"><b>${t('منجز')}</b> - ${t('برنامج منجز بواسطة شريف رمضان')}</p><p style="color:var(--mut);margin:4px 0 10px">${t('رقم النسخة')}: ${VERSION}</p>
+    <div class="row"><button class="btn sec" data-a="privacy">${t('سياسة الخصوصية')}</button><button class="btn sec" data-a="rate">⭐ ${t('قيّم التطبيق')}</button><button class="btn sec" data-a="install" id="inst2" ${deferredInstall ? '' : 'hidden'}>⬇️ ${t('تثبيت التطبيق')}</button></div></div>`;
+}
+function addCatModal() {
+  openModal(t('فئة جديدة'), `<div class="lbl">${t('اسم الفئة')}</div><input id="cn"><div class="lbl">${t('اللون')}</div><input type="color" id="cc" value="#0ea5e9" style="padding:4px"><div class="row"><button class="btn" data-a="saveCat">${t('حفظ')}</button></div>`);
+  setTimeout(() => $('#cn') && $('#cn').focus(), 50);
+}
+let deferredInstall = null;
+addEventListener('beforeinstallprompt', e => { e.preventDefault(); deferredInstall = e; const b = $('#instBtn'); if (b) b.hidden = false; const c = $('#inst2'); if (c) c.hidden = false; });
+addEventListener('appinstalled', () => { deferredInstall = null; const b = $('#instBtn'); if (b) b.hidden = true; });
+
+/* ============ الهيكل والتنقل ============ */
+function shell() {
+  applyLang();
+  $('#root').innerHTML = `<header class="hdr"><div><div class="logo">${t('منجز')}</div><div class="sub">${t('برنامج منجز بواسطة شريف رمضان')}</div></div>
+  <div class="hact"><span id="saved" class="saved">✓ ${t('تم الحفظ')}</span><button class="ib" id="instBtn" data-a="install" title="${t('تثبيت التطبيق')}" ${deferredInstall ? '' : 'hidden'}>⬇️</button><button class="ib" id="themeBtn" data-a="themeToggle"></button><button class="av" data-a="page" data-id="settings" id="avatar"></button></div></header>
+  <main id="page"></main>
+  <nav class="nav">${[['home', '🏠', 'اليوم'], ['ach', '🏆', 'الإنجازات'], ['settings', '⚙️', 'الإعدادات']].map(([k, i, n]) => `<button data-a="page" data-id="${k}" data-nav="${k}"><span>${i}</span>${t(n)}</button>`).join('')}</nav>`;
+  const av = $('#avatar'); av.innerHTML = session.photo ? `<img src="${esc(session.photo)}" referrerpolicy="no-referrer" alt="">` : esc((session.name || t('ضيف')).trim().charAt(0).toUpperCase());
+  applyTheme(); showPage(ui.page);
+}
+function showPage(p) {
+  ui.page = p; document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === p));
+  if (p === 'home') homePage(); else if (p === 'ach') achPage(); else settingsPage();
+  scrollTo(0, 0);
+}
+function refreshAll() { showPage(ui.page); }
+function startApp() {
+  LANG = S.settings.lang || 'ar'; savePrefs(); ensureRecurring(); shell();
+  if (S.settings.pin) showLock();
+  if (FIREBASE_CONFIG && session.mode === 'google') loadFirebase().then(() => { cloudPush(); }).catch(() => {});
+}
+
+/* ============ الأحداث ============ */
+const H = {
+  page:id => showPage(id),
+  themeToggle:() => { const dark = document.documentElement.dataset.theme === 'dark'; S.settings.theme = dark ? 'light' : 'dark'; save(); savePrefs(); applyTheme(); },
+  theme:id => { S.settings.theme = id; save(); savePrefs(); applyTheme(); settingsPage(); },
+  lang:() => { S.settings.lang = LANG === 'en' ? 'ar' : 'en'; LANG = S.settings.lang; save(); savePrefs(); shell(); },
+  google:() => googleSignIn(), guest:() => enterGuest(), signOut:() => signOut(),
+  closeModal:() => closeModal(),
+  migrate:() => migrateGuest(true), noMigrate:() => migrateGuest(false),
+  prevDay:() => setDate(addDays(ui.date, -1)), nextDay:() => setDate(addDays(ui.date, 1)), goToday:() => setDate(today()),
+  pickDate:() => { const d = $('#dp'); try { d.showPicker(); } catch (e) { d.click(); } },
+  catSel:id => { ui.cat = id; refreshHome(); },
+  addCat:() => addCatModal(),
+  saveCat:() => {
+    const n = $('#cn').value.trim(); if (!n) return; const c = {id:'c_' + uid(), name:n, color:$('#cc').value}; S.cats.push(c); save(); closeModal();
+    if (ui.page === 'home') { ui.cat = c.id; refreshHome(); } else refreshAll();
+  },
+  delCat:id => { if (!confirm(LANG === 'en' ? 'Delete category?' : 'حذف الفئة؟ المهام اللي فيها هتفضل بدون فئة.')) return; S.cats = S.cats.filter(c => c.id !== id); if (ui.cat === id) ui.cat = 'all'; save(); refreshAll(); },
+  filter:id => { ui.filter = id; refreshHome(); },
+  toggle:id => toggleTask(id), subToggle:(id, el) => toggleSub(id, +el.dataset.i),
+  subDel:(id, el) => { const x = T(id); x.subs.splice(+el.dataset.i, 1); syncDone(x); save(); refreshHome(); },
+  openSub:id => { ui.openSub = id; renderList(); }, addSub:id => addSub(id),
+  tmr:id => moveTask(id, addDays(T(id).date, 1)), toToday:id => moveTask(id, today()),
+  del:id => delTask(id), edit:id => editModal(id), saveEdit:id => saveEdit(id),
+  focusFor:id => { fo.taskId = id; focusModal(); }, focusOpen:() => focusModal(),
+  focusGo:() => { fo.taskId = $('#ftask') ? $('#ftask').value : fo.taskId; fo.running ? focusPause() : focusStart(); },
+  focusReset:() => focusReset(),
+  prio:id => { ui.prio = id; document.querySelectorAll('#prio button').forEach(b => b.classList.toggle('on', b.dataset.id === id)); },
+  ntype:id => { ui.ntype = id; document.querySelectorAll('#ntype button').forEach(b => { const on = b.dataset.id === id; b.classList.toggle('on', on); }); },
+  addTask:() => addTask(),
+  chart:() => { ui.chart = !ui.chart; renderMoney(); },
+  calPrev:() => { ui.calMonth = addMonths(ui.calMonth.slice(0, 8) + '01', -1); achPage(); }, calNext:() => { ui.calMonth = addMonths(ui.calMonth.slice(0, 8) + '01', 1); achPage(); },
+  calDay:id => { ui.filter = 'day'; ui.cat = 'all'; ui.date = id; showPage('home'); },
+  expPdf:() => expPdf(), expCsv:() => expCsv(false), expAllCsv:() => expCsv(true),
+  expJson:() => download('munjez-backup-' + today() + '.json', JSON.stringify({app:'munjez', version:VERSION, exported:new Date().toISOString(), ...S}, null, 1), 'application/json'),
+  importPick:() => $('#imf').click(),
+  doImport:() => { const r = mergeImport(pendingImport); pendingImport = null; closeModal(); refreshAll(); toast(`${t('تم استيراد')} ${r.added}`); },
+  moneyMode:id => { S.settings.moneyMode = id; save(); settingsPage(); },
+  pin:() => pinModal(),
+  pinOn:async () => { const a = $('#pin1').value, b = $('#pin2').value; if (!/^\d{4}$/.test(a)) return toast('اكتب 4 أرقام'); if (a !== b) return toast('الرقمين مش متطابقين'); S.settings.pin = await hashPin(a); save(); closeModal(); settingsPage(); toast('تم تفعيل القفل'); },
+  pinOff:async () => { if (await hashPin($('#pin1').value) !== S.settings.pin) return toast('رقم سري خطأ'); S.settings.pin = null; save(); closeModal(); settingsPage(); toast('تم إلغاء القفل'); },
+  privacy:() => openModal(t('سياسة الخصوصية'), `<p>${t('سياسة الخصوصية: بياناتك تتحفظ على جهازك فقط (وعلى حسابك السحابي لو سجلت بجوجل). لا تُباع ولا يشاهدها أحد غيرك، وتُحذف بحذف الحساب. لا نخزّن كلمة سر جوجل نهائياً. لا توجد إعلانات.')}</p>`),
+  rate:() => openModal('⭐ ' + t('قيّم التطبيق'), `<div style="text-align:center;font-size:40px">${[1, 2, 3, 4, 5].map(n => `<button data-a="star" data-id="${n}" style="font-size:40px">⭐</button>`).join('')}</div>`),
+  star:id => { localStorage.setItem('munjez_rating', id); closeModal(); toast('شكراً لتقييمك!'); },
+  install:async () => { if (!deferredInstall) { toast(LANG === 'en' ? 'Use the browser menu ⋮ → Install app' : 'من قائمة المتصفح ⋮ ← تثبيت التطبيق'); return; } deferredInstall.prompt(); await deferredInstall.userChoice; deferredInstall = null; const b = $('#instBtn'); if (b) b.hidden = true; }
+};
+document.addEventListener('click', e => {
+  const el = e.target.closest('[data-a]'); if (!el) return;
+  const f = H[el.dataset.a]; if (f) f(el.dataset.id, el, e);
 });
+document.addEventListener('keydown', e => {
+  if (e.key !== 'Enter') return; const el = e.target.closest('[data-enter]'); if (!el) return;
+  e.preventDefault(); const f = H[el.dataset.enter]; if (f) f(el.dataset.id, el, e);
+});
+document.addEventListener('input', e => {
+  if (e.target.id === 'sq') { ui.q = e.target.value; renderList(); }
+});
+document.addEventListener('change', e => {
+  const el = e.target;
+  if (el.id === 'dp') { if (el.value) setDate(el.value); }
+  else if (el.id === 'imf') {
+    const file = el.files[0]; el.value = ''; if (!file) return;
+    readImport(file).then(p => p ? importPreview(p) : toast('ملف غير مدعوم أو فاضي'));
+  }
+  else if (el.id === 'ac') { ui.aCat = el.value; renderAch(); }
+  else if (el.id === 'af') { ui.aFrom = el.value || ui.aFrom; renderAch(); }
+  else if (el.id === 'at') { ui.aTo = el.value || ui.aTo; renderAch(); }
+  else if (el.dataset.change === 'budget') { S.settings.budget = Math.abs(parseFloat(latin(el.value))) || 0; save(); }
+  else if (el.dataset.change === 'catBudget') { const v = Math.abs(parseFloat(latin(el.value))) || 0; if (v) S.settings.catBudgets[el.dataset.id] = v; else delete S.settings.catBudgets[el.dataset.id]; save(); }
+});
+document.addEventListener('visibilitychange', () => { if (!document.hidden && S) { ensureRecurring(); focusUI(); if (ui.page === 'home') refreshHome(); } });
+
+/* ============ التشغيل ============ */
+(function init() {
+  try { const ss = JSON.parse(localStorage.getItem('munjez_session') || 'null'); if (ss && ss.mode) session = ss; } catch (e) {}
+  if (FIREBASE_CONFIG && localStorage.getItem('munjez_redir')) {
+    localStorage.removeItem('munjez_redir');
+    loadFirebase().then(() => fb.auth.getRedirectResult()).then(r => { if (r && r.user) onGoogleUser(r.user); }).catch(() => {});
+  }
+  if (!session) { showLogin(); } else { loadData(); startApp(); }
+  if ('serviceWorker' in navigator && /^https?:$/.test(location.protocol)) navigator.serviceWorker.register('sw.js').catch(() => {});
+})();
 </script>
 </body>
 </html>
