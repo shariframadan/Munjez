@@ -139,7 +139,7 @@ const EN = {
 'أهلاً بيك في منجز':'Welcome to Munjez','إدارة مهامك وفلوسك وإنجازاتك':'Manage your tasks, money and achievements',
 'الدخول بحساب Google':'Sign in with Google','المتابعة كضيف بدون تسجيل':'Continue as guest','بياناتك خاصة، ومفيش حد بيشوفها غيرك':'Your data is private',
 'اليوم':'Today','الكل':'All','المعلقة':'Pending','المكتملة':'Completed','المستقبلية':'Upcoming','الإنجازات':'Achievements','الإعدادات':'Settings',
-'شخصي':'Personal','شغل':'Work','عائلة':'Family','صحة':'Health','مالي':'Finance','دراسة':'Study','بدون فئة':'No category',
+'شخصي':'Personal','عائلة':'Family','صحة':'Health','مالي':'Finance','دراسة':'Study','بدون فئة':'No category',
 'أنجزت':'Done','من':'of','مهام':'tasks','سلسلة الإنجاز':'Streak','أيام':'days',
 'اكتب المهمة... مثال: اجتماع الشغل':'Write a task... e.g. work meeting','المبلغ بالجنيه (اختياري)':'Amount in EGP (optional)',
 'بدون فلوس':'No money','دخل +':'Income +','مصروف -':'Expense -','مهام فرعية - اكتبها مفصولة بفاصلة':'Subtasks - separated by commas',
@@ -188,7 +188,7 @@ const hm = sec => { const m = Math.round(sec / 60); return Math.floor(m / 60) + 
 
 /* ============ الحالة ============ */
 const DEFAULT_CATS = [
-  {id:'personal', name:'شخصي', color:'#0ea5e9'}, {id:'work', name:'شغل', color:'#0f766e'},
+  {id:'personal', name:'شخصي', color:'#0ea5e9'}, 
   {id:'family', name:'عائلة', color:'#ec4899'}, {id:'health', name:'صحة', color:'#22c55e'},
   {id:'money', name:'مالي', color:'#f59e0b'}, {id:'study', name:'دراسة', color:'#8b5cf6'}];
 const blank = () => ({v:1, tasks:[], cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all'}, focusLog:{}, updated:0});
