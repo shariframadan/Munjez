@@ -110,6 +110,34 @@ small.mut{color:var(--mut)}
 .txr{display:flex;align-items:center;gap:8px;padding:8px 0;border-bottom:1px solid var(--bd)}.txr:last-child{border:0}
 .txm{flex:1;min-width:0}.txr b{white-space:nowrap}
 .r2>*{flex:1 1 0;min-width:0}
+.mzsum{display:flex;gap:14px;align-items:center;margin-bottom:12px}
+.mzring{position:relative;width:112px;height:112px;flex:none}.mzring svg{width:100%;height:100%;transform:rotate(-90deg)}
+.mzpct{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:800}.mzpct small{font-size:14px;margin-inline-start:2px}
+.mzinfo{flex:1;min-width:0}.mzpts{font-size:15px;color:var(--mut)}.mzpts b{font-size:28px;color:var(--pri)}.mztier{font-weight:800;margin-top:2px}.mzq{font-size:13px;color:var(--mut)}
+.mzh{display:flex;align-items:center;gap:10px;cursor:pointer}
+.mzic{width:42px;height:42px;border-radius:12px;background:var(--soft);display:flex;align-items:center;justify-content:center;font-size:22px;flex:none}
+.mzt2{flex:1;min-width:0}.mzt2 b{display:block;font-size:17px}.mzt2 small{color:var(--mut);font-size:12.5px;display:block;line-height:1.35}
+.mzpt{text-align:center;white-space:nowrap;font-size:12.5px;color:var(--mut)}.mzpt b{font-size:19px;color:var(--tx)}
+.mzgear,.mzedit{width:34px;height:34px;border-radius:10px;background:var(--bg);flex:none;font-size:15px}
+.mzban{background:var(--soft);color:var(--pri);border-radius:10px;padding:8px 10px;margin-top:10px;font-weight:700;text-align:center;font-size:14px}
+.mzhint{font-size:13px;color:var(--mut);margin:6px 2px 0}
+.mzit{border:1px solid var(--bd);border-radius:12px;padding:8px 10px;margin-top:8px;background:var(--card)}
+.mzit.mzoff{opacity:.6;border-style:dashed}
+.mzrow{display:flex;align-items:center;gap:10px}
+.mzbadge{background:var(--soft);color:var(--pri);border-radius:99px;padding:2px 9px;font-size:13px;font-weight:700;white-space:nowrap}
+.mzsub{font-size:12.5px;color:var(--mut)}
+.mzsk{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-top:6px;font-size:13.5px;color:var(--mut)}
+.mzsk .seg{min-height:34px;width:112px;flex:none}.mzsk .seg button{padding:2px;font-size:13px}
+.mzopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:6px;margin-top:6px}
+.mzopt{display:flex;align-items:center;gap:8px;border:1.5px solid var(--bd);border-radius:10px;padding:8px;font-weight:600;font-size:14px;text-align:start;background:var(--card)}
+.mzopt .rd{width:18px;height:18px;border-radius:50%;border:2px solid var(--pri);flex:none}.mzopt.on{background:var(--soft);border-color:var(--pri)}.mzopt.on .rd{background:var(--pri);box-shadow:inset 0 0 0 3px var(--card)}.mzopt b{margin-inline-start:auto;color:var(--mut)}
+.mzadd{width:100%;margin-top:10px;border:1.5px dashed var(--bd);border-radius:12px;padding:10px;color:var(--pri);font-weight:700}
+.chipb{padding:7px 12px;border-radius:99px;border:1.5px solid var(--bd);font-weight:600;font-size:14px;background:var(--card)}.chipb.on{background:var(--pri);color:#fff;border-color:var(--pri)}
+.mzdays{display:flex;flex-wrap:wrap;gap:6px}
+.mzcal{display:grid;grid-template-columns:repeat(7,1fr);gap:5px;text-align:center}
+.mzcell{aspect-ratio:1;border-radius:10px;background:var(--bg);display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:13px;font-weight:700;line-height:1.15;color:var(--tx)}.mzcell small{font-size:10.5px;font-weight:600}
+.mzbarrow{margin:8px 0}
+.card[id^=mzs_]{scroll-margin-top:76px}
 .ag{display:flex;align-items:center;gap:8px;background:var(--card);border:1px solid var(--bd);border-radius:12px;padding:8px 10px;margin-bottom:6px;box-shadow:var(--shadow)}
 .atm{font-size:12.5px;font-weight:700;color:var(--pri);min-width:62px;white-space:nowrap}.atm.late{color:var(--out)}
 .ag .eb{width:34px;height:34px;border-radius:10px;background:var(--bg);flex:none}
@@ -125,7 +153,7 @@ small.mut{color:var(--mut)}
 <script>
 'use strict';
 /* ============ إعدادات عامة ============ */
-const VERSION = '2.2.0';
+const VERSION = '2.3.0';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
@@ -206,10 +234,16 @@ const DEFAULT_CATS = [
 const defaultTemplates = () => [
   {id:'t_order', name:'طلبية', subs:['الطلب', 'الاستلام', 'التسجيل', 'السداد']},
   {id:'t_order_inv', name:'طلبية بفاتورة إلكترونية', subs:['الطلب', 'الاستلام', 'الفاتورة الإلكترونية', 'التسجيل', 'السداد']}];
-const blank = () => ({v:1, tasks:[], tx:[], templates:defaultTemplates(), cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all'}, focusLog:{}, updated:0});
+const mzChk = (id, name, pts = 2) => ({id, name, type:'check', pts, days:[], modes:[], skip:false, tag:'', rt:''});
+const defaultMizan = () => ({sections:[
+  {id:'s_fard', name:'صلوات الفرائض', icon:'🕌', sub:'الأساس • الفريضة فقط هي الإلزامية يوميًا', items:['الفجر', 'الظهر', 'العصر', 'المغرب', 'العشاء'].map((n, i) => ({id:'i_fard' + i, name:n, type:'choice', opts:[{n:'جماعة + تكبيرة الإحرام', p:3}, {n:'جماعة', p:2}, {n:'منفردًا', p:1}, {n:'فاتتني / قضاء', p:0}], days:[], modes:[], skip:false, tag:'', rt:''}))},
+  {id:'s_sunan', name:'السنن', icon:'🌿', sub:'الضحى، السنن الرواتب بالتفصيل، وقيام الليل والوتر', items:['صلاة الضحى', 'راتبة الفجر (2 قبل الفجر)', 'راتبة الظهر (4 قبل + 2 بعد)', 'راتبة المغرب (2 بعد)', 'راتبة العشاء (2 بعد)', 'قيام الليل', 'الوتر'].map((n, i) => mzChk('i_sunan' + i, n))},
+  {id:'s_adhkar', name:'الأذكار', icon:'✨', sub:'حضور القلب وطمأنينة اليوم', items:['أذكار الصباح', 'أذكار المساء', 'أذكار النوم', 'أذكار الصلوات (بعد الصلاة)', 'ورد الذكر', 'ورد الصلاة على النبي ﷺ'].map((n, i) => mzChk('i_adhkar' + i, n))}
+], days:{}, fired:{}, snz:{}});
+const blank = () => ({v:1, tasks:[], tx:[], mz:defaultMizan(), templates:defaultTemplates(), cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all'}, focusLog:{}, updated:0});
 let S = null;
 let session = null;
-const ui = {page:'home', date:today(), cat:'all', filter:'day', q:'', prio:'m', ntype:'none', chart:false, openSub:null, calMonth:today(), agenda:false, aCat:'all', aFrom:'', aTo:'', mFrom:'', mTo:'', mType:'all', mCat:'all', mQ:'', xType:'out'};
+const ui = {page:'home', date:today(), cat:'all', filter:'day', q:'', prio:'m', ntype:'none', chart:false, openSub:null, calMonth:today(), agenda:false, mzDate:'', mzTab:'day', mzRange:'week', mzFold:{}, mzType:'check', aCat:'all', aFrom:'', aTo:'', mFrom:'', mTo:'', mType:'all', mCat:'all', mQ:'', xType:'out'};
 const fb = {ready:false};
 
 const dataKey = () => session && session.mode === 'google' ? 'munjez_u_' + session.uid : 'munjez_guest';
@@ -222,6 +256,7 @@ function normalizeData(d) {
   r.focusLog = d.focusLog || {};
   r.tx = Array.isArray(d.tx) ? d.tx : [];
   r.templates = Array.isArray(r.templates) ? r.templates : defaultTemplates();
+  r.mz = normMz(r.mz);
   return migrateCats(r);
 }
 // دمج فئة "شغل" القديمة في "عمل"
@@ -898,7 +933,7 @@ function parseCSV(text) {
   return rows.slice(1).map(r => Object.fromEntries(head.map((h, i) => [h, r[i]])));
 }
 async function readImport(file) {
-  const name = file.name.toLowerCase(); let tasks = [], cats = null, txs = [];
+  const name = file.name.toLowerCase(); let tasks = [], cats = null, txs = [], mzIn = null;
   if (/\.(xlsx|xls)$/.test(name)) {
     try {
       if (!window.XLSX) await loadScript('https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js');
@@ -910,12 +945,12 @@ async function readImport(file) {
     if (/\.json$/.test(name) || /^\s*[\[{]/.test(text)) {
       let j; try { j = JSON.parse(text); } catch (e) { return null; }
       const arr = Array.isArray(j) ? j : (j.tasks || j.data || j.items || []);
-      tasks = arr.map(normTask); if (j.cats && Array.isArray(j.cats)) cats = j.cats; if (Array.isArray(j.tx)) txs = j.tx; if (Array.isArray(j.templates)) importTpl = j.templates;
+      tasks = arr.map(normTask); if (j.cats && Array.isArray(j.cats)) cats = j.cats; if (Array.isArray(j.tx)) txs = j.tx; if (j.mz && typeof j.mz === 'object') mzIn = j.mz; if (Array.isArray(j.templates)) importTpl = j.templates;
       if (j.focusLog) importFocus = j.focusLog;
     } else if (/\.csv$/.test(name) || /[,;\t].*\n/.test(text.slice(0, 400))) tasks = parseCSV(text).map(normTask);
     else tasks = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => normTask({title:l}));
   }
-  tasks = tasks.filter(Boolean); return (tasks.length || txs.length) ? {tasks, cats, tx:txs} : null;
+  tasks = tasks.filter(Boolean); return (tasks.length || txs.length || mzIn) ? {tasks, cats, tx:txs, mz:mzIn} : null;
 }
 let importFocus = null, pendingImport = null, importTpl = null;
 const dupKey = x => (x.title + '|' + x.date).toLowerCase().trim();
@@ -943,12 +978,13 @@ function mergeImport(src) {
   if (!S.templates) S.templates = [];
   [...(src.templates || []), ...(importTpl || [])].forEach(q => { if (q && q.name && Array.isArray(q.subs) && !S.templates.some(y => y.name === q.name)) S.templates.push({id:'t_' + uid(), name:String(q.name), subs:q.subs.map(String)}); });
   importTpl = null;
+  added += mzMerge(src.mz);
   migrateCats(S); save(); return {added, skipped};
 }
 function importPreview(p) {
   pendingImport = p; const keys = new Set(S.tasks.map(dupKey)), dups = p.tasks.filter(x => keys.has(dupKey(x))).length;
   const money = p.tasks.filter(x => x.amount > 0).length + (p.tx || []).length;
-  openModal(t('استيراد'), `<p>${t('وجدنا')} <b>${p.tasks.length}</b> ${t('مهام')} ${t('و')} <b>${money}</b> ${t('معاملة مالية')}${dups ? ` — ${dups} ${t('مكرر هيتخطى')}` : ''}</p><div class="lbl">${t('أول 5 مهام')}</div>${p.tasks.slice(0, 5).map(x => `<div class="hl"><span>${esc(x.title)}</span><small class="mut">${x.date}</small></div>`).join('')}<div class="row"><button class="btn" data-a="doImport">${t('استيراد الكل')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+  openModal(t('استيراد'), `<p>${t('وجدنا')} <b>${p.tasks.length}</b> ${t('مهام')} ${t('و')} <b>${money}</b> ${t('معاملة مالية')}${p.mz && p.mz.sections ? ' — ' + p.mz.sections.length + ' ' + t('قسم في ميزاني') : ''}${dups ? ` — ${dups} ${t('مكرر هيتخطى')}` : ''}</p><div class="lbl">${t('أول 5 مهام')}</div>${p.tasks.slice(0, 5).map(x => `<div class="hl"><span>${esc(x.title)}</span><small class="mut">${x.date}</small></div>`).join('')}<div class="row"><button class="btn" data-a="doImport">${t('استيراد الكل')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
 }
 
 /* ============ الأجندة ============ */
@@ -1019,6 +1055,220 @@ function tplFromForm() {
   tplModal(null, {name:$('#nt').value.trim(), subs});
 }
 
+/* ============ ميزاني ============ */
+const MZ_DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
+const MZ_TIERS = [[0, 'بداية موفقة', 'أول الغيث قطرة، والنية بداية النور'], [25, 'خطوات طيبة', 'أحبّ الأعمال أدومها وإن قلّ'], [50, 'عزيمة صادقة', 'واصل، فأنت في منتصف الطريق'], [75, 'ما شاء الله، قرّبت', 'لمسة أخيرة ويكتمل يومك'], [100, 'يوم مكتمل', 'تم بحمد الله — حافظ على هذا الصدق']];
+const normMz = m => {
+  const b = defaultMizan();
+  if (!m || typeof m !== 'object') return b;
+  return {sections:Array.isArray(m.sections) ? m.sections : b.sections, days:(m.days && typeof m.days === 'object') ? m.days : {}, fired:m.fired || {}, snz:m.snz || {}};
+};
+function mzGet(date, create) {
+  let r = S.mz.days[date];
+  if (!r && create) r = S.mz.days[date] = {};
+  if (r) { r.v = r.v || {}; r.modes = r.modes || {}; r.off = r.off || {}; r.skip = r.skip || {}; r.nums = r.nums || {}; }
+  return r || {v:{}, modes:{}, off:{}, skip:{}, nums:{}};
+}
+const mzMode = (sec, rec) => sec.modes && sec.modes.length ? (rec.modes[sec.id] || sec.modes[0].id) : null;
+function mzCounted(sec, it, date, rec) {
+  if (sec.optional && rec.off[sec.id]) return false;
+  const mode = mzMode(sec, rec);
+  if (mode === 'off') return false;
+  if (it.days && it.days.length && !it.days.includes(pd(date).getDay())) return false;
+  if (it.modes && it.modes.length && mode && !it.modes.includes(mode)) return false;
+  if (it.skip && rec.skip[it.id]) return false;
+  return true;
+}
+const mzMax = it => it.type === 'choice' ? Math.max(0, ...(it.opts || []).map(o => +o.p || 0)) : (+it.pts || 0);
+const mzEarn = (it, rec) => { const v = rec.v[it.id]; if (it.type === 'choice') { const o = (it.opts || [])[v]; return o ? (+o.p || 0) : 0; } return v === 1 ? (+it.pts || 0) : 0; };
+function mzStats(date) {
+  const rec = mzGet(date), secs = []; let earned = 0, avail = 0;
+  S.mz.sections.forEach(sec => {
+    let e = 0, a = 0;
+    const items = sec.items.map(it => { const c = mzCounted(sec, it, date, rec), mx = c ? mzMax(it) : 0, ea = c ? mzEarn(it, rec) : 0; e += ea; a += mx; return {it, c, mx, ea}; });
+    earned += e; avail += a; secs.push({sec, items, e, a});
+  });
+  return {earned, avail, pct:avail ? Math.round(earned / avail * 100) : 0, secs, rec};
+}
+function mzFind(id) { for (const sec of S.mz.sections) { const it = sec.items.find(x => x.id === id); if (it) return {sec, it}; } return null; }
+function mzMerge(src) {
+  if (!src || typeof src !== 'object') return 0;
+  if (!S.mz) S.mz = defaultMizan();
+  let n = 0;
+  (src.sections || []).forEach(sec => { if (sec && sec.id && sec.name && Array.isArray(sec.items) && !S.mz.sections.some(x => x.id === sec.id)) { S.mz.sections.push(sec); n++; } });
+  Object.entries(src.days || {}).forEach(([d, r]) => { if (r && typeof r === 'object' && !S.mz.days[d]) S.mz.days[d] = r; });
+  return n;
+}
+
+/* ---- الصفحة ---- */
+function mizanPage() {
+  if (!ui.mzDate) ui.mzDate = addDays(today(), -1);
+  $('#page').innerHTML = `<div class="card datebar" id="mzbar" style="position:relative"></div><div class="seg" id="mztabs" style="margin-bottom:12px;background:var(--card)"></div><div id="mzbody"></div>`;
+  renderMizan();
+}
+function renderMizan() {
+  if (!$('#mzbody')) return;
+  const d = ui.mzDate, en = LANG === 'en', an = ui.mzTab === 'an';
+  $('#mzbar').innerHTML = `<button class="ib" data-a="mzPrev">${en ? '←' : '→'}</button><div class="dtxt">${an ? (ui.mzRange === 'week' ? fmtShort(addDays(d, -6)) + ' – ' + fmtShort(d) : fmtMonth(d)) : fmtDate(d)}</div><button class="ib" data-a="mzNext">${en ? '→' : '←'}</button>
+    <button class="chip ${d === addDays(today(), -1) ? 'run' : ''}" data-a="mzYest">${t('أمس')}</button><button class="chip ${d === today() ? 'run' : ''}" data-a="mzToday">${t('اليوم')}</button><button class="ib" data-a="mzPick">📅</button><input type="date" id="mzdp" value="${d}" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">`;
+  $('#mztabs').innerHTML = [['day', '✅ ' + t('تقييم اليوم')], ['an', '📈 ' + t('التحليل')]].map(([k, n]) => `<button data-a="mzTab" data-id="${k}" class="${ui.mzTab === k ? 'on' : ''}">${n}</button>`).join('');
+  $('#mzbody').innerHTML = an ? mzAnalysisHTML() : mzDayHTML();
+}
+function mzDayHTML() {
+  const st = mzStats(ui.mzDate), tier = MZ_TIERS.filter(x => st.pct >= x[0] && (x[0] < 100 || st.pct === 100)).pop(), C = 2 * Math.PI * 50;
+  let h = `<div class="card"><div class="mzsum"><div class="mzring"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="50" fill="none" stroke="var(--bd)" stroke-width="10"/><circle cx="60" cy="60" r="50" fill="none" stroke="var(--pri)" stroke-width="10" stroke-linecap="round" stroke-dasharray="${(C * st.pct / 100).toFixed(1)} ${C.toFixed(1)}"/></svg><div class="mzpct">${st.pct}<small>%</small></div></div>
+    <div class="mzinfo"><div class="mzpts"><b>${st.earned}</b> / ${st.avail} ${t('نقطة')}</div>${st.avail ? `<div class="mztier">${t(tier[1])}</div><div class="mzq">${t(tier[2])}</div>` : `<div class="mzq">${t('مفيش بنود محسوبة في اليوم ده')}</div>`}</div></div>
+    <div class="row"><button class="btn sec" data-a="mzCopy">📋 ${t('نسخ نتيجتي')}</button><button class="btn sec" data-a="mzReset">↻ ${t('ابدأ من جديد')}</button></div></div>`;
+  h += `<div class="cats">${st.secs.map(x => `<button class="cat" data-a="mzJump" data-id="${x.sec.id}">${esc(x.sec.name)}</button>`).join('')}</div>`;
+  h += st.secs.map(x => mzSecHTML(x, st)).join('');
+  h += `<button class="btn sec" data-a="mzSecNew" style="margin-bottom:12px">+ ${t('قسم جديد')}</button>
+    <div class="card" style="text-align:center;color:var(--mut)"><b style="color:var(--pri)">${t('الفريضة فقط هي الإلزامية يوميًا، والباقي على قدر طاقتك.')}</b><br><small>${t('اليوم لا يحتاج الكمال؛ يحتاج صدقًا واحدًا تلو الآخر.')}</small></div>`;
+  return h;
+}
+function mzSecHTML(x, st) {
+  const {sec, items, e, a} = x, rec = st.rec, mode = mzMode(sec, rec), mObj = sec.modes && sec.modes.find(m => m.id === mode);
+  let h = `<div class="card" id="mzs_${sec.id}"><div class="mzh" data-a="mzFold" data-id="${sec.id}"><span class="mzic">${esc(sec.icon || '⭐')}</span><div class="mzt2"><b>${esc(sec.name)}</b><small>${esc(sec.sub || '')}</small></div><div class="mzpt"><b>${e}</b> / ${a}<br>${t('نقطة')}</div><button class="mzgear" data-a="mzSecEdit" data-id="${sec.id}" aria-label="edit">⚙️</button></div><div class="bar" style="margin-top:10px"><i style="width:${a ? e / a * 100 : 0}%"></i></div>`;
+  if (ui.mzFold[sec.id]) return h + '</div>';
+  if (sec.optional) h += `<div class="mzrow" style="margin-top:10px"><button class="cb sm ${rec.off[sec.id] ? '' : 'on'}" data-a="mzOff" data-id="${sec.id}">✓</button><span style="font-weight:600">${t('مفعّل اليوم')}</span><span class="mzbadge" style="margin-inline-start:auto">${t('قسم إضافي • ليس يوميًا')}</span></div>`;
+  if (sec.modes && sec.modes.length) h += `<div class="lbl">${esc(sec.modeLabel || t('نوع اليوم'))}</div><div class="seg">${sec.modes.map(m => `<button data-a="mzMode" data-id="${sec.id}" data-m="${m.id}" class="${m.id === mode ? 'on' : ''}">${esc(m.name)}</button>`).join('')}</div>${mObj && mObj.hint ? `<p class="mzhint">${esc(mObj.hint)}</p>` : ''}`;
+  if (sec.num) h += `<div class="lbl">${esc(sec.numLabel || t('رقم الدرس'))}</div><input inputmode="numeric" data-change="mzNum" data-id="${sec.id}" value="${esc(rec.nums[sec.id] || '')}" placeholder="${esc(sec.numHint || '')}">`;
+  if (sec.banner) h += `<div class="mzban">${esc(sec.banner)}</div>`;
+  h += items.map(o => mzItemHTML(o, rec)).join('');
+  return h + `<button class="mzadd" data-a="mzItemNew" data-id="${sec.id}">+ ${t('أضف إنجازًا جديدًا')}</button></div>`;
+}
+function mzItemHTML(o, rec) {
+  const it = o.it, notes = [];
+  if (it.days && it.days.length) notes.push(it.days.map(d => MZ_DAYS[d]).join(' و') + ' ' + t('فقط') + ' • ' + (o.c ? t('محسوب اليوم') : t('غير محسوب اليوم')));
+  else if (!o.c) notes.push(t('غير محسوب اليوم'));
+  if (it.tag) notes.push(it.tag);
+  if (it.rt) notes.push('🔔 ' + fmtTime(it.rt));
+  const sub = notes.length ? `<div class="mzsub">${notes.map(esc).join(' • ')}</div>` : '';
+  const edit = `<button class="mzedit" data-a="mzItemEdit" data-id="${it.id}">✏️</button>`;
+  const sk = it.skip ? `<div class="mzsk"><span>${t('يُحسب اليوم؟')}</span><div class="seg"><button data-a="mzSkip" data-id="${it.id}" data-v="yes" class="${rec.skip[it.id] ? '' : 'on'}">${t('نعم')}</button><button data-a="mzSkip" data-id="${it.id}" data-v="no" class="${rec.skip[it.id] ? 'on' : ''}">${t('لا')}</button></div></div>` : '';
+  if (it.type === 'choice') {
+    const sel = rec.v[it.id] != null ? rec.v[it.id] : (it.opts || []).findIndex(op => +op.p === 0);
+    return `<div class="mzit ${o.c ? '' : 'mzoff'}"><div class="mzrow"><div class="tmain"><b>${esc(it.name)}</b>${sub}</div>${edit}</div><div class="mzopts">${(it.opts || []).map((op, i) => `<button class="mzopt ${sel === i ? 'on' : ''}" data-a="mzOpt" data-id="${it.id}" data-i="${i}"><i class="rd"></i><span>${esc(op.n)}</span><b>${+op.p}</b></button>`).join('')}</div>${sk}</div>`;
+  }
+  return `<div class="mzit ${o.c ? '' : 'mzoff'}"><div class="mzrow"><button class="cb ${rec.v[it.id] === 1 ? 'on' : ''}" data-a="mzCheck" data-id="${it.id}">✓</button><div class="tmain"><div class="ttl">${esc(it.name)}</div>${sub}</div><span class="mzbadge">+${+it.pts || 0}</span>${edit}</div>${sk}</div>`;
+}
+async function mzCopy() {
+  const st = mzStats(ui.mzDate);
+  const txt = [`مسابقة اليوم | تقييم ${fmtDate(ui.mzDate)}`, `🏆 ${st.earned} / ${st.avail} نقطة — ${st.pct}%`, ...st.secs.filter(x => x.a > 0).map(x => `${x.sec.icon || '•'} ${x.sec.name}: ${x.e}/${x.a}`), '', t('برنامج منجز بواسطة شريف رمضان')].join('\n');
+  try { await navigator.clipboard.writeText(txt); toast('تم نسخ النتيجة'); }
+  catch (e) { const ta = document.createElement('textarea'); ta.value = txt; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('تم نسخ النتيجة'); } catch (e2) { toast('تعذّر النسخ'); } ta.remove(); }
+}
+
+/* ---- التحليل ---- */
+function mzDates() {
+  if (ui.mzRange === 'week') return Array.from({length:7}, (_, i) => addDays(ui.mzDate, i - 6));
+  const [a, b] = mb(ui.mzDate), out = []; for (let d = a; d <= b; d = addDays(d, 1)) out.push(d); return out;
+}
+function mzStreak() {
+  const ok = x => S.mz.days[x] && mzStats(x).pct >= 50; let d = today(), n = 0;
+  if (!ok(d)) d = addDays(d, -1);
+  while (ok(d) && n < 800) { n++; d = addDays(d, -1); }
+  return n;
+}
+const mzHeat = p => `background:color-mix(in srgb,#0f766e ${Math.max(14, p)}%,var(--bg));${p >= 55 ? 'color:#fff' : ''}`;
+function mzAnalysisHTML() {
+  const dates = mzDates(), ev = dates.filter(d => S.mz.days[d]), per = ev.map(d => ({d, st:mzStats(d)}));
+  let te = 0, ta = 0; const itemAgg = {}, secAgg = {};
+  per.forEach(({st}) => { te += st.earned; ta += st.avail; st.secs.forEach(sx => {
+    if (sx.a > 0) { const g = secAgg[sx.sec.id] = secAgg[sx.sec.id] || {name:sx.sec.name, icon:sx.sec.icon, e:0, a:0}; g.e += sx.e; g.a += sx.a; }
+    sx.items.forEach(o => { if (o.c && o.mx > 0) { const g = itemAgg[o.it.id] = itemAgg[o.it.id] || {name:o.it.name, sec:sx.sec.name, e:0, m:0, n:0}; g.e += o.ea; g.m += o.mx; g.n++; } });
+  }); });
+  const avg = ta ? Math.round(te / ta * 100) : 0, best = per.reduce((b, x) => (!b || x.st.pct > b.st.pct) ? x : b, null), pctOf = {}; per.forEach(x => pctOf[x.d] = x.st.pct);
+  let h = `<div class="mon"><div>${t('متوسط النسبة')}<b>${avg}%</b></div><div>${t('أيام متقيّمة')}<b>${ev.length} / ${dates.length}</b></div><div>${t('سلسلة الالتزام')}<b>🔥 ${mzStreak()}</b></div></div>
+  <div class="seg" style="margin:10px 0">${[['week', 'آخر ٧ أيام'], ['month', 'الشهر']].map(([k, n]) => `<button data-a="mzRange" data-id="${k}" class="${ui.mzRange === k ? 'on' : ''}">${t(n)}</button>`).join('')}</div>`;
+  let grid;
+  if (ui.mzRange === 'week') grid = `<div class="mzcal">${dates.map(d => `<button class="mzcell" data-a="mzGoDay" data-id="${d}" style="${pctOf[d] != null ? mzHeat(pctOf[d]) : ''}"><span>${new Intl.DateTimeFormat(loc(), {weekday:'short'}).format(pd(d))}</span><small>${pctOf[d] != null ? pctOf[d] + '%' : '—'}</small></button>`).join('')}</div>`;
+  else {
+    const [y, mo] = ui.mzDate.slice(0, 7).split('-').map(Number), first = (new Date(y, mo - 1, 1).getDay() + 1) % 7;
+    const wk = Array.from({length:7}, (_, i) => new Intl.DateTimeFormat(loc(), {weekday:'narrow'}).format(new Date(2024, 0, 6 + i)));
+    grid = `<div class="mzcal">${wk.map(w => `<div class="h" style="font-size:12px;color:var(--mut);font-weight:700">${w}</div>`).join('')}${'<div></div>'.repeat(first)}${dates.map(d => `<button class="mzcell" data-a="mzGoDay" data-id="${d}" style="${pctOf[d] != null ? mzHeat(pctOf[d]) : ''}"><span>${+d.slice(8)}</span>${pctOf[d] != null ? `<small>${pctOf[d]}%</small>` : ''}</button>`).join('')}</div>`;
+  }
+  h += `<div class="card">${grid}<p class="mzhint">${t('الأيام الرمادية لسه ما اتقيّمتش.')}</p></div>`;
+  if (!ev.length) return h + `<div class="empty">📈<br>${t('مفيش أيام متقيّمة في الفترة دي')}</div>`;
+  const bar = (name, sub, r) => `<div class="mzbarrow"><div class="prow"><span>${esc(name)} ${sub ? `<small class="mut">${esc(sub)}</small>` : ''}</span><span>${Math.round(r * 100)}%</span></div><div class="bar" style="height:6px"><i style="width:${r * 100}%"></i></div></div>`;
+  h += `<div class="card"><div class="sect">${t('الأقسام')}</div>${Object.values(secAgg).map(g => bar((g.icon || '') + ' ' + g.name, '', g.a ? g.e / g.a : 0)).join('')}</div>`;
+  const rows = Object.values(itemAgg).map(g => ({...g, r:g.e / g.m})).filter(g => g.n >= Math.min(2, ev.length));
+  const strong = rows.slice().sort((a, b) => b.r - a.r || b.n - a.n).slice(0, 5), weak = rows.filter(g => g.r < 1).sort((a, b) => a.r - b.r || b.n - a.n).slice(0, 5);
+  if (strong.length) h += `<div class="card"><div class="sect">💪 ${t('نقاط قوتك')}</div>${strong.map(g => bar(g.name, g.sec, g.r)).join('')}</div>`;
+  if (weak.length) h += `<div class="card"><div class="sect">🎯 ${t('محتاج اهتمام')}</div>${weak.map(g => bar(g.name, g.sec, g.r)).join('')}</div>`;
+  if (best) h += `<div class="card" style="text-align:center">🏅 ${t('أفضل يوم')}: <b>${fmtDate(best.d)}</b> — ${best.st.pct}%</div>`;
+  return h;
+}
+
+/* ---- التعديل ---- */
+function mzItemModal(secId, itemId) {
+  const sec = S.mz.sections.find(s => s.id === secId), it = itemId ? sec.items.find(x => x.id === itemId) : null;
+  const v = it || {name:'', type:'check', pts:2, opts:[], days:[], modes:[], skip:false, tag:'', rt:''};
+  ui.mzType = v.type;
+  const modeChips = sec.modes ? sec.modes.filter(m => m.id !== 'off') : [];
+  openModal(itemId ? t('تعديل إنجاز') : t('إنجاز جديد'), `
+  <div class="lbl">${t('اسم الإنجاز')}</div><input id="mn" value="${esc(v.name)}">
+  <div class="lbl">${t('النوع')}</div><div class="seg" id="mtseg"><button data-a="mzType" data-id="check" class="${v.type === 'check' ? 'on' : ''}">${t('علامة بنقاط')}</button><button data-a="mzType" data-id="choice" class="${v.type === 'choice' ? 'on' : ''}">${t('اختيار بدرجات')}</button></div>
+  <div id="mpts" ${v.type === 'check' ? '' : 'hidden'}><div class="lbl">${t('النقاط')}</div><input id="mp" inputmode="numeric" value="${+v.pts || 2}"></div>
+  <div id="mopt" ${v.type === 'choice' ? '' : 'hidden'}><div class="lbl">${t('الخيارات: كل خيار في سطر بالشكل')} <bdi dir="ltr">النص = النقاط</bdi></div><textarea id="mo" rows="4">${esc((v.opts || []).map(o => o.n + ' = ' + o.p).join('\n'))}</textarea></div>
+  <div class="lbl">${t('أيام الظهور (سيبها فاضية = كل يوم)')}</div><div class="mzdays" id="mdays">${MZ_DAYS.map((n, i) => `<button class="chipb ${(v.days || []).includes(i) ? 'on' : ''}" data-a="chipTog" data-id="${i}">${n}</button>`).join('')}</div>
+  ${modeChips.length ? `<div class="lbl">${t('يُحسب في أنواع الأيام')}</div><div class="mzdays" id="mmodes">${modeChips.map(m => `<button class="chipb ${(!v.modes || !v.modes.length || v.modes.includes(m.id)) ? 'on' : ''}" data-a="chipTog" data-id="${m.id}">${esc(m.name)}</button>`).join('')}</div>` : ''}
+  <div class="lbl">${t('مفتاح «يُحسب اليوم؟»')}</div><div class="mzdays"><button class="chipb ${v.skip ? 'on' : ''}" id="mskip" data-a="chipTog">${t('إظهار المفتاح بجوار البند')}</button></div>
+  <div class="lbl">${t('ملاحظة صغيرة (اختياري)')}</div><input id="mtg" value="${esc(v.tag || '')}">
+  <div class="lbl">🔔 ${t('تنبيه يومي (اختياري)')}</div><input type="time" id="mrt" value="${esc(v.rt || '')}">
+  <div class="row"><button class="btn" data-a="mzItemSave" data-id="${itemId || ''}" data-s="${secId}">${t('حفظ')}</button>${itemId ? `<button class="btn red" data-a="mzItemDel" data-id="${itemId}" data-s="${secId}">${t('حذف')}</button>` : ''}<button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+  if (!itemId) setTimeout(() => $('#mn') && $('#mn').focus(), 60);
+}
+function mzItemSave(id, secId) {
+  const sec = S.mz.sections.find(s => s.id === secId), name = $('#mn').value.trim(); if (!name) { $('#mn').focus(); return toast('اكتب اسم الإنجاز'); }
+  const o = {name, type:ui.mzType, days:[...document.querySelectorAll('#mdays .chipb.on')].map(b => +b.dataset.id), tag:$('#mtg').value.trim(), rt:$('#mrt').value || '', skip:$('#mskip').classList.contains('on')};
+  if (o.type === 'check') o.pts = Math.abs(parseFloat(latin($('#mp').value))) || 2;
+  else {
+    o.opts = $('#mo').value.split('\n').map(l => l.trim()).filter(Boolean).map(l => { const i = l.lastIndexOf('='); return i > 0 ? {n:l.slice(0, i).trim(), p:Math.abs(parseFloat(latin(l.slice(i + 1)))) || 0} : {n:l, p:0}; });
+    if (o.opts.length < 2) return toast('اكتب خيارين على الأقل');
+  }
+  const mc = document.querySelectorAll('#mmodes .chipb'); o.modes = mc.length ? ([...mc].every(b => b.classList.contains('on')) ? [] : [...mc].filter(b => b.classList.contains('on')).map(b => b.dataset.id)) : [];
+  if (id) { const it = sec.items.find(x => x.id === id); delete it.pts; delete it.opts; Object.assign(it, o); } else sec.items.push({id:'i_' + uid(), ...o});
+  save(); closeModal(); renderMizan(); toast('تم الحفظ');
+}
+function mzItemDel(id, secId) { if (!confirm(LANG === 'en' ? 'Delete this item?' : 'حذف الإنجاز ده؟')) return; const sec = S.mz.sections.find(s => s.id === secId); sec.items = sec.items.filter(x => x.id !== id); save(); closeModal(); renderMizan(); }
+function mzSecModal(id) {
+  const x = id ? S.mz.sections.find(s => s.id === id) : null, v = x || {name:'', icon:'⭐', sub:'', optional:false};
+  openModal(id ? t('تعديل القسم') : t('قسم جديد'), `<div class="lbl">${t('اسم القسم')}</div><input id="sn" value="${esc(v.name)}">
+  <div class="row"><div><div class="lbl">${t('أيقونة (إيموجي)')}</div><input id="si" value="${esc(v.icon || '')}" maxlength="4"></div></div>
+  <div class="lbl">${t('وصف قصير')}</div><input id="sd" value="${esc(v.sub || '')}">
+  <div class="lbl">${t('قسم إضافي')}</div><div class="mzdays"><button class="chipb ${v.optional ? 'on' : ''}" id="sopt" data-a="chipTog">${t('يمكن تعطيله في أي يوم (ليس يوميًا)')}</button></div>
+  <div class="row"><button class="btn" data-a="mzSecSave" data-id="${id || ''}">${t('حفظ')}</button>${id ? `<button class="btn red" data-a="mzSecDel" data-id="${id}">${t('حذف')}</button>` : ''}<button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+  if (!id) setTimeout(() => $('#sn') && $('#sn').focus(), 60);
+}
+function mzSecSave(id) {
+  const name = $('#sn').value.trim(); if (!name) { $('#sn').focus(); return toast('اكتب اسم القسم'); }
+  const o = {name, icon:$('#si').value.trim() || '⭐', sub:$('#sd').value.trim(), optional:$('#sopt').classList.contains('on')};
+  if (id) Object.assign(S.mz.sections.find(s => s.id === id), o); else S.mz.sections.push({id:'s_' + uid(), items:[], ...o});
+  save(); closeModal(); renderMizan();
+}
+function mzSecDel(id) { if (!confirm(LANG === 'en' ? 'Delete this section and its items?' : 'حذف القسم وكل بنوده؟ (النتائج القديمة بتفضل محفوظة)')) return; S.mz.sections = S.mz.sections.filter(s => s.id !== id); save(); closeModal(); renderMizan(); }
+
+/* ---- تنبيهات ميزاني اليومية ---- */
+function mzCheckReminders() {
+  if (!S || !S.mz) return;
+  const td = today(), now = Date.now(), rec = mzGet(td); let ch = false;
+  S.mz.fired = S.mz.fired || {}; S.mz.snz = S.mz.snz || {};
+  Object.keys(S.mz.fired).forEach(d => { if (d < addDays(td, -7)) delete S.mz.fired[d]; });
+  const fired = S.mz.fired[td] = S.mz.fired[td] || {};
+  S.mz.sections.forEach(sec => sec.items.forEach(it => {
+    if (!it.rt) return;
+    let at;
+    if (S.mz.snz[it.id]) at = S.mz.snz[it.id];
+    else { if (fired[it.id]) return; const [hh, mm] = it.rt.split(':').map(Number), d = new Date(); d.setHours(hh, mm, 0, 0); at = d.getTime(); }
+    if (at > now) return;
+    ch = true; fired[it.id] = true; delete S.mz.snz[it.id];
+    if (now - at > 3 * 3600 * 1000 || !mzCounted(sec, it, td, rec) || mzEarn(it, rec) > 0) return;
+    sysNotify('🔔 ' + it.name, (sec.icon || '') + ' ' + sec.name, 'mz' + it.id);
+    dueQ.push('mz:' + it.id); beep(); try { navigator.vibrate && navigator.vibrate([300, 150, 300]); } catch (e) {}
+  }));
+  if (ch) save();
+}
+
 /* ============ التنبيهات ============ */
 const REM_LIST = [['', 'بدون تنبيه'], ['0', 'عند الوقت'], ['5', 'قبلها بـ 5 دقائق'], ['10', 'قبلها بـ 10 دقائق'], ['30', 'قبلها بـ 30 دقيقة'], ['60', 'قبلها بساعة'], ['1440', 'قبلها بيوم']];
 const remOptions = sel => REM_LIST.map(([k, n]) => `<option value="${k}" ${String(sel ?? '') === k ? 'selected' : ''}>${t(n)}</option>`).join('');
@@ -1052,13 +1302,20 @@ function checkReminders() {
     ch = true; if (now - at > 24 * 3600 * 1000) { x.reminded = true; return; }
     fireReminder(x);
   });
+  mzCheckReminders();
   if (ch) save();
   showDue();
 }
 function showDue() {
   if (!dueQ.length || document.hidden || !$('#modal').hidden) return;
-  const items = dueQ.splice(0).map(id => T(id)).filter(x => x && !x.done); if (!items.length) return;
-  openModal('🔔 ' + t('تنبيه'), items.map(x => `<div class="hl" style="align-items:center"><span><b>${esc(x.title)}</b><br><small class="mut">${x.time ? '⏰ ' + fmtTime(x.time) + ' · ' : ''}${fmtShort(x.date)}</small></span><span style="display:flex;gap:6px"><button class="btn sec inl" data-a="remSnooze" data-id="${x.id}">⏳ 10 ${t('دقائق')}</button><button class="btn inl" data-a="remDone" data-id="${x.id}">✓</button></span></div>`).join('') + `<div class="row"><button class="btn sec" data-a="closeModal">${t('إغلاق')}</button></div>`);
+  const items = dueQ.splice(0).map(id => {
+    if (String(id).startsWith('mz:')) { const f = mzFind(id.slice(3)); return f ? {mz:true, it:f.it, sec:f.sec} : null; }
+    const x = T(id); return x && !x.done ? {x} : null;
+  }).filter(Boolean);
+  if (!items.length) return;
+  openModal('🔔 ' + t('تنبيه'), items.map(o => o.mz
+    ? `<div class="hl" style="align-items:center"><span><b>${esc(o.it.name)}</b><br><small class="mut">${esc(o.sec.icon || '')} ${esc(o.sec.name)} · ${fmtTime(o.it.rt)}</small></span><span style="display:flex;gap:6px"><button class="btn sec inl" data-a="mzSnooze" data-id="${o.it.id}">⏳ 10 ${t('دقائق')}</button><button class="btn inl" data-a="mzRemDone" data-id="${o.it.id}">${o.it.type === 'check' ? '✓' : '↗'}</button></span></div>`
+    : `<div class="hl" style="align-items:center"><span><b>${esc(o.x.title)}</b><br><small class="mut">${o.x.time ? '⏰ ' + fmtTime(o.x.time) + ' · ' : ''}${fmtShort(o.x.date)}</small></span><span style="display:flex;gap:6px"><button class="btn sec inl" data-a="remSnooze" data-id="${o.x.id}">⏳ 10 ${t('دقائق')}</button><button class="btn inl" data-a="remDone" data-id="${o.x.id}">✓</button></span></div>`).join('') + `<div class="row"><button class="btn sec" data-a="closeModal">${t('إغلاق')}</button></div>`);
 }
 function subTimeModal(id, i) {
   const s = T(id).subs[i];
@@ -1101,13 +1358,13 @@ function shell() {
   $('#root').innerHTML = `<header class="hdr"><div><div class="logo">${t('منجز')}</div><div class="sub">${t('برنامج منجز بواسطة شريف رمضان')}</div></div>
   <div class="hact"><span id="saved" class="saved">✓ ${t('تم الحفظ')}</span><button class="ib" id="instBtn" data-a="install" title="${t('تثبيت التطبيق')}" ${deferredInstall ? '' : 'hidden'}>⬇️</button><button class="ib" id="themeBtn" data-a="themeToggle"></button><button class="av" data-a="page" data-id="settings" id="avatar"></button></div></header>
   <main id="page"></main>
-  <nav class="nav">${[['home', '🏠', 'اليوم'], ['money', '💰', 'المعاملات'], ['ach', '🏆', 'الإنجازات'], ['settings', '⚙️', 'الإعدادات']].map(([k, i, n]) => `<button data-a="page" data-id="${k}" data-nav="${k}"><span>${i}</span>${t(n)}</button>`).join('')}</nav>`;
+  <nav class="nav">${[['home', '🏠', 'اليوم'], ['money', '💰', 'المعاملات'], ['mizan', '⚖️', 'ميزاني'], ['ach', '🏆', 'الإنجازات'], ['settings', '⚙️', 'الإعدادات']].map(([k, i, n]) => `<button data-a="page" data-id="${k}" data-nav="${k}"><span>${i}</span>${t(n)}</button>`).join('')}</nav>`;
   const av = $('#avatar'); av.innerHTML = session.photo ? `<img src="${esc(session.photo)}" referrerpolicy="no-referrer" alt="">` : esc((session.name || t('ضيف')).trim().charAt(0).toUpperCase());
   applyTheme(); showPage(ui.page);
 }
 function showPage(p) {
   ui.page = p; document.querySelectorAll('[data-nav]').forEach(b => b.classList.toggle('on', b.dataset.nav === p));
-  if (p === 'home') homePage(); else if (p === 'money') moneyPage(); else if (p === 'ach') achPage(); else settingsPage();
+  if (p === 'home') homePage(); else if (p === 'money') moneyPage(); else if (p === 'mizan') mizanPage(); else if (p === 'ach') achPage(); else settingsPage();
   scrollTo(0, 0);
 }
 function refreshAll() { showPage(ui.page); }
@@ -1120,6 +1377,35 @@ function startApp() {
 /* ============ الأحداث ============ */
 const H = {
   page:id => showPage(id),
+  mzTab:id => { ui.mzTab = id; renderMizan(); },
+  mzRange:id => { ui.mzRange = id; renderMizan(); },
+  mzPrev:() => { ui.mzDate = ui.mzTab === 'an' ? (ui.mzRange === 'week' ? addDays(ui.mzDate, -7) : addMonths(ui.mzDate, -1)) : addDays(ui.mzDate, -1); renderMizan(); },
+  mzNext:() => { ui.mzDate = ui.mzTab === 'an' ? (ui.mzRange === 'week' ? addDays(ui.mzDate, 7) : addMonths(ui.mzDate, 1)) : addDays(ui.mzDate, 1); renderMizan(); },
+  mzYest:() => { ui.mzDate = addDays(today(), -1); renderMizan(); },
+  mzToday:() => { ui.mzDate = today(); renderMizan(); },
+  mzPick:() => { const d = $('#mzdp'); try { d.showPicker(); } catch (e) { d.click(); } },
+  mzGoDay:id => { ui.mzDate = id; ui.mzTab = 'day'; renderMizan(); },
+  mzJump:id => { ui.mzFold[id] = false; renderMizan(); const e = $('#mzs_' + id); if (e) e.scrollIntoView({behavior:'smooth', block:'start'}); },
+  mzFold:id => { ui.mzFold[id] = !ui.mzFold[id]; renderMizan(); },
+  mzCheck:id => { const r = mzGet(ui.mzDate, true); r.v[id] = r.v[id] === 1 ? 0 : 1; save(); renderMizan(); },
+  mzOpt:(id, el) => { const r = mzGet(ui.mzDate, true); r.v[id] = +el.dataset.i; save(); renderMizan(); },
+  mzMode:(id, el) => { const r = mzGet(ui.mzDate, true); r.modes[id] = el.dataset.m; save(); renderMizan(); },
+  mzOff:id => { const r = mzGet(ui.mzDate, true); r.off[id] = !r.off[id]; save(); renderMizan(); },
+  mzSkip:(id, el) => { const r = mzGet(ui.mzDate, true); r.skip[id] = el.dataset.v === 'no'; save(); renderMizan(); },
+  mzReset:() => { if (!confirm(LANG === 'en' ? 'Reset this day?' : 'مسح تقييم اليوم ده والبدء من جديد؟')) return; delete S.mz.days[ui.mzDate]; save(); renderMizan(); },
+  mzCopy:() => mzCopy(),
+  mzItemNew:id => mzItemModal(id),
+  mzItemEdit:id => { const f = mzFind(id); if (f) mzItemModal(f.sec.id, id); },
+  mzItemSave:(id, el) => mzItemSave(id, el.dataset.s), mzItemDel:(id, el) => mzItemDel(id, el.dataset.s),
+  mzSecNew:() => mzSecModal(), mzSecEdit:id => mzSecModal(id), mzSecSave:id => mzSecSave(id), mzSecDel:id => mzSecDel(id),
+  mzType:id => { ui.mzType = id; document.querySelectorAll('#mtseg button').forEach(b => b.classList.toggle('on', b.dataset.id === id)); $('#mpts').hidden = id !== 'check'; $('#mopt').hidden = id !== 'choice'; },
+  chipTog:(id, el) => el.classList.toggle('on'),
+  mzSnooze:(id, el) => { S.mz.snz[id] = Date.now() + 10 * 60000; save(); el.closest('.hl').remove(); if (!$('#modal .hl')) closeModal(); },
+  mzRemDone:(id, el) => {
+    const f = mzFind(id);
+    if (f && f.it.type === 'check') { const r = mzGet(today(), true); r.v[id] = 1; save(); if (ui.page === 'mizan' && ui.mzDate === today()) renderMizan(); el.closest('.hl').remove(); if (!$('#modal .hl')) closeModal(); }
+    else { closeModal(); ui.mzDate = today(); ui.mzTab = 'day'; showPage('mizan'); }
+  },
   agenda:() => { ui.agenda = !ui.agenda; try { localStorage.setItem('munjez_agenda', ui.agenda ? '1' : ''); } catch (e) {} renderList(); },
   tplSave:() => tplFromForm(), tplNew:() => tplModal(), tplEdit:id => tplModal(id), tplDo:id => tplDo(id),
   tplDel:id => { if (!confirm(LANG === 'en' ? 'Delete template?' : 'حذف القالب؟')) return; S.templates = S.templates.filter(q => q.id !== id); save(); settingsPage(); },
@@ -1200,6 +1486,8 @@ document.addEventListener('change', e => {
     readImport(file).then(p => p ? importPreview(p) : toast('ملف غير مدعوم أو فاضي'));
   }
   else if (el.id === 'ntp') { applyTpl(el.value); }
+  else if (el.id === 'mzdp') { if (el.value) { ui.mzDate = el.value; renderMizan(); } }
+  else if (el.dataset.change === 'mzNum') { const r = mzGet(ui.mzDate, true); r.nums[el.dataset.id] = latin(el.value).trim(); save(); }
   else if (el.id === 'mc') { ui.mCat = el.value; renderMoneyPage(); }
   else if (el.id === 'mf') { ui.mFrom = el.value || ui.mFrom; if (ui.mTo < ui.mFrom) { ui.mTo = ui.mFrom; $('#mt').value = ui.mTo; } renderMoneyPage(); }
   else if (el.id === 'mt') { ui.mTo = el.value || ui.mTo; if (ui.mTo < ui.mFrom) { ui.mFrom = ui.mTo; $('#mf').value = ui.mFrom; } renderMoneyPage(); }
