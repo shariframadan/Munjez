@@ -153,7 +153,7 @@ small.mut{color:var(--mut)}
 <script>
 'use strict';
 /* ============ إعدادات عامة ============ */
-const VERSION = '2.3.0';
+const VERSION = '2.3.1';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
@@ -984,7 +984,7 @@ function mergeImport(src) {
 function importPreview(p) {
   pendingImport = p; const keys = new Set(S.tasks.map(dupKey)), dups = p.tasks.filter(x => keys.has(dupKey(x))).length;
   const money = p.tasks.filter(x => x.amount > 0).length + (p.tx || []).length;
-  openModal(t('استيراد'), `<p>${t('وجدنا')} <b>${p.tasks.length}</b> ${t('مهام')} ${t('و')} <b>${money}</b> ${t('معاملة مالية')}${p.mz && p.mz.sections ? ' — ' + p.mz.sections.length + ' ' + t('قسم في ميزاني') : ''}${dups ? ` — ${dups} ${t('مكرر هيتخطى')}` : ''}</p><div class="lbl">${t('أول 5 مهام')}</div>${p.tasks.slice(0, 5).map(x => `<div class="hl"><span>${esc(x.title)}</span><small class="mut">${x.date}</small></div>`).join('')}<div class="row"><button class="btn" data-a="doImport">${t('استيراد الكل')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+  openModal(t('استيراد'), `<p>${t('وجدنا')} <b>${p.tasks.length}</b> ${t('مهام')} ${t('و')} <b>${money}</b> ${t('معاملة مالية')}${p.mz && p.mz.sections ? ' — ' + p.mz.sections.length + ' ' + t('قسم في تألق') : ''}${dups ? ` — ${dups} ${t('مكرر هيتخطى')}` : ''}</p><div class="lbl">${t('أول 5 مهام')}</div>${p.tasks.slice(0, 5).map(x => `<div class="hl"><span>${esc(x.title)}</span><small class="mut">${x.date}</small></div>`).join('')}<div class="row"><button class="btn" data-a="doImport">${t('استيراد الكل')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
 }
 
 /* ============ الأجندة ============ */
@@ -1055,7 +1055,7 @@ function tplFromForm() {
   tplModal(null, {name:$('#nt').value.trim(), subs});
 }
 
-/* ============ ميزاني ============ */
+/* ============ تألق ============ */
 const MZ_DAYS = ['الأحد', 'الاثنين', 'الثلاثاء', 'الأربعاء', 'الخميس', 'الجمعة', 'السبت'];
 const MZ_TIERS = [[0, 'بداية موفقة', 'أول الغيث قطرة، والنية بداية النور'], [25, 'خطوات طيبة', 'أحبّ الأعمال أدومها وإن قلّ'], [50, 'عزيمة صادقة', 'واصل، فأنت في منتصف الطريق'], [75, 'ما شاء الله، قرّبت', 'لمسة أخيرة ويكتمل يومك'], [100, 'يوم مكتمل', 'تم بحمد الله — حافظ على هذا الصدق']];
 const normMz = m => {
@@ -1248,7 +1248,7 @@ function mzSecSave(id) {
 }
 function mzSecDel(id) { if (!confirm(LANG === 'en' ? 'Delete this section and its items?' : 'حذف القسم وكل بنوده؟ (النتائج القديمة بتفضل محفوظة)')) return; S.mz.sections = S.mz.sections.filter(s => s.id !== id); save(); closeModal(); renderMizan(); }
 
-/* ---- تنبيهات ميزاني اليومية ---- */
+/* ---- تنبيهات تألق اليومية ---- */
 function mzCheckReminders() {
   if (!S || !S.mz) return;
   const td = today(), now = Date.now(), rec = mzGet(td); let ch = false;
@@ -1358,7 +1358,7 @@ function shell() {
   $('#root').innerHTML = `<header class="hdr"><div><div class="logo">${t('منجز')}</div><div class="sub">${t('برنامج منجز بواسطة شريف رمضان')}</div></div>
   <div class="hact"><span id="saved" class="saved">✓ ${t('تم الحفظ')}</span><button class="ib" id="instBtn" data-a="install" title="${t('تثبيت التطبيق')}" ${deferredInstall ? '' : 'hidden'}>⬇️</button><button class="ib" id="themeBtn" data-a="themeToggle"></button><button class="av" data-a="page" data-id="settings" id="avatar"></button></div></header>
   <main id="page"></main>
-  <nav class="nav">${[['home', '🏠', 'اليوم'], ['money', '💰', 'المعاملات'], ['mizan', '⚖️', 'ميزاني'], ['ach', '🏆', 'الإنجازات'], ['settings', '⚙️', 'الإعدادات']].map(([k, i, n]) => `<button data-a="page" data-id="${k}" data-nav="${k}"><span>${i}</span>${t(n)}</button>`).join('')}</nav>`;
+  <nav class="nav">${[['home', '🏠', 'اليوم'], ['money', '💰', 'المعاملات'], ['mizan', '🌟', 'تألق'], ['ach', '🏆', 'الإنجازات'], ['settings', '⚙️', 'الإعدادات']].map(([k, i, n]) => `<button data-a="page" data-id="${k}" data-nav="${k}"><span>${i}</span>${t(n)}</button>`).join('')}</nav>`;
   const av = $('#avatar'); av.innerHTML = session.photo ? `<img src="${esc(session.photo)}" referrerpolicy="no-referrer" alt="">` : esc((session.name || t('ضيف')).trim().charAt(0).toUpperCase());
   applyTheme(); showPage(ui.page);
 }
