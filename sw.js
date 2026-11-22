@@ -1,4 +1,4 @@
-const CACHE = 'munjez-v2.0.0';
+const CACHE = 'munjez-v2.2.0';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-1024.png', './icon-maskable-512.png'];
 
 self.addEventListener('install', e => {
@@ -17,4 +17,12 @@ self.addEventListener('fetch', e => {
     return;
   }
   e.respondWith(caches.match(req).then(hit => hit || fetch(req).then(r => { const copy = r.clone(); caches.open(CACHE).then(c => c.put(req, copy)); return r; })));
+});
+
+self.addEventListener('notificationclick', e => {
+  e.notification.close();
+  e.waitUntil(clients.matchAll({type: 'window', includeUncontrolled: true}).then(cs => {
+    for (const c of cs) { if ('focus' in c) return c.focus(); }
+    return clients.openWindow('./index.html');
+  }));
 });
