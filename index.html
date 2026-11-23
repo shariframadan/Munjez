@@ -153,7 +153,7 @@ small.mut{color:var(--mut)}
 <script>
 'use strict';
 /* ============ إعدادات عامة ============ */
-const VERSION = '2.3.1';
+const VERSION = '2.3.2';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
@@ -257,6 +257,7 @@ function normalizeData(d) {
   r.tx = Array.isArray(d.tx) ? d.tx : [];
   r.templates = Array.isArray(r.templates) ? r.templates : defaultTemplates();
   r.mz = normMz(r.mz);
+  r._st = (d._st && typeof d._st === 'object') ? d._st : {}; r._gone = (d._gone && typeof d._gone === 'object') ? d._gone : {};
   return migrateCats(r);
 }
 // دمج فئة "شغل" القديمة في "عمل"
@@ -274,13 +275,80 @@ function migrateCats(r) {
   }
   return r;
 }
-function loadData() { try { S = normalizeData(JSON.parse(localStorage.getItem(dataKey()))); } catch (e) { S = blank(); } }
+function loadData() { try { S = normalizeData(JSON.parse(localStorage.getItem(dataKey()))); } catch (e) { S = blank(); } SNAP = flat(S); }
 let savedTimer, pushTimer;
+/* ---- مزامنة بالدمج: كل عنصر له ختم زمني، فلا يمحو جهاز بيانات جهاز آخر ---- */
+let SNAP = {};
+function flat(d) {
+  const m = {}, J = JSON.stringify;
+  const st = (d.mz && d.mz.sections) || [];
+  d.tasks.forEach(x => { if (x && x.id) m['t:' + x.id] = J(x); });
+  d.tx.forEach(x => { if (x && x.id) m['x:' + x.id] = J(x); });
+  (d.templates || []).forEach(x => { if (x && x.id) m['p:' + x.id] = J(x); });
+  d.cats.forEach(x => { if (x && x.id) m['c:' + x.id] = J(x); });
+  st.forEach(x => { if (x && x.id) m['s:' + x.id] = J(x); });
+  Object.keys(d.mz.days).forEach(dt => { const r = d.mz.days[dt] || {}; ['v', 'modes', 'off', 'skip', 'nums'].forEach(f => { const o = r[f] || {}; Object.keys(o).forEach(k => { m['d:' + dt + '|' + f + '|' + k] = J(o[k]); }); }); });
+  Object.keys(d.mz.fired || {}).forEach(k => { m['z:f|' + k] = J(d.mz.fired[k]); });
+  Object.keys(d.mz.snz || {}).forEach(k => { m['z:s|' + k] = J(d.mz.snz[k]); });
+  Object.keys(d.focusLog || {}).forEach(k => { m['f:' + k] = J(d.focusLog[k]); });
+  Object.keys(d.settings || {}).forEach(k => { m['g:' + k] = J(d.settings[k]); });
+  return m;
+}
+function stamp() {
+  if (!S) return;
+  S._st = S._st || {}; S._gone = S._gone || {};
+  const cur = flat(S), now = Date.now();
+  for (const k in cur) if (SNAP[k] !== cur[k]) { S._st[k] = now; delete S._gone[k]; }
+  for (const k in SNAP) if (!(k in cur)) { S._gone[k] = now; delete S._st[k]; }
+  SNAP = cur;
+}
+// يرجع {present, ts} لمفتاح في نسخة
+function side(d, fl, k) {
+  if (k in fl) return {p:true, ts:(d._st && d._st[k]) || 0};
+  if (d._gone && d._gone[k]) return {p:false, ts:d._gone[k]};
+  return {p:false, ts:-1};
+}
+function mergeData(L, R) {
+  const fl = flat(L), fr = flat(R), keys = new Set([...Object.keys(fl), ...Object.keys(fr), ...Object.keys(L._gone || {}), ...Object.keys(R._gone || {})]);
+  const out = {}, st = {}, gone = {};
+  const pref = (L.updated || 0) >= (R.updated || 0) ? 'L' : 'R';
+  keys.forEach(k => {
+    const a = side(L, fl, k), b = side(R, fr, k);
+    let w;
+    if (a.ts > b.ts) w = 'L'; else if (b.ts > a.ts) w = 'R';
+    else if (a.p && !b.p) w = 'L'; else if (b.p && !a.p) w = 'R'; else w = pref;
+    const x = w === 'L' ? a : b, f = w === 'L' ? fl : fr;
+    if (x.p) { out[k] = f[k]; if (x.ts > 0) st[k] = x.ts; } else if (x.ts > 0) gone[k] = x.ts;
+  });
+  // إعادة البناء: نبدأ بترتيب النسخة المحلية ثم الجديد
+  const r = JSON.parse(JSON.stringify({...L, tasks:[], tx:[], templates:[], cats:[], focusLog:{}, settings:{}, mz:{...L.mz, sections:[], days:{}, fired:{}, snz:{}}}));
+  const seen = new Set();
+  const put = (k, arr) => { if (k in out && !seen.has(k)) { seen.add(k); arr.push(JSON.parse(out[k])); } };
+  const colsOf = (d, pre) => ({t:d.tasks, x:d.tx, p:d.templates || [], c:d.cats, s:(d.mz.sections || [])}[pre]);
+  [['t', r.tasks], ['x', r.tx], ['p', r.templates], ['c', r.cats], ['s', r.mz.sections]].forEach(([pre, arr]) => {
+    [L, R].forEach(d => colsOf(d, pre).forEach(x => { if (x && x.id) put(pre + ':' + x.id, arr); }));
+  });
+  keys.forEach(k => {
+    if (!(k in out)) return;
+    const v = JSON.parse(out[k]);
+    if (k[0] === 'd') { const [dt, f, ...ks] = k.slice(2).split('|'); const rec = r.mz.days[dt] = r.mz.days[dt] || {}; (rec[f] = rec[f] || {})[ks.join('|')] = v; }
+    else if (k.startsWith('z:f|')) r.mz.fired[k.slice(4)] = v;
+    else if (k.startsWith('z:s|')) r.mz.snz[k.slice(4)] = v;
+    else if (k[0] === 'f') r.focusLog[k.slice(2)] = v;
+    else if (k[0] === 'g') r.settings[k.slice(2)] = v;
+  });
+  r.updated = Math.max(L.updated || 0, R.updated || 0, Date.now());
+  r._st = st; r._gone = gone;
+  return r;
+}
+const syncInfo = {last:0, err:'', busy:false};
+let syncP = null, syncAgain = false;
 function save() {
+  stamp();
   S.updated = Date.now();
   try { localStorage.setItem(dataKey(), JSON.stringify(S)); } catch (e) { toast('⚠️ المساحة ممتلئة'); }
   const s = $('#saved'); if (s) { s.classList.add('on'); clearTimeout(savedTimer); savedTimer = setTimeout(() => s.classList.remove('on'), 1400); }
-  if (session && session.mode === 'google' && fb.ready) { clearTimeout(pushTimer); pushTimer = setTimeout(cloudPush, 1500); }
+  if (session && session.mode === 'google' && fb.ready) { clearTimeout(pushTimer); pushTimer = setTimeout(cloudSync, 1500); }
 }
 function toast(msg) {
   const e = document.createElement('div'); e.className = 'toast'; e.textContent = t(msg); document.body.appendChild(e); setTimeout(() => e.remove(), 2200);
@@ -357,7 +425,7 @@ async function onGoogleUser(u) {
   loadData();
   try {
     const snap = await fb.db.collection('munjez').doc(u.uid).get();
-    if (snap.exists) { const cd = normalizeData(JSON.parse(snap.data().json)); if ((cd.updated || 0) > (S.updated || 0)) S = cd; }
+    if (snap.exists) { stamp(); S = normalizeData(mergeData(S, normalizeData(JSON.parse(snap.data().json)))); SNAP = flat(S); }
   } catch (e) { /* أوفلاين */ }
   let guest = null; try { guest = JSON.parse(localStorage.getItem('munjez_guest')); } catch (e) {}
   const mk = 'munjez_migrated_' + u.uid;
@@ -371,29 +439,47 @@ function migrateGuest(doIt) {
   if (doIt) { try { mergeImport(normalizeData(JSON.parse(localStorage.getItem('munjez_guest')))); } catch (e) {} localStorage.removeItem('munjez_guest'); }
   closeModal(); refreshAll();
 }
-async function cloudPush() {
-  if (!fb.ready || !session || session.mode !== 'google' || !navigator.onLine) return;
-  try { await fb.db.collection('munjez').doc(session.uid).set({json:JSON.stringify(S), updated:S.updated}); } catch (e) {}
-}
 async function cloudSync() {
-  if (!fb.ready || !session || session.mode !== 'google' || !navigator.onLine) return;
-  try {
-    const u = await new Promise(res => { const un = fb.auth.onAuthStateChanged(x => { un(); res(x); }); });
-    if (!u || u.uid !== session.uid) return;
-    const snap = await fb.db.collection('munjez').doc(session.uid).get();
-    if (snap.exists) {
-      const cd = normalizeData(JSON.parse(snap.data().json));
-      if ((cd.updated || 0) > (S.updated || 0)) {
-        S = cd; try { localStorage.setItem(dataKey(), JSON.stringify(S)); } catch (e) {}
-        LANG = S.settings.lang || 'ar'; ensureRecurring(); applyLang(); applyTheme(); shell(); return;
+  if (!fb.ready || !session || session.mode !== 'google') return false;
+  if (!navigator.onLine) { syncInfo.err = 'offline'; return false; }
+  if (syncP) { syncAgain = true; return syncP; }
+  syncP = (async () => {
+    try {
+      const u = await new Promise(res => { const un = fb.auth.onAuthStateChanged(x => { try { un(); } catch (e) {} res(x); }); });
+      if (!u || u.uid !== session.uid) { syncInfo.err = 'auth'; return false; }
+      const ref = fb.db.collection('munjez').doc(session.uid);
+      const snap = await ref.get();
+      stamp();
+      let changed = false;
+      if (snap.exists) {
+        const cd = normalizeData(JSON.parse(snap.data().json));
+        const before = JSON.stringify(flat(S));
+        const m = normalizeData(mergeData(S, cd));
+        changed = JSON.stringify(flat(m)) !== before;
+        S = m; SNAP = flat(S);
+        try { localStorage.setItem(dataKey(), JSON.stringify(S)); } catch (e) {}
       }
-    }
-    await cloudPush();
-  } catch (e) { /* أوفلاين أو صلاحيات */ }
+      await ref.set({json:JSON.stringify(S), updated:S.updated});
+      syncInfo.last = Date.now(); syncInfo.err = '';
+      if (changed) { LANG = S.settings.lang || 'ar'; applyLang(); applyTheme(); if ($('#modal').hidden) shell(); }
+      return true;
+    } catch (e) { syncInfo.err = (e && (e.code || e.message)) || 'error'; return false; }
+  })();
+  const r = await syncP; syncP = null;
+  if (syncAgain) { syncAgain = false; return cloudSync(); }
+  if (ui.page === 'settings') { const b = $('#syncStat'); if (b) b.textContent = syncText(); }
+  return r;
 }
-function signOut() {
+const cloudPush = cloudSync;
+const syncText = () => syncInfo.err ? '⚠️ ' + t(syncInfo.err === 'offline' ? 'لا يوجد إنترنت' : 'تعذّرت المزامنة') + ' (' + syncInfo.err + ')' : syncInfo.last ? '✅ ' + t('آخر مزامنة') + ' ' + new Date(syncInfo.last).toLocaleTimeString(LANG === 'en' ? 'en' : 'ar-EG', {hour:'2-digit', minute:'2-digit'}) : t('لم تتم بعد');
+async function signOut() {
   if (!confirm(LANG === 'en' ? 'Sign out? Local data on this device will be removed (your cloud account keeps it).' : 'تسجيل الخروج؟ هتتمسح البيانات من الجهاز ده بس، والحساب هيفضل موجود على السحابة.')) return;
-  if (session.mode === 'google') { cloudPush(); localStorage.removeItem(dataKey()); try { fb.auth && fb.auth.signOut(); } catch (e) {} }
+  if (session.mode === 'google') {
+    toast('جارٍ المزامنة قبل الخروج...');
+    const ok = fb.ready ? await Promise.race([cloudSync(), new Promise(r => setTimeout(() => r(false), 8000))]) : false;
+    if (!ok && !confirm(LANG === 'en' ? 'Could not sync. Signing out now may LOSE recent changes. Sign out anyway?' : '⚠️ تعذّرت المزامنة. لو خرجت دلوقتي ممكن تضيع آخر تعديلاتك. تخرج برضه؟')) return;
+    localStorage.removeItem(dataKey()); try { fb.auth && fb.auth.signOut(); } catch (e) {}
+  }
   localStorage.removeItem('munjez_session'); session = null; S = null; showLogin();
 }
 
@@ -445,8 +531,8 @@ function ensureRecurring() {
     if (!x.nextDue) x.nextDue = nextOcc(x.repeat, x.date);
     let n = 0;
     while (x.nextDue && x.nextDue <= td && n++ < 800) {
-      if (x.nextDue >= addDays(td, -45)) {
-        S.tasks.push({...x, id:uid(), date:x.nextDue, done:false, doneDay:null, doneAt:'', reminded:false, subs:x.subs.map(s => ({t:s.t, d:false, time:s.time || ''})), repeat:'none', nextDue:null, srcId:x.id, created:Date.now() + n});
+      if (x.nextDue >= addDays(td, -45) && !S.tasks.some(y => y.id === 'r_' + x.id + '_' + x.nextDue)) {
+        S.tasks.push({...x, id:'r_' + x.id + '_' + x.nextDue, date:x.nextDue, done:false, doneDay:null, doneAt:'', reminded:false, subs:x.subs.map(s => ({t:s.t, d:false, time:s.time || ''})), repeat:'none', nextDue:null, srcId:x.id, created:Date.now() + n});
       }
       x.nextDue = nextOcc(x.repeat, x.nextDue); changed = true;
     }
@@ -1329,6 +1415,7 @@ function settingsPage() {
   <div class="card"><div class="sect">${t('المظهر')}</div><div class="seg">${[['light', 'نهاري'], ['dark', 'ليلي'], ['auto', 'تلقائي']].map(([k, n]) => `<button data-a="theme" data-id="${k}" class="${s.theme === k ? 'on' : ''}">${t(n)}</button>`).join('')}</div></div>
   <div class="card"><div class="sect">${t('الحساب')}</div>
     <div class="set"><span>${u.mode === 'google' ? esc(u.name) : t('ضيف')}<br><small class="mut">${esc(u.email || '')}</small></span>${u.photo ? `<img src="${esc(u.photo)}" width="44" height="44" style="border-radius:50%" referrerpolicy="no-referrer">` : ''}</div>
+    ${u.mode === 'google' ? `<div class="set"><span>☁️ ${t('المزامنة')}<br><small class="mut" id="syncStat">${syncText()}</small></span><button class="btn inl" data-a="syncNow">${t('مزامنة الآن')}</button></div>` : ''}
     ${u.mode === 'google' ? `<button class="btn sec" data-a="signOut">${t('تسجيل خروج')}</button>` : `<button class="btn sec" data-a="google">${t('الدخول بجوجل')}</button>`}</div>
   <div class="card"><div class="sect">🔔 ${t('التنبيهات')}</div><div class="set"><span>${t('إشعارات الجهاز')}</span><b id="npStat">${t(permText())}</b></div><div class="row"><button class="btn sec" data-a="notifEnable">${t('تفعيل الإشعارات')}</button><button class="btn sec" data-a="notifTest">${t('تنبيه تجريبي')}</button></div><p style="font-size:13px;color:var(--mut);margin:8px 0 0">${t('التنبيهات بتشتغل والتطبيق مفتوح أو شغال في الخلفية. لو التطبيق مقفول تماماً، هتظهر لك أول ما تفتحه.')}</p></div>
   <div class="card"><div class="sect">📋 ${t('القوالب')}</div>${(S.templates || []).map(q => `<div class="set"><span>${esc(q.name)}<br><small class="mut">${esc(q.subs.join(' ← '))}</small></span><span style="display:flex;gap:4px"><button data-a="tplEdit" data-id="${q.id}">✏️</button><button data-a="tplDel" data-id="${q.id}">🗑️</button></span></div>`).join('') || `<div class="empty">${t('مفيش قوالب')}</div>`}<button class="btn sec" data-a="tplNew">+ ${t('قالب جديد')}</button></div>
@@ -1426,6 +1513,7 @@ const H = {
   themeToggle:() => { const dark = document.documentElement.dataset.theme === 'dark'; S.settings.theme = dark ? 'light' : 'dark'; save(); savePrefs(); applyTheme(); },
   theme:id => { S.settings.theme = id; save(); savePrefs(); applyTheme(); settingsPage(); },
   lang:() => { S.settings.lang = LANG === 'en' ? 'ar' : 'en'; LANG = S.settings.lang; save(); savePrefs(); shell(); },
+  syncNow:async () => { toast('جارٍ المزامنة...'); const ok = await cloudSync(); toast(ok ? 'تمت المزامنة ✅' : 'تعذّرت المزامنة'); settingsPage(); },
   google:() => googleSignIn(), guest:() => enterGuest(), signOut:() => signOut(),
   closeModal:() => closeModal(),
   migrate:() => migrateGuest(true), noMigrate:() => migrateGuest(false),
@@ -1497,7 +1585,8 @@ document.addEventListener('change', e => {
   else if (el.dataset.change === 'budget') { S.settings.budget = Math.abs(parseFloat(latin(el.value))) || 0; save(); }
   else if (el.dataset.change === 'catBudget') { const v = Math.abs(parseFloat(latin(el.value))) || 0; if (v) S.settings.catBudgets[el.dataset.id] = v; else delete S.settings.catBudgets[el.dataset.id]; save(); }
 });
-document.addEventListener('visibilitychange', () => { if (!document.hidden && S) { ensureRecurring(); focusUI(); if (ui.page === 'home') refreshHome(); if (fb.ready) cloudSync(); checkReminders(); } });
+addEventListener('pagehide', () => { if (S && fb.ready) cloudSync(); });
+document.addEventListener('visibilitychange', () => { if (document.hidden && S && fb.ready) { clearTimeout(pushTimer); cloudSync(); } if (!document.hidden && S) { ensureRecurring(); focusUI(); if (ui.page === 'home') refreshHome(); if (fb.ready) cloudSync(); checkReminders(); } });
 
 /* ============ التشغيل ============ */
 (function init() {
