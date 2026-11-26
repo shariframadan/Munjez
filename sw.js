@@ -1,4 +1,4 @@
-const CACHE = 'munjez-v2.4.3';
+const CACHE = 'munjez-v2.5.0';
 const ASSETS = ['./', './index.html', './manifest.json', './icon-192.png', './icon-512.png', './icon-1024.png', './icon-maskable-512.png'];
 
 self.addEventListener('install', e => {

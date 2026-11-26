@@ -158,6 +158,15 @@ small.mut{color:var(--mut)}
 .azw{background:#fef2f2;border:1.5px solid #fca5a5;color:#991b1b;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14.5px}
 :root[data-theme=dark] .azw{background:#3a1717;color:#fecaca;border-color:#7f1d1d}
 .azs2{margin:12px 2px 4px;font-size:12px;line-height:1.7;color:var(--mut);border-top:1px dashed var(--bd);padding-top:8px}.azs2 b{color:var(--tx)}
+.vtorg{font-weight:700;color:var(--pri);margin:-2px 0 8px;font-size:14px}
+.vt3{display:grid;grid-template-columns:1fr;gap:0}
+.vtbig{font-size:22px!important;font-weight:800;text-align:center}.vtv{font-size:26px;font-weight:800;color:var(--pri);padding:6px 0}.vtv small{font-size:13px;color:var(--mut);font-weight:600}
+.vtb{display:inline-block;padding:4px 12px;border-radius:99px;font-size:13px;font-weight:700}.vtb.ok{background:#dcfce7;color:#166534}.vtb.lack{background:#fee2e2;color:#991b1b}.vtb.over{background:#fef3c7;color:#92400e}.vtb.wait{background:var(--soft);color:var(--mut)}
+.vtr{display:flex;align-items:center;justify-content:space-between;gap:10px;border-bottom:1px solid var(--bd);padding:10px 0;flex-wrap:wrap}.vtr.x{background:var(--soft);border-radius:12px;padding:8px;margin:6px 0;border:none}
+.vti{display:flex;align-items:center;gap:10px;flex:1;min-width:150px}.vti b{display:block;font-size:14.5px}.vti small{display:block;color:var(--mut);font-size:12px}.vtic{font-size:22px}
+.vta{display:flex;gap:6px;align-items:center}.vta input{width:120px;text-align:center;font-weight:700}.vtdt{min-width:56px;text-align:center;color:var(--mut);font-size:13px}
+.vtsum{display:flex;justify-content:space-between;align-items:center;background:var(--soft);border-radius:12px;padding:12px;margin:10px 0;font-weight:800;color:var(--pri)}
+:root[data-theme=dark] .vtb.ok{background:#14341f;color:#bbf7d0}:root[data-theme=dark] .vtb.lack{background:#3a1717;color:#fecaca}:root[data-theme=dark] .vtb.over{background:#3a2a0a;color:#fde68a}
 .azinfo{background:var(--soft);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13.5px;line-height:1.8}
 .azs{margin:8px 0;font-size:14px;color:var(--mut)}.azs summary{cursor:pointer;font-weight:700;color:var(--pri)}.azs div{margin-top:6px;line-height:1.8}
 .azn{font-size:13px;color:var(--mut);text-align:center;margin:6px 0}
@@ -177,7 +186,7 @@ small.mut{color:var(--mut)}
 <script>
 'use strict';
 /* ============ إعدادات عامة ============ */
-const VERSION = '2.4.3';
+const VERSION = '2.5.0';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
@@ -264,7 +273,7 @@ const defaultMizan = () => ({sections:[
   {id:'s_sunan', name:'السنن', icon:'🌿', sub:'الضحى، السنن الرواتب بالتفصيل، وقيام الليل والوتر', items:['صلاة الضحى', 'راتبة الفجر (2 قبل الفجر)', 'راتبة الظهر (4 قبل + 2 بعد)', 'راتبة المغرب (2 بعد)', 'راتبة العشاء (2 بعد)', 'قيام الليل', 'الوتر'].map((n, i) => mzChk('i_sunan' + i, n))},
   {id:'s_adhkar', name:'الأذكار', icon:'✨', sub:'حضور القلب وطمأنينة اليوم', items:['أذكار الصباح', 'أذكار المساء', 'أذكار النوم', 'أذكار الصلوات (بعد الصلاة)', 'ورد الذكر', 'ورد الصلاة على النبي ﷺ'].map((n, i) => mzChk('i_adhkar' + i, n))}
 ], days:{}, fired:{}, snz:{}});
-const blank = () => ({v:1, tasks:[], tx:[], mz:defaultMizan(), az:{n:{}, c:[]}, templates:defaultTemplates(), cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all', azAuto:true, azVib:true}, focusLog:{}, updated:0});
+const blank = () => ({v:1, tasks:[], tx:[], mz:defaultMizan(), az:{n:{}, c:[]}, vault:{recs:[]}, templates:defaultTemplates(), cats:DEFAULT_CATS.map(c => ({...c})), settings:{theme:'auto', lang:'ar', pin:null, budget:0, catBudgets:{}, moneyMode:'all', azAuto:true, azVib:true}, focusLog:{}, updated:0});
 let S = null;
 let session = null;
 const ui = {page:'home', date:today(), cat:'all', filter:'day', q:'', prio:'m', ntype:'none', chart:false, openSub:null, calMonth:today(), agenda:false, mzDate:'', mzTab:'day', mzRange:'week', mzFold:{}, mzType:'check', aCat:'all', aFrom:'', aTo:'', mFrom:'', mTo:'', mType:'all', mCat:'all', mQ:'', xType:'out'};
@@ -282,6 +291,7 @@ function normalizeData(d) {
   r.templates = Array.isArray(r.templates) ? r.templates : defaultTemplates();
   r.mz = normMz(r.mz);
   r.az = {n:(d.az && d.az.n && typeof d.az.n === 'object') ? d.az.n : {}, c:(d.az && Array.isArray(d.az.c)) ? d.az.c : []};
+  r.vault = {recs:(d.vault && Array.isArray(d.vault.recs)) ? d.vault.recs : []};
   r._st = (d._st && typeof d._st === 'object') ? d._st : {}; r._gone = (d._gone && typeof d._gone === 'object') ? d._gone : {};
   return migrateCats(r);
 }
@@ -317,6 +327,7 @@ function flat(d) {
   Object.keys(d.mz.snz || {}).forEach(k => { m['z:s|' + k] = J(d.mz.snz[k]); });
   Object.keys((d.az && d.az.n) || {}).forEach(k => { m['n:' + k] = J(d.az.n[k]); });
   ((d.az && d.az.c) || []).forEach(x => { if (x && x.id) m['u:' + x.id] = J(x); });
+  ((d.vault && d.vault.recs) || []).forEach(x => { if (x && x.id) m['v:' + x.id] = J(x); });
   Object.keys(d.focusLog || {}).forEach(k => { m['f:' + k] = J(d.focusLog[k]); });
   Object.keys(d.settings || {}).forEach(k => { m['g:' + k] = J(d.settings[k]); });
   return m;
@@ -348,11 +359,11 @@ function mergeData(L, R) {
     if (x.p) { out[k] = f[k]; if (x.ts > 0) st[k] = x.ts; } else if (x.ts > 0) gone[k] = x.ts;
   });
   // إعادة البناء: نبدأ بترتيب النسخة المحلية ثم الجديد
-  const r = JSON.parse(JSON.stringify({...L, tasks:[], tx:[], templates:[], cats:[], focusLog:{}, settings:{}, az:{n:{}, c:[]}, mz:{...L.mz, sections:[], days:{}, fired:{}, snz:{}}}));
+  const r = JSON.parse(JSON.stringify({...L, tasks:[], tx:[], templates:[], cats:[], focusLog:{}, settings:{}, az:{n:{}, c:[]}, vault:{recs:[]}, mz:{...L.mz, sections:[], days:{}, fired:{}, snz:{}}}));
   const seen = new Set();
   const put = (k, arr) => { if (k in out && !seen.has(k)) { seen.add(k); arr.push(JSON.parse(out[k])); } };
-  const colsOf = (d, pre) => ({t:d.tasks, x:d.tx, p:d.templates || [], c:d.cats, s:(d.mz.sections || []), u:(d.az && d.az.c) || []}[pre]);
-  [['t', r.tasks], ['x', r.tx], ['p', r.templates], ['c', r.cats], ['s', r.mz.sections], ['u', r.az.c]].forEach(([pre, arr]) => {
+  const colsOf = (d, pre) => ({t:d.tasks, x:d.tx, p:d.templates || [], c:d.cats, s:(d.mz.sections || []), u:(d.az && d.az.c) || [], v:(d.vault && d.vault.recs) || []}[pre]);
+  [['t', r.tasks], ['x', r.tx], ['p', r.templates], ['c', r.cats], ['s', r.mz.sections], ['u', r.az.c], ['v', r.vault.recs]].forEach(([pre, arr]) => {
     [L, R].forEach(d => colsOf(d, pre).forEach(x => { if (x && x.id) put(pre + ':' + x.id, arr); }));
   });
   keys.forEach(k => {
@@ -687,6 +698,7 @@ function moneyPage() {
   </div>
   <div class="card" id="msum"></div>
   <button class="btn" data-a="txNew" style="margin-bottom:12px">+ ${t('معاملة جديدة')}</button>
+  ${vtOn() ? `<button class="btn sec" data-a="vtOpen" style="margin-bottom:12px">🏦 ${t('جرد الخزينة')}</button>` : ''}
   <div id="mlist"></div>
   <div class="card" id="mcat"></div>
   <div class="card"><div class="sect">${t('تقرير المعاملات')}</div><div class="row"><button class="btn" data-a="mPdf">📄 ${t('تصدير PDF')}</button><button class="btn sec" data-a="mCsv">📊 ${t('تصدير Excel')}</button></div></div>`;
@@ -1065,13 +1077,13 @@ async function readImport(file) {
       let j; try { j = JSON.parse(text); } catch (e) { return null; }
       const arr = Array.isArray(j) ? j : (j.tasks || j.data || j.items || []);
       tasks = arr.map(normTask); if (j.cats && Array.isArray(j.cats)) cats = j.cats; if (Array.isArray(j.tx)) txs = j.tx; if (j.mz && typeof j.mz === 'object') mzIn = j.mz; if (Array.isArray(j.templates)) importTpl = j.templates;
-      if (j.focusLog) importFocus = j.focusLog;
+      if (j.focusLog) importFocus = j.focusLog; if (j.vault && typeof j.vault === 'object' && !Array.isArray(j.vault)) importVault = j.vault;
     } else if (/\.csv$/.test(name) || /[,;\t].*\n/.test(text.slice(0, 400))) tasks = parseCSV(text).map(normTask);
     else tasks = text.split(/\r?\n/).map(l => l.trim()).filter(Boolean).map(l => normTask({title:l}));
   }
-  tasks = tasks.filter(Boolean); return (tasks.length || txs.length || mzIn) ? {tasks, cats, tx:txs, mz:mzIn} : null;
+  tasks = tasks.filter(Boolean); const vlt = importVault; importVault = null; return (tasks.length || txs.length || mzIn || vlt) ? {tasks, cats, tx:txs, mz:mzIn, vault:vlt} : null;
 }
-let importFocus = null, pendingImport = null, importTpl = null;
+let importFocus = null, pendingImport = null, importTpl = null, importVault = null;
 const dupKey = x => (x.title + '|' + x.date).toLowerCase().trim();
 function mergeImport(src) {
   const keys = new Set(S.tasks.map(dupKey)); let added = 0, skipped = 0;
@@ -1098,6 +1110,7 @@ function mergeImport(src) {
   [...(src.templates || []), ...(importTpl || [])].forEach(q => { if (q && q.name && Array.isArray(q.subs) && !S.templates.some(y => y.name === q.name)) S.templates.push({id:'t_' + uid(), name:String(q.name), subs:q.subs.map(String)}); });
   importTpl = null;
   added += mzMerge(src.mz);
+  if (src.vault) { S.settings.vault = {...(S.settings.vault || {}), ...src.vault}; if (!S.vault) S.vault = {recs:[]}; added++; }
   if (src.az) { Object.keys(src.az.n || {}).forEach(k => { if (!(k in S.az.n)) S.az.n[k] = src.az.n[k]; }); (src.az.c || []).forEach(c => { if (c && c.id && !S.az.c.some(y => y.id === c.id)) S.az.c.push(c); }); }
   migrateCats(S); save(); return {added, skipped};
 }
@@ -1500,6 +1513,180 @@ function startApp() {
 }
 
 /* ============ الأحداث ============ */
+/* ============ جرد الخزينة (خاص: لا يظهر إلا بعد تفعيله بملف الإعداد الخاص) ============ */
+const VT_DEF = {org:'', dept:'', unit:'الخزينة', resp:'', txCat:'all', denoms:[200, 100, 50, 20, 10, 5, 1],
+  sign:[{role:'أمين الخزينة', name:''}, {role:'راجع الحسابات', name:''}, {role:'يعتمد، المدير المالي', name:''}],
+  items:[
+    {id:'cash', icon:'💵', name:'نقود ورقية بالخزينة (نقدًا)', hint:'الرصيد الفعلي في درج الخزينة', cash:true},
+    {id:'insta', icon:'📱', name:'رصيد تطبيق انستاباي (InstaPay)', hint:'الحساب البنكي / المحوّل لحظيًا'},
+    {id:'wallet', icon:'👛', name:'محفظة إلكترونية', hint:'رصيد المحفظة الإلكترونية'},
+    {id:'loans', icon:'🤝', name:'عهد مؤقتة مع زملاء', hint:'مبالغ مع زملاء لحين تقديم الفواتير'},
+    {id:'checks', icon:'🧾', name:'شيكات تحت التحصيل / إيصالات', hint:'إيصالات مؤقتة معتمدة'}]};
+const vtOn = () => !!(S && S.settings && S.settings.vault);
+const vtCfg = () => ({...VT_DEF, ...(S.settings.vault || {})});
+const vtNew = () => ({date:today(), time:nowHM(), sys:'', amts:{}, extra:[], notes:'', den:{}});
+const vtDraft = () => S.settings.vaultDraft || (S.settings.vaultDraft = vtNew());
+const vtNum = v => { const n = parseFloat(latin(v)); return isFinite(n) ? n : 0; };
+const vtR = n => Math.round(n * 100) / 100;
+function vtTxBal(date, catId) { let b = 0; allTx().forEach(x => { if (x.date <= date && (!catId || catId === 'all' || x.cat === catId)) b += x.type === 'in' ? x.amount : -x.amount; }); return vtR(b); }
+function vtCalc(d, cfg) {
+  const act = vtR(cfg.items.reduce((s, it) => s + vtNum(d.amts[it.id]), 0) + d.extra.reduce((s, e) => s + vtNum(e.amt), 0));
+  const has = String(d.sys).trim() !== '', sys = vtNum(d.sys), diff = vtR(act - sys);
+  const st = !has ? ['wait', 'في انتظار الرصيد', '⏳'] : diff === 0 ? ['ok', 'مطابقة تامة', '✅'] : diff < 0 ? ['lack', 'عجز', '🔻'] : ['over', 'زيادة', '🔺'];
+  return {act, sys, diff, has, st};
+}
+const vtNo = date => { const n = (S.vault.recs.filter(r => r.date === date).length + 1); return 'JRD-' + date.replace(/-/g, '') + '-' + String(n).padStart(2, '0'); };
+const vtRoot = () => { let v = $('#vtv'); if (!v) { v = document.createElement('div'); v.id = 'vtv'; v.className = 'azv'; document.body.appendChild(v); document.body.style.overflow = 'hidden'; v.addEventListener('input', vtInput); v.addEventListener('change', vtInput); v.addEventListener('click', vtClick); } return v; };
+function vtClose() { const v = $('#vtv'); if (v) v.remove(); document.body.style.overflow = ''; }
+function vtOpen() { if (!vtOn()) return; vtDraft(); vtRender(); }
+let vtTimer = null;
+function vtInput(e) {
+  const el = e.target, k = el.dataset && el.dataset.vk; if (!k) return;
+  const d = vtDraft(), id = el.dataset.id;
+  if (k === 'amt') d.amts[id] = latin(el.value); else if (k === 'sys') d.sys = latin(el.value); else if (k === 'date') { d.date = el.value || today(); }
+  else if (k === 'time') d.time = el.value; else if (k === 'notes') d.notes = el.value;
+  else if (k === 'xn') d.extra[+id].name = el.value; else if (k === 'xd') d.extra[+id].note = el.value; else if (k === 'xa') d.extra[+id].amt = latin(el.value);
+  clearTimeout(vtTimer); vtTimer = setTimeout(save, 400);
+  if (k === 'date' && e.type === 'change') { vtRender(); return; }
+  vtUpdate();
+}
+function vtUpdate() {
+  const cfg = vtCfg(), c = vtCalc(vtDraft(), cfg), s = (id, h) => { const n = $('#' + id); if (n) n.innerHTML = h; };
+  s('vtAct', mh(c.act) + ' <small>' + t('ج.م') + '</small>'); s('vtTot', mh(c.act));
+  s('vtDiff', c.has ? mh(c.diff) + ' <small>' + t('ج.م') + '</small>' : '—');
+  const b = $('#vtBadge'); if (b) { b.className = 'vtb ' + c.st[0]; b.textContent = c.st[2] + ' ' + t(c.st[1]); }
+}
+function vtRender() {
+  const v = vtRoot(), cfg = vtCfg(), d = vtDraft(), c = vtCalc(d, cfg), recs = S.vault.recs.length;
+  const fetched = vtTxBal(d.date, cfg.txCat);
+  v.innerHTML = `<div class="azh"><button data-vt="close" aria-label="close">✕</button><b>🏦 ${t('جرد الخزينة')}</b><button data-vt="hist" title="${t('سجل الجرد')}">📋</button><button data-vt="cfg" title="${t('إعدادات')}">⚙️</button></div>
+  <div class="azb">
+   <div class="card"><div class="sect">📅 ${t('بيانات الجرد')}</div>${cfg.org || cfg.unit ? `<div class="vtorg">${esc(cfg.org)}${cfg.org && cfg.unit ? ' — ' : ''}${esc(cfg.unit)}${cfg.resp ? ' — ' + esc(cfg.resp) : ''}</div>` : ''}
+    <div class="row r2"><div><div class="lbl">${t('التاريخ')}</div><input type="date" data-vk="date" value="${d.date}"></div><div><div class="lbl">${t('التوقيت')}</div><input type="time" data-vk="time" value="${d.time}"></div></div></div>
+   <div class="vt3">
+    <div class="card"><div class="lbl">1️⃣ ${t('رصيد الخزينة على السيستم')}</div><input inputmode="decimal" data-vk="sys" placeholder="0.00" value="${esc(d.sys)}" class="vtbig">
+      <button class="btn sec" data-vt="fetch" style="margin-top:8px">🔗 ${t('اجلب من المعاملات')} (<bdi dir="ltr">${money(fetched)}</bdi>)</button></div>
+    <div class="card"><div class="lbl">2️⃣ ${t('إجمالي الأرصدة الفعلية')}</div><div class="vtv" id="vtAct">${mh(c.act)} <small>${t('ج.م')}</small></div></div>
+    <div class="card"><div class="lbl">3️⃣ ${t('نتيجة المطابقة (الفرق)')}</div><div class="vtv" id="vtDiff">${c.has ? mh(c.diff) + ' <small>' + t('ج.م') + '</small>' : '—'}</div><span id="vtBadge" class="vtb ${c.st[0]}">${c.st[2]} ${t(c.st[1])}</span></div>
+   </div>
+   <div class="card"><div class="sect">📋 ${t('تفاصيل البنود والأرصدة الفعلية')}</div>
+    ${cfg.items.map(it => `<div class="vtr"><div class="vti"><span class="vtic">${esc(it.icon || '▫️')}</span><div><b>${esc(it.name)}</b><small>${esc(it.hint || '')}</small></div></div><div class="vta"><input inputmode="decimal" data-vk="amt" data-id="${it.id}" placeholder="0.00" value="${esc(d.amts[it.id] ?? '')}">${it.cash ? `<button class="btn inl" data-vt="den" title="${t('جرد الفئات النقدية')}">🧮</button>` : ''}</div></div>`).join('')}
+    ${d.extra.map((x, i) => `<div class="vtr x"><div class="vti" style="flex-direction:column;align-items:stretch;gap:6px"><input data-vk="xn" data-id="${i}" placeholder="${t('اسم البند')}" value="${esc(x.name)}"><input data-vk="xd" data-id="${i}" placeholder="${t('ملاحظات / بيان')}" value="${esc(x.note || '')}"></div><div class="vta"><input inputmode="decimal" data-vk="xa" data-id="${i}" placeholder="0.00" value="${esc(x.amt ?? '')}"><button class="btn inl" data-vt="xdel" data-id="${i}">✕</button></div></div>`).join('')}
+    <div class="vtsum"><span>${t('الإجمالي الفعلي لجميع البنود')}</span><b id="vtTot">${mh(c.act)}</b></div>
+    <button class="mzadd" data-vt="xadd">+ ${t('إضافة بند / حساب آخر (مثل: محفظة ثانية، عهدة جديدة)')}</button></div>
+   <div class="card"><div class="lbl">📝 ${t('ملاحظات الجرد وتبرير الفروق (إن وجدت)')}</div><textarea data-vk="notes" rows="3" placeholder="${t('اكتب أي ملاحظات: عهدة معلقة، تحويلات لم يتم تسجيلها، أسباب العجز/الزيادة...')}">${esc(d.notes)}</textarea></div>
+   <div class="row" style="margin-bottom:8px"><button class="btn" data-vt="save">💾 ${t('حفظ الجرد بالسجل')}</button><button class="btn sec" data-vt="prev">🖨️ ${t('معاينة وتقرير A5')}</button></div>
+   <button class="btn sec" data-vt="reset" style="margin-bottom:24px">🔄 ${t('تفريغ النموذج لجرد جديد')}</button>
+   <div class="azs2" style="text-align:center">${t('سجل الجرد')}: ${recs} ${t('محضر')}</div></div>`;
+}
+function vtClick(e) {
+  const el = e.target.closest('[data-vt]'); if (!el) return; const a = el.dataset.vt, d = vtDraft(), cfg = vtCfg();
+  if (a === 'close') vtClose();
+  else if (a === 'fetch') { d.sys = String(vtTxBal(d.date, cfg.txCat)); save(); vtRender(); toast('تم جلب الرصيد من المعاملات'); }
+  else if (a === 'xadd') { d.extra.push({name:'', note:'', amt:''}); save(); vtRender(); const n = v => v.querySelectorAll('[data-vk=xn]'); const l = n($('#vtv')); l[l.length - 1] && l[l.length - 1].focus(); }
+  else if (a === 'xdel') { d.extra.splice(+el.dataset.id, 1); save(); vtRender(); }
+  else if (a === 'den') vtDenModal();
+  else if (a === 'reset') { if (!confirm(t('تفريغ النموذج الحالي؟'))) return; S.settings.vaultDraft = vtNew(); save(); vtRender(); }
+  else if (a === 'save') vtSave();
+  else if (a === 'prev') vtPreview(vtDraftRec());
+  else if (a === 'hist') vtHist();
+  else if (a === 'cfg') vtCfgModal();
+}
+function vtDraftRec() {
+  const cfg = vtCfg(), d = vtDraft(), c = vtCalc(d, cfg);
+  return {id:'', no:vtNo(d.date), date:d.date, time:d.time, resp:cfg.resp, sys:c.has ? c.sys : null, total:c.act, diff:c.has ? c.diff : null, status:c.st[1],
+    items:cfg.items.map(it => ({name:it.name, hint:it.hint || '', icon:it.icon || '', amt:vtNum(d.amts[it.id])})), extra:d.extra.filter(x => x.name || vtNum(x.amt)).map(x => ({name:x.name, note:x.note || '', amt:vtNum(x.amt)})),
+    notes:d.notes, den:Object.fromEntries(Object.entries(d.den || {}).filter(([, n]) => +n > 0)), cfg:{org:cfg.org, dept:cfg.dept, unit:cfg.unit, sign:cfg.sign}};
+}
+function vtSave() {
+  const d = vtDraft(), c = vtCalc(d, vtCfg()); if (!c.act && !c.has) { toast('أدخل الأرصدة أولًا'); return; }
+  if (!c.has && !confirm(t('لم تُدخل رصيد السيستم. تحفظ الجرد بدون مطابقة؟'))) return;
+  const r = vtDraftRec(); r.id = uid(); r.created = Date.now(); S.vault.recs.unshift(r); S.settings.vaultDraft = vtNew(); save(); vtRender();
+  openModal('✅ ' + t('تم حفظ الجرد'), `<p style="text-align:center;font-size:17px"><b>${esc(r.no)}</b><br><span class="vtb ${c.st[0]}">${c.st[2]} ${t(c.st[1])}</span>${c.has && c.diff ? `<br>${t('الفرق')}: ${mh(c.diff)} ${t('ج.م')}` : ''}</p>
+   <div class="row"><button class="btn" data-a="vtPrevId" data-id="${r.id}">🖨️ ${t('معاينة التقرير')}</button>${c.has && c.diff ? `<button class="btn sec" data-a="vtFix" data-id="${r.id}">💱 ${t('سجّل الفرق في المعاملات')}</button>` : ''}</div>`);
+}
+function vtFix(id) {
+  const r = S.vault.recs.find(x => x.id === id); if (!r || !r.diff || r.fixed) { toast('مسجَّل من قبل'); return; }
+  const cfg = vtCfg(); S.tx.push({id:uid(), title:'فرق جرد الخزينة — ' + r.date, cat:cfg.txCat !== 'all' && cat(cfg.txCat) ? cfg.txCat : S.cats[0].id, date:r.date, time:r.time || '', type:r.diff > 0 ? 'in' : 'out', amount:Math.abs(r.diff), notes:'تسوية فرق الجرد ' + r.no, created:Date.now()});
+  r.fixed = true; save(); closeModal(); toast('سُجّل الفرق في المعاملات'); if (ui.page === 'money') moneyPage();
+}
+function vtDenModal() {
+  const cfg = vtCfg(), d = vtDraft(), den = cfg.denoms;
+  openModal('🧮 ' + t('حاسبة الفئات النقدية'), `<p class="mut" style="margin-top:0">${t('أدخل عدد الورقات من كل فئة ويُحسب الإجمالي تلقائيًا.')}</p>
+   ${den.map(n => `<div class="vtr"><div class="vti"><b>${t('فئة')} ${n}</b></div><div class="vta"><input inputmode="numeric" data-vd="${n}" placeholder="0" value="${d.den[n] || ''}"><span class="vtdt" id="vd_${n}">0</span></div></div>`).join('')}
+   <div class="vtsum"><span>${t('إجمالي النقدية المحسوبة')}</span><b id="vdTot">0</b></div>
+   <div class="row" style="margin-top:12px"><button class="btn" data-a="vtDenOk">${t('اعتماد المبلغ بنموذج الجرد')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+  const m = $('#modal'), calc = () => { let tot = 0; den.forEach(n => { const c = Math.max(0, Math.floor(vtNum(m.querySelector(`[data-vd="${n}"]`).value))); tot += c * n; $('#vd_' + n).textContent = money(c * n); }); $('#vdTot').textContent = money(tot); return tot; };
+  m.oninput = e => { if (e.target.dataset.vd) calc(); }; calc();
+}
+function vtDenOk() {
+  const cfg = vtCfg(), d = vtDraft(), m = $('#modal'), den = {}; let tot = 0;
+  cfg.denoms.forEach(n => { const c = Math.max(0, Math.floor(vtNum(m.querySelector(`[data-vd="${n}"]`).value))); if (c) den[n] = c; tot += c * n; });
+  d.den = den; const cash = cfg.items.find(i => i.cash) || cfg.items[0]; d.amts[cash.id] = tot ? String(tot) : ''; save(); closeModal(); vtRender(); toast('تم اعتماد المبلغ');
+}
+function vtReportHTML(r) {
+  const rtl = LANG !== 'en', num = n => `<bdi dir="ltr">${money(n)}</bdi>`, cf = r.cfg || vtCfg(), has = r.sys !== null && r.sys !== undefined;
+  const rows = [...r.items, ...r.extra].map((x, i) => `<tr><td>${i + 1}</td><td><b>${esc(x.name)}</b></td><td class="m">${esc(x.hint || x.note || '')}</td><td>${num(x.amt)} ${t('ج.م')}</td></tr>`).join('');
+  const dn = Object.entries(r.den || {}).sort((a, b) => b[0] - a[0]);
+  const res = !has ? t('لم يُدخل رصيد السيستم') : r.diff === 0 ? '✅ ' + t('نتيجة الجرد: مطابقة تامة بدون فروق') : r.diff < 0 ? '🔻 ' + t('نتيجة الجرد: عجز بقيمة') + ' ' + num(-r.diff) + ' ' + t('ج.م') : '🔺 ' + t('نتيجة الجرد: زيادة بقيمة') + ' ' + num(r.diff) + ' ' + t('ج.م');
+  const cls = !has ? 'w' : r.diff === 0 ? 'o' : 'b';
+  return `<!DOCTYPE html><html lang="${LANG}" dir="${rtl ? 'rtl' : 'ltr'}"><head><meta charset="utf-8"><title>${esc(r.no)}</title><style>
+  @page{size:A5;margin:9mm}*{box-sizing:border-box}body{font-family:Tahoma,"Segoe UI",Arial,sans-serif;color:#111;font-size:11px;margin:0;padding:14px}
+  .hd{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2px solid #111;padding-bottom:8px;margin-bottom:10px}.hd h1{margin:0;font-size:17px}.hd p{margin:2px 0;color:#444}
+  .tag{border:1.5px solid #111;border-radius:6px;padding:4px 8px;font-weight:700;font-size:11px;display:inline-block;margin-bottom:6px}
+  .info{display:flex;justify-content:space-between;background:#f3f4f6;border:1px solid #d1d5db;border-radius:6px;padding:6px 8px;margin-bottom:10px}
+  h3{font-size:12px;margin:10px 0 4px}table{width:100%;border-collapse:collapse}th{background:#e5e7eb;text-align:${rtl ? 'right' : 'left'};padding:4px 6px;border:1px solid #9ca3af}td{padding:4px 6px;border:1px solid #d1d5db}td.m{color:#555;font-size:10px}
+  .tot{display:flex;justify-content:space-between;background:#f3f4f6;border:1px solid #9ca3af;border-top:2px solid #111;padding:5px 8px;font-weight:700;margin-bottom:8px}
+  .box{border:1px solid #9ca3af;border-radius:6px;padding:6px 8px}.box div{display:flex;justify-content:space-between;padding:3px 0}.box .res{display:block;text-align:center;font-weight:700;padding:6px;margin-top:4px;border-radius:5px}.res.o{background:#dcfce7;color:#166534}.res.b{background:#fee2e2;color:#991b1b}.res.w{background:#fef3c7;color:#92400e}
+  .sg{display:flex;justify-content:space-between;margin-top:34px;text-align:center}.sg div{width:30%;border-top:1px dashed #6b7280;padding-top:4px;font-size:10px}.sg b{display:block;font-size:11px}small{color:#555}
+  </style></head><body>
+  <div class="hd"><div><h1>${esc(cf.org || t('جرد الخزينة'))}</h1>${cf.dept ? `<p><b>${esc(cf.dept)}</b></p>` : ''}${cf.unit ? `<p>${esc(cf.unit)}</p>` : ''}</div><div style="text-align:${rtl ? 'left' : 'right'}"><span class="tag">${t('محضر جرد خزينة')}</span><p>${t('التاريخ')}: <bdi dir="ltr">${r.date}</bdi></p><p>${t('الوقت')}: <bdi dir="ltr">${r.time || ''}</bdi></p></div></div>
+  <div class="info"><span>${t('المسؤول')}: ${esc(r.resp || '')}</span><span>${t('رقم المحضر')}: <bdi dir="ltr">${esc(r.no)}</bdi></span></div>
+  <h3>${t('أولًا: بيان الأرصدة الفعلية الموجودة بالخزينة')}</h3>
+  <table><tr><th style="width:24px">${t('م')}</th><th>${t('البند / القناة')}</th><th>${t('تفاصيل')}</th><th>${t('المبلغ الفعلي')}</th></tr>${rows}</table>
+  <div class="tot"><span>${t('إجمالي الأرصدة الفعلية')}</span><span>${num(r.total)} ${t('ج.م')}</span></div>
+  ${dn.length ? `<h3>${t('تفصيل الفئات النقدية')}</h3><table><tr><th>${t('الفئة')}</th><th>${t('العدد')}</th><th>${t('الإجمالي')}</th></tr>${dn.map(([n, c]) => `<tr><td>${n}</td><td>${c}</td><td>${num(n * c)}</td></tr>`).join('')}</table>` : ''}
+  <h3>${t('ثانيًا: مطابقة رصيد السيستم والنتيجة')}</h3>
+  <div class="box"><div><span>${t('رصيد الخزينة على السيستم')}</span><b>${has ? num(r.sys) + ' ' + t('ج.م') : '—'}</b></div><div><span>${t('الفرق (الفعلي - السيستم)')}</span><b>${has ? num(r.diff) + ' ' + t('ج.م') : '—'}</b></div><div class="res ${cls}">${res}</div></div>
+  ${r.notes ? `<h3>${t('ملاحظات الجرد')}</h3><div class="box" style="white-space:pre-wrap">${esc(r.notes)}</div>` : ''}
+  <div class="sg">${(cf.sign || []).slice(0, 3).map(s => `<div><b>${esc(s.role)}</b>${esc(s.name || '')}</div>`).join('')}</div></body></html>`;
+}
+function vtPreview(r) {
+  const html = vtReportHTML(r); vtLast = html;
+  openModal('🖨️ ' + t('معاينة تقرير الجرد (A5)'), `<iframe id="vtfr" style="width:100%;height:60vh;border:1px solid var(--bd);border-radius:10px;background:#fff"></iframe><div class="row" style="margin-top:10px"><button class="btn" data-a="vtPrint">🖨️ ${t('طباعة / حفظ PDF')}</button><button class="btn sec" data-a="closeModal">${t('إغلاق')}</button></div>`);
+  $('#vtfr').srcdoc = html;
+}
+let vtLast = '';
+function vtHist() {
+  const L = S.vault.recs.slice().sort((a, b) => (b.date + (b.time || '') + b.created).localeCompare(a.date + (a.time || '') + a.created));
+  openModal('📋 ' + t('سجل الجرد') + ' (' + L.length + ')', (L.length ? L.map(r => { const has = r.diff !== null && r.diff !== undefined, k = !has ? 'wait' : r.diff === 0 ? 'ok' : r.diff < 0 ? 'lack' : 'over';
+    return `<div class="vtr"><div class="vti"><div><b><bdi dir="ltr">${r.date} ${r.time || ''}</bdi></b><small>${esc(r.no)} • ${t('الفعلي')} ${mh(r.total)}</small></div></div><div class="vta"><span class="vtb ${k}">${has ? (r.diff === 0 ? t('مطابقة') : (r.diff < 0 ? t('عجز') : t('زيادة')) + ' ' + money(Math.abs(r.diff))) : '—'}</span><button class="btn inl" data-a="vtPrevId" data-id="${r.id}">👁</button><button class="btn inl" data-a="vtDelRec" data-id="${r.id}">🗑</button></div></div>`; }).join('') : `<p class="mut">${t('لا توجد محاضر محفوظة بعد.')}</p>`)
+    + (L.length ? `<button class="btn sec" data-a="vtCsv" style="margin-top:10px">⬇️ ${t('تصدير السجل CSV')}</button>` : ''));
+}
+function vtCsv() {
+  const q = v => '"' + String(v ?? '').replace(/"/g, '""') + '"';
+  const rows = S.vault.recs.slice().sort((a, b) => (a.date + (a.time || '')).localeCompare(b.date + (b.time || ''))).map(r => [r.no, r.date, r.time, r.total, r.sys ?? '', r.diff ?? '', r.status, r.notes].map(q).join(','));
+  download('munjez-vault-' + today() + '.csv', '﻿' + [['الرقم', 'التاريخ', 'الوقت', 'الإجمالي الفعلي', 'رصيد السيستم', 'الفرق', 'النتيجة', 'ملاحظات'].map(q).join(','), ...rows].join('\r\n'), 'text/csv;charset=utf-8');
+}
+function vtCfgModal() {
+  const c = vtCfg(), ln = a => a.join('\n');
+  openModal('⚙️ ' + t('إعدادات جرد الخزينة'), `<div class="lbl">${t('اسم الجهة')}</div><input id="vcOrg" value="${esc(c.org)}"><div class="lbl">${t('الإدارة / القسم')}</div><input id="vcDept" value="${esc(c.dept)}"><div class="lbl">${t('اسم الخزينة')}</div><input id="vcUnit" value="${esc(c.unit)}"><div class="lbl">${t('المسؤول عن الخزينة')}</div><input id="vcResp" value="${esc(c.resp)}">
+  <div class="lbl">${t('البنود (سطر لكل بند: رمز | الاسم | التفاصيل | نقد). اكتب «نقد» في آخر سطر النقدية لتظهر حاسبة الفئات')}</div><textarea id="vcItems" rows="6">${esc(ln(c.items.map(i => [i.icon || '', i.name, i.hint || '', i.cash ? 'نقد' : ''].join(' | ').replace(/( \| )+$/, ''))))}</textarea>
+  <div class="lbl">${t('التوقيعات (سطر لكل توقيع: الوظيفة | الاسم)')}</div><textarea id="vcSign" rows="3">${esc(ln(c.sign.map(s => s.role + ' | ' + (s.name || ''))))}</textarea>
+  <div class="lbl">${t('فئات النقد (مفصولة بفواصل)')}</div><input id="vcDen" value="${c.denoms.join(', ')}">
+  <div class="lbl">${t('فئة المعاملات المرتبطة بالرصيد (للجلب والتسوية)')}</div><select id="vcCat"><option value="all">${t('كل الفئات')}</option>${S.cats.map(x => `<option value="${x.id}" ${c.txCat === x.id ? 'selected' : ''}>${esc(catName(x.id))}</option>`).join('')}</select>
+  <div class="row" style="margin-top:12px"><button class="btn" data-a="vtCfgOk">${t('حفظ')}</button><button class="btn sec" data-a="closeModal">${t('إلغاء')}</button></div>`);
+}
+function vtCfgOk() {
+  const g = id => $('#' + id).value.trim(), old = vtCfg().items;
+  const items = g('vcItems').split('\n').map(l => l.split('|').map(x => x.trim())).filter(p => p[0] || p[1]).map(p => { const hasIcon = p.length > 1 && p[0].length <= 4 && !/[؀-ۿ\w]{3,}/.test(p[0]); const a = hasIcon ? p : ['', ...p]; const nm = a[1] || a[0]; const o = old.find(i => i.name === nm); return {id:o ? o.id : 'i' + uid(), icon:a[0], name:nm, hint:a[2] || '', cash:/نقد/.test(a[3] || '')}; });
+  if (!items.length) { toast('أضف بندًا واحدًا على الأقل'); return; }
+  const sign = g('vcSign').split('\n').map(l => l.split('|').map(x => x.trim())).filter(p => p[0]).map(p => ({role:p[0], name:p[1] || ''}));
+  const denoms = g('vcDen').split(/[,،\s]+/).map(x => Math.abs(vtNum(x))).filter(Boolean).sort((a, b) => b - a);
+  S.settings.vault = {...S.settings.vault, org:g('vcOrg'), dept:g('vcDept'), unit:g('vcUnit'), resp:g('vcResp'), items, sign:sign.length ? sign : VT_DEF.sign, denoms:denoms.length ? denoms : VT_DEF.denoms, txCat:$('#vcCat').value};
+  save(); closeModal(); vtRender(); toast('تم الحفظ');
+}
+
 const H = {
   page:id => showPage(id),
   mzTab:id => { ui.mzTab = id; renderMizan(); },
@@ -1567,6 +1754,8 @@ const H = {
   filter:id => { ui.filter = id; ui.agenda = false; try { localStorage.setItem('munjez_agenda', ''); } catch (e) {} refreshHome(); },
   toggle:id => toggleTask(id), subToggle:(id, el) => toggleSub(id, +el.dataset.i),
   subDel:(id, el) => { const x = T(id); x.subs.splice(+el.dataset.i, 1); syncDone(x); save(); refreshHome(); },
+  vtOpen:() => vtOpen(), vtPrevId:id => { const r = S.vault.recs.find(x => x.id === id); if (r) vtPreview(r); }, vtPrint:() => { if (vtLast) printHTML(vtLast); }, vtFix:id => vtFix(id), vtDenOk:() => vtDenOk(), vtCsv:() => vtCsv(), vtCfgOk:() => vtCfgOk(),
+  vtDelRec:id => { if (!confirm(t('حذف هذا المحضر من السجل؟'))) return; S.vault.recs = S.vault.recs.filter(x => x.id !== id); save(); vtHist(); },
   openSub:id => { ui.openSub = id; renderList(); const i = $('#subin'); if (i) i.focus(); }, addSub:id => addSub(id),
   tmr:id => moveTask(id, addDays(T(id).date, 1)), toToday:id => moveTask(id, today()),
   del:id => delTask(id), edit:id => editModal(id), saveEdit:id => saveEdit(id),
