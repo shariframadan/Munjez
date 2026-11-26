@@ -21,6 +21,7 @@ button{cursor:pointer;border:0;background:none}
 input,select,textarea{background:var(--card);border:1.5px solid var(--bd);border-radius:12px;padding:10px 12px;min-height:46px;width:100%}
 input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-color:var(--pri)}
 #root{max-width:760px;margin:0 auto;padding-bottom:84px;min-height:100vh}
+#list{overflow-anchor:none}
 .hdr{position:sticky;top:0;z-index:20;background:var(--pri);color:#fff;display:flex;align-items:center;justify-content:space-between;padding:10px 14px;padding-top:calc(10px + env(safe-area-inset-top));box-shadow:0 2px 8px rgba(0,0,0,.15)}
 .logo{font-size:24px;font-weight:800;line-height:1.1}.sub{font-size:12.5px;opacity:.9}
 .hact{display:flex;align-items:center;gap:8px}
@@ -31,6 +32,7 @@ input:focus,select:focus,textarea:focus{outline:2px solid var(--pri);border-colo
 main{padding:12px}
 .card{background:var(--card);border-radius:16px;box-shadow:var(--shadow);padding:12px;margin-bottom:12px;border:1px solid var(--bd)}
 .datebar{display:flex;align-items:center;gap:6px;flex-wrap:wrap}
+#mzbar{flex-wrap:nowrap}#mzbar .dtxt{min-width:0;font-size:15px}#mzbar .chip{padding:0 12px}
 .datebar .ib{width:44px;height:44px;border-radius:12px;background:var(--soft);color:var(--pri);font-size:20px;font-weight:700}
 .dtxt{flex:1;text-align:center;font-weight:700;min-width:140px}
 .chip{background:var(--soft);color:var(--pri);border-radius:99px;padding:8px 14px;font-weight:700;white-space:nowrap}
@@ -155,6 +157,8 @@ small.mut{color:var(--mut)}
 .azf{background:var(--soft);border-radius:12px;padding:10px 12px;margin:8px 0;font-size:15px}
 .azw{background:#fef2f2;border:1.5px solid #fca5a5;color:#991b1b;border-radius:12px;padding:10px 12px;margin:8px 0;font-size:14.5px}
 :root[data-theme=dark] .azw{background:#3a1717;color:#fecaca;border-color:#7f1d1d}
+.azs2{margin:12px 2px 4px;font-size:12px;line-height:1.7;color:var(--mut);border-top:1px dashed var(--bd);padding-top:8px}.azs2 b{color:var(--tx)}
+.azinfo{background:var(--soft);border:1px solid var(--bd);border-radius:12px;padding:10px 12px;margin:0 0 12px;font-size:13.5px;line-height:1.8}
 .azs{margin:8px 0;font-size:14px;color:var(--mut)}.azs summary{cursor:pointer;font-weight:700;color:var(--pri)}.azs div{margin-top:6px;line-height:1.8}
 .azn{font-size:13px;color:var(--mut);text-align:center;margin:6px 0}
 .azft{flex:none;padding:10px 14px calc(10px + env(safe-area-inset-bottom));background:var(--card);border-top:1px solid var(--bd)}
@@ -173,7 +177,7 @@ small.mut{color:var(--mut)}
 <script>
 'use strict';
 /* ============ إعدادات عامة ============ */
-const VERSION = '2.4.0';
+const VERSION = '2.4.3';
 // للمزامنة بحساب جوجل: ضع إعدادات Firebase هنا (الخطوات في الشرح المرفق). لو فاضي يشتغل التطبيق بوضع الضيف/الأوفلاين.
 const FIREBASE_CONFIG = {
   apiKey: "AIzaSyCeqya2DH8tj9wsvbtfa3kpfTbiB8Es_CE",
@@ -590,9 +594,9 @@ function setDone(x, v) { x.done = v; x.doneDay = v ? today() : null; x.doneAt = 
 function toggleTask(id) {
   const x = T(id); if (!x) return;
   setDone(x, !x.done); if (x.done) x.subs.forEach(s => { if (!s.d) { s.d = true; s.doneAt = nowHM(); } });
-  save(); refreshHome();
+  save(); refreshHome(id);
 }
-function toggleSub(id, i) { const x = T(id); if (!x || !x.subs[i]) return; x.subs[i].d = !x.subs[i].d; x.subs[i].doneAt = x.subs[i].d ? nowHM() : ''; syncDone(x); save(); refreshHome(); }
+function toggleSub(id, i) { const x = T(id); if (!x || !x.subs[i]) return; x.subs[i].d = !x.subs[i].d; x.subs[i].doneAt = x.subs[i].d ? nowHM() : ''; syncDone(x); save(); refreshHome(id); }
 const TIME_RE = /\s*(?:@\s*)?([0-9٠-٩]{1,2})[:：]([0-9٠-٩]{2})\s*(ص|م|am|pm|AM|PM)?\s*$/;
 function parseSubItem(str) {
   str = String(str).trim(); const m = str.match(TIME_RE); let time = '';
@@ -638,7 +642,7 @@ function taskHTML(x) {
   const add = ui.openSub === x.id
     ? `<div class="inl"><input id="subin" placeholder="${t('إضافة مهمة فرعية')}" data-enter="addSub" data-id="${x.id}"><button class="btn inl" data-a="addSub" data-id="${x.id}">${t('إضافة')}</button></div>`
     : `<button class="mini" data-a="openSub" data-id="${x.id}" title="${t('إضافة مهمة فرعية')}">+</button>`;
-  return `<div class="task"><div class="trow">
+  return `<div class="task" data-tid="${x.id}"><div class="trow">
     <button class="cb ${x.done ? 'on' : ''}" data-a="toggle" data-id="${x.id}" aria-label="done">✓</button>
     <div class="tmain"><div class="ttl ${x.done ? 'dn' : ''}"><span class="pd p-${x.prio}"></span><span class="tt">${esc(x.title)}</span>${x.repeat && x.repeat !== 'none' ? '<span title="' + t(RP[x.repeat]) + '">🔁</span>' : ''}</div>
     <div class="meta"><span><i class="dot" style="background:${catColor(x.cat)}"></i> ${esc(catName(x.cat))}</span><span>${fmtShort(x.date)}</span>${timeInfo}${amt}${x.subs.length ? `<span>☑ ${sd}/${x.subs.length}</span>` : ''}${x.est ? `<span>⏳ ${x.est}${LANG === 'en' ? 'm' : 'د'}</span>` : ''}</div>
@@ -822,12 +826,17 @@ function renderProg() {
 function renderCats() {
   $('#cats').innerHTML = [{id:'all', name:'الكل', color:'#94a3b8'}, ...S.cats].map(c => `<button class="cat ${ui.cat === c.id ? 'on' : ''}" data-a="catSel" data-id="${c.id}">${c.id !== 'all' ? `<i class="dot" style="background:${c.color}"></i>` : ''}${c.id === 'all' ? t('الكل') : esc(catName(c.id))}</button>`).join('') + `<button class="cat" data-a="addCat" title="${t('فئة جديدة')}">+</button>`;
 }
+function keepScroll(fn, id) {
+  const y = window.scrollY, el = id ? document.querySelector('#list [data-tid="' + id + '"]') : null, top = el ? el.getBoundingClientRect().top : null;
+  fn();
+  const e2 = id ? document.querySelector('#list [data-tid="' + id + '"]') : null;
+  if (e2 && top !== null) window.scrollBy(0, e2.getBoundingClientRect().top - top); else window.scrollTo(0, y);
+}
 function renderList() {
   if (ui.agenda) $('#list').innerHTML = agendaHTML();
   else { const a = visibleTasks(); $('#list').innerHTML = a.length ? a.map(taskHTML).join('') : `<div class="empty">📭<br>${t('مفيش مهام هنا')}</div>`; }
   document.querySelectorAll('[data-filter]').forEach(b => b.classList.toggle('on', !ui.agenda && b.dataset.filter === ui.filter));
   const ab = $('#agBtn'); if (ab) ab.classList.toggle('on', !!ui.agenda);
-  const i = $('#subin'); if (i) i.focus();
 }
 function renderMoney() { $('#money').innerHTML = moneyHTML(); }
 function renderDateBar() {
@@ -836,7 +845,7 @@ function renderDateBar() {
     ${isT ? '' : `<button class="chip" data-a="goToday">${t('اليوم')}</button>`}<button class="ib" data-a="pickDate">📅</button><input type="date" id="dp" value="${ui.date}" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px"><button class="chip ${fo.running ? 'run' : ''}" id="fchip" data-a="focusOpen">⏱️ ${fmtClock(focusRemaining())}</button>`;
 }
 function syncDateInputs() { const n = $('#nd'); if (n) n.value = ui.date; }
-function refreshHome() { if (ui.page !== 'home') return; renderDateBar(); renderCats(); renderProg(); renderList(); renderMoney(); fillCatSelect(); }
+function refreshHome(id) { if (ui.page !== 'home') return; keepScroll(() => { renderDateBar(); renderCats(); renderProg(); renderList(); renderMoney(); fillCatSelect(); }, id); }
 function fillCatSelect() {
   const s = $('#nc'); if (!s) return; const cur = s.value;
   s.innerHTML = S.cats.map(c => `<option value="${c.id}">${esc(catName(c.id))}</option>`).join('');
@@ -1221,7 +1230,7 @@ function renderMizan() {
   if (!$('#mzbody')) return;
   const d = ui.mzDate, en = LANG === 'en', an = ui.mzTab === 'an';
   $('#mzbar').innerHTML = `<button class="ib" data-a="mzPrev">${en ? '←' : '→'}</button><div class="dtxt">${an ? (ui.mzRange === 'week' ? fmtShort(addDays(d, -6)) + ' – ' + fmtShort(d) : fmtMonth(d)) : fmtDate(d)}</div><button class="ib" data-a="mzNext">${en ? '→' : '←'}</button>
-    <button class="chip ${d === addDays(today(), -1) ? 'run' : ''}" data-a="mzYest">${t('أمس')}</button><button class="chip ${d === today() ? 'run' : ''}" data-a="mzToday">${t('اليوم')}</button><button class="ib" data-a="mzPick">📅</button><input type="date" id="mzdp" value="${d}" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">`;
+    <button class="chip ${d === today() ? 'run' : ''}" data-a="mzToday">${t('اليوم')}</button><button class="ib" data-a="mzPick">📅</button><input type="date" id="mzdp" value="${d}" style="position:absolute;opacity:0;pointer-events:none;width:1px;height:1px">`;
   $('#mztabs').innerHTML = [['day', '✅ ' + t('تقييم اليوم')], ['an', '📈 ' + t('التحليل')]].map(([k, n]) => `<button data-a="mzTab" data-id="${k}" class="${ui.mzTab === k ? 'on' : ''}">${n}</button>`).join('');
   $('#mzbody').innerHTML = an ? mzAnalysisHTML() : mzDayHTML();
 }
@@ -1244,6 +1253,7 @@ function mzSecHTML(x, st) {
   if (sec.modes && sec.modes.length) h += `<div class="lbl">${esc(sec.modeLabel || t('نوع اليوم'))}</div><div class="seg">${sec.modes.map(m => `<button data-a="mzMode" data-id="${sec.id}" data-m="${m.id}" class="${m.id === mode ? 'on' : ''}">${esc(m.name)}</button>`).join('')}</div>${mObj && mObj.hint ? `<p class="mzhint">${esc(mObj.hint)}</p>` : ''}`;
   if (sec.num) h += `<div class="lbl">${esc(sec.numLabel || t('رقم الدرس'))}</div><input inputmode="numeric" data-change="mzNum" data-id="${sec.id}" value="${esc(rec.nums[sec.id] || '')}" placeholder="${esc(sec.numHint || '')}">`;
   if (sec.banner) h += `<div class="mzban">${esc(sec.banner)}</div>`;
+  if (items.some(o => o.it.type === 'check' && azLink(o.it))) h += `<div class="azinfo">📿 ${t('اضغط أيقونة السبحة بجانب الذكر لفتح الأذكار بنصها ومصدرها وعدّاد إلكتروني؛ وعند الانتهاء تُوضع علامة ✓ (صح) على الذكر تلقائيًا.')}</div>`;
   h += items.map(o => mzItemHTML(o, rec)).join('');
   return h + `<button class="mzadd" data-a="mzItemNew" data-id="${sec.id}">+ ${t('أضف إنجازًا جديدًا')}</button></div>`;
 }
@@ -1446,7 +1456,7 @@ function settingsPage() {
     ${u.mode === 'google' ? `<button class="btn sec" data-a="signOut">${t('تسجيل خروج')}</button>` : `<button class="btn sec" data-a="google">${t('الدخول بجوجل')}</button>`}</div>
   <div class="card"><div class="sect">🔔 ${t('التنبيهات')}</div><div class="set"><span>${t('إشعارات الجهاز')}</span><b id="npStat">${t(permText())}</b></div><div class="row"><button class="btn sec" data-a="notifEnable">${t('تفعيل الإشعارات')}</button><button class="btn sec" data-a="notifTest">${t('تنبيه تجريبي')}</button></div><p style="font-size:13px;color:var(--mut);margin:8px 0 0">${t('التنبيهات بتشتغل والتطبيق مفتوح أو شغال في الخلفية. لو التطبيق مقفول تماماً، هتظهر لك أول ما تفتحه.')}</p></div>
   <div class="card"><div class="sect">📋 ${t('القوالب')}</div>${(S.templates || []).map(q => `<div class="set"><span>${esc(q.name)}<br><small class="mut">${esc(q.subs.join(' ← '))}</small></span><span style="display:flex;gap:4px"><button data-a="tplEdit" data-id="${q.id}">✏️</button><button data-a="tplDel" data-id="${q.id}">🗑️</button></span></div>`).join('') || `<div class="empty">${t('مفيش قوالب')}</div>`}<button class="btn sec" data-a="tplNew">+ ${t('قالب جديد')}</button></div>
-  <div class="card"><div class="sect">📿 ${t('الأذكار')}</div><div class="set"><span>${t('احتساب بند الأذكار تلقائيًا عند إكمال الورد')}</span><button class="btn inl ${s.azAuto !== false ? '' : 'sec'}" data-a="azOpt" data-id="azAuto">${s.azAuto !== false ? t('مفعّل') : t('متوقف')}</button></div><div class="set"><span>${t('الاهتزاز عند العدّ')}</span><button class="btn inl ${s.azVib !== false ? '' : 'sec'}" data-a="azOpt" data-id="azVib">${s.azVib !== false ? t('مفعّل') : t('متوقف')}</button></div></div>
+  <div class="card"><div class="sect">📿 ${t('الأذكار')}</div><div class="set"><span>${t('احتساب بند الأذكار تلقائيًا عند إكمال الورد')}</span><button class="btn inl ${s.azAuto !== false ? '' : 'sec'}" data-a="azOpt" data-id="azAuto">${s.azAuto !== false ? t('مفعّل') : t('متوقف')}</button></div><div class="set"><span>${t('الاهتزاز عند العدّ')}</span><button class="btn inl ${s.azVib !== false ? '' : 'sec'}" data-a="azOpt" data-id="azVib">${s.azVib !== false ? t('مفعّل') : t('متوقف')}</button></div><p style="font-size:12px;color:var(--mut);margin:8px 0 0">${t('مصدر الأذكار: قاعدة Seen-Arabic (ترخيص MIT) + حصن المسلم. درجات الأحاديث منقولة من التخريج المذكور مع كل ذكر، وللتثبت راجع أهل العلم.')}</p></div>
   <div class="card"><div class="sect">${t('القفل')}</div><div class="set"><span>${s.pin ? '🔒 ' : ''}${s.pin ? t('إلغاء القفل') : t('تفعيل القفل برقم سري')}</span><button class="btn inl" data-a="pin">${s.pin ? t('إلغاء القفل') : '🔒'}</button></div></div>
   <div class="card"><div class="sect">${t('اللغة')}</div><button class="btn sec" data-a="lang">${LANG === 'en' ? 'عربي' : 'English'}</button></div>
   <div class="card"><div class="sect">${t('الميزانية')}</div>
@@ -1557,7 +1567,7 @@ const H = {
   filter:id => { ui.filter = id; ui.agenda = false; try { localStorage.setItem('munjez_agenda', ''); } catch (e) {} refreshHome(); },
   toggle:id => toggleTask(id), subToggle:(id, el) => toggleSub(id, +el.dataset.i),
   subDel:(id, el) => { const x = T(id); x.subs.splice(+el.dataset.i, 1); syncDone(x); save(); refreshHome(); },
-  openSub:id => { ui.openSub = id; renderList(); }, addSub:id => addSub(id),
+  openSub:id => { ui.openSub = id; renderList(); const i = $('#subin'); if (i) i.focus(); }, addSub:id => addSub(id),
   tmr:id => moveTask(id, addDays(T(id).date, 1)), toToday:id => moveTask(id, today()),
   del:id => delTask(id), edit:id => editModal(id), saveEdit:id => saveEdit(id),
   focusFor:id => { fo.taskId = id; focusModal(); }, focusOpen:() => focusModal(),
@@ -1611,7 +1621,7 @@ function azBadges(x) {
   let h = '';
   if (x.q) h += `<span class="azbd q">📖 ${t('قرآن كريم')}</span>`;
   const g = AZ_GRADE[x.g];
-  if (g) h += `<span class="azbd ${g[2]}">${g[0]} ${x.q ? t('الفضل') + ': ' : ''}${t(g[1])}</span>`;
+  if (g) h += `<span class="azbd ${g[2]}">${g[0]} ${t('درجة الحديث')}: ${t(g[1])}</span>`;
   return h;
 }
 function azCard(x) {
@@ -1622,10 +1632,12 @@ function azCard(x) {
   h += `<div class="azt">${esc(x.t)}</div>`;
   if (x.o) h += `<div class="azn">${esc(x.o)}</div>`;
   if (x.f) h += `<div class="azf">💡 ${esc(x.f)}</div>`;
-  if (x.s) h += `<details class="azs"><summary>${t('المصدر والتخريج')}</summary><div>${esc(x.s)}</div></details>`;
+  if (x.s) h += `<div class="azs2"><b>${t('المصدر')}:</b> ${esc(x.s)}</div>`;
   return h;
 }
-const AZ_FOOT = () => `<div class="azn" style="margin-top:14px">${t('درجات الأحاديث منقولة من التخريج الوارد في المصدر، وللتثبت راجع أهل العلم.')}<br>${t('المصادر: قاعدة Seen-Arabic (MIT) + حصن المسلم')}</div>`;
+const AZ_FOOT = () => '';
+const azInfoSet = () => `<div class="azinfo">📿 <b>${t('سبحة إلكترونية')}</b> — ${t('اضغط الدائرة الكبيرة بعدد التكرار المطلوب (يظهر المتبقي عليها)، وعند الاكتمال تُوضع علامة ✓ (صح) على الذكر وينتقل للتالي. وعند إتمام الورد تُوضع (صح) على بند الأذكار في تألق. وللذكر المطلق استخدم زر 📿 في تألق.')}</div>`;
+const azInfoFree = () => `<div class="azinfo">📿 ${t('السبحة الإلكترونية: اضغط الدائرة للعدّ، واختر الذكر من الشريط العلوي أو أضف ذكرك الخاص بالزر ＋. ويُحفظ لك عدّاد اليوم والإجمالي.')}</div>`;
 function azRoot() {
   let v = $('#azv'); if (!v) { v = document.createElement('div'); v.id = 'azv'; v.className = 'azv'; document.body.appendChild(v); document.body.style.overflow = 'hidden'; }
   return v;
@@ -1644,19 +1656,19 @@ function azRender() { const v = azRoot(); v.innerHTML = az.mode === 'free' ? azF
 function azSetHTML() {
   const L = azList(az.set), d = az.date, title = t(AZ_TITLE[az.set]), pg = azProg(d, az.set);
   const hd = sub => `<div class="azh"><button data-a="azClose">✕</button><b>${title}</b><span>${sub}</span></div><div class="azbar"><i style="width:${pg.total ? Math.round(pg.done / pg.total * 100) : 0}%"></i></div>`;
-  if (az.list) return hd(pg.done + '/' + pg.total) + `<div class="azb">${L.map((x, i) => { const dn = azGet(d, az.set, x.id) >= x.n; return `<button class="azli ${dn ? 'dn' : ''}" data-a="azGo" data-id="${i}"><i>✓</i><span>${esc(x.t.slice(0, 70))}</span><small>${azGet(d, az.set, x.id)}/${x.n}</small></button>`; }).join('')}</div><div class="azft"><button class="btn sec" data-a="azBack">${t('رجوع')}</button></div>`;
+  if (az.list) return hd(pg.done + '/' + pg.total) + `<div class="azb">${azInfoSet()}${L.map((x, i) => { const dn = azGet(d, az.set, x.id) >= x.n; return `<button class="azli ${dn ? 'dn' : ''}" data-a="azGo" data-id="${i}"><i>✓</i><span>${esc(x.t.slice(0, 70))}</span><small>${azGet(d, az.set, x.id)}/${x.n}</small></button>`; }).join('')}</div><div class="azft"><button class="btn sec" data-a="azBack">${t('رجوع')}</button></div>`;
   if (az.i >= L.length) {
     const it = azItemFor(az.set), auto = S.settings.azAuto !== false, credited = it && mzGet(d).v[it.id] === 1;
     return hd(pg.done + '/' + pg.total) + `<div class="azb" style="text-align:center;padding-top:40px"><div style="font-size:64px">🌟</div><h2 style="color:var(--pri)">${t('ما شاء الله، أتممت')} ${title}</h2>${it ? (credited ? `<p>✅ ${t('احتُسب البند في تألق')}</p>` : auto ? `<p>${t('سيُحتسب البند في تألق')}</p>` : `<p>${t('الاحتساب التلقائي متوقف.')}</p><button class="btn" data-a="azCredit">${t('احتسب البند الآن')}</button>`) : ''}<p class="azn">${t('تقبّل الله منك')}</p></div><div class="azft"><div class="aznv"><button class="btn sec" data-a="azBack">${t('مراجعة الأذكار')}</button><button class="btn" data-a="azClose">${t('إغلاق')}</button></div></div>`;
   }
   const x = L[az.i], c = azGet(d, az.set, x.id), rem = Math.max(0, x.n - c), dn = rem === 0;
-  return hd((az.i + 1) + '/' + L.length) + `<div class="azb">${azCard(x)}${AZ_FOOT()}</div><div class="azft"><button class="azc ${dn ? 'dn' : ''}" data-a="azTap" id="azc">${x.n === 1 ? `<b id="azrem">${dn ? '✓' : '☝️'}</b><small>${dn ? t('تمّت') : t('اضغط عند الانتهاء')}</small>` : `<b id="azrem">${dn ? '✓' : rem}</b><small>${dn ? t('تمّت') : t('متبقي من') + ' ' + x.n}</small>`}</button><div class="aznv"><button class="btn sec" data-a="azPrev">${t('السابق')}</button><button class="btn sec" data-a="azShowList">☰</button><button class="btn sec" data-a="azNext">${t('التالي')}</button></div></div>`;
+  return hd((az.i + 1) + '/' + L.length) + `<div class="azb">${az.i === 0 ? azInfoSet() : ''}${azCard(x)}${AZ_FOOT()}</div><div class="azft"><button class="azc ${dn ? 'dn' : ''}" data-a="azTap" id="azc">${x.n === 1 ? `<b id="azrem">${dn ? '✓' : '☝️'}</b><small>${dn ? t('تمّت') : t('اضغط عند الانتهاء')}</small>` : `<b id="azrem">${dn ? '✓' : rem}</b><small>${dn ? t('تمّت') : t('متبقي من') + ' ' + x.n}</small>`}</button><div class="aznv"><button class="btn sec" data-a="azPrev">${t('السابق')}</button><button class="btn sec" data-a="azShowList">☰</button><button class="btn sec" data-a="azNext">${t('التالي')}</button></div></div>`;
 }
 function azFreeHTML() {
   const all = azAll(); if (!all.find(x => x.id === az.free)) az.free = (all.find(x => x.p) || all[0]).id;
   const x = azFreeItem(az.free), c = azGet(az.date, 'free', x.id), tot = azTotal(x.id);
   return `<div class="azh"><button data-a="azClose">✕</button><b>📿 ${t('السبحة')}</b><span>${fmtShort(az.date)}</span></div><div class="azbar"><i id="azbar" style="width:${Math.min(100, Math.round(c / x.n * 100))}%"></i></div>
-  <div class="azb"><div class="azchips">${all.map(y => `<button data-a="azPick" data-id="${y.id}" class="${y.id === x.id ? 'on' : ''}">${esc(y.t.length > 22 ? y.t.slice(0, 22) + '…' : y.t)}</button>`).join('')}<button data-a="azAdd">＋ ${t('ذكر جديد')}</button></div>
+  <div class="azb">${azInfoFree()}<div class="azchips">${all.map(y => `<button data-a="azPick" data-id="${y.id}" class="${y.id === x.id ? 'on' : ''}">${esc(y.t.length > 22 ? y.t.slice(0, 22) + '…' : y.t)}</button>`).join('')}<button data-a="azAdd">＋ ${t('ذكر جديد')}</button></div>
   ${azCard(x)}<div class="azn">${t('اليوم')}: <b id="azday">${c}</b> • ${t('الإجمالي')}: <b id="aztot">${tot}</b> • ${t('الهدف')}: ${x.n}</div>${AZ_FOOT()}</div>
   <div class="azft"><button class="azc ${c >= x.n ? 'dn' : ''}" data-a="azFreeTap" id="azc"><b id="azrem">${c}</b><small>${t('الهدف')} ${x.n}</small></button><div class="aznv"><button class="btn sec" data-a="azFreeReset">↺ ${t('تصفير اليوم')}</button>${x.custom ? `<button class="btn sec" data-a="azEdit" data-id="${x.id}">✏️ ${t('تعديل')}</button>` : ''}</div></div>`;
 }
@@ -1719,7 +1731,7 @@ document.addEventListener('keydown', e => {
   e.preventDefault(); const f = H[el.dataset.enter]; if (f) f(el.dataset.id, el, e);
 });
 document.addEventListener('input', e => {
-  if (e.target.id === 'sq') { ui.q = e.target.value; renderList(); }
+  if (e.target.id === 'sq') { ui.q = e.target.value; const y = window.scrollY; renderList(); window.scrollTo(0, y); }
   else if (e.target.id === 'mq') { ui.mQ = e.target.value; renderMoneyPage(); }
 });
 document.addEventListener('change', e => {
